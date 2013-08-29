@@ -1,1 +1,1 @@
-Welcome to the monica wiki!
+[MONICA versions](monica_versions)
