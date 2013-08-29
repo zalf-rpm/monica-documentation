@@ -1,5 +1,3 @@
-## List of MONICA versions
-
 ### v1.1.1 
 
 Date: 2012-12-07
