@@ -1,2 +1,2 @@
-[MONICA versions](Monica-versions)
+[MONICA versions](wiki/Monica-versions)
 
