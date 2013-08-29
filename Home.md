@@ -1,2 +1,2 @@
-[MONICA versions](monica-versions)
+[MONICA versions](Monica-versions)
 
