@@ -42,9 +42,11 @@ Diese Installation wurde unter Ubuntu 10.4 LTS getestet. Falls diese Dokumentati
 
 Folgende Einträge müssen in der .bashrc gesetzt werden, damit qmake und die Qt-Bibliotheken korrekt gefunden werden können
 
- export QTDIR=/home/user/pfad_zum_QT_installationsverzeichnis
- export PATH=$QTDIR/bin:$QTDIR/qt/bin:$PATH
- export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+``export QTDIR=/home/user/pfad_zum_QT_installationsverzeichnis``
+
+``export PATH=$QTDIR/bin:$QTDIR/qt/bin:$PATH``
+
+``export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH``
 
     
 
