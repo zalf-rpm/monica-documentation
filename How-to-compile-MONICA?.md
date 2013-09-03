@@ -40,7 +40,7 @@ Diese Installation wurde unter Ubuntu 10.4 LTS getestet. Falls diese Dokumentati
 
 **Hinweise:**
 
-Folgende Einträge müssen in der .bashrc gesetzt werden, damit qmake und die Qt-Bibliotheken korrekt gefunden werden können
+Folgende Einträge müssen in der .bashrc gesetzt werden, damit qmake und die Qt-Bibliotheken korrekt gefunden werden können:
 
 ``export QTDIR=/home/user/pfad_zum_QT_installationsverzeichnis``
 
