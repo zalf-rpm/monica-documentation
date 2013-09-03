@@ -25,3 +25,29 @@ Um die EVA-Skripte zur Ausführung von MONICA zu nutzen, muss MONICA als Python-
 * swigwin 
 
 Der Pfad zu R, Python und zur DLL vom MySQLConnector C muss in der PATH Umgebungsvariable gesetzt sein. Sonst erscheinen Fehler bei der Ausführung von MONICA aus den Python-SKripten heraus. 
+
+# Linux / Ubuntu
+
+Diese Installation wurde unter Ubuntu 10.4 LTS getestet. Falls diese Dokumentation Fehler enthält, bitte selbständig im Wiki korrigieren.
+
+## Notwendige Softwarepakete
+
+* GCC: Der Compiler wird zum Übersetzen des Quellcodes benötigt; Installation: sudo apt-get install gcc build-essential 
+* Git: Verteiltes Codeverwaltungssystem, wird zum aus-checken des Quellcodes benötigt; Installation: sudo apt-get install git-core 
+* Qt4: Wird hauptsächlich als Makefile-Generator verwendet; MONICA ist nicht direkt abhängig von Qt; Installation: Von der Webseite  http://qt.nokia.com/downloads herunterladen und installieren (LGPL-Version) getestete Version: qtsdk-2010.02
+* Boost: Bibliothek wird für die Übersetzung des Quellcodes benötigt; Download und Entpacken der Bibliothek (Version 1.53.0) ins übergeordnete Projektverzeichnis (../monica)
+* MySQL: Zur Anbindung an diverse MySQL-Datenbanken mittels MONICA benötigt; Installation: sudo apt-get install libmysqlclient15-dev 
+
+**Hinweise:**
+
+Folgende Einträge müssen in der .bashrc gesetzt werden, damit qmake und die Qt-Bibliotheken korrekt gefunden werden können
+
+ export QTDIR=/home/user/pfad_zum_QT_installationsverzeichnis
+ export PATH=$QTDIR/bin:$QTDIR/qt/bin:$PATH
+ export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+
+    
+
+## Optionale Software
+
+* Eclipse: Freie Entwicklungsumgebung auch für C++-Entwicklung; Installation: siehe Installation von Eclipse 
