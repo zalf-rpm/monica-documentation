@@ -30,6 +30,11 @@ Das swigwin-Verzeichnis muss in dem Verzeichnis abgespeichert werden, in dem sic
 
 Wird eine neuere swig Version als 2.10.0 verwendet so muss zusätzlich in der monica-swig.vcxproj Datei der Pfad zur swig.exe angepasst werden. Dazu muss die Datei monica-swig.vcxproj in einem Texteditor (z.B. notepad++) geöffnet werden und dann im Texteditor der Pfad angepasst werden.
 
+Folgende Umgebungsvariablen müssen für swig gesetzt sein, damit es korrekt arbeiten kann:
+
+PYTHON_INCLUDE : Pfad zum Verzeichnis, welches die python.h enthält, z.B. C:\Python34\include
+PYTHON_LIB : Pfad zur Python-Bibliothek, z.B. C:\Python34\libs\python3.lib
+
 Hinweis: MONICA muss in der swig-Variante als Release gebaut werden, da sonst der swig-Build-step nicht ausgeführt wird.
 
 # Linux / Ubuntu
