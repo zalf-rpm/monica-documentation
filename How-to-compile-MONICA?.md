@@ -18,7 +18,7 @@
 
 Um die EVA-Skripte zur Ausführung von MONICA zu nutzen, muss MONICA als Python-Bibliothek gebaut werden. Dies erfolgt durch das Compilieren von monica-swig.sln. Dazu ist die Installation folgender Softwarepakete erforderlich:
 
-* Python (2.7.x)
+* Python (2.7.x), als 32-bit Variante, da sonst swig Probleme bereitet.
 * Numpy
 * MysqlDb? 
 * R
