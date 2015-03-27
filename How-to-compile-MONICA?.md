@@ -26,6 +26,12 @@ Um die EVA-Skripte zur Ausführung von MONICA zu nutzen, muss MONICA als Python-
 
 Der Pfad zu R, Python und zur DLL vom MySQLConnector C muss in der PATH Umgebungsvariable gesetzt sein. Sonst erscheinen Fehler bei der Ausführung von MONICA aus den Python-SKripten heraus. 
 
+Das swigwin-Verzeichnis muss in dem Verzeichnis abgespeichert werden, in dem sich auch die anderen Repositories befinden wie z.B: monica oder eva-project. 
+
+Wird eine neuere swig Version als 2.10.0 verwendet so muss zusätzlich in der monica-swig.vcxproj Datei der Pfad zur swig.exe angepasst werden. Dazu muss die Datei monica-swig.vcxproj in einem Texteditor (z.B. notepad++) geöffnet werden und dann im Texteditor der Pfad angepasst werden.
+
+Hinweis: MONICA muss in der swig-Variante als Release gebaut werden, da sonst der swig-Build-step nicht ausgeführt wird.
+
 # Linux / Ubuntu
 
 Diese Installation wurde unter Ubuntu 10.4 LTS getestet. Falls diese Dokumentation Fehler enthält, bitte selbständig im Wiki korrigieren.
