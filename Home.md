@@ -6,3 +6,4 @@ This Wiki contains information solemnly about the software development of MONICA
 
 [How to compile MONICA?](wiki/How-to-compile-MONICA)
 
+[New Monica JSON version](wiki/monica-2-1-json)
