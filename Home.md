@@ -4,5 +4,5 @@ This Wiki contains information solemnly about the software development of MONICA
 
 [MONICA versions](wiki/Monica-versions)
 
-[How to compile MONICA?](wiki/How-to-compile-MONICA%3F)
+[How to compile MONICA?](wiki/How-to-compile-MONICA)
 
