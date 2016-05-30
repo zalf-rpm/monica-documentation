@@ -1,11 +1,11 @@
-### Branch: MACSUR_WP2
 
-* 2015-06-08
-* created branch for MACSUR WP2 simulations
+### v1.2
 
-### Tag: perennial crop module
+ * 2013-07-29
+ * 3d389ca
+ * Tag: MACSUR_WP2 --> Basisversion für die MACSUR-Simulationen
+ * Tag: v1.2
 
-* 2014-07-25
 
 ### v1.1.1 
 
