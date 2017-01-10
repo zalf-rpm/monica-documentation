@@ -117,12 +117,284 @@ As can be seen from the following examples taken from **site.json**, the functio
 
 
 ## JSON data format
-Currently MONICA uses  [**JSON**](http://www.json.org) as format for its files. Thus care has to be taken to obey the JSON rules, don't forget commas and the like. In order to check and/or reformat existing code, tools like [this online json viewer](http://codebeautify.org/jsonviewer) or [this one](https://jsonformatter.curiousconcept.com) can be used.
+Currently MONICA uses  [**JSON**](http://www.json.org) as format for its files. Thus care has to be taken to obey the JSON rules, don't forget commas and the like. In order to check and/or reformat existing code, tools like [this online json viewer](http://codebeautify.org/jsonviewer) or [this one](https://jsonformatter.curiousconcept.com) can be used. 
+
+**JSON** has no syntax for comments, it's a pure data format. In order to make the configuration files more self describing, but keep them valid **JSON** files, comments are encoded as keys beginning with two underscores **__** and an empty string **""** value. Instead of comments this also can be used to comment out structures which should not be used right now, simply by making a key invalid, e.g. adding an underscore character in front **_** or rename it to a name unknown to MONICA.
+
 
 ## **sim.json**
 The **sim.json** file contains simulation specific information like start and end date (MONICA will pick the right climate data from **climate.csv**) or whether certain global toggles like nitrogen response/use of secondary yields will be turned on or of. 
 
 **NumberOfLayers** and **LayerThickness** shouldn't be changed currently.
+
+### Reading climate data (**climate.csv-options**)
+
+Climate data are being stored in a **.csv** formatted file. In **sim.json** is a section which can be used to configure some parts of what will be read and in which way. If the **JSON object** **climate.csv-options** contains the two keys **start-date** and **end-date**, only the designated time range will be read from the file. If they are missing all data will be read and thus determine how long MONICA will run.
+
+The key **no-of-climate-file-header-lines** defines how many lines will be skiped initially, as there could be no (0) header in the file, just the column names (1) or maybe more (e.g. the units). **csv-separator** defines what character is being used to separate the columns and values. In a **Comma Separated Values** file this is usually a **,**, but could equally well be the tabulator character **\t** or spaces etc.
+
+Then there may be a key **header-to-acd-names** which may have a **JSON object** as its value. The key/value pairs in the object define mappings from the column header names in the **climate.csv** file to **Available Climate Data (ACD)** names which MONICA knows and accepts. **ACD** are (case sensitivity is significant)
+
+| ACD element | description (example) [unit] |
+| :--------- | ------------- |
+| day | day of year (**5**) |
+| month | month of year (**11**) |
+| year | the year (**2017**) |
+| isoDate | date part of ISO date format (**2017-11-05**) |
+| deDate | german date format (**05.11.2017**) |
+| tmin | minimum daily temperature (**-2**) [**°C**] |
+| tavg | average daily temperature (**15.3**) [**°C**] |
+| tmax | maximum daily temperature (**34.7**) [**°C**] |
+| precip | daily precipitation (**2.3**) [**mm**] |
+| globrad | global radiation (**27.431**) [**MJ m-2**] |
+| wind | wind speed (**6.7**) [**m s-1**] |
+| relhumid | relative humidity (**90.0**) [**%**] |
+| skip | skip an existing element |
+
+Unknown column headers will be skipped automatically, therefore the **skip** **ACD** is to consciously skip known elements, e.g. if there might be multiple columns for the same type of climate elements. The **header-to-acd-names** mapping is meant to provide a means to allow a wider range of existing **.csv** files to be used as is.
+
+Additionally it is possible that the value side of the mapping is actually a **JSON array**, which is allowed to contain two elements - first a simple arithmetic operation (__+, -, *, /__) and second a number value. Then instead of replacing the key (a name) by the value (a valid **ACD** name) the operation is applied to the key (a column name). In the example below the .csv** file contains a column **global_radiation** in **J cm-2** __global_radiation__ is mapped to **globrad** the valid MONICA **ACD** name for the global radiation and secondly it will be multiplied (__*__) by **100.0** to convert the values to **MJ m-2**. 
+
+```json
+"climate.csv-options": {
+  "__given the start and end date, monica will run just this time range, else the full time range given by supplied climate data": "",
+  "start-date": "1991-01-01",
+  "end-date": "1997-12-31",
+
+  "no-of-climate-file-header-lines": 1,
+  "csv-separator": ",",
+  "header-to-acd-names": {
+    "DE-date": "de-date",
+    "global_radiation": "globrad",
+    "global_radiation": ["*", 100.0]
+}
+```
+
+### Outputing results from MONICA
+
+The user can request the result output in **CSV** format from MONICA by defining options in the **JSON object** under the key **output**. 
+
+The following table describes a couple of options which can be set:
+
+| key | description (example/default) |
+| --- | --------------- |
+| path-to-output | path to directory to write output to (**./**) = current directory |
+| write-file? | Write file to "path-to-output"? (**true**) or (**false**) |
+| include-header-row | include the header row in the output (**true**) or (**false**) |
+| include-units-row | include a line with the units (**true**) or (**false**) |
+| include aggregation-rows | show two rows telling about a) the expression which requested an output and b) what MONICA interpreted - both can be used for debugging purposes (**true**) or (**false**) |
+| csv-separator | the separating character to be used (**,**) | 
+| events | a list of pairs, which describe the events on which MONICA is requested to output a list of results |
+
+#### events
+
+The key **events** defines a list of MONICA results which should be output. The definition consists of two pieces, so the **JSON array** which is the value to the key **events** has to consist of an even number of entries, always a pair of **event, [list of outputs]**. An event can either be a simple string like **"daily"** or a **JSON object** or a **JSON array**. A string and a **JSON array** are just shortcuts for a more complex **JSON object** which describes the event upon which output should be generated.
+
+In order to define requested outputs a few kinds of information have to be distinguished:
+
+1. when to **start**/**end** outputing results (**start**/**end** keys)
+2. in the start/end period **from**/**to** when to aggregate data (**from**/**to** keys)
+3. **at** which time/condition to write a result, which doesn't aggregate results
+4. **while** some condition is true, aggregate results
+
+ISO-Dates are allowed to contain placeholders (**x**), which means that the year, month or day is unspecified and thus every available value is used. 
+
+Additionally to date patterns every workstep generates two events, one with the exact name of the workstep and one with a easier to read simplified name.
+
+| Workstep event name | simplified name |
+| ------------------- | --------------- |
+| WorkStep | workstep |
+| Seed | seeding |
+| Harvest | harvesting |
+| AutomaticHarvest | automatic-harvesting, harvesting |
+| Cutting | cutting |
+| MineralFertiliserApplication | mineral-fertilizing |
+| OrganicFertiliserApplication | organic-fertilizing |
+| TillageApplication | tillage |
+| IrrigationApplication | irrigation |
+| SetValue | set-value |
+
+The following table shows some event expressions, shortcuts (and their expansion):
+
+| Shortcut | Expanded form | Meaning |
+| -------- | ------------- | ----------- |
+| | ```{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}``` | output results at every 15th from mai to july - daily results will be output |
+| "xxxx-03-31" | ```{"at": "xxxx-03-31"}``` | write results every year at the march 31st |
+| "daily" | ```{"at": "xxxx-xx-xx"}``` | write results daily |
+| "monthly" | ```{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}``` | write monthly aggregated results |
+|	"yearly" | ```{"from": "xxxx-01-01", "to": "xxxx-12-31"}``` | write yearly aggregated results |
+|	"run" | ```{"from": <start-date>, "to": <end-date>}``` | write results aggregated over the whole run |
+|	"crop" | ```{"from": "seeding", "to": "harvesting"}``` | write results aggregated during the cropping period |
+| ["while", "Stage", "=", 5] | ```{"while": ["Stage", "=", 5]}``` | write results aggregated only while the result **Stage** equals 5 |
+| ["at", "Stage", "=", 2] | ```{"at": ["Stage", "=", 2]}``` | write results daily if the result **Stage** equals 2
+| [["Mois", 1], "<", 0.5] | ```{"at": ["Mois", 1], "<", 0.5]}``` | write results daily if the soil-moisture in the first layer is below 0.5 |
+| "seeding" | ```{"at": "seeding"}``` | at seeding time write a result |
+
+As can be seen in the table above it is possible to use simple comparision expressions in the events. The available operators are **<, <=, =, >=, >**. On the lefthand and/or righthand side of the operator may appear either an output expression (e.g **"Stage"** or **["Mois", 1]**) or a numeric value (e.g. **1**).
+
+### List of outputs
+
+The previous section defined the events when MONICA should output results. What remains is to define what should be output. In the previous table appeared already some **outputs** in expressions like ```["at", "Stage", "=", 2]``` or ```[["Mois", 1], "<", 0.5]```. **"Stage"** outputs the current development stage the plant is in and **["Mois", 1]** outputs the soil-moisture in the first 10cm soil-layer. MONICA internally defines a lot of names which refer to results which can be output. There are three categories:
+
+1. scalar values like **Stage**
+2. array values like **Mois**, which actually consist of 20 values for the soil-moistures in all the layers
+3. array values like **["OrgBiom", "Root"]**, crop-organ specific results 
+
+MONICA currently uses a fixed set of 20 10cm soil-layers. If an output requires to choose a layer or a range of layers, a number between 1 and 20 has to be supplied. If the output is about an crop-organ one of the following keywords is to be used: **"Root", "Leaf", "Shoot", "Fruit", "Struct", "Sugar"**.
+
+Additionally the user has to tell MONICA whether ranges of values (in the arrays) are to be output as a bunch of scalars or instead be aggregated to a single value and if they should be aggregated, how to aggregate them. The following aggregation operations are available: **AVG, MEDIAN, SUM, MIN, MAX, FIRST, LAST, NONE**.
+
+The user specifies an output by either defining in the most simple case the name of the output (e.g. **"Stage"**, **"Crop"** or **"Date"**) or a **JSON array** where the first element of the array is the aforementioned output name. It is allowed to append to the name, separated by the character **|** a display name which will in the output used instead of the result name, e.g. **"DOY|MatDOY"** would not output **DOY** but **MatDOY** which could be more descriptive. The second element in the array is, either the choosen soil-layer, layer-range, crop-organ (for array values) or the aggregation operation for scalar values. The latter is by default set to **NONE** if not used. If the output is an array value a third value, the aggregation operation can be supplied. For array values the second value can be a single number (the soil-layer number), a string describing the crop-organ or again an array which describes (for soil-layers only) a range of layers. In the latter case the array's first value is the starting layer, the second the ending layer (inclusive) and a possible third value an aggregation operation. If the range description specifies an aggregation operation every time an output is requested the defined range will be aggregated via the operation and a single value will be stored, else a list of values will be returned and show up in the outputs with the name of the result appended by underscore and layer number.
+
+
+
+```json
+"output": { 
+  "write-file?": false,
+  "file-name": "out.csv",
+
+  "__how to write and what to include in monica CSV output": "",
+  "csv-options": {
+    "include-header-row": true,
+    "include-units-row": true,
+    "include-aggregation-rows": true,
+    "csv-separator": ","
+  },
+  
+  "__what data to include in the monica output according to the events defined by the keys": "",
+  "events": [
+    "daily", [
+      "Date",
+      "Crop",
+      "Recharge",
+      ["PercolationRate", [1,20]],
+      "guenther-isoprene-emission|G-Iso",
+      "guenther-monoterpene-emission|G-Mono",
+      "jjv-isoprene-emission|JJV-Iso",
+      "jjv-monoterpene-emission|JJV-Mono"
+    ]
+  ],
+  
+  "__events": [
+    "crop", [
+      ["Year", "LAST"],
+      ["DOY|SowDOY", "FIRST"],
+      ["LAI|MaxLAI", "MAX"],
+      ["PercolationRate|WDrain", 15, "SUM"],
+      ["Act_ET|CumET", "SUM"],
+      ["Act_Ev|Evap", "SUM"],
+      ["Mois|SoilAvW", [1, 15, "SUM"], "LAST"],
+      ["Runoff", "SUM"],
+      ["ET0|Eto", "SUM"],
+      ["Tmax|TMAXAve", "AVG"],
+
+      ["Yield", "LAST"],
+      ["AbBiom|Biom-ma", "LAST"],
+      ["AbBiomN|CroN-ma", "LAST"],
+      ["GrainN", "LAST"]
+    ],
+
+    ["while", "Stage", "=", 5], [
+      ["DOY|AntDOY", "FIRST"],
+      ["AbBiom|Biom-an", "First"],
+      ["AbBiomN|CroN-an", "FIRST"]
+    ],
+
+    ["while", "Stage", "=", 7], [
+      ["Yield", "FIRST"],
+      ["DOY|MatDOY", "FIRST"], 
+      ["AbBiom|Biom-ma", "First"],
+      ["AbBiomN|CroN-ma", "FIRST"],
+      ["GrainN", "FIRST"]
+    ],
+    
+    ["while", "Stage", "=", 2], [
+      ["DOY|EmergDOY", "FIRST"]
+    ]
+  ],
+  
+  
+  "_events" : [
+    "_daily", [
+      "Date", "Crop", "TraDef", "Tra", "NDef", "HeatRed", "FrostRed", "OxRed",
+      "Stage", "TempSum", "VernF", "DaylF", 
+      "IncRoot", "IncLeaf", "IncShoot", "IncFruit", 
+      "RelDev", "LT50", "AbBiom", 
+      ["OrgBiom", "Root"], ["OrgBiom", "Leaf"], ["OrgBiom", "Shoot"], 
+      ["OrgBiom", "Fruit"], ["OrgBiom", "Struct"], ["OrgBiom", "Sugar"],
+      "Yield", "SumYield", "GroPhot", "NetPhot", "MaintR", "GrowthR",	"StomRes",
+      "Height", "LAI", "RootDep", "EffRootDep", "TotBiomN", "AbBiomN", "SumNUp",
+      "ActNup", "PotNup", "NFixed", "Target", "CritN", "AbBiomNc", "YieldNc", 
+      "Protein", 
+      "NPP", ["NPP", "Root"], ["NPP", "Leaf"], ["NPP", "Shoot"], 
+      ["NPP", "Fruit"], ["NPP", "Struct"], ["NPP", "Sugar"],
+      "GPP", 
+      "Ra", 
+      ["Ra", "Root"], ["Ra", "Leaf"], ["Ra", "Shoot"], ["Ra", "Fruit"], 
+      ["Ra", "Struct"], ["Ra", "Sugar"],
+      ["Mois", [1, 20]], "Precip", "Irrig", "Infilt", "Surface", "RunOff", "SnowD", "FrostD",
+      "ThawD", ["PASW", [1, 20]], "SurfTemp", ["STemp", [1, 5]], 
+      "Act_Ev", "Act_ET", "ET0", "Kc", "AtmCO2", "Groundw", "Recharge", "NLeach",
+      ["NO3", [1, 20]], "Carb", ["NH4", [1, 20]], ["NO2", [1, 4]], 
+      ["SOC", [1, 6]], ["SOC-X-Y", [1, 3,	"SUM"]], ["SOC-X-Y", [1, 20, "SUM"]],
+      ["AOMf", 1], ["AOMs", 1], ["SMBf", 1], ["SMBs", 1], ["SOMf", 1], 
+      ["SOMs", 1], ["CBal", 1], ["Nmin", [1, 3]], "NetNmin", "Denit", "N2O", "SoilpH",
+      "NEP", "NEE", "Rh", "Tmin", "Tavg", "Tmax", "Wind", "Globrad", "Relhumid", "Sunhours",
+      "NFert"
+    ],
+
+    "monthly", [
+      "Year", "Month",
+      ["SOC", [1, 1, "AVG"]], ["SOC", [1, 3, "AVG"]],
+      ["WaterContent", [1, 9, "AVG"]], "Recharge", "NLeach", 
+      ["SnowD", "MAX"], ["SnowD", "SUM"], ["FrostD", "SUM"],
+      ["RunOff", "SUM"], ["NH3", "SUM"], ["Precip", "SUM"], "Act_ET"
+    ],
+
+    "yearly", ["Year", ["N", [1, 3]], ["RunOff", "SUM"], ["NLeach", "SUM"], ["Recharge", "SUM"]],
+
+    "run", [["Precip", "SUM"]],
+
+    "xxxx-03-31", [
+      "Year",
+      ["N", [1, 9, "SUM"]],
+      ["STemp", [1, 3, "SUM"]],
+      ["STemp", [1, 3, "AVG"]],
+      ["NO3", [1, 9, "SUM"]],
+      ["Mois", [1, 3, "AVG"]],
+      ["Mois", [4, 6, "AVG"]],
+      ["Mois", [7, 9, "AVG"]],
+      ["Mois", [1, 9, "AVG"]],
+      "Recharge",
+      ["CapillaryRise", [1, 3, "AVG"]], 
+      ["CapillaryRise", [4, 6, "AVG"]],
+      ["CapillaryRise", [7, 9, "AVG"]],
+      ["PercolationRate", [1, 3, "AVG"]],
+      ["PercolationRate", [4, 6, "AVG"]],
+      ["PercolationRate", [7, 9, "AVG"]],
+      "Act_ET", "Act_Ev", "NH3",
+      "Evapotranspiration", "Evaporation", "Transpiration"
+    ],
+
+    {	"start": "xxxx-05-01",
+      "end": "xxxx-07-31",
+      "at": "xxxx-xx-15"}, ["Date", "Stage", "TempSum"],
+
+    "seeding", ["Crop", ["OrgBiom", "Fruit"], "Yield"],
+    "harvesting", ["Crop", ["OrgBiom", "Fruit"], "Yield"],
+    {	"from": "seeding",
+      "to": "harvesting"}, ["Crop", ["OrgBiom", "Fruit", "SUM"], ["Yield", "LAST"]],
+    
+    ["Stage", "=", 2], ["Date", "Stage"],
+    {"at": ["Stage", "=", 2]}, ["Date", "Stage", ["Mois",1]],
+    [["Mois", 1], "<", 0.5], ["Date", ["Mois",1]],
+    {	"from": ["Stage", "=", 2],
+      "to": ["Stage", "=", 3]}, ["Crop", "Stage"]
+  ]
+}
+```
+
+
 
 ```json
 {
