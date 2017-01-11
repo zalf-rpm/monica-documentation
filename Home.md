@@ -1,11 +1,9 @@
 MONICA is a dynamic, process-based simulation model which describes transport and bio-chemical turn-over of carbon, nitrogen and water in agro-ecosystems. On daily time steps the most important processes in soil and plant are modelled mechanistically. They are linked in such way that feed-back relations of the single processes are reproduced as close to nature as possible. MONICA works one dimensional and represents a space of 1 m² surface area and 2 m depth. The acronym MONICA is derived from „MOdel of Nitrogen and Carbon dynamics in Agro-ecosystems”.
 
-This Wiki contains information solely about the software development of MONICA. Additional information of the model (processes, installation) can be found on [http://monica.agrosystem-models.com/](http://monica.agrosystem-models.com/).
+This Wiki contains information about the software development of MONICA. Additional information of the model (processes, installation v1.2) can be found on [http://monica.agrosystem-models.com/](http://monica.agrosystem-models.com/).
 
 [MONICA versions](wiki/Monica-versions)
 
 [How to compile MONICA?](wiki/How-to-compile-MONICA)
 
-[New Monica JSON version](wiki/monica-2-1-json)
-
-[Description of MONICA json config file format](wiki/description-json-config-files)
+MONICA is now available in a version 2. There are a lot of changes especially regarding the configuration of MONICA, how to start it and how to get results. Most of the changes are described in the this [description of the MONICA json config files](wiki/description-json-config-files). 
