@@ -242,38 +242,40 @@ The previous section defined the events when MONICA should output results. What 
 
 MONICA currently uses a fixed set of 20 10cm soil-layers. If an output requires to choose a layer or a range of layers, a number between 1 and 20 has to be supplied. If the output is about an crop-organ one of the following keywords is to be used: **"Root", "Leaf", "Shoot", "Fruit", "Struct", "Sugar"**.
 
-Additionally the user has to tell MONICA whether ranges of values (in the arrays) are to be output as a bunch of scalars or instead be aggregated to a single value and if they should be aggregated, how to aggregate them. The following aggregation operations are available: **AVG, MEDIAN, SUM, MIN, MAX, FIRST, LAST, NONE**.
+Additionally the user has to tell MONICA whether ranges of values (in the arrays) are to be output as a bunch of scalars or instead be aggregated to a single value and if they should be aggregated, how to aggregate them. The following aggregation operations are available: **AVG, MEDIAN, SUM, MIN, MAX, FIRST, LAST, NONE**. Aggregation might happen on a daily basis to aggregate soil layers to a single scalar value (the **default** operation for layer aggregation is **NONE**) or in aggregation time ranges, e.g. to aggregate monthly values, where the **default** aggregation operation is **AVG**.
 
-The user specifies an output by either defining in the most simple case the name of the output (e.g. **"Stage"**, **"Crop"** or **"Date"**) or a **JSON array** where the first element of the array is the aforementioned output name. It is allowed to append to the name, separated by the character **|** a display name which will in the output used instead of the result name, e.g. **"DOY|MatDOY"** would not output **DOY** but **MatDOY** which could be more descriptive. The second element in the array is, either the choosen soil-layer, layer-range, crop-organ (for array values) or the aggregation operation for scalar values. The latter is by default set to **NONE** if not used. If the output is an array value a third value, the aggregation operation can be supplied. For array values the second value can be a single number (the soil-layer number), a string describing the crop-organ or again an array which describes (for soil-layers only) a range of layers. In the latter case the array's first value is the starting layer, the second the ending layer (inclusive) and a possible third value an aggregation operation. If the range description specifies an aggregation operation every time an output is requested the defined range will be aggregated via the operation and a single value will be stored, else a list of values will be returned and show up in the outputs with the name of the result appended by underscore and layer number.
+| Aggregation reason | Default operation | Meaning |
+| ------------------ | ----------------- | ------- |
+| aggregate soil layers into scalar value | **NONE** | if no aggregation operation is given, selected range of layer values will be output |
+| aggregate time range | **AVG** | if an event defines an aggregation time range, a missing aggregation operation (value 2 or 3 in **JSON array**), the temporarily collected daily values will be averaged |
 
+To understand aggregation operations one can think of that all the values to be aggregated (e.g. the **Runoff**) will be stored during the **from**/**to** period temporarily in a list. After the **to** time range is over the aggregation operation will be applied to this list. That means that **AVG** will average all values or that **FIRST** will return simply the first value in the list aka the value when the time range began (**from** day).
 
+The user specifies an output by either defining in the most simple case the name of the output (e.g. **"Stage"**, **"Crop"** or **"Date"**) or a **JSON array** where the first element of the array is the aforementioned output name. It is allowed to append to the name, separated by the character **|** a display name which will in the output used instead of the result name, e.g. **"DOY|MatDOY"** would not output **DOY** but **MatDOY** which could be more descriptive. The second element in the array is, either the choosen soil-layer, layer-range, crop-organ (for array values) or the aggregation operation for scalar values. The latter is by default set to **NONE** if not used. If the output is an array value a third value, the aggregation operation can be supplied. For array values the second value can be a single number (the soil-layer number), a string describing the crop-organ or again an array which describes (for soil-layers only) a range of layers. In the latter case the array's first value is the starting layer, the second the ending layer (inclusive) and a possible third value an aggregation operation. If the range description specifies an aggregation operation every time an output is requested the defined range will be aggregated via the operation and a single value will be stored, else a list of values will be returned and show up in the outputs with the name of the result appended by underscore and layer number. The following examples with show the possible variations.
+
+| Output definition | Meaning |
+| ----------------- | ------- |
+| "Date" | return the ISO date, e.g. 2017-01-17 |
+| ["Year", "LAST"] | return the year at **to** time, when the aggregation time ends |
+| ["PercolationRate|WDrain", 15, "SUM"] | return the sum of the **PercolationRate**s in soil layer 15 (1.5m) in an aggregation period, but rename it in the outputs as **WDrain** ... to **SUM** requires an event to specify the aggregation time range |
+| ["Mois", [1, 20]] | return the daily soil-moistures of all 20 soil layers, output will be labeled "Mois_1", "Mois_2", etc |
+| ["OrgBiom", "Leaf"] | return the daily organic biomass of the **Leaf** organ |
+| ["SOC", [1, 3, "AVG"]] | return the daily soil organic carbon as a single value averaged over the first three soil layers |
+| ["Precip", "SUM"] | return the sum of the precipitations in a given aggregation time range |
+
+In the created output file the order of the outputed results in the **events** list is preserved and can be relied upon. Below you'll find an example output section, which creates an equivalent file to the **rmout** file of the old version 1 of MONICA and also includes commented out (**__events**) an example set of outputs used in the EU MACSUR Heat Stress study.
 
 ```json
 "output": { 
   "write-file?": false,
   "file-name": "out.csv",
 
-  "__how to write and what to include in monica CSV output": "",
   "csv-options": {
     "include-header-row": true,
     "include-units-row": true,
     "include-aggregation-rows": true,
     "csv-separator": ","
   },
-  
-  "__what data to include in the monica output according to the events defined by the keys": "",
-  "events": [
-    "daily", [
-      "Date",
-      "Crop",
-      "Recharge",
-      ["PercolationRate", [1,20]],
-      "guenther-isoprene-emission|G-Iso",
-      "guenther-monoterpene-emission|G-Mono",
-      "jjv-isoprene-emission|JJV-Iso",
-      "jjv-monoterpene-emission|JJV-Mono"
-    ]
-  ],
   
   "__events": [
     "crop", [
@@ -313,9 +315,8 @@ The user specifies an output by either defining in the most simple case the name
     ]
   ],
   
-  
-  "_events" : [
-    "_daily", [
+  "events" : [
+    "daily", [
       "Date", "Crop", "TraDef", "Tra", "NDef", "HeatRed", "FrostRed", "OxRed",
       "Stage", "TempSum", "VernF", "DaylF", 
       "IncRoot", "IncLeaf", "IncShoot", "IncFruit", 
@@ -336,65 +337,17 @@ The user specifies an output by either defining in the most simple case the name
       "ThawD", ["PASW", [1, 20]], "SurfTemp", ["STemp", [1, 5]], 
       "Act_Ev", "Act_ET", "ET0", "Kc", "AtmCO2", "Groundw", "Recharge", "NLeach",
       ["NO3", [1, 20]], "Carb", ["NH4", [1, 20]], ["NO2", [1, 4]], 
-      ["SOC", [1, 6]], ["SOC-X-Y", [1, 3,	"SUM"]], ["SOC-X-Y", [1, 20, "SUM"]],
+      ["SOC", [1, 6]], ["SOC-X-Y", [1, 3, "SUM"]], ["SOC-X-Y", [1, 20, "SUM"]],
       ["AOMf", 1], ["AOMs", 1], ["SMBf", 1], ["SMBs", 1], ["SOMf", 1], 
       ["SOMs", 1], ["CBal", 1], ["Nmin", [1, 3]], "NetNmin", "Denit", "N2O", "SoilpH",
       "NEP", "NEE", "Rh", "Tmin", "Tavg", "Tmax", "Wind", "Globrad", "Relhumid", "Sunhours",
       "NFert"
-    ],
-
-    "monthly", [
-      "Year", "Month",
-      ["SOC", [1, 1, "AVG"]], ["SOC", [1, 3, "AVG"]],
-      ["WaterContent", [1, 9, "AVG"]], "Recharge", "NLeach", 
-      ["SnowD", "MAX"], ["SnowD", "SUM"], ["FrostD", "SUM"],
-      ["RunOff", "SUM"], ["NH3", "SUM"], ["Precip", "SUM"], "Act_ET"
-    ],
-
-    "yearly", ["Year", ["N", [1, 3]], ["RunOff", "SUM"], ["NLeach", "SUM"], ["Recharge", "SUM"]],
-
-    "run", [["Precip", "SUM"]],
-
-    "xxxx-03-31", [
-      "Year",
-      ["N", [1, 9, "SUM"]],
-      ["STemp", [1, 3, "SUM"]],
-      ["STemp", [1, 3, "AVG"]],
-      ["NO3", [1, 9, "SUM"]],
-      ["Mois", [1, 3, "AVG"]],
-      ["Mois", [4, 6, "AVG"]],
-      ["Mois", [7, 9, "AVG"]],
-      ["Mois", [1, 9, "AVG"]],
-      "Recharge",
-      ["CapillaryRise", [1, 3, "AVG"]], 
-      ["CapillaryRise", [4, 6, "AVG"]],
-      ["CapillaryRise", [7, 9, "AVG"]],
-      ["PercolationRate", [1, 3, "AVG"]],
-      ["PercolationRate", [4, 6, "AVG"]],
-      ["PercolationRate", [7, 9, "AVG"]],
-      "Act_ET", "Act_Ev", "NH3",
-      "Evapotranspiration", "Evaporation", "Transpiration"
-    ],
-
-    {	"start": "xxxx-05-01",
-      "end": "xxxx-07-31",
-      "at": "xxxx-xx-15"}, ["Date", "Stage", "TempSum"],
-
-    "seeding", ["Crop", ["OrgBiom", "Fruit"], "Yield"],
-    "harvesting", ["Crop", ["OrgBiom", "Fruit"], "Yield"],
-    {	"from": "seeding",
-      "to": "harvesting"}, ["Crop", ["OrgBiom", "Fruit", "SUM"], ["Yield", "LAST"]],
-    
-    ["Stage", "=", 2], ["Date", "Stage"],
-    {"at": ["Stage", "=", 2]}, ["Date", "Stage", ["Mois",1]],
-    [["Mois", 1], "<", 0.5], ["Date", ["Mois",1]],
-    {	"from": ["Stage", "=", 2],
-      "to": ["Stage", "=", 3]}, ["Crop", "Stage"]
+    ]
   ]
 }
 ```
 
-
+Finally below you'll find an output-wise simplified full **sim.json** file.
 
 ```json
 {
@@ -424,87 +377,7 @@ The user specifies an output by either defining in the most simple case the name
 		},
 		
 		"__what data to include in the monica output according to the events defined by the keys": "",
-		"events": [
-			"daily", [
-				"Date",
-				"Crop",
-				"Recharge",
-				["PercolationRate", [1,20]],
-				"guenther-isoprene-emission|G-Iso",
-				"guenther-monoterpene-emission|G-Mono",
-				"jjv-isoprene-emission|JJV-Iso",
-				"jjv-monoterpene-emission|JJV-Mono"
-			]
-		],
-		
-		"__events": [
-			"crop", [
-				["Year", "LAST"],
-				["DOY|SowDOY", "FIRST"],
-				["LAI|MaxLAI", "MAX"],
-				["PercolationRate|WDrain", 15, "SUM"],
-				["Act_ET|CumET", "SUM"],
-				["Act_Ev|Evap", "SUM"],
-				["Mois|SoilAvW", [1, 15, "SUM"], "LAST"],
-				["Runoff", "SUM"],
-				["ET0|Eto", "SUM"],
-				["Tmax|TMAXAve", "AVG"],
-
-				["Yield", "LAST"],
-				["AbBiom|Biom-ma", "LAST"],
-				["AbBiomN|CroN-ma", "LAST"],
-				["GrainN", "LAST"]
-			],
-
-			["while", "Stage", "=", 5], [
-				["DOY|AntDOY", "FIRST"],
-				["AbBiom|Biom-an", "First"],
-				["AbBiomN|CroN-an", "FIRST"]
-			],
-
-			["while", "Stage", "=", 7], [
-				["Yield", "FIRST"],
-				["DOY|MatDOY", "FIRST"], 
-				["AbBiom|Biom-ma", "First"],
-				["AbBiomN|CroN-ma", "FIRST"],
-				["GrainN", "FIRST"]
-			],
-			
-			["while", "Stage", "=", 2], [
-				["DOY|EmergDOY", "FIRST"]
-			]
-		],
-		
-		
-		"_events" : [
-			"_daily", [
-				"Date", "Crop", "TraDef", "Tra", "NDef", "HeatRed", "FrostRed", "OxRed",
-				"Stage", "TempSum", "VernF", "DaylF", 
-				"IncRoot", "IncLeaf", "IncShoot", "IncFruit", 
-				"RelDev", "LT50", "AbBiom", 
-				["OrgBiom", "Root"], ["OrgBiom", "Leaf"], ["OrgBiom", "Shoot"], 
-				["OrgBiom", "Fruit"], ["OrgBiom", "Struct"], ["OrgBiom", "Sugar"],
-				"Yield", "SumYield", "GroPhot", "NetPhot", "MaintR", "GrowthR",	"StomRes",
-				"Height", "LAI", "RootDep", "EffRootDep", "TotBiomN", "AbBiomN", "SumNUp",
-				"ActNup", "PotNup", "NFixed", "Target", "CritN", "AbBiomNc", "YieldNc", 
-				"Protein", 
-				"NPP", ["NPP", "Root"], ["NPP", "Leaf"], ["NPP", "Shoot"], 
-				["NPP", "Fruit"], ["NPP", "Struct"], ["NPP", "Sugar"],
-				"GPP", 
-				"Ra", 
-				["Ra", "Root"], ["Ra", "Leaf"], ["Ra", "Shoot"], ["Ra", "Fruit"], 
-				["Ra", "Struct"], ["Ra", "Sugar"],
-				["Mois", [1, 20]], "Precip", "Irrig", "Infilt", "Surface", "RunOff", "SnowD", "FrostD",
-				"ThawD", ["PASW", [1, 20]], "SurfTemp", ["STemp", [1, 5]], 
-				"Act_Ev", "Act_ET", "ET0", "Kc", "AtmCO2", "Groundw", "Recharge", "NLeach",
-				["NO3", [1, 20]], "Carb", ["NH4", [1, 20]], ["NO2", [1, 4]], 
-				["SOC", [1, 6]], ["SOC-X-Y", [1, 3,	"SUM"]], ["SOC-X-Y", [1, 20, "SUM"]],
-				["AOMf", 1], ["AOMs", 1], ["SMBf", 1], ["SMBs", 1], ["SOMf", 1], 
-				["SOMs", 1], ["CBal", 1], ["Nmin", [1, 3]], "NetNmin", "Denit", "N2O", "SoilpH",
-				"NEP", "NEE", "Rh", "Tmin", "Tavg", "Tmax", "Wind", "Globrad", "Relhumid", "Sunhours",
-				"NFert"
-			],
-
+		"events" : [
 			"monthly", [
 				"Year", "Month",
 				["SOC", [1, 1, "AVG"]], ["SOC", [1, 3, "AVG"]],
@@ -513,45 +386,17 @@ The user specifies an output by either defining in the most simple case the name
 				["RunOff", "SUM"], ["NH3", "SUM"], ["Precip", "SUM"], "Act_ET"
 			],
 
-			"yearly", ["Year", ["N", [1, 3]], ["RunOff", "SUM"], ["NLeach", "SUM"], ["Recharge", "SUM"]],
+			"yearly", [
+        "Year", 
+        ["N", [1, 3]], 
+        ["RunOff", "SUM"], 
+        ["NLeach", "SUM"], 
+        ["Recharge", "SUM"]
+      ],
 
 			"run", [["Precip", "SUM"]],
 
-			"xxxx-03-31", [
-				"Year",
-				["N", [1, 9, "SUM"]],
-				["STemp", [1, 3, "SUM"]],
-				["STemp", [1, 3, "AVG"]],
-				["NO3", [1, 9, "SUM"]],
-				["Mois", [1, 3, "AVG"]],
-				["Mois", [4, 6, "AVG"]],
-				["Mois", [7, 9, "AVG"]],
-				["Mois", [1, 9, "AVG"]],
-				"Recharge",
-				["CapillaryRise", [1, 3, "AVG"]], 
-				["CapillaryRise", [4, 6, "AVG"]],
-				["CapillaryRise", [7, 9, "AVG"]],
-				["PercolationRate", [1, 3, "AVG"]],
-				["PercolationRate", [4, 6, "AVG"]],
-				["PercolationRate", [7, 9, "AVG"]],
-				"Act_ET", "Act_Ev", "NH3",
-				"Evapotranspiration", "Evaporation", "Transpiration"
-			],
-
-			{	"start": "xxxx-05-01",
-				"end": "xxxx-07-31",
-				"at": "xxxx-xx-15"}, ["Date", "Stage", "TempSum"],
-
-			"seeding", ["Crop", ["OrgBiom", "Fruit"], "Yield"],
 			"harvesting", ["Crop", ["OrgBiom", "Fruit"], "Yield"],
-			{	"from": "seeding",
-				"to": "harvesting"}, ["Crop", ["OrgBiom", "Fruit", "SUM"], ["Yield", "LAST"]],
-			
-			["Stage", "=", 2], ["Date", "Stage"],
-			{"at": ["Stage", "=", 2]}, ["Date", "Stage", ["Mois",1]],
-			[["Mois", 1], "<", 0.5], ["Date", ["Mois",1]],
-			{	"from": ["Stage", "=", 2],
-				"to": ["Stage", "=", 3]}, ["Crop", "Stage"]
 		]
 	},
 
@@ -587,8 +432,140 @@ The user specifies an output by either defining in the most simple case the name
 
 ```
 
+### Allowed outputs 
 
-### **site.json**
+The most up to date list of available and allowed output names can be found directly from the MONICA source in the file [**build-output.cpp**](https://github.com/zalf-lsa/monica/blob/master/src/io/build-output.cpp#L359). There you'll find entries like:
+
+```C++
+build({id++, "Date", "", "output current date"}, 
+.
+.
+.
+build({id++, "TraDef", "0;1", "TranspirationDeficit"},
+```
+
+Here **Date** or **TraDef** are the allowed outputs. Additionally one can see after the output name (if available) the expected units of measure and a description.
+
+| Output name | Unit | Description |
+| ----------- | ---- | ----------- |
+| Date |  | output current date |
+| DOY |  | output current day of year |
+| Month |  | output current Month |
+| Year |  | output current Year |
+| Crop |  | crop name |
+| TraDef | 0;1 | TranspirationDeficit |
+| Tra | mm | ActualTranspiration |
+| NDef | 0;1 | CropNRedux |
+| HeatRed | 0;1 |  HeatStressRedux |
+| FrostRed | 0;1 | FrostStressRedux |
+| OxRed | 0;1 | OxygenDeficit |
+| Stage |  | DevelopmentalStage |
+| TempSum | °Cd | CurrentTemperatureSum |
+| VernF | 0;1 | VernalisationFactor |
+| DaylF | 0;1 | DaylengthFactor |
+| IncRoot | kg ha-1 | OrganGrowthIncrement root |
+| IncLeaf | kg ha-1 | OrganGrowthIncrement leaf |
+| IncShoot | kg ha-1 | OrganGrowthIncrement shoot |
+| IncFruit | kg ha-1 | OrganGrowthIncrement fruit |
+| RelDev | 0;1 | RelativeTotalDevelopment |
+| LT50 | °C | LT50 |
+| AbBiom | kg ha-1 | AbovegroundBiomass |
+| OrgBiom | kgDM ha-1 | get_OrganBiomass(i) |
+| Yield | kgDM ha-1 | get_PrimaryCropYield |
+| SumYield | kgDM ha-1 | get_AccumulatedPrimaryCropYield |
+| GroPhot | kgCH2O ha-1 | GrossPhotosynthesisHaRate |
+| NetPhot | kgCH2O ha-1 | NetPhotosynthesis |
+| MaintR | kgCH2O ha-1 | MaintenanceRespirationAS |
+| GrowthR | kgCH2O ha-1 | GrowthRespirationAS |
+| StomRes | s m-1 | StomataResistance |
+| Height | m | CropHeight |
+| LAI | m2 m-2 | LeafAreaIndex |
+| RootDep | layer# | RootingDepth |
+| EffRootDep | m | Effective RootingDepth |
+| TotBiomN | kgN ha-1 | TotalBiomassNContent |
+| AbBiomN | kgN ha-1 | AbovegroundBiomassNContent |
+| SumNUp | kgN ha-1 | SumTotalNUptake |
+| ActNup | kgN ha-1 | ActNUptake |
+| PotNup | kgN ha-1 | PotNUptake |
+| NFixed | kgN ha-1 | NFixed |
+| Target | kgN ha-1 | TargetNConcentration |
+| CritN | kgN ha-1 | CriticalNConcentration |
+| AbBiomNc | kgN ha-1 | AbovegroundBiomassNConcentration |
+| Nstress | - | NitrogenStressIndex}
+| YieldNc | kgN ha-1 | PrimaryYieldNConcentration |
+| Protein | kg kg-1 | RawProteinConcentration |
+| NPP | kgC ha-1 | NPP |
+| NPP-Organs | kgC ha-1 | organ specific NPP |
+| GPP | kgC ha-1 | GPP |
+| Ra | kgC ha-1 | autotrophic respiration |
+| Ra-Organs | kgC ha-1 | organ specific autotrophic respiration |
+| Mois | m3 m-3 | Soil moisture content |
+| Irrig | mm | Irrigation |
+| Infilt | mm | Infiltration |
+| Surface | mm | Surface water storage |
+| RunOff | mm | Surface water runoff |
+| SnowD | mm | Snow depth |
+| FrostD | m | Frost front depth in soil |
+| ThawD | m | Thaw front depth in soil |
+| PASW | m3 m-3 | PASW |
+| SurfTemp | °C |  |
+| STemp | °C |  |
+| Act_Ev | mm |  |
+| Pot_ET | mm | }
+| Act_ET | mm |  |
+| ET0 | mm |  |
+| Kc |  |  |
+| AtmCO2 | ppm | Atmospheric CO2 concentration |
+| Groundw | m |  |
+| Recharge | mm |  |
+| NLeach | kgN ha-1 |  |
+| NO3 | kgN m-3 |  |
+| Carb | kgN m-3 | Soil Carbamid |
+| NH4 | kgN m-3 |  |
+| NO2 | kgN m-3 |  |
+| SOC | kgC kg-1 | get_SoilOrganicC |
+| SOC-X-Y | gC m-2 | SOC-X-Y |
+| AOMf | kgC m-3 | get_AOM_FastSum |
+| AOMs | kgC m-3 | get_AOM_SlowSum |
+| SMBf | kgC m-3 | get_SMB_Fast |
+| SMBs | kgC m-3 | get_SMB_Slow |
+| SOMf | kgC m-3 | get_SOM_Fast |
+| SOMs | kgC m-3 | get_SOM_Slow |
+| CBal | kgC m-3 | get_CBalance |
+| Nmin | kgN ha-1 | NetNMineralisationRate |
+| NetNmin | kgN ha-1 | NetNmin |
+| Denit | kgN ha-1 | Denit |
+| N2O | kgN ha-1 | N2O |
+| SoilpH |  | SoilpH |
+| NEP | kgC ha-1 | NEP |
+| NEE | kgC ha- | NEE |
+| Rh | kgC ha- | Rh |
+| Tmin |  |  |
+| Tavg |  |  |
+| Tmax |  |  |
+| Precip | mm | Precipitation |
+| Wind |  |  |
+| Globrad |  |  |
+| Relhumid |  |  |
+| Sunhours |  |  |
+| BedGrad | 0;1 |  |
+| N | kgN m-3 |  |
+| Co | kgC m-3 |  |
+| NH3 | kgN ha-1 | NH3_Volatilised |
+| NFert | kgN ha-1 | dailySumFertiliser |
+| WaterContent | %nFC | soil water content |
+| CapillaryRise | mm | capillary rise |
+| PercolationRate | mm | percolation rate |
+| SMB-CO2-ER |  | soilOrganic.get_SMB_CO2EvolutionRate |
+| Evapotranspiration | mm |  |
+| Evaporation | mm |  |
+| Transpiration | mm |  |
+| GrainN | kg ha-1 | get_FruitBiomassNContent|
+| Fc | m3 m-3 | field capacity|
+| Pwp | m3 m-3 | permanent wilting point|
+
+
+## **site.json**
 **site.json** holds all input data and parameters which could be considers site specific. Besides the key **SiteParameters** in the top-level JSON object, there might be a few JSON objects which set global/general soil and environment specific parameters. These can either be included from the SQLite database (table user_parameter) or the filesystem or be defined directly in **site.json**.  In order to facilitate easy overwriting of the standard parameters, they are included via the **DEFAULT** parameter pseudo-key. 
 
 ```json
@@ -633,7 +610,7 @@ The user specifies an output by either defining in the most simple case the name
 
 ```
 
-### **crop.json**
+## **crop.json**
 **crop.json** defines all crop specific input data for MONICA. There has to be just one key in the top-level JSON object, **cropRotation**. **cropRotation** is a JSON array (list) of JSON objects representing a cultivation method (class CultivationMethod in MONICA code). A cultivation method is defined as a set of work steps (class hierarchy WorkStep in MONICA code). Work steps can be the seeding of a crop, the harvesting thereof, fertilizer, irrigation water or tillage applications. A seeding application tells MONICA at which point in time which crop to grow. Within the seeding work step a key **crop** will be set to a JSON object with crop parameters. This can be done in-line, via a include function (**include-from-db** or **include-from-file**) or via a **ref** function. Because crops might be used in more than one work step or cultivation method and the example below defines all used crops in a JSON object, which maps shortcut names to the actual crop parameters. The mapping object is available under the top-level key **crops** which is the first parameter to the **ref** function, the second being the referenced shortcut names. The names chosen (**crops** and e.g. **WR** or **SM**) are abitrary and might depend on the use case.
 
 The example below sports another key **CropParameters**, which contains the some global crop parameters common to all crops, either from the **user-parameter** database table or a referenced file.
