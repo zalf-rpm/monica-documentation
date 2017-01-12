@@ -257,7 +257,7 @@ The user specifies an output by either defining in the most simple case the name
 | ----------------- | ------- |
 | "Date" | return the ISO date, e.g. 2017-01-17 |
 | ["Year", "LAST"] | return the year at **to** time, when the aggregation time ends |
-| ["PercolationRate|WDrain", 15, "SUM"] | return the sum of the **PercolationRate**s in soil layer 15 (1.5m) in an aggregation period, but rename it in the outputs as **WDrain** ... to **SUM** requires an event to specify the aggregation time range |
+| ["PercolationRate\|WDrain", 15, "SUM"] | return the sum of the **PercolationRate**s in soil layer 15 (1.5m) in an aggregation period, but rename it in the outputs as **WDrain** ... to **SUM** requires an event to specify the aggregation time range |
 | ["Mois", [1, 20]] | return the daily soil-moistures of all 20 soil layers, output will be labeled "Mois_1", "Mois_2", etc |
 | ["OrgBiom", "Leaf"] | return the daily organic biomass of the **Leaf** organ |
 | ["SOC", [1, 3, "AVG"]] | return the daily soil organic carbon as a single value averaged over the first three soil layers |
