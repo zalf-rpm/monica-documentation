@@ -1,4 +1,16 @@
-## General
+# Table of contents
+
+[General](#general)
+
+[sim.json](#sim-json)
+
+[site.json](#site-json)
+
+[crop.json](#crop-json)
+
+
+# General
+
 MONICA uses a couple of configuration files to either parameterize the model or setup all input data necessary to run the model. Necessary to run the model are four files:
 
  - **climate.csv**
@@ -28,7 +40,7 @@ In the following json code snippet two settings are being declared (taken from t
 
 One can either include all necessary data (potentially deeply nested JSON objects) into the configuration files or use a reference and include mechanism to fetch data from a SQLite database or files in the filesystem. Where applicable (e.g. **crop.json**) JSON objects can be referenced at mulitple places.
 
-### Default values
+## Default values
 Most of the JSON object data which might be included from database or from a file support an optional **key** named **DEFAULT** which enables the user to load/include data, but overwrite some of them manually. In the example below an EnvironmentParameters JSON object is being defined. It will be initialized completely from a file, but the keys **LeachingDepth** and **WindSpeedHeight** will be overwritten. That way a user could keep rarely changing data in a file and include them always via **DEFAULT** and from project to project just change or update a few values.
 
 ```json
@@ -116,18 +128,19 @@ As can be seen from the following examples taken from **site.json**, the functio
 ```
 
 
-## JSON data format
+# JSON data format
 Currently MONICA uses  [**JSON**](http://www.json.org) as format for its files. Thus care has to be taken to obey the JSON rules, don't forget commas and the like. In order to check and/or reformat existing code, tools like [this online json viewer](http://codebeautify.org/jsonviewer) or [this one](https://jsonformatter.curiousconcept.com) can be used. 
 
 **JSON** has no syntax for comments, it's a pure data format. In order to make the configuration files more self describing, but keep them valid **JSON** files, comments are encoded as keys beginning with two underscores **__** and an empty string **""** value. Instead of comments this also can be used to comment out structures which should not be used right now, simply by making a key invalid, e.g. adding an underscore character in front **_** or rename it to a name unknown to MONICA.
 
 
-## **sim.json**
+# **SIM JSON**
+
 The **sim.json** file contains simulation specific information like start and end date (MONICA will pick the right climate data from **climate.csv**) or whether certain global toggles like nitrogen response/use of secondary yields will be turned on or of. 
 
 **NumberOfLayers** and **LayerThickness** shouldn't be changed currently.
 
-### Reading climate data (**climate.csv-options**)
+## Reading climate data (**climate.csv-options**)
 
 Climate data are being stored in a **.csv** formatted file. In **sim.json** is a section which can be used to configure some parts of what will be read and in which way. If the **JSON object** **climate.csv-options** contains the two keys **start-date** and **end-date**, only the designated time range will be read from the file. If they are missing all data will be read and thus determine how long MONICA will run.
 
@@ -170,7 +183,7 @@ Additionally it is possible that the value side of the mapping is actually a **J
 }
 ```
 
-### Outputing results from MONICA
+## Outputing results from MONICA
 
 The user can request the result output in **CSV** format from MONICA by defining options in the **JSON object** under the key **output**. 
 
@@ -186,7 +199,7 @@ The following table describes a couple of options which can be set:
 | csv-separator | the separating character to be used (**,**) | 
 | events | a list of pairs, which describe the events on which MONICA is requested to output a list of results |
 
-#### events
+### events
 
 The key **events** defines a list of MONICA results which should be output. The definition consists of two pieces, so the **JSON array** which is the value to the key **events** has to consist of an even number of entries, always a pair of **event, [list of outputs]**. An event can either be a simple string like **"daily"** or a **JSON object** or a **JSON array**. A string and a **JSON array** are just shortcuts for a more complex **JSON object** which describes the event upon which output should be generated.
 
@@ -232,7 +245,7 @@ The following table shows some event expressions, shortcuts (and their expansion
 
 As can be seen in the table above it is possible to use simple comparision expressions in the events. The available operators are **<, <=, =, >=, >**. On the lefthand and/or righthand side of the operator may appear either an output expression (e.g **"Stage"** or **["Mois", 1]**) or a numeric value (e.g. **1**).
 
-### List of outputs
+## List of outputs
 
 The previous section defined the events when MONICA should output results. What remains is to define what should be output. In the previous table appeared already some **outputs** in expressions like ```["at", "Stage", "=", 2]``` or ```[["Mois", 1], "<", 0.5]```. **"Stage"** outputs the current development stage the plant is in and **["Mois", 1]** outputs the soil-moisture in the first 10cm soil-layer. MONICA internally defines a lot of names which refer to results which can be output. There are three categories:
 
@@ -432,7 +445,7 @@ Finally below you'll find an output-wise simplified full **sim.json** file.
 
 ```
 
-### Allowed outputs 
+## Allowed outputs 
 
 The most up to date list of available and allowed output names can be found directly from the MONICA source in the file [**build-output.cpp**](https://github.com/zalf-lsa/monica/blob/master/src/io/build-output.cpp#L359). There you'll find entries like:
 
@@ -565,7 +578,7 @@ Here **Date** or **TraDef** are the allowed outputs. Additionally one can see af
 | Pwp | m3 m-3 | permanent wilting point|
 
 
-## **site.json**
+# **SITE JSON**
 **site.json** holds all input data and parameters which could be considers site specific. Besides the key **SiteParameters** in the top-level JSON object, there might be a few JSON objects which set global/general soil and environment specific parameters. These can either be included from the SQLite database (table user_parameter) or the filesystem or be defined directly in **site.json**.  In order to facilitate easy overwriting of the standard parameters, they are included via the **DEFAULT** parameter pseudo-key. 
 
 ```json
@@ -610,10 +623,54 @@ Here **Date** or **TraDef** are the allowed outputs. Additionally one can see af
 
 ```
 
-## **crop.json**
-**crop.json** defines all crop specific input data for MONICA. There has to be just one key in the top-level JSON object, **cropRotation**. **cropRotation** is a JSON array (list) of JSON objects representing a cultivation method (class CultivationMethod in MONICA code). A cultivation method is defined as a set of work steps (class hierarchy WorkStep in MONICA code). Work steps can be the seeding of a crop, the harvesting thereof, fertilizer, irrigation water or tillage applications. A seeding application tells MONICA at which point in time which crop to grow. Within the seeding work step a key **crop** will be set to a JSON object with crop parameters. This can be done in-line, via a include function (**include-from-db** or **include-from-file**) or via a **ref** function. Because crops might be used in more than one work step or cultivation method and the example below defines all used crops in a JSON object, which maps shortcut names to the actual crop parameters. The mapping object is available under the top-level key **crops** which is the first parameter to the **ref** function, the second being the referenced shortcut names. The names chosen (**crops** and e.g. **WR** or **SM**) are abitrary and might depend on the use case.
+# **CROP JSON**
+**crop.json** defines all crop specific input data for MONICA. There have to be just two keys in the top-level JSON object, **cropRotation** and **CropParameters**. **cropRotation** is a **JSON array** of JSON objects representing a cultivation method (class **CultivationMethod** in the MONICA C++ code). **CropParameters** keeps global crop related MONICA parameters, which are taken either from the **user-parameter** database table or a referenced file.
 
-The example below sports another key **CropParameters**, which contains the some global crop parameters common to all crops, either from the **user-parameter** database table or a referenced file.
+A cultivation method is defined as a set of worksteps (class hierarchy **WorkStep** in MONICA code). Worksteps can be the seeding of a crop, the harvesting thereof, fertilizer, irrigation water or tillage applications. A seeding application tells MONICA at which point in time which crop to grow. Within the seeding workstep a key **crop** will be set to a JSON object with all the crop's parameters MONICA needs. This can be done in-line, via a include function (**include-from-db** or **include-from-file**) or via a **ref** function. Because crops might be used in more than one workstep or cultivation method, the example below defines all used crops in a separate JSON object named **crops**, which maps shortcut names to the actual crop parameters. The mapping object is available under the top-level key **crops** which is the first parameter to the **ref** function, the second being the referenced shortcut name. The names chosen (**crops** and e.g. **WR** or **SM**) are abitrary.
+
+The following table shows the worksteps available in MONICA. All worksteps expect a **date** parameter to be set. A workstep date can be a relative date (e.g. **"0000-12-01"** (every december 1st) or **"0001-12-01"** (every next year december 1st)), which means it's year part is a four digit number between 0 and 100, padded with 0s; or a normal date (**"2017-12-01"** december 1st 2017). A **crop-rotation** with relative dates will simply be applied to all available (selected) climate data, wraps around when its end is reached and starts anew. An absolute **crop-rotation** will only be applied if the worksteps' dates are reached, thus also care has to be taken that a workstep can be reached. For instance a workstep will never be executed if its **date** is set before the actual climate data start.
+
+The following table shows a list of all available worksteps, their parameters (except the mandatory **date** parameter) and what they do. Additionally the events they generate are included again. These events can be matched in the output definition.
+
+Workstep name | parameter(s) = value(s) | description
+------------- | ----------------------- | -----------
+WorkStep |  | base workstep, does nothing but can be used in conjuction with the fired events **WorkStep** and **workstep**
+Seed | **crop** = **JSON object** |  | define the seeding time with the **date** parameter and the crop with all its parameters with the **crop** **JSON object**; fires **Seed** and **seeding** events
+Harvest | **method** = [**total** \| **fruitHarvest** \| **cutting** \| **leafPruning** \| **tipPruning** \| **shootPruning**], <br> **percentage** = [0;1], <br> **exported** = [**true** \| **false** ] | define the harvesting time of the previous seeded crop; set method to be used, the percentage (between 0-1) and whether to **export** = add only roots and residues of plant to AOMs; fires **Harvest** and **harvesting** events
+AutomaticHarvest | **harvestTime** = **maturity**, <br> **latestHarvestDOY** = [1 ... 365] | automatic harvesting workstep, which right now just supports to harvest at **maturity** or latest if given **latestHarvestDOY** (day of year/julian day) is reached; fires **AutomaticHarvest**, **automatic-harvesting**, **harvesting** 
+Cutting |  | cut crop; fires **Cutting**, **cutting** 
+MineralFertiliserApplication | **partition** = **JSON object**, <br> **amount** = [kg N] | apply **amount** kg N fertilizer, which composition is described by **partition**, which can also be referenced by include from a **JSON file**; fires **MineralFertiliserApplication**, **mineral-fertilizing** 
+OrganicFertiliserApplication | **parameters** = **JSON object**, <br> **amount** = [kg], <br> **incorporation** = [**true** \| **false**] | apply **amount** kg organic fertilizer described by the **parameters** **JSON object** and incorporate if **incorporation** is set to **true**; fires **OrganicFertiliserApplication**, **organic-fertilizing** 
+TillageApplication | **depth** = [m] | till up to **depth** m; fires **TillageApplication**, **tillage** 
+IrrigationApplication | **parameters** = **JSON object** ```{"nitrateConcentration": [mg dm-3], "sulfateConcentration": [mg dm-3]}```, <br> **amount** = [mm water] | irrigate **amount** of water with optionally given nitrate/sulfate concentrations; fires **IrrigationApplication**, **irrigation** 
+SetValue | **var** = **setable output expression**, <br> **value** = [value \| **JSON array** ```["=", output-name|value, OP, output-name|value]```] | set at the given **date** the **setable output expression** to either just a **value** (can be a scalar (5.0) or a **JSON array** if setable output expression is itself a **JSON array** (e.g. output expression is ["Mois, [1,3]], then value could be [20, 30, 20])) or a simple arithmetic expression where **OP** can be [**+, -, \*, /**] and either side either a value or an output expression; ONLY FEW SETABLE OUTPUT EXPRESSIONS AVAILABLE CURRENTLY; fires **SetValue**, **set-value** 
+
+Some examples for the **SetValue** workstep.
+
+Set on every september 22nd the NO2 value in layer 0 (first layer) to the value which will be calculated by layer 1 * 0.5:
+
+```json
+{ "date": "0000-09-22", "type": "SetValue", "var": ["NO2", 1], "value": ["=", ["NO2", 1], "*", 0.5] }
+```
+
+Double on every september 23rd the NO3 values in the layers 1-10:
+
+```json
+{ "date": "0000-09-23", "type": "SetValue", "var": ["NO3", [1, 10]], "value": ["=", ["NO3", [1, 10]], "*", 2] }
+```
+
+Set on every september 24th the NH4 value in layer 1 to the value it already has (actually senseless):
+
+```json
+{ "date": "0000-09-24", "type": "SetValue", "var": ["NH4", 1], "value": ["NH4", 1] }
+```
+
+Set on every september 25th the carbamid value in allen layers to 0.01
+
+```json
+{ "date": "0000-09-25", "type": "SetValue", "var": ["Carb", [1,20]], "value": 0.01 }
+```
+
 
 ```json
 {
