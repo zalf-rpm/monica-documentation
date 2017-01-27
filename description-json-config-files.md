@@ -581,6 +581,39 @@ Here **Date** or **TraDef** are the allowed outputs. Additionally one can see af
 # **SITE JSON**
 **site.json** holds all input data and parameters which could be considers site specific. Besides the key **SiteParameters** in the top-level JSON object, there might be a few JSON objects which set global/general soil and environment specific parameters. These can either be included from the SQLite database (table user_parameter) or the filesystem or be defined directly in **site.json**.  In order to facilitate easy overwriting of the standard parameters, they are included via the **DEFAULT** parameter pseudo-key. 
 
+## The soil profile
+
+The key **SoilProfileParameters** contains a **JSON array** of **JSON objects** which describe the layers of the soil profile. MONICA uses internally **20** layers each with a **10cm** thickness. The **SoilProfileParameters** has to contain at least one layer with a minimal set of soil properties (**KA5TextureClass**, **SoilOrganicCarbon/Matter** and **SoilRaw/BulkDensity**). Additionally to the soil properties a key **Thickness** which describes the height of the soil layer. The specified soil profile will internally be normalized to **20** **10cm** layers. If the sizes of the layers won't add up to **2m** (MONICAs used profile depth), the last layer will be extend up to **2m**. Equally, the layers will be cut at **2m** profile depth. 
+
+Not all properties are necessary, but the more soil properties are specified, the more exact the calculations will be. If only the **KA5TextureClass** is given, average values for **Sand** and **Clay** content will be used as well as **FieldCapacity**, **PermanentWiltingPoint**, **PoreVolume** and **Lambda** will be calculated based on them. 
+
+Also just one of **SoilRawDensity** and **SoilBulkDensity** as well as **SoilOrganicCarbon** and **SoilOrganicMatter** have to be given. If both values are being supplied, they should match.
+
+The following table shows the names of the soil properties which can be set on an individual layer. 
+
+Name of config file variable | Unit | Description 
+---------------------------- | ---- | -----------
+**Thickness** | m | thickness of the soil layer
+**Sand** | kg kg-1 (% [0-1]) | soil sand content, a percentage between 0 and 1
+**Clay** | kg kg-1 (% [0-1]) | soil clay content, a percentage between 0 and 1
+**pH** | | soil pH value
+**Sceleton** | % [0-1] | soil stone content, a percentage between 0 and 1
+**Lambda** | | soil water conductivity coefficient
+**FieldCapacity** | m3 m-3 | fieldcapacity 
+**PoreVolume** | m3 m-3 | saturation 
+**PermanentWiltingPoint** | m3 m-3 | permanent wilting point
+**KA5TextureClass** | | KA5 soil texture
+**SoilAmmonium** | kg NH4-N m-3 | soil ammonium
+**SoilNitrate** | kg NO3-N m-3 | soil nitrate
+**CN** | | soil C/N ratio
+**SoilRawDensity** | kg m-3 | soil raw density
+**SoilBulkDensity** | kg m-3 | soil bulk density 
+**SoilOrganicCarbon** | % [0-100] ([kg C kg-1] * 100) | soil organic carbon, a percentage between 0 and 100 
+**SoilOrganicMatter** | kg OM kg-1 (% [0-1]) | soil organic matter 
+**SoilMoisturePercentFC** | % [0-100] | initial soil moisture in percent of field capacity
+
+## Example **site.json** file
+
 ```json
 {
   "SiteParameters": {
@@ -671,6 +704,7 @@ Set on every september 25th the carbamid value in allen layers to 0.01
 { "date": "0000-09-25", "type": "SetValue", "var": ["Carb", [1,20]], "value": 0.01 }
 ```
 
+## Example **crop.json** file
 
 ```json
 {
