@@ -104,10 +104,10 @@ To include data from a file the example from above would look like the example b
 ```
 
 ### reference data within a file
-In **crop.json** it is desirable to be able to define a crop and reference it multiple times. This is what the **ref** function does. In the example below, taken from the **worksteps** section of a crop, the **Seed** workstep is amongst other values being defined by the key/value pair **crop: winter rye**. The references function takes two parameters, the first being a name (**"crops"**) which is a **key** in top-level JSON object in the file which contains another JSON object whose **key = WR** returns the JSON object to replace the function call. Thus in the example **crop.json** exists under the key **crops** a mapping (a JSON object) of arbitrary crop name shortcuts to crop parameter objects. Usually the objects themselves are being included by **include-from-db** or **include-from-file** functions.
+In **crop.json** it is desirable to be able to define a crop and reference it multiple times. This is what the **ref** function does. In the example below, taken from the **worksteps** section of a crop, the **Sowing** workstep is amongst other values being defined by the key/value pair **crop: winter rye**. The references function takes two parameters, the first being a name (**"crops"**) which is a **key** in top-level JSON object in the file which contains another JSON object whose **key = WR** returns the JSON object to replace the function call. Thus in the example **crop.json** exists under the key **crops** a mapping (a JSON object) of arbitrary crop name shortcuts to crop parameter objects. Usually the objects themselves are being included by **include-from-db** or **include-from-file** functions.
 
 ```json
-{ "date": "1991-09-23", "type": "Seed", "crop": ["ref", "crops", "WR"] },
+{ "date": "1991-09-23", "type": "Sowing", "crop": ["ref", "crops", "WR"] },
 ```
 
 ### other functions
@@ -212,20 +212,7 @@ In order to define requested outputs a few kinds of information have to be disti
 
 ISO-Dates are allowed to contain placeholders (**x**), which means that the year, month or day is unspecified and thus every available value is used. 
 
-Additionally to date patterns every workstep generates two events, one with the exact name of the workstep and one with a easier to read simplified name.
-
-| Workstep event name | simplified name |
-| ------------------- | --------------- |
-| WorkStep | workstep |
-| Seed | seeding |
-| Harvest | harvesting |
-| AutomaticHarvest | automatic-harvesting, harvesting |
-| Cutting | cutting |
-| MineralFertiliserApplication | mineral-fertilizing |
-| OrganicFertiliserApplication | organic-fertilizing |
-| TillageApplication | tillage |
-| IrrigationApplication | irrigation |
-| SetValue | set-value |
+Additionally to date patterns every workstep generates an events with named like the Workstep, e.g. there are events like Sowing, Harvest, AutomaticSowing, SetValue etc.
 
 The following table shows some event expressions, shortcuts (and their expansion):
 
@@ -237,11 +224,11 @@ The following table shows some event expressions, shortcuts (and their expansion
 | "monthly" | ```{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}``` | write monthly aggregated results |
 |	"yearly" | ```{"from": "xxxx-01-01", "to": "xxxx-12-31"}``` | write yearly aggregated results |
 |	"run" | ```{"from": <start-date>, "to": <end-date>}``` | write results aggregated over the whole run |
-|	"crop" | ```{"from": "seeding", "to": "harvesting"}``` | write results aggregated during the cropping period |
+|	"crop" | ```{"from": "Sowing", "to": "Harvest"}``` | write results aggregated during the cropping period |
 | ["while", "Stage", "=", 5] | ```{"while": ["Stage", "=", 5]}``` | write results aggregated only while the result **Stage** equals 5 |
 | ["at", "Stage", "=", 2] | ```{"at": ["Stage", "=", 2]}``` | write results daily if the result **Stage** equals 2
 | [["Mois", 1], "<", 0.5] | ```{"at": ["Mois", 1], "<", 0.5]}``` | write results daily if the soil-moisture in the first layer is below 0.5 |
-| "seeding" | ```{"at": "seeding"}``` | at seeding time write a result |
+| "Sowing" | ```{"at": "Sowing"}``` | at sowing time write a result |
 
 As can be seen in the table above it is possible to use simple comparision expressions in the events. The available operators are **<, <=, =, >=, >**. On the lefthand and/or righthand side of the operator may appear either an output expression (e.g **"Stage"** or **["Mois", 1]**) or a numeric value (e.g. **1**).
 
@@ -659,26 +646,189 @@ Name of config file variable | Unit | Description
 # **CROP JSON**
 **crop.json** defines all crop specific input data for MONICA. There have to be just two keys in the top-level JSON object, **cropRotation** and **CropParameters**. **cropRotation** is a **JSON array** of JSON objects representing a cultivation method (class **CultivationMethod** in the MONICA C++ code). **CropParameters** keeps global crop related MONICA parameters, which are taken either from the **user-parameter** database table or a referenced file.
 
-A cultivation method is defined as a set of worksteps (class hierarchy **Workstep** in MONICA code). Worksteps can be the seeding of a crop, the harvesting thereof, fertilizer, irrigation water or tillage applications. A seeding application tells MONICA at which point in time which crop to grow. Within the seeding workstep a key **crop** will be set to a JSON object with all the crop's parameters MONICA needs. This can be done in-line, via a include function (**include-from-db** or **include-from-file**) or via a **ref** function. Because crops might be used in more than one workstep or cultivation method, the example below defines all used crops in a separate JSON object named **crops**, which maps shortcut names to the actual crop parameters. The mapping object is available under the top-level key **crops** which is the first parameter to the **ref** function, the second being the referenced shortcut name. The names chosen (**crops** and e.g. **WR** or **SM**) are abitrary.
+A cultivation method is defined as a set of worksteps (class hierarchy **Workstep** in MONICA code). Worksteps can be the sowing of a crop, the harvesting thereof, fertilizer, irrigation water or tillage applications. A sowing application tells MONICA at which point in time which crop to grow. Within the sowing workstep a key **crop** will be set to a JSON object with all the crop's parameters MONICA needs. This can be done in-line, via a include function (**include-from-db** or **include-from-file**) or via a **ref** function. Because crops might be used in more than one workstep or cultivation method, the example below defines all used crops in a separate JSON object named **crops**, which maps shortcut names to the actual crop parameters. The mapping object is available under the top-level key **crops** which is the first parameter to the **ref** function, the second being the referenced shortcut name. The names chosen (**crops** and e.g. **WR** or **SM**) are abitrary.
 
-The following table shows the worksteps available in MONICA. All worksteps expect a **date** parameter to be set. A workstep date can be a relative date (e.g. **"0000-12-01"** (every december 1st) or **"0001-12-01"** (every next year december 1st)), which means its year part is a four digit number between 0 and 100, padded with 0s; or a normal date (**"2017-12-01"** december 1st 2017). A **crop-rotation** with relative dates will simply be applied to all available (selected) climate data, wraps around when its end is reached and starts anew. An absolute **crop-rotation** will only be applied if the worksteps' dates are reached, thus also care has to be taken that a workstep can be reached. For instance a workstep will never be executed if its **date** is set before the actual climate data start.
+The following table shows the worksteps available in MONICA. All worksteps expect a **date** parameter to be set. If the **date** is missing the workstep is being interpreted as a dynamic workstep which in some way needs conditional properties to be set, which are being checked every day. In case the conditions hold true, the workstep is being executed once per **CultivationMethod**. 
+
+Every non-dynamic workstep (e.g. Sowing, Harvest, Tillage, SetValue etc) can have a **days** (default 0)[d] and an **after** [event-name] property. If both are set, the workstep will be executed **days** after the event **after** happenend.
+
+A workstep date can be a relative date (e.g. **"0000-12-01"** (every december 1st) or **"0001-12-01"** (every next year december 1st)), which means its year part is a four digit number between 0 and 100, padded with 0s; or a normal date (**"2017-12-01"** december 1st 2017). A **crop-rotation** with relative dates will simply be applied to all available (selected) climate data, wraps around when its end is reached and starts anew. An absolute **crop-rotation** will only be applied if the worksteps' dates are reached, thus also care has to be taken that a workstep can be reached. For instance a workstep will never be executed if its **date** is set before the actual climate data start.
 
 The following table shows a list of all available worksteps, their parameters (except the mandatory **date** parameter) and what they do. Additionally the events they generate are included again. These events can be matched in the output definition.
 
-Workstep name | parameter(s) = value(s) | description
-------------- | ----------------------- | -----------
-WorkStep |  | base workstep, does nothing but can be used in conjuction with the fired events **WorkStep** and **workstep**
-Seed | **crop** = **JSON object** |  | define the seeding time with the **date** parameter and the crop with all its parameters with the **crop** **JSON object**; fires **Seed** and **seeding** events
-AutomaticSowing | **crop** = **JSON object**, <br> **earliest-date** = **date**, <br> **latest-date** = **date**, <br> **min-temp** = [°C], <br> **days-in-temp-window** = [d], <br> **min-%-asw** = [%], <br> **max-%-asw** = [%], <br> **max-3d-precip** = [mm], <br> **max-curr-day-precip** = [mm], <br> **temp-sum-above-base-temp** = [K], <br> **base-temp** = [°C] | an automatic seeding workstep, whose algorithm will start to check all conditions at **earliest-data** and will nevertheless seed if no conditions have been met at **latest-date**; <br> **conditions** <br> **min-temp** && **days-in-temp-window**: for spring crops, the daily minimum air temperature **tmin** >= **min-temp** as well as the average of temperature **tavg** during the time window **days-in-temp-window** has to be >= **min-temp**; for winter crops sowing is possible when the running average air temperature **tavg** within the time window **days-in-temp-window** <= **min-temp** <br> **min-%-asw** && **max-%-asw**: the bounds (in % of available soil water) wherein the soil moisture (0-10cm) **["Mois", 1]** has to lie for possible sowing <br> **max-3d-precip**: the maximum precipitation sum [mm] for the last 3 days (incl. actual day) for possible sowing <br> **max-curr-day-precip**: the maximum precipitation sum [mm] for the actual day for possible sowing <br> **temp-sum-above-base-temp** && **base-temp**: **temp-sum-above-base-temp** is the temperature sum above **base-temp** needed for sowing
-Harvest | **method** = [**total** \| **fruitHarvest** \| **cutting** \| **leafPruning** \| **tipPruning** \| **shootPruning**], <br> **percentage** = [0;1], <br> **exported** = [**true** \| **false** ] | define the harvesting time of the previous seeded crop; set method to be used, the percentage (between 0-1) and whether to **export** = add only roots and residues of plant to AOMs; fires **Harvest** and **harvesting** events
-AutomaticHarvesting | **latest-date** = **date**, **min-%-asw** = [%], <br> **max-%-asw** = [%], <br> **max-3d-precip** = [mm], <br> **max-curr-day-precip** = [mm] | an automatic harvesting workstep, which will be carried out if conditions are met after **maturity** of the crop or if no conditions have been met at **latest-date**; <br> **conditions** <br> **min-%-asw** && **max-%-asw**: the bounds (in % of available soil water) wherein the soil moisture (0-10cm) **["Mois", 1]** has to lie for possible harvesting <br> **max-3d-precip**: the maximum precipitation sum [mm] for the last 3 days (incl. actual day) for possible harvesting <br> **max-curr-day-precip**: the maximum precipitation sum [mm] for the actual day for possible harvesting 
-Cutting |  | cut crop; fires **Cutting**, **cutting** 
-MineralFertiliserApplication | **partition** = **JSON object**, <br> **amount** = [kg N] | apply **amount** kg N fertilizer, which composition is described by **partition**, which can also be referenced by include from a **JSON file**; fires **MineralFertiliserApplication**, **mineral-fertilizing** 
-NDemandApplication | **partition** = **JSON object**, <br> **depth** = [m], <br> **stage** = [MONICA DEV STAGE number] | apply a calculated amount of N fertilizer, which composition is described by **partition**, which can also be referenced by include from a **JSON file**, at either the given workstep's **date**, or if there's no date, when stage **stage** is being entered; measurement of existing N in the soil will happen until depth **depth** [m]
-OrganicFertiliserApplication | **parameters** = **JSON object**, <br> **amount** = [kg], <br> **incorporation** = [**true** \| **false**] | apply **amount** kg organic fertilizer described by the **parameters** **JSON object** and incorporate if **incorporation** is set to **true**; fires **OrganicFertiliserApplication**, **organic-fertilizing** 
-TillageApplication | **depth** = [m] | till up to **depth** m; fires **TillageApplication**, **tillage** 
-IrrigationApplication | **parameters** = **JSON object** ```{"nitrateConcentration": [mg dm-3], "sulfateConcentration": [mg dm-3]}```, <br> **amount** = [mm water] | irrigate **amount** of water with optionally given nitrate/sulfate concentrations; fires **IrrigationApplication**, **irrigation** 
-SetValue | **var** = **setable output expression**, <br> **value** = [value \| **JSON array** ```["=", output-name|value, OP, output-name|value]```] | set at the given **date** the **setable output expression** to either just a **value** (can be a scalar (5.0) or a **JSON array** if setable output expression is itself a **JSON array** (e.g. output expression is ["Mois, [1,3]], then value could be [20, 30, 20])) or a simple arithmetic expression where **OP** can be [**+, -, \*, /**] and either side either a value or an output expression; ONLY FEW SETABLE OUTPUT EXPRESSIONS AVAILABLE CURRENTLY; fires **SetValue**, **set-value** 
+## Worksteps
+
+All worksteps have the parameters of the workstep **Workstep** in common. If no **date** is given it's a dynamic workstep and at least a parameter specifiying a condition should be defined, else the workstep will never be carried out.
+
+### **Workstep**
+
+Is the base workstep, does nothing but can be used in conjuction with the fired events **Workstep**. If no **date** is given **days** and **after** can be specified. Then **days** after the event **after** happend, the workstep will be carried out. 
+
+Fires the **Workstep** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**date** | iso-date <br> "YYYY-MM-DD" | | "1991-05-21" <br> "0001-05-21" | absolute or <br> relative date 
+**days** | [d] | 0 | | 
+**after** | string | | "Harvest" | "event/workstep name"
+
+### **Sowing**
+
+Define the sowing time with the **date** parameter and the crop specified with the **crop** parameter will be planted.
+
+Fires the **Sowing** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**crop** | **JSON object** | | | a complex **JSON object** specifying the crop top be planted
+**PlantDensity** | [plants m-2] | | **10** for maize | plant density
+
+
+### **Automatic Sowing**
+
+An automatic sowing workstep, whose algorithm will start to check all conditions at **earliest-data** and will nevertheless sow if no conditions have been met at **latest-date**.
+
+**conditions** 
+
+- **min-temp** && **days-in-temp-window**: 
+  - **spring crops**: the daily minimum air temperature (**tmin**) >= **min-temp** as well as the average temperature (**tavg**) during the time window **days-in-temp-window** has to be >= **min-temp**
+  - **winter crops**: sowing is possible when the running average air temperature (**tavg**) within the time window **days-in-temp-window** <= **min-temp**
+- **min-%-asw** && **max-%-asw**: the bounds (in % of available soil water) wherein the soil moisture (0-10cm) **["Mois", 1]** has to lie for possible sowing
+- **max-3d-precip**: the maximum precipitation sum [mm] for the last 3 days (incl. actual day) for possible sowing
+- **max-curr-day-precip**: the maximum precipitation sum [mm] for the actual day for possible sowing
+- **temp-sum-above-base-temp** && **base-temp**: **temp-sum-above-base-temp** is the temperature sum above **base-temp** needed for sowing
+
+Fires the **AutomaticSowing** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**crop** | JSON object 
+**earliest-date** | iso-date | | | earliest date when sowing might take place
+**latest-date** | iso-date | | | last date when sowing will in any case happen
+**min-temp** | [°C] | | | minimal temperature to be reached 
+**days-in-temp-window** | [d] | | | no of days the minimal temperature has to be reached 
+**min-%-asw** | [%] | | | percentage of minimal available soil water 
+**max-%-asw** | [%] | | | percentage of maximal available soil water
+**max-3d-precip** | [mm] | | | maximal 3 day precipitation sum
+**max-curr-day-precip** | [mm] | | | maximal current day precipitation
+**temp-sum-above-base-temp** | [K] | | | temperature sum above base temperature to be reached
+**base-temp** | [°C] | | | base temperature for calculation of temperature sum
+
+### **Harvest**
+
+Define the harvesting time of the previously sowed crop, and set method to be used, the percentage (between 0-1) and whether to **export** (= add only roots and residues of plant to AOMs).
+
+Fires **Harvest** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**method** | **total** or <br> **fruitHarvest** or <br> **cutting** or <br> **leafPruning** or <br> **tipPruning** or <br> **shootPruning** 
+**percentage** | [%] [0;1] | | | percentage to cut etc.
+**exported** | **true** or **false** | true | | if export = false, then the whole crop will be incorporated into the soil, else just roots and residues 
+
+
+### **AutomaticHarvest**
+
+An automatic harvesting workstep, which will be carried out if conditions are met after **maturity** of the crop or if no conditions have been met at **latest-date**.
+
+**conditions**
+
+- **min-%-asw** && **max-%-asw**: the bounds (in % of available soil water) wherein the soil moisture (0-10cm) **["Mois", 1]** has to lie for possible harvesting
+- **max-3d-precip**: the maximum precipitation sum [mm] for the last 3 days (incl. actual day) for possible harvesting
+- **max-curr-day-precip**: the maximum precipitation sum [mm] for the actual day for possible harvesting
+
+Fires **AutomaticHarvest** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**latest-date** | iso-date | | | last date when harvesting will in any case happen
+**min-%-asw** | [%] | | | percentage of minimal available soil water 
+**max-%-asw** | [%] | | | percentage of maximal available soil water
+**max-3d-precip** | [mm] | | | maximal 3 day precipitation sum
+**max-curr-day-precip** | [mm] | | | maximal current day precipitation
+
+
+### **Cutting**
+
+Cut crop.
+
+Fires **Cutting** event.
+
+
+### **MineralFertilization**
+
+Apply **amount** kg N fertilizer, whose composition is described by **partition**. The partition object can also be referenced by include from a **JSON file**.
+
+Fires **MineralFertilization** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**partition** | JSON object | | ```{"Carbamid": 0, "NH4": 0.5, "NO3": 0.5}``` | Json object describing the composition of the N fertilizer
+**amount** | [kg N] | | | amount of N to put into the soil
+
+
+### **NDemandFertilization**
+
+Apply a calculated amount of N fertilizer, whose composition is described by **partition** (and can also be referenced by include from a **JSON file**) at either the given workstep's **date** or if there's no date, when stage **stage** is being entered. The measurement of existing N in the soil will happen until depth **depth**.
+
+Fires **NDemandFertilization** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**partition** | JSON object | | ```{"id": "AN",	"name": "ammonium nitrate", "Carbamid": 0, "NH4": 0.5, "NO3": 0.5}``` | Json object describing the composition of the N fertilizer
+**depth** | [m]
+**stage** | dev stage [1-6/7] | | 0 (sowing) or<br> 6 (maturity of maize) | MONICA development stage number
+
+
+### **OrganicFertilization**
+
+Apply **amount** kg organic fertilizer described by the **parameters** **JSON object** and incorporate if **incorporation** is set to **true**.
+
+Fires **OrganicFertilization** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**parameters** | JSON object | | ```{"id": "CAM", "name": "cattle manure", "AOM_DryMatterContent": [0.196, "kg DM kg FM-1"], "AOM_FastDecCoeffStandard": [0.002, "d-1"], "AOM_NH4Content": [0.007, "kg N kg DM-1"], "AOM_NO3Content": [0, "kg N kg DM-1"], "AOM_SlowDecCoeffStandard": [0.0002, "d-1"], "CN_Ratio_AOM_Fast": 6.5, "CN_Ratio_AOM_Slow": 100, "NConcentration": 0, "PartAOM_Slow_to_SMB_Fast": [1, "kg kg-1"], "PartAOM_Slow_to_SMB_Slow": [0, "kg kg-1"], "PartAOM_to_AOM_Fast": [0.18, "kg kg-1"], "PartAOM_to_AOM_Slow": [0.72, "kg kg-1"]}``` | Json object describing the composition of the organic fertilizer
+**amount** | [kg] | | [30000, "kg"]
+**incorporation** | **true** or <br> **false**
+
+**depth** | [m]
+**stage** | dev stage [1-6/7] | | 0 (sowing) or<br> 6 (maturity of maize) | MONICA development stage number
+
+
+### **Tillage**
+
+Till up to **depth** m.
+
+Fires **Tillage** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**depth** | [m] 
+
+
+### **Irrigation**
+
+Irrigate **amount** of water with optionally given nitrate/sulfate concentrations.
+
+Fires **Irrigation** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**parameters** | JSON object | | ```{"nitrateConcentration": [mg dm-3], "sulfateConcentration": [mg dm-3]}```
+**amount** | [mm]  
+
+
+### **SetValue**
+
+Set at the given **date** the **setable output expression** to either just a **value** (can be a scalar (5.0) or a **JSON array** if setable output expression is itself a **JSON array** (e.g. output expression is **["Mois, [1,3]]**, then value could be **[20, 30, 20]**)) or a simple arithmetic expression where **OP** can be [**+, -, \*, /**] and either side either a value or an output expression. **ONLY FEW SETABLE OUTPUT EXPRESSIONS ARE AVAILABLE CURRENTLY.** 
+
+Fires **SetValue** event.
+
+Parameter name | unit/type | default | example | description 
+-------------- | --------- | ------- | ------- | -----------
+**var** | setable output expression <br> | | ```["NO2", 1]``` | the setable variable to assign a value to 
+**value** | value or <br> JSON array <br> ```["=", output-name or value, OP, output-name or value]```] | | ```["=", ["NO2", 1], "*", 0.5]``` | an expression or number like the ones to be used to define outputs
 
 Some examples for the **SetValue** workstep.
 
@@ -705,6 +855,8 @@ Set on every september 25th the carbamid value in allen layers to 0.01
 ```json
 { "date": "0000-09-25", "type": "SetValue", "var": ["Carb", [1,20]], "value": 0.01 }
 ```
+
+
 
 ## Example **crop.json** file
 
@@ -765,10 +917,10 @@ Set on every september 25th the carbamid value in allen layers to 0.01
   "cropRotation": [
     {
       "worksteps": [
-        { "date": "1991-09-23", "type": "Seed", "crop": ["ref", "crops", "WR"] },
+        { "date": "1991-09-23", "type": "Sowing", "crop": ["ref", "crops", "WR"] },
         { 
           "date": "1992-05-05", 
-          "type": "IrrigationApplication", 
+          "type": "Irrigation", 
           "amount": [1.0, "mm"],
           "parameters": { 
             "nitrateConcentration": [0.0, "mg dm-3"], 
@@ -777,13 +929,13 @@ Set on every september 25th the carbamid value in allen layers to 0.01
         },
         { 
           "date": "1992-04-03", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [40.0, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { 
           "date": "1992-05-07", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [40.0, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
@@ -794,98 +946,98 @@ Set on every september 25th the carbamid value in allen layers to 0.01
       "worksteps": [
         { 
           "date": "1993-04-23", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [125, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
-        { "date": "1993-04-27", "type": "TillageApplication", "depth": [0.15, "m"] },
-        { "date": "1993-05-04", "type": "Seed", "crop": ["ref", "crops", "SM"] },
+        { "date": "1993-04-27", "type": "Tillage", "depth": [0.15, "m"] },
+        { "date": "1993-05-04", "type": "Sowing", "crop": ["ref", "crops", "SM"] },
         { 
           "date": "1993-05-10", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [60, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1993-09-23", "type": "Harvest", "crop": ["ref", "crops", "SM"] },
         { 
           "date": "1993-12-16", 
-          "type": "OrganicFertiliserApplication", 
+          "type": "OrganicFertilization", 
           "amount": [30000, "kg N"], 
           "parameters": ["include-from-file", "../monica-parameters/organic-fertilisers/CADLM.json"],
           "incorporation": true
         },
-        { "date": "1993-12-22", "type": "TillageApplication", "depth": [0.1, "m"] }
+        { "date": "1993-12-22", "type": "Tillage", "depth": [0.1, "m"] }
       ]
     },
     {
       "worksteps": [
-        { "date": "1994-04-25", "type": "Seed", "crop": ["ref", "crops", "MEP"] },
+        { "date": "1994-04-25", "type": "Sowing", "crop": ["ref", "crops", "MEP"] },
         { 
           "date": "1994-05-04", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [90, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1994-09-06", "type": "Harvest", "crop": ["ref", "crops", "MEP"] },
-        { "date": "1994-09-29", "type": "TillageApplication", "depth": [0.15, "m"] }
+        { "date": "1994-09-29", "type": "Tillage", "depth": [0.15, "m"] }
       ]
     },
     {
       "worksteps": [
-        { "date": "1994-10-11", "type": "Seed", "crop": ["ref", "crops", "WW"] },
+        { "date": "1994-10-11", "type": "Sowing", "crop": ["ref", "crops", "WW"] },
         { 
           "date": "1995-03-24", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [60, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { 
           "date": "1995-04-27", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [40, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { 
           "date": "1995-05-12", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [60, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1995-08-02", "type": "Harvest", "crop": ["ref", "crops", "WW"] },
-        { "date": "1995-08-03", "type": "TillageApplication", "depth": [0.15, "m"] }
+        { "date": "1995-08-03", "type": "Tillage", "depth": [0.15, "m"] }
       ]
     },
     {
       "worksteps": [
-        { "date": "1995-09-07", "type": "Seed", "crop": ["ref", "crops", "WG"] },
+        { "date": "1995-09-07", "type": "Sowing", "crop": ["ref", "crops", "WG"] },
         { 
           "date": "1996-03-21", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [60, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1996-04-13", "type": "Harvest", "crop": ["ref", "crops", "WG"] },
-        { "date": "1996-04-14", "type": "TillageApplication", "depth": [0.10, "m"] }
+        { "date": "1996-04-14", "type": "Tillage", "depth": [0.10, "m"] }
       ]
     },
     {
       "worksteps": [
-        { "date": "1996-04-17", "type": "Seed", "crop": ["ref", "crops", "SG"] },
+        { "date": "1996-04-17", "type": "Sowing", "crop": ["ref", "crops", "SG"] },
         { "date": "1996-09-10", "type": "Harvest", "crop": ["ref", "crops", "SG"] },
-        { "date": "1996-09-17", "type": "TillageApplication", "depth": [0.10, "m"] }
+        { "date": "1996-09-17", "type": "Tillage", "depth": [0.10, "m"] }
       ]
     },
     {
       "worksteps": [
-        { "date": "1997-04-04", "type": "Seed", "crop": ["ref", "crops", "SC"] },
+        { "date": "1997-04-04", "type": "Sowing", "crop": ["ref", "crops", "SC"] },
         { 
           "date": "1997-04-10", 
-          "type": "MineralFertiliserApplication", 
+          "type": "MineralFertilization", 
           "amount": [80, "kg N"], 
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1997-07-08", "type": "Harvest", "crop": ["ref", "crops", "SC"] },
-        { "date": "1997-07-09", "type": "TillageApplication", "depth": [0.10, "m"] }
+        { "date": "1997-07-09", "type": "Tillage", "depth": [0.10, "m"] }
       ]
     }
   ],
