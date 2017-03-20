@@ -103,6 +103,11 @@ To include data from a file the example from above would look like the example b
 "residueParams": ["include-from-file", "../monica-parameters/crop-residues/rye.json"]
 ```
 
+In order to keep paths to the files to be included reasonably short and readable, relative paths will be prepended by the contents of the contents of the key **include-file-base-path**. This key is defined in **sim.json** and is allowed to exist as well in **crop.json** and **site.json**. In the latter case a "local" definition of **include-file-base-path** will replace the definition in **sim.json**. By default **include-file-base-path** in **sim.json** is defined as ```"${MONICA_PARAMETERS}/"```. This means it will be the value of the environment variable **MONICA_PARAMETERS** which after a MONICA installation will point to the directory where all the MONICA parameters where installed to (usually something like c:\\users\\USER_NAME\\MONICA\monica-parameters). 
+
+So keep in mind that if **include-from-file** has a relative path as its first parameter, **include-file-base-path** will be prepended and has to give a valid filesystem path. If **include-from-file**'s first parameter is an absolute path (eg. starting with c:\\ on Microsoft Windows or / under Linux) nothing else will be done to the path. 
+
+
 ### reference data within a file
 In **crop.json** it is desirable to be able to define a crop and reference it multiple times. This is what the **ref** function does. In the example below, taken from the **worksteps** section of a crop, the **Sowing** workstep is amongst other values being defined by the key/value pair **crop: winter rye**. The references function takes two parameters, the first being a name (**"crops"**) which is a **key** in top-level JSON object in the file which contains another JSON object whose **key = WR** returns the JSON object to replace the function call. Thus in the example **crop.json** exists under the key **crops** a mapping (a JSON object) of arbitrary crop name shortcuts to crop parameter objects. Usually the objects themselves are being included by **include-from-db** or **include-from-file** functions.
 
