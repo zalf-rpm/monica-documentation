@@ -22,12 +22,12 @@ The three .json files contain the necessary input information to run the MONICA 
 
 All **.json** configuration files reflect to some degree the data structures being used internally in MONICA. If MONICA won't find a value in a configuration file a hard-coded default value will be used. These can usually be taken from the corresponding **.h** (C++ header file) in the MONICA sources. Real parameters to the MONICA model should all have default values. In contrast missing input data (like a soil profile in **site.json**) can't be compensated for and MONICA won't run.
 
-In the following json code snippet two settings are being declared (taken from the **sim.json** example file), **UseAutomaticIrrigation** which is set to **false** and **AutoIrrigationParams** which is set to a **JSON object** (key/value map). This object/map contains itself three parameters. **irrigationParameters** is once more a JSON object, while **amount** is set to a **JSON array** (list of values) **[17, "mm"]** and **threshold** is set to the floating point (**double**) value **0.35**. **amount** is interesting because MONICA allows in place of a simple value like **17** a JSON array, with two or three elements. The second element (in this case **"mm"**) will be treated as the unit describing the value (**17**) and an optional third value might act as a description for the value, in case the value's unit won't be self-describing enough. 
+In the following json code snippet two settings are being declared (taken from the **sim.json** example file), **UseAutomaticIrrigation** which is set to **false** and **AutoIrrigationParams** which is set to a **JSON object** (key/value map). This object/map contains itself three parameters. **irrigationParameters** is once more a JSON object, while **amount** is set to a **JSON array** (list of values) **[17, "mm"]** and **threshold** is set to the floating point (**double**) value **0.35**. **amount** is interesting because MONICA allows in place of a simple value like **17** a JSON array, with two or three elements. The second element (in this case **"mm"**) will be treated as the unit describing the value (**17**) and an optional third value might act as a description for the value, in case the value's unit won't be self-describing enough.
 
 > **Note:** Even though one can use the JSON array syntax to add **units of measure** and an optional description this is **currently ignored** by MONICA and just a means to describe the value. The user has still to refer to the MONICA documentation (or the example files) to enter values using the right units of measure and dimensions.
 
 ```json
-"UseAutomaticIrrigation": false,  
+"UseAutomaticIrrigation": false,
 "AutoIrrigationParams": {
   "irrigationParameters": {
     "nitrateConcentration": [0, "mg dm-3"],
@@ -35,7 +35,7 @@ In the following json code snippet two settings are being declared (taken from t
   },
   "amount": [17, "mm"],
   "threshold": 0.35
-},  
+},
 ```
 
 One can either include all necessary data (potentially deeply nested JSON objects) into the configuration files or use a reference and include mechanism to fetch data from a SQLite database or files in the filesystem. Where applicable (e.g. **crop.json**) JSON objects can be referenced at mulitple places.
@@ -66,31 +66,32 @@ The following example taken from the **crop.json** configuration file, shows how
 
 Right now there are the following possible functions fetching data from the database <br> (e.g. syntax **["include-from-db" ...]**). There are two possible ways to specify the parameters to the **include-from-db** function:
 
-1. as a list of parameters 
+1. as a list of parameters
 2. as one parameter, which is a **JSON object**
 
-If the sole parameter is a **JSON object** the object's keys will be 
+If the sole parameter is a **JSON object** the object's keys will be
 
 * **type** ... value of the column **what** below
 * **db** ... if missing will **default** to the value written in square brackets in teh **what** column
-* **KEY-NAME** ... the key under which the value has to be defined, available in square brackets in the parameter 1 und parameter 2 column 
+* **KEY-NAME** ... the key under which the value has to be defined, available in square brackets in the parameter 1 und parameter 2 column
 
-|  what [db-name] | parameter 1 (example) [key-name] | parameter 2 (example) [key-name] | description |
-| :----- | :----------- | :----------- | :----------- |
-| "mineral_fertiliser" ["monica"] | fertiliser name (**"AN"**) ["name"] | - | include mineral fertiliser parameters |
-| "organic_fertiliser" ["monica"] | fertiliser name (**"CADLM"**) ["name"] | - | include organic fertiliser ["monica"] |
-| "crop_residue" ["monica"] | species name (**"rye"**) ["species"] | residue_type (**"" or "cover"**) ["residue-type"] | include crop residue parameters |
-| "species" ["monica"] | species name (**"rye"**) ["species"] | - | include just the species parameters |
-| "cultivar" ["monica"] | species name (**"rye"**) ["species"] | cultivar name (**"winter rye"**) ["cultivar"] | include just the specified cultivars parameters (**Note:** a cultivar is only specifiable with the species as first parameter) |
-| "crop" ["monica"] | species name (**"rye"**) ["species"] | cultivar name (**"winter rye"**) ["cultivar"] | include both parts of the crop parameters in one JSON object (as usually needed and is equivalent to ```{"species": ["include-from-db", "species", ...], "cultivar": ["include-from-db", "cultivar", ..., ...]```) |
-| "soil-temperature-params" ["monica"] | name of parameterset (**"hermes" or "eva2" or "macsur"**) ["name"] | - | include user definable global soil temperature parameters for the MONICA model |
-| "environment-params" ["monica"] | name of parameterset (**"hermes"**) ["name"] | - | include global user environment parameters |
-| "soil-organic-params" ["monica"] | name of parameterset (**"eva2"**) ["name"] | - | include global user soil organic parameters |
-| "soil-transport-params" ["monica"] | name of parameterset (**"macsur"**) ["name"] | - | include global user soil transport parameters |
-| "soil-moisture-params" ["monica"] | name of parameterset (**"hermes"**) ["name"] | - | include global user 
-| "crop-params" ["monica"] | name of parameterset (**"hermes"**) ["name"] | - | include global user crop parameters |
-| "soil-profile" ["soil"] | profile id (**123**) ["id"] | - | include a whole soil profile with given profile id |
-| "soil-layer" ["soil"] | profile id (***123***) ["id"] | layer number (***2***) ["no"] | include just a single layer from a profile in the database |
+what [db-name] | parameter 1 (example) [key-name] | parameter 2 (example) [key-name] | description
+-------------- | -------------------------------- | -------------------------------- | -----------
+"mineral_fertiliser" ["monica"] | fertiliser name (**"AN"**) ["name"] | - | include mineral fertiliser parameters
+"organic_fertiliser" ["monica"] | fertiliser name (**"CADLM"**) ["name"] | - | include organic fertiliser ["monica"]
+"crop_residue" ["monica"] | species name (**"rye"**) ["species"] | residue_type (**"" or "cover"**) ["residue-type"] | include crop residue parameters
+"species" ["monica"] | species name (**"rye"**) ["species"] | - | include just the species parameters
+"cultivar" ["monica"] | species name (**"rye"**) ["species"] | cultivar name (**"winter rye"**) ["cultivar"] | include just the specified cultivars parameters (**Note:** a cultivar is only specifiable with the species as first parameter)
+"crop" ["monica"] | species name (**"rye"**) ["species"] | cultivar name (**"winter rye"**) ["cultivar"] | include both parts of the crop parameters in one JSON object (as usually needed and is equivalent to ```{"species": ["include-from-db", "species", ...], "cultivar": ["include-from-db", "cultivar", ..., ...]```)
+"soil-temperature-params" ["monica"] | name of parameterset (**"hermes" or "eva2" or "macsur"**) ["name"] | - | include user definable global soil temperature parameters for the MONICA model
+"environment-params" ["monica"] | name of parameterset (**"hermes"**) ["name"] | - | include global user environment parameters
+"soil-organic-params" ["monica"] | name of parameterset (**"eva2"**) ["name"] | - | include global user soil organic parameters
+"soil-transport-params" ["monica"] | name of parameterset (**"macsur"**) ["name"] | - | include global user soil transport parameters
+"soil-moisture-params" ["monica"] | name of parameterset (**"hermes"**) ["name"] | - | include global user
+"crop-params" ["monica"] | name of parameterset (**"hermes"**) ["name"] | - | include global user crop parameters
+"soil-profile" ["soil"] | profile id (**123**) ["id"] | - | include a whole soil profile with given profile id
+"soil-layer" ["soil"] | profile id (***123***) ["id"] | layer number (***2***) ["no"] | include just a single layer from a profile in the database
+
 
 ### include data from a file
 To include data from a file the example from above would look like the example below. The name of the function is **include-from-file** with its only parameter the path to the file to include. The whole contents of the named file should be **valid JSON** and will be included. The included JSON data may again contain other functions.
@@ -103,9 +104,9 @@ To include data from a file the example from above would look like the example b
 "residueParams": ["include-from-file", "../monica-parameters/crop-residues/rye.json"]
 ```
 
-In order to keep paths to the files to be included reasonably short and readable, relative paths will be prepended by the contents of the contents of the key **include-file-base-path**. This key is defined in **sim.json** and is allowed to exist as well in **crop.json** and **site.json**. In the latter case a "local" definition of **include-file-base-path** will replace the definition in **sim.json**. By default **include-file-base-path** in **sim.json** is defined as ```"${MONICA_PARAMETERS}/"```. This means it will be the value of the environment variable **MONICA_PARAMETERS** which after a MONICA installation will point to the directory where all the MONICA parameters where installed to (usually something like c:\\users\\USER_NAME\\MONICA\monica-parameters). 
+In order to keep paths to the files to be included reasonably short and readable, relative paths will be prepended by the contents of the contents of the key **include-file-base-path**. This key is defined in **sim.json** and is allowed to exist as well in **crop.json** and **site.json**. In the latter case a "local" definition of **include-file-base-path** will replace the definition in **sim.json**. By default **include-file-base-path** in **sim.json** is defined as ```"${MONICA_PARAMETERS}/"```. This means it will be the value of the environment variable **MONICA_PARAMETERS** which after a MONICA installation will point to the directory where all the MONICA parameters where installed to (usually something like c:\\users\\USER_NAME\\MONICA\monica-parameters).
 
-So keep in mind that if **include-from-file** has a relative path as its first parameter, **include-file-base-path** will be prepended and has to give a valid filesystem path. If **include-from-file**'s first parameter is an absolute path (eg. starting with c:\\ on Microsoft Windows or / under Linux) nothing else will be done to the path. 
+So keep in mind that if **include-from-file** has a relative path as its first parameter, **include-file-base-path** will be prepended and has to give a valid filesystem path. If **include-from-file**'s first parameter is an absolute path (eg. starting with c:\\ on Microsoft Windows or / under Linux) nothing else will be done to the path.
 
 
 ### reference data within a file
@@ -117,13 +118,13 @@ In **crop.json** it is desirable to be able to define a crop and reference it mu
 
 ### other functions
 
-| function name | parameter 1 (example) | parameter 2 (example) | description |
-| :------------ | :-------------------- | :-------------------- | :---------- |
-| "humus-class->corg" | humus class (**1**) | - | converts the humus class to corg value |
-| "bulk-density-class->raw-density" | effective bulk density class (**1 - 5**) | clay content (**0.0 - 1.0**) | converts the effective bulk density given the clay content to raw density | 
-| "KA5-texture-class->clay" | KA5 texture class (**fSms**) | - | returns the average clay content given the KA5 texture class |
-| "KA5-texture-class->sand" |  KA5 texture class (**Lt3**) | - | returns the average sand content given the KA5 texture class |
-| "sand-and-clay->lambda" | sand content (**0.0 - 1.0**) | clay content (**0.0 - 1.0**) | calculates the lambda value given sand and clay content |
+function name | parameter 1 (example) | parameter 2 (example) | description
+------------- | --------------------- | --------------------- | -----------
+"humus-class->corg" | humus class (**1**) | - | converts the humus class to corg value
+"bulk-density-class->raw-density" | effective bulk density class (**1 - 5**) | clay content (**0.0 - 1.0**) | converts the effective bulk density given the clay content to raw density |
+"KA5-texture-class->clay" | KA5 texture class (**fSms**) | - | returns the average clay content given the KA5 texture class
+"KA5-texture-class->sand" |  KA5 texture class (**Lt3**) | - | returns the average sand content given the KA5 texture class
+"sand-and-clay->lambda" | sand content (**0.0 - 1.0**) | clay content (**0.0 - 1.0**) | calculates the lambda value given sand and clay content
 
 As can be seen from the following examples taken from **site.json**, the function calls are allowed to be nested.
 
@@ -134,14 +135,14 @@ As can be seen from the following examples taken from **site.json**, the functio
 
 
 # JSON data format
-Currently MONICA uses  [**JSON**](http://www.json.org) as format for its files. Thus care has to be taken to obey the JSON rules, don't forget commas and the like. In order to check and/or reformat existing code, tools like [this online json viewer](http://codebeautify.org/jsonviewer) or [this one](https://jsonformatter.curiousconcept.com) can be used. 
+Currently MONICA uses  [**JSON**](http://www.json.org) as format for its files. Thus care has to be taken to obey the JSON rules, don't forget commas and the like. In order to check and/or reformat existing code, tools like [this online json viewer](http://codebeautify.org/jsonviewer) or [this one](https://jsonformatter.curiousconcept.com) can be used.
 
 **JSON** has no syntax for comments, it's a pure data format. In order to make the configuration files more self describing, but keep them valid **JSON** files, comments are encoded as keys beginning with two underscores **__** and an empty string **""** value. Instead of comments this also can be used to comment out structures which should not be used right now, simply by making a key invalid, e.g. adding an underscore character in front **_** or rename it to a name unknown to MONICA.
 
 
 # **SIM JSON**
 
-The **sim.json** file contains simulation specific information like start and end date (MONICA will pick the right climate data from **climate.csv**) or whether certain global toggles like nitrogen response/use of secondary yields will be turned on or of. 
+The **sim.json** file contains simulation specific information like start and end date (MONICA will pick the right climate data from **climate.csv**) or whether certain global toggles like nitrogen response/use of secondary yields will be turned on or of.
 
 **NumberOfLayers** and **LayerThickness** shouldn't be changed currently.
 
@@ -153,25 +154,25 @@ The key **no-of-climate-file-header-lines** defines how many lines will be skipe
 
 Then there may be a key **header-to-acd-names** which may have a **JSON object** as its value. The key/value pairs in the object define mappings from the column header names in the **climate.csv** file to **Available Climate Data (ACD)** names which MONICA knows and accepts. **ACD** are (case sensitivity is significant)
 
-| ACD element | description (example) [unit] |
-| :--------- | ------------- |
-| day | day of year (**5**) |
-| month | month of year (**11**) |
-| year | the year (**2017**) |
-| isoDate | date part of ISO date format (**2017-11-05**) |
-| deDate | german date format (**05.11.2017**) |
-| tmin | minimum daily temperature (**-2**) [**°C**] |
-| tavg | average daily temperature (**15.3**) [**°C**] |
-| tmax | maximum daily temperature (**34.7**) [**°C**] |
-| precip | daily precipitation (**2.3**) [**mm**] |
-| globrad | global radiation (**27.431**) [**MJ m-2**] |
-| wind | wind speed (**6.7**) [**m s-1**] |
-| relhumid | relative humidity (**90.0**) [**%**] |
-| skip | skip an existing element |
+ACD element | description (example) [unit]
+----------- | ----------------------------
+day | day of year (**5**)
+month | month of year (**11**)
+year | the year (**2017**)
+isoDate | date part of ISO date format (**2017-11-05**)
+deDate | german date format (**05.11.2017**)
+tmin | minimum daily temperature (**-2**) [**°C**]
+tavg | average daily temperature (**15.3**) [**°C**]
+tmax | maximum daily temperature (**34.7**) [**°C**]
+precip | daily precipitation (**2.3**) [**mm**]
+globrad | global radiation (**27.431**) [**MJ m-2**]
+wind | wind speed (**6.7**) [**m s-1**]
+relhumid | relative humidity (**90.0**) [**%**]
+skip | skip an existing element
 
 Unknown column headers will be skipped automatically, therefore the **skip** **ACD** is to consciously skip known elements, e.g. if there might be multiple columns for the same type of climate elements. The **header-to-acd-names** mapping is meant to provide a means to allow a wider range of existing **.csv** files to be used as is.
 
-Additionally it is possible that the value side of the mapping is actually a **JSON array**, which is allowed to contain two elements - first a simple arithmetic operation (__+, -, *, /__) and second a number value. Then instead of replacing the key (a name) by the value (a valid **ACD** name) the operation is applied to the key (a column name). In the example below the .csv** file contains a column **global_radiation** in **J cm-2** __global_radiation__ is mapped to **globrad** the valid MONICA **ACD** name for the global radiation and secondly it will be multiplied (__*__) by **100.0** to convert the values to **MJ m-2**. 
+Additionally it is possible that the value side of the mapping is actually a **JSON array**, which is allowed to contain two elements - first a simple arithmetic operation (__+, -, *, /__) and second a number value. Then instead of replacing the key (a name) by the value (a valid **ACD** name) the operation is applied to the key (a column name). In the example below the .csv** file contains a column **global_radiation** in **J cm-2** __global_radiation__ is mapped to **globrad** the valid MONICA **ACD** name for the global radiation and secondly it will be multiplied (__*__) by **100.0** to convert the values to **MJ m-2**.
 
 ```json
 "climate.csv-options": {
@@ -190,19 +191,19 @@ Additionally it is possible that the value side of the mapping is actually a **J
 
 ## Outputing results from MONICA
 
-The user can request the result output in **CSV** format from MONICA by defining options in the **JSON object** under the key **output**. 
+The user can request the result output in **CSV** format from MONICA by defining options in the **JSON object** under the key **output**.
 
 The following table describes a couple of options which can be set:
 
-| key | description (example/default) |
-| --- | --------------- |
-| path-to-output | path to directory to write output to (**./**) = current directory |
-| write-file? | Write file to "path-to-output"? (**true**) or (**false**) |
-| include-header-row | include the header row in the output (**true**) or (**false**) |
-| include-units-row | include a line with the units (**true**) or (**false**) |
-| include aggregation-rows | show two rows telling about a) the expression which requested an output and b) what MONICA interpreted - both can be used for debugging purposes (**true**) or (**false**) |
-| csv-separator | the separating character to be used (**,**) | 
-| events | a list of pairs, which describe the events on which MONICA is requested to output a list of results |
+key | description (example/default)
+--- | -----------------------------
+path-to-output | path to directory to write output to (**./**) = current directory
+write-file? | Write file to "path-to-output"? (**true**) or (**false**)
+include-header-row | include the header row in the output (**true**) or (**false**)
+include-units-row | include a line with the units (**true**) or (**false**)
+include aggregation-rows | show two rows telling about a) the expression which requested an output and b) what MONICA interpreted - both can be used for debugging purposes (**true**) or (**false**)
+csv-separator | the separating character to be used (**,**) |
+events | a list of pairs, which describe the events on which MONICA is requested to output a list of results
 
 ### events
 
@@ -215,25 +216,26 @@ In order to define requested outputs a few kinds of information have to be disti
 3. **at** which time/condition to write a result, which doesn't aggregate results
 4. **while** some condition is true, aggregate results
 
-ISO-Dates are allowed to contain placeholders (**x**), which means that the year, month or day is unspecified and thus every available value is used. 
+ISO-Dates are allowed to contain placeholders (**x**), which means that the year, month or day is unspecified and thus every available value is used.
 
 Additionally to date patterns every workstep generates an events with named like the Workstep, e.g. there are events like Sowing, Harvest, AutomaticSowing, SetValue etc.
 
 The following table shows some event expressions, shortcuts (and their expansion):
 
-| Shortcut | Expanded form | Meaning |
-| -------- | ------------- | ----------- |
-| | ```{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}``` | output results at every 15th from mai to july - daily results will be output |
-| "xxxx-03-31" | ```{"at": "xxxx-03-31"}``` | write results every year at the march 31st |
-| "daily" | ```{"at": "xxxx-xx-xx"}``` | write results daily |
-| "monthly" | ```{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}``` | write monthly aggregated results |
-|	"yearly" | ```{"from": "xxxx-01-01", "to": "xxxx-12-31"}``` | write yearly aggregated results |
-|	"run" | ```{"from": <start-date>, "to": <end-date>}``` | write results aggregated over the whole run |
-|	"crop" | ```{"from": "Sowing", "to": "Harvest"}``` | write results aggregated during the cropping period |
-| ["while", "Stage", "=", 5] | ```{"while": ["Stage", "=", 5]}``` | write results aggregated only while the result **Stage** equals 5 |
-| ["at", "Stage", "=", 2] | ```{"at": ["Stage", "=", 2]}``` | write results daily if the result **Stage** equals 2
-| [["Mois", 1], "<", 0.5] | ```{"at": ["Mois", 1], "<", 0.5]}``` | write results daily if the soil-moisture in the first layer is below 0.5 |
-| "Sowing" | ```{"at": "Sowing"}``` | at sowing time write a result |
+Shortcut | Expanded form | Meaning
+-------- | ------------- | -------
+ | ```{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}``` | output results at every 15th from mai to july - daily results will be output
+ | ```{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "<", 0.4]}``` | output aggregated results from "Sowing" event until (incl) the "anthesis" event, but include only results while actual to potential evapotranspiration was below 0.4
+"xxxx-03-31" | ```{"at": "xxxx-03-31"}``` | write results every year at the march 31st
+"daily" | ```{"at": "xxxx-xx-xx"}``` | write results daily
+"monthly" | ```{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}``` | write monthly aggregated results
+"yearly" | ```{"from": "xxxx-01-01", "to": "xxxx-12-31"}``` | write yearly aggregated results
+"run" | ```{"from": <start-date>, "to": <end-date>}``` | write results aggregated over the whole run
+"crop" | ```{"from": "Sowing", "to": "Harvest"}``` | write results aggregated during the cropping period
+["while", "Stage", "=", 5] | ```{"while": ["Stage", "=", 5]}``` | write results aggregated only while the result **Stage** equals 5
+["at", "Stage", "=", 2] | ```{"at": ["Stage", "=", 2]}``` | write results daily if the result **Stage** equals 2
+[["Mois", 1], "<", 0.5] | ```{"at": ["Mois", 1], "<", 0.5]}``` | write results daily if the soil-moisture in the first layer is below 0.5
+"Sowing" | ```{"at": "Sowing"}``` | at sowing time write a result
 
 As can be seen in the table above it is possible to use simple comparision expressions in the events. The available operators are **<, <=, =, >=, >**. On the lefthand and/or righthand side of the operator may appear either an output expression (e.g **"Stage"** or **["Mois", 1]**) or a numeric value (e.g. **1**).
 
@@ -243,35 +245,35 @@ The previous section defined the events when MONICA should output results. What 
 
 1. scalar values like **Stage**
 2. array values like **Mois**, which actually consist of 20 values for the soil-moistures in all the layers
-3. array values like **["OrgBiom", "Root"]**, crop-organ specific results 
+3. array values like **["OrgBiom", "Root"]**, crop-organ specific results
 
 MONICA currently uses a fixed set of 20 10cm soil-layers. If an output requires to choose a layer or a range of layers, a number between 1 and 20 has to be supplied. If the output is about an crop-organ one of the following keywords is to be used: **"Root", "Leaf", "Shoot", "Fruit", "Struct", "Sugar"**.
 
 Additionally the user has to tell MONICA whether ranges of values (in the arrays) are to be output as a bunch of scalars or instead be aggregated to a single value and if they should be aggregated, how to aggregate them. The following aggregation operations are available: **AVG, MEDIAN, SUM, MIN, MAX, FIRST, LAST, NONE**. Aggregation might happen on a daily basis to aggregate soil layers to a single scalar value (the **default** operation for layer aggregation is **NONE**) or in aggregation time ranges, e.g. to aggregate monthly values, where the **default** aggregation operation is **AVG**.
 
-| Aggregation reason | Default operation | Meaning |
-| ------------------ | ----------------- | ------- |
-| aggregate soil layers into scalar value | **NONE** | if no aggregation operation is given, selected range of layer values will be output |
-| aggregate time range | **AVG** | if an event defines an aggregation time range, a missing aggregation operation (value 2 or 3 in **JSON array**), the temporarily collected daily values will be averaged |
+Aggregation reason | Default operation | Meaning
+------------------ | ----------------- | -------
+aggregate soil layers into scalar value | **NONE** | if no aggregation operation is given, selected range of layer values will be output
+aggregate time range | **AVG** | if an event defines an aggregation time range, a missing aggregation operation (value 2 or 3 in **JSON array**), the temporarily collected daily values will be averaged
 
 To understand aggregation operations one can think of that all the values to be aggregated (e.g. the **Runoff**) will be stored during the **from**/**to** period temporarily in a list. After the **to** time range is over the aggregation operation will be applied to this list. That means that **AVG** will average all values or that **FIRST** will return simply the first value in the list aka the value when the time range began (**from** day).
 
 The user specifies an output by either defining in the most simple case the name of the output (e.g. **"Stage"**, **"Crop"** or **"Date"**) or a **JSON array** where the first element of the array is the aforementioned output name. It is allowed to append to the name, separated by the character **|** a display name which will in the output used instead of the result name, e.g. **"DOY|MatDOY"** would not output **DOY** but **MatDOY** which could be more descriptive. The second element in the array is, either the choosen soil-layer, layer-range, crop-organ (for array values) or the aggregation operation for scalar values. The latter is by default set to **NONE** if not used. If the output is an array value a third value, the aggregation operation can be supplied. For array values the second value can be a single number (the soil-layer number), a string describing the crop-organ or again an array which describes (for soil-layers only) a range of layers. In the latter case the array's first value is the starting layer, the second the ending layer (inclusive) and a possible third value an aggregation operation. If the range description specifies an aggregation operation every time an output is requested the defined range will be aggregated via the operation and a single value will be stored, else a list of values will be returned and show up in the outputs with the name of the result appended by underscore and layer number. The following examples with show the possible variations.
 
-| Output definition | Meaning |
-| ----------------- | ------- |
-| "Date" | return the ISO date, e.g. 2017-01-17 |
-| ["Year", "LAST"] | return the year at **to** time, when the aggregation time ends |
-| ["PercolationRate\|WDrain", 15, "SUM"] | return the sum of the **PercolationRate**s in soil layer 15 (1.5m) in an aggregation period, but rename it in the outputs as **WDrain** ... to **SUM** requires an event to specify the aggregation time range |
-| ["Mois", [1, 20]] | return the daily soil-moistures of all 20 soil layers, output will be labeled "Mois_1", "Mois_2", etc |
-| ["OrgBiom", "Leaf"] | return the daily organic biomass of the **Leaf** organ |
-| ["SOC", [1, 3, "AVG"]] | return the daily soil organic carbon as a single value averaged over the first three soil layers |
-| ["Precip", "SUM"] | return the sum of the precipitations in a given aggregation time range |
+Output definition | Meaning
+----------------- | -------
+"Date" | return the ISO date, e.g. 2017-01-17
+["Year", "LAST"] | return the year at **to** time, when the aggregation time ends
+["PercolationRate\|WDrain", 15, "SUM"] | return the sum of the **PercolationRate**s in soil layer 15 (1.5m) in an aggregation period, but rename it in the outputs as **WDrain** ... to **SUM** requires an event to specify the aggregation time range
+["Mois", [1, 20]] | return the daily soil-moistures of all 20 soil layers, output will be labeled "Mois_1", "Mois_2", etc
+["OrgBiom", "Leaf"] | return the daily organic biomass of the **Leaf** organ
+["SOC", [1, 3, "AVG"]] | return the daily soil organic carbon as a single value averaged over the first three soil layers
+["Precip", "SUM"] | return the sum of the precipitations in a given aggregation time range
 
 In the created output file the order of the outputed results in the **events** list is preserved and can be relied upon. Below you'll find an example output section, which creates an equivalent file to the **rmout** file of the old version 1 of MONICA and also includes commented out (**__events**) an example set of outputs used in the EU MACSUR Heat Stress study.
 
 ```json
-"output": { 
+"output": {
   "write-file?": false,
   "file-name": "out.csv",
 
@@ -281,7 +283,7 @@ In the created output file the order of the outputed results in the **events** l
     "include-aggregation-rows": true,
     "csv-separator": ","
   },
-  
+
   "__events": [
     "crop", [
       ["Year", "LAST"],
@@ -309,41 +311,41 @@ In the created output file the order of the outputed results in the **events** l
 
     ["while", "Stage", "=", 7], [
       ["Yield", "FIRST"],
-      ["DOY|MatDOY", "FIRST"], 
+      ["DOY|MatDOY", "FIRST"],
       ["AbBiom|Biom-ma", "First"],
       ["AbBiomN|CroN-ma", "FIRST"],
       ["GrainN", "FIRST"]
     ],
-    
+
     ["while", "Stage", "=", 2], [
       ["DOY|EmergDOY", "FIRST"]
     ]
   ],
-  
+
   "events" : [
     "daily", [
       "Date", "Crop", "TraDef", "Tra", "NDef", "HeatRed", "FrostRed", "OxRed",
-      "Stage", "TempSum", "VernF", "DaylF", 
-      "IncRoot", "IncLeaf", "IncShoot", "IncFruit", 
-      "RelDev", "LT50", "AbBiom", 
-      ["OrgBiom", "Root"], ["OrgBiom", "Leaf"], ["OrgBiom", "Shoot"], 
+      "Stage", "TempSum", "VernF", "DaylF",
+      "IncRoot", "IncLeaf", "IncShoot", "IncFruit",
+      "RelDev", "LT50", "AbBiom",
+      ["OrgBiom", "Root"], ["OrgBiom", "Leaf"], ["OrgBiom", "Shoot"],
       ["OrgBiom", "Fruit"], ["OrgBiom", "Struct"], ["OrgBiom", "Sugar"],
       "Yield", "SumYield", "GroPhot", "NetPhot", "MaintR", "GrowthR",	"StomRes",
       "Height", "LAI", "RootDep", "EffRootDep", "TotBiomN", "AbBiomN", "SumNUp",
-      "ActNup", "PotNup", "NFixed", "Target", "CritN", "AbBiomNc", "YieldNc", 
-      "Protein", 
-      "NPP", ["NPP", "Root"], ["NPP", "Leaf"], ["NPP", "Shoot"], 
+      "ActNup", "PotNup", "NFixed", "Target", "CritN", "AbBiomNc", "YieldNc",
+      "Protein",
+      "NPP", ["NPP", "Root"], ["NPP", "Leaf"], ["NPP", "Shoot"],
       ["NPP", "Fruit"], ["NPP", "Struct"], ["NPP", "Sugar"],
-      "GPP", 
-      "Ra", 
-      ["Ra", "Root"], ["Ra", "Leaf"], ["Ra", "Shoot"], ["Ra", "Fruit"], 
+      "GPP",
+      "Ra",
+      ["Ra", "Root"], ["Ra", "Leaf"], ["Ra", "Shoot"], ["Ra", "Fruit"],
       ["Ra", "Struct"], ["Ra", "Sugar"],
       ["Mois", [1, 20]], "Precip", "Irrig", "Infilt", "Surface", "RunOff", "SnowD", "FrostD",
-      "ThawD", ["PASW", [1, 20]], "SurfTemp", ["STemp", [1, 5]], 
+      "ThawD", ["PASW", [1, 20]], "SurfTemp", ["STemp", [1, 5]],
       "Act_Ev", "Act_ET", "ET0", "Kc", "AtmCO2", "Groundw", "Recharge", "NLeach",
-      ["NO3", [1, 20]], "Carb", ["NH4", [1, 20]], ["NO2", [1, 4]], 
+      ["NO3", [1, 20]], "Carb", ["NH4", [1, 20]], ["NO2", [1, 4]],
       ["SOC", [1, 6]], ["SOC-X-Y", [1, 3, "SUM"]], ["SOC-X-Y", [1, 20, "SUM"]],
-      ["AOMf", 1], ["AOMs", 1], ["SMBf", 1], ["SMBs", 1], ["SOMf", 1], 
+      ["AOMf", 1], ["AOMs", 1], ["SMBf", 1], ["SMBs", 1], ["SOMf", 1],
       ["SOMs", 1], ["CBal", 1], ["Nmin", [1, 3]], "NetNmin", "Denit", "N2O", "SoilpH",
       "NEP", "NEE", "Rh", "Tmin", "Tavg", "Tmax", "Wind", "Globrad", "Relhumid", "Sunhours",
       "NFert"
@@ -361,18 +363,18 @@ Finally below you'll find an output-wise simplified full **sim.json** file.
 		"__given the start and end date, monica will run just this time range, else the full time range given by supplied climate data": "",
 		"start-date": "1991-01-01",
 		"end-date": "1997-12-31",
-	
+
 		"no-of-climate-file-header-lines": 1,
 		"csv-separator": ",",
 		"header-to-acd-names": {
 			"DE-date": "de-date"
 		}
 	},
-  
-  "output": { 
+
+  "output": {
 	  "write-file?": false,
 		"file-name": "out.csv",
-	
+
 		"__how to write and what to include in monica CSV output": "",
 		"csv-options": {
 			"include-header-row": true,
@@ -380,22 +382,22 @@ Finally below you'll find an output-wise simplified full **sim.json** file.
 			"include-aggregation-rows": true,
 			"csv-separator": ","
 		},
-		
+
 		"__what data to include in the monica output according to the events defined by the keys": "",
 		"events" : [
 			"monthly", [
 				"Year", "Month",
 				["SOC", [1, 1, "AVG"]], ["SOC", [1, 3, "AVG"]],
-				["WaterContent", [1, 9, "AVG"]], "Recharge", "NLeach", 
+				["WaterContent", [1, 9, "AVG"]], "Recharge", "NLeach",
 				["SnowD", "MAX"], ["SnowD", "SUM"], ["FrostD", "SUM"],
 				["RunOff", "SUM"], ["NH3", "SUM"], ["Precip", "SUM"], "Act_ET"
 			],
 
 			"yearly", [
-        "Year", 
-        ["N", [1, 3]], 
-        ["RunOff", "SUM"], 
-        ["NLeach", "SUM"], 
+        "Year",
+        ["N", [1, 3]],
+        ["RunOff", "SUM"],
+        ["NLeach", "SUM"],
         ["Recharge", "SUM"]
       ],
 
@@ -407,14 +409,14 @@ Finally below you'll find an output-wise simplified full **sim.json** file.
 
   "NumberOfLayers": 20,
   "LayerThickness": [0.1, "m"],
-  
+
   "UseSecondaryYields": true,
   "NitrogenResponseOn": true,
   "WaterDeficitResponseOn": true,
   "EmergenceMoistureControlOn": true,
   "EmergenceFloodingControlOn": true,
-    
-  "UseAutomaticIrrigation": false,  
+
+  "UseAutomaticIrrigation": false,
   "AutoIrrigationParams": {
     "irrigationParameters": {
       "nitrateConcentration": [0, "mg dm-3"],
@@ -422,8 +424,8 @@ Finally below you'll find an output-wise simplified full **sim.json** file.
     },
     "amount": [17, "mm"],
     "threshold": 0.35
-  },  
-  
+  },
+
   "UseNMinMineralFertilisingMethod": false,
   "NMinUserParams": { "min": 0, "max": 0, "delayInDays": 0 },
   "NMinFertiliserPartition": {
@@ -437,12 +439,12 @@ Finally below you'll find an output-wise simplified full **sim.json** file.
 
 ```
 
-## Allowed outputs 
+## Allowed outputs
 
 The most up to date list of available and allowed output names can be found directly from the MONICA source in the file [**build-output.cpp**](https://github.com/zalf-lsa/monica/blob/master/src/io/build-output.cpp#L359). There you'll find entries like:
 
 ```C++
-build({id++, "Date", "", "output current date"}, 
+build({id++, "Date", "", "output current date"},
 .
 .
 .
@@ -451,139 +453,141 @@ build({id++, "TraDef", "0;1", "TranspirationDeficit"},
 
 Here **Date** or **TraDef** are the allowed outputs. Additionally one can see after the output name (if available) the expected units of measure and a description.
 
-| Output name | Unit | Description |
-| ----------- | ---- | ----------- |
-| Date |  | output current date |
-| DOY |  | output current day of year |
-| Month |  | output current Month |
-| Year |  | output current Year |
-| Crop |  | crop name |
-| TraDef | 0;1 | TranspirationDeficit |
-| Tra | mm | ActualTranspiration |
-| NDef | 0;1 | CropNRedux |
-| HeatRed | 0;1 |  HeatStressRedux |
-| FrostRed | 0;1 | FrostStressRedux |
-| OxRed | 0;1 | OxygenDeficit |
-| Stage |  | DevelopmentalStage |
-| TempSum | °Cd | CurrentTemperatureSum |
-| VernF | 0;1 | VernalisationFactor |
-| DaylF | 0;1 | DaylengthFactor |
-| IncRoot | kg ha-1 | OrganGrowthIncrement root |
-| IncLeaf | kg ha-1 | OrganGrowthIncrement leaf |
-| IncShoot | kg ha-1 | OrganGrowthIncrement shoot |
-| IncFruit | kg ha-1 | OrganGrowthIncrement fruit |
-| RelDev | 0;1 | RelativeTotalDevelopment |
-| LT50 | °C | LT50 |
-| AbBiom | kg ha-1 | AbovegroundBiomass |
-| OrgBiom | kgDM ha-1 | get_OrganBiomass(i) |
-| Yield | kgDM ha-1 | get_PrimaryCropYield |
-| SumYield | kgDM ha-1 | get_AccumulatedPrimaryCropYield |
-| GroPhot | kgCH2O ha-1 | GrossPhotosynthesisHaRate |
-| NetPhot | kgCH2O ha-1 | NetPhotosynthesis |
-| MaintR | kgCH2O ha-1 | MaintenanceRespirationAS |
-| GrowthR | kgCH2O ha-1 | GrowthRespirationAS |
-| StomRes | s m-1 | StomataResistance |
-| Height | m | CropHeight |
-| LAI | m2 m-2 | LeafAreaIndex |
-| RootDep | layer# | RootingDepth |
-| EffRootDep | m | Effective RootingDepth |
-| TotBiomN | kgN ha-1 | TotalBiomassNContent |
-| AbBiomN | kgN ha-1 | AbovegroundBiomassNContent |
-| SumNUp | kgN ha-1 | SumTotalNUptake |
-| ActNup | kgN ha-1 | ActNUptake |
-| PotNup | kgN ha-1 | PotNUptake |
-| NFixed | kgN ha-1 | NFixed |
-| Target | kgN ha-1 | TargetNConcentration |
-| CritN | kgN ha-1 | CriticalNConcentration |
-| AbBiomNc | kgN ha-1 | AbovegroundBiomassNConcentration |
-| Nstress | - | NitrogenStressIndex}
-| YieldNc | kgN ha-1 | PrimaryYieldNConcentration |
-| Protein | kg kg-1 | RawProteinConcentration |
-| NPP | kgC ha-1 | NPP |
-| NPP-Organs | kgC ha-1 | organ specific NPP |
-| GPP | kgC ha-1 | GPP |
-| Ra | kgC ha-1 | autotrophic respiration |
-| Ra-Organs | kgC ha-1 | organ specific autotrophic respiration |
-| Mois | m3 m-3 | Soil moisture content |
-| Irrig | mm | Irrigation |
-| Infilt | mm | Infiltration |
-| Surface | mm | Surface water storage |
-| RunOff | mm | Surface water runoff |
-| SnowD | mm | Snow depth |
-| FrostD | m | Frost front depth in soil |
-| ThawD | m | Thaw front depth in soil |
-| PASW | m3 m-3 | PASW |
-| SurfTemp | °C |  |
-| STemp | °C |  |
-| Act_Ev | mm |  |
-| Pot_ET | mm | }
-| Act_ET | mm |  |
-| ET0 | mm |  |
-| Kc |  |  |
-| AtmCO2 | ppm | Atmospheric CO2 concentration |
-| Groundw | m |  |
-| Recharge | mm |  |
-| NLeach | kgN ha-1 |  |
-| NO3 | kgN m-3 |  |
-| Carb | kgN m-3 | Soil Carbamid |
-| NH4 | kgN m-3 |  |
-| NO2 | kgN m-3 |  |
-| SOC | kgC kg-1 | get_SoilOrganicC |
-| SOC-X-Y | gC m-2 | SOC-X-Y |
-| AOMf | kgC m-3 | get_AOM_FastSum |
-| AOMs | kgC m-3 | get_AOM_SlowSum |
-| SMBf | kgC m-3 | get_SMB_Fast |
-| SMBs | kgC m-3 | get_SMB_Slow |
-| SOMf | kgC m-3 | get_SOM_Fast |
-| SOMs | kgC m-3 | get_SOM_Slow |
-| CBal | kgC m-3 | get_CBalance |
-| Nmin | kgN ha-1 | NetNMineralisationRate |
-| NetNmin | kgN ha-1 | NetNmin |
-| Denit | kgN ha-1 | Denit |
-| N2O | kgN ha-1 | N2O |
-| SoilpH |  | SoilpH |
-| NEP | kgC ha-1 | NEP |
-| NEE | kgC ha- | NEE |
-| Rh | kgC ha- | Rh |
-| Tmin |  |  |
-| Tavg |  |  |
-| Tmax |  |  |
-| Precip | mm | Precipitation |
-| Wind |  |  |
-| Globrad |  |  |
-| Relhumid |  |  |
-| Sunhours |  |  |
-| BedGrad | 0;1 |  |
-| N | kgN m-3 |  |
-| Co | kgC m-3 |  |
-| NH3 | kgN ha-1 | NH3_Volatilised |
-| NFert | kgN ha-1 | dailySumFertiliser |
-| WaterContent | %nFC | soil water content |
-| CapillaryRise | mm | capillary rise |
-| PercolationRate | mm | percolation rate |
-| SMB-CO2-ER |  | soilOrganic.get_SMB_CO2EvolutionRate |
-| Evapotranspiration | mm |  |
-| Evaporation | mm |  |
-| Transpiration | mm |  |
-| GrainN | kg ha-1 | get_FruitBiomassNContent|
-| Fc | m3 m-3 | field capacity|
-| Pwp | m3 m-3 | permanent wilting point|
+Output name | (L)ayers/(O)rgans? | Setable? | Unit | Description
+----------- | -------------- | -------- | ---- | -----------
+Date | | |  | output current date
+DOY | | |  | output current day of year
+Month | | |  | output current Month
+Year | | |  | output current Year
+Crop | | |  | crop name
+TraDef | | | 0;1 | TranspirationDeficit
+Tra | | | mm | ActualTranspiration
+NDef | | | 0;1 | CropNRedux
+HeatRed | | | 0;1 |  HeatStressRedux
+FrostRed | | | 0;1 | FrostStressRedux
+OxRed | | | 0;1 | OxygenDeficit
+Stage | | |  | DevelopmentalStage
+TempSum | | | °Cd | CurrentTemperatureSum
+VernF | | | 0;1 | VernalisationFactor
+DaylF | | | 0;1 | DaylengthFactor
+IncRoot | | | kg ha-1 | OrganGrowthIncrement root
+IncLeaf | | | kg ha-1 | OrganGrowthIncrement leaf
+IncShoot | | | kg ha-1 | OrganGrowthIncrement shoot
+IncFruit | | | kg ha-1 | OrganGrowthIncrement fruit
+RelDev | | | 0;1 | RelativeTotalDevelopment
+LT50 | | | °C | LT50
+AbBiom | | | kg ha-1 | AbovegroundBiomass
+OrgBiom | O | | kgDM ha-1 | get_OrganBiomass(i)
+Yield | | | kgDM ha-1 | get_PrimaryCropYield
+SumYield | | | kgDM ha-1 | get_AccumulatedPrimaryCropYield
+GroPhot | | | kgCH2O ha-1 | GrossPhotosynthesisHaRate
+NetPhot | | | kgCH2O ha-1 | NetPhotosynthesis
+MaintR | | | kgCH2O ha-1 | MaintenanceRespirationAS
+GrowthR | | | kgCH2O ha-1 | GrowthRespirationAS
+StomRes | | | s m-1 | StomataResistance
+Height | | | m | CropHeight
+LAI | | | m2 m-2 | LeafAreaIndex
+RootDep | | | layer# | RootingDepth
+EffRootDep | | | m | Effective RootingDepth
+TotBiomN | | | kgN ha-1 | TotalBiomassNContent
+AbBiomN | | | kgN ha-1 | AbovegroundBiomassNContent
+SumNUp | | | kgN ha-1 | SumTotalNUptake
+ActNup | | | kgN ha-1 | ActNUptake
+PotNup | | | kgN ha-1 | PotNUptake
+NFixed | | | kgN ha-1 | NFixed
+Target | | | kgN ha-1 | TargetNConcentration
+CritN | | | kgN ha-1 | CriticalNConcentration
+AbBiomNc | | | kgN ha-1 | AbovegroundBiomassNConcentration
+Nstress | | | - | NitrogenStressIndex}
+YieldNc | | | kgN ha-1 | PrimaryYieldNConcentration
+Protein | | | kg kg-1 | RawProteinConcentration
+NPP | | | kgC ha-1 | NPP
+NPP-Organs | O | | kgC ha-1 | organ specific NPP
+GPP | | | kgC ha-1 | GPP
+Ra | | | kgC ha-1 | autotrophic respiration
+Ra-Organs | O | | kgC ha-1 | organ specific autotrophic respiration
+Mois | L | x | m3 m-3 | Soil moisture content
+Irrig | | | mm | Irrigation
+Infilt | | | mm | Infiltration
+Surface | | | mm | Surface water storage
+RunOff | | | mm | Surface water runoff
+SnowD | | | mm | Snow depth
+FrostD | | | m | Frost front depth in soil
+ThawD | | | m | Thaw front depth in soil
+PASW | L | | m3 m-3 | PASW
+SurfTemp | | | °C |
+STemp | L | | °C |
+Act_Ev | | | mm |
+Pot_ET | | | mm |
+Act_ET | | | mm |
+ET0 | | | mm |
+Kc | | |  |
+AtmCO2 | | | ppm | Atmospheric CO2 concentration
+Groundw | | | m |
+Recharge | | | mm |
+NLeach | | | kgN ha-1 |
+NO3 | L | x | kgN m-3 |
+Carb | L | x | kgN m-3 | Soil Carbamid
+NH4 | L | x | kgN m-3 |
+NO2 | L | x | kgN m-3 |
+SOC | | | kgC kg-1 | get_SoilOrganicC
+SOC-X-Y | | | gC m-2 | SOC-X-Y
+AOMf | | | kgC m-3 | get_AOM_FastSum
+AOMs | | | kgC m-3 | get_AOM_SlowSum
+SMBf | | | kgC m-3 | get_SMB_Fast
+SMBs | | | kgC m-3 | get_SMB_Slow
+SOMf | | | kgC m-3 | get_SOM_Fast
+SOMs | | | kgC m-3 | get_SOM_Slow
+CBal | | | kgC m-3 | get_CBalance
+Nmin | | | kgN ha-1 | NetNMineralisationRate
+NetNmin | | | kgN ha-1 | NetNmin
+Denit | | | kgN ha-1 | Denit
+N2O | | | kgN ha-1 | N2O
+SoilpH | | |  | SoilpH
+NEP | | | kgC ha-1 | NEP
+NEE | | | kgC ha- | NEE
+Rh | | | kgC ha- | Rh
+Tmin | | |  |
+Tavg | | |  |
+Tmax | | |  |
+Precip | | | mm | Precipitation
+Wind | | |  |
+Globrad | | |  |
+Relhumid | | |  |
+Sunhours | | |  |
+BedGrad | | | 0;1 |
+N | | | kgN m-3 |
+Co | | | kgC m-3 |
+NH3 | | | kgN ha-1 | NH3_Volatilised
+NFert | | | kgN ha-1 | dailySumFertiliser
+WaterContent | | | %nFC | soil water content
+CapillaryRise | | | mm | capillary rise
+PercolationRate | | | mm | percolation rate
+SMB-CO2-ER | | |  | soilOrganic.get_SMB_CO2EvolutionRate
+Evapotranspiration | | | mm |
+Evaporation | | | mm |
+ETa/ETc | | | | actual evapotranspiration / potential evapotranspiration
+Transpiration | | | mm |
+GrainN | | | kg ha-1 | get_FruitBiomassNContent
+Fc | | | m3 m-3 | field capacity
+Pwp | | | m3 m-3 | permanent wilting point
+Nresid | | | kg N ha-1 | Nitrogen content in crop residues
 
 
 # **SITE JSON**
-**site.json** holds all input data and parameters which could be considers site specific. Besides the key **SiteParameters** in the top-level JSON object, there might be a few JSON objects which set global/general soil and environment specific parameters. These can either be included from the SQLite database (table user_parameter) or the filesystem or be defined directly in **site.json**.  In order to facilitate easy overwriting of the standard parameters, they are included via the **DEFAULT** parameter pseudo-key. 
+**site.json** holds all input data and parameters which could be considers site specific. Besides the key **SiteParameters** in the top-level JSON object, there might be a few JSON objects which set global/general soil and environment specific parameters. These can either be included from the SQLite database (table user_parameter) or the filesystem or be defined directly in **site.json**.  In order to facilitate easy overwriting of the standard parameters, they are included via the **DEFAULT** parameter pseudo-key.
 
 ## The soil profile
 
-The key **SoilProfileParameters** contains a **JSON array** of **JSON objects** which describe the layers of the soil profile. MONICA uses internally **20** layers each with a **10cm** thickness. The **SoilProfileParameters** has to contain at least one layer with a minimal set of soil properties (**KA5TextureClass**, **SoilOrganicCarbon/Matter** and **SoilRaw/BulkDensity**). Additionally to the soil properties a key **Thickness** which describes the height of the soil layer. The specified soil profile will internally be normalized to **20** **10cm** layers. If the sizes of the layers won't add up to **2m** (MONICAs used profile depth), the last layer will be extend up to **2m**. Equally, the layers will be cut at **2m** profile depth. 
+The key **SoilProfileParameters** contains a **JSON array** of **JSON objects** which describe the layers of the soil profile. MONICA uses internally **20** layers each with a **10cm** thickness. The **SoilProfileParameters** has to contain at least one layer with a minimal set of soil properties (**KA5TextureClass**, **SoilOrganicCarbon/Matter** and **SoilRaw/BulkDensity**). Additionally to the soil properties a key **Thickness** which describes the height of the soil layer. The specified soil profile will internally be normalized to **20** **10cm** layers. If the sizes of the layers won't add up to **2m** (MONICAs used profile depth), the last layer will be extend up to **2m**. Equally, the layers will be cut at **2m** profile depth.
 
-Not all properties are necessary, but the more soil properties are specified, the more exact the calculations will be. If only the **KA5TextureClass** is given, average values for **Sand** and **Clay** content will be used as well as **FieldCapacity**, **PermanentWiltingPoint**, **PoreVolume** and **Lambda** will be calculated based on them. 
+Not all properties are necessary, but the more soil properties are specified, the more exact the calculations will be. If only the **KA5TextureClass** is given, average values for **Sand** and **Clay** content will be used as well as **FieldCapacity**, **PermanentWiltingPoint**, **PoreVolume** and **Lambda** will be calculated based on them.
 
 Also just one of **SoilRawDensity** and **SoilBulkDensity** as well as **SoilOrganicCarbon** and **SoilOrganicMatter** have to be given. If both values are being supplied, they should match.
 
-The following table shows the names of the soil properties which can be set on an individual layer. 
+The following table shows the names of the soil properties which can be set on an individual layer.
 
-Name of config file variable | Unit | Description 
+Name of config file variable | Unit | Description
 ---------------------------- | ---- | -----------
 **Thickness** | m | thickness of the soil layer
 **Sand** | kg kg-1 (% [0-1]) | soil sand content, a percentage between 0 and 1
@@ -591,17 +595,17 @@ Name of config file variable | Unit | Description
 **pH** | | soil pH value
 **Sceleton** | % [0-1] | soil stone content, a percentage between 0 and 1
 **Lambda** | | soil water conductivity coefficient
-**FieldCapacity** | m3 m-3 | fieldcapacity 
-**PoreVolume** | m3 m-3 | saturation 
+**FieldCapacity** | m3 m-3 | fieldcapacity
+**PoreVolume** | m3 m-3 | saturation
 **PermanentWiltingPoint** | m3 m-3 | permanent wilting point
 **KA5TextureClass** | | KA5 soil texture
 **SoilAmmonium** | kg NH4-N m-3 | soil ammonium
 **SoilNitrate** | kg NO3-N m-3 | soil nitrate
 **CN** | | soil C/N ratio
 **SoilRawDensity** | kg m-3 | soil raw density
-**SoilBulkDensity** | kg m-3 | soil bulk density 
-**SoilOrganicCarbon** | % [0-100] ([kg C kg-1] * 100) | soil organic carbon, a percentage between 0 and 100 
-**SoilOrganicMatter** | kg OM kg-1 (% [0-1]) | soil organic matter 
+**SoilBulkDensity** | kg m-3 | soil bulk density
+**SoilOrganicCarbon** | % [0-100] ([kg C kg-1] * 100) | soil organic carbon, a percentage between 0 and 100
+**SoilOrganicMatter** | kg OM kg-1 (% [0-1]) | soil organic matter
 **SoilMoisturePercentFC** | % [0-100] | initial soil moisture in percent of field capacity
 
 ## Example **site.json** file
@@ -651,30 +655,38 @@ Name of config file variable | Unit | Description
 # **CROP JSON**
 **crop.json** defines all crop specific input data for MONICA. There have to be just two keys in the top-level JSON object, **cropRotation** and **CropParameters**. **cropRotation** is a **JSON array** of JSON objects representing a cultivation method (class **CultivationMethod** in the MONICA C++ code). **CropParameters** keeps global crop related MONICA parameters, which are taken either from the **user-parameter** database table or a referenced file.
 
-A cultivation method is defined as a set of worksteps (class hierarchy **Workstep** in MONICA code). Worksteps can be the sowing of a crop, the harvesting thereof, fertilizer, irrigation water or tillage applications. A sowing application tells MONICA at which point in time which crop to grow. Within the sowing workstep a key **crop** will be set to a JSON object with all the crop's parameters MONICA needs. This can be done in-line, via a include function (**include-from-db** or **include-from-file**) or via a **ref** function. Because crops might be used in more than one workstep or cultivation method, the example below defines all used crops in a separate JSON object named **crops**, which maps shortcut names to the actual crop parameters. The mapping object is available under the top-level key **crops** which is the first parameter to the **ref** function, the second being the referenced shortcut name. The names chosen (**crops** and e.g. **WR** or **SM**) are abitrary.
+## Cultivation Methods
 
-The following table shows the worksteps available in MONICA. All worksteps expect a **date** parameter to be set. If the **date** is missing the workstep is being interpreted as a dynamic workstep which in some way needs conditional properties to be set, which are being checked every day. In case the conditions hold true, the workstep is being executed once per **CultivationMethod**. 
+A cultivation method is defined as a set of worksteps (class hierarchy **Workstep** in MONICA code). Worksteps can be the sowing of a crop, the harvesting thereof, fertilizer, irrigation water or tillage applications. A sowing application tells MONICA at which point in time which crop to grow. Within the sowing workstep a parameter **crop** will be set to a JSON object with **ALL** the crop's parameters MONICA needs. This can be done in-line, via a include function (**include-from-db** or **include-from-file**) or via a **ref** function. Because crops might be used in more than one workstep or cultivation method, the example below (at the end of the **CROP JSON** section) defines all used crops in a separate JSON object named **crops**, which maps shortcut names to the actual crop parameters. The mapping object is available under the top-level key **crops** which is the first parameter to the **ref** function, the second being the referenced shortcut name. The names chosen (**crops** and e.g. **WR** or **SM**) are abitrary.
+
+A cultivation method can also have parameters, which are described in the following table.
+
+Parameter name | unit/type | default | example | description
+-------------- | --------- | ------- | ------- | -----------
+**can-be-skipped** | **true** or **false** | **false** | | if true, this cultivation method can be skipped if it's ealiest starting date is past the current date (e.g. when climate data start later than the first workstep in the cultivation method); if false, MONICA will wait until the **date** (condition) of the first workstep is reached, which might never happen if the **date** is in the past
+**is-cover-crop** | **true** or **false** | **false** | | if true, the cultivation method describes a catch or cover crop and similarly to **can-be-skipped** will be skipped if the previous primary crop was havested later then the (latest) sowing **date** (in contrast to the earliest workstep **date** using **can-be-skipped**); if false MONICA might not continue the crop rotation because it is waiting for the the cover/catch crop cultivation method to start (sowing workstep), whose (latest) sowing **date** is already in the past
+
+
+## Worksteps
+
+The following table shows the worksteps available in MONICA. All worksteps expect a **date** parameter to be set. If the **date** is missing the workstep is being interpreted as a dynamic workstep which in some way needs conditional properties to be set, which are being checked every day. In case the conditions hold true, the workstep is being executed once per **CultivationMethod**.
 
 Every non-dynamic workstep (e.g. Sowing, Harvest, Tillage, SetValue etc) can have a **days** (default 0)[d] and an **after** [event-name] property. If both are set, the workstep will be executed **days** after the event **after** happenend.
 
 A workstep date can be a relative date (e.g. **"0000-12-01"** (every december 1st) or **"0001-12-01"** (every next year december 1st)), which means its year part is a four digit number between 0 and 100, padded with 0s; or a normal date (**"2017-12-01"** december 1st 2017). A **crop-rotation** with relative dates will simply be applied to all available (selected) climate data, wraps around when its end is reached and starts anew. An absolute **crop-rotation** will only be applied if the worksteps' dates are reached, thus also care has to be taken that a workstep can be reached. For instance a workstep will never be executed if its **date** is set before the actual climate data start.
 
-The following table shows a list of all available worksteps, their parameters (except the mandatory **date** parameter) and what they do. Additionally the events they generate are included again. These events can be matched in the output definition.
-
-## Worksteps
-
 All worksteps have the parameters of the workstep **Workstep** in common. If no **date** is given it's a dynamic workstep and at least a parameter specifiying a condition should be defined, else the workstep will never be carried out.
 
 ### **Workstep**
 
-Is the base workstep, does nothing but can be used in conjuction with the fired events **Workstep**. If no **date** is given **days** and **after** can be specified. Then **days** after the event **after** happend, the workstep will be carried out. 
+Is the base workstep, does nothing but can be used in conjuction with the fired events **Workstep**. If no **date** is given **days** and **after** can be specified. Then **days** after the event **after** happend, the workstep will be carried out.
 
 Fires the **Workstep** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
-**date** | iso-date <br> "YYYY-MM-DD" | | "1991-05-21" <br> "0001-05-21" | absolute or <br> relative date 
-**days** | [d] | 0 | | 
+**date** | iso-date <br> "YYYY-MM-DD" | | "1991-05-21" <br> "0001-05-21" | absolute or <br> relative date
+**days** | [d] | 0 | |
 **after** | string | | "Harvest" | "event/workstep name"
 
 ### **Sowing**
@@ -683,7 +695,7 @@ Define the sowing time with the **date** parameter and the crop specified with t
 
 Fires the **Sowing** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
 **crop** | **JSON object** | | | a complex **JSON object** specifying the crop top be planted
 **PlantDensity** | [plants m-2] | | **10** for maize | plant density
@@ -693,9 +705,9 @@ Parameter name | unit/type | default | example | description
 
 An automatic sowing workstep, whose algorithm will start to check all conditions at **earliest-data** and will nevertheless sow if no conditions have been met at **latest-date**.
 
-**conditions** 
+**conditions**
 
-- **min-temp** && **days-in-temp-window**: 
+- **min-temp** && **days-in-temp-window**:
   - **spring crops**: the daily minimum air temperature (**tmin**) >= **min-temp** as well as the average temperature (**tavg**) during the time window **days-in-temp-window** has to be >= **min-temp**
   - **winter crops**: sowing is possible when the running average air temperature (**tavg**) within the time window **days-in-temp-window** <= **min-temp**
 - **min-%-asw** && **max-%-asw**: the bounds (in % of available soil water) wherein the soil moisture (0-10cm) **["Mois", 1]** has to lie for possible sowing
@@ -705,14 +717,14 @@ An automatic sowing workstep, whose algorithm will start to check all conditions
 
 Fires the **AutomaticSowing** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
-**crop** | JSON object 
+**crop** | JSON object
 **earliest-date** | iso-date | | | earliest date when sowing might take place
 **latest-date** | iso-date | | | last date when sowing will in any case happen
-**min-temp** | [°C] | | | minimal temperature to be reached 
-**days-in-temp-window** | [d] | | | no of days the minimal temperature has to be reached 
-**min-%-asw** | [%] | | | percentage of minimal available soil water 
+**min-temp** | [°C] | | | minimal temperature to be reached
+**days-in-temp-window** | [d] | | | no of days the minimal temperature has to be reached
+**min-%-asw** | [%] | | | percentage of minimal available soil water
 **max-%-asw** | [%] | | | percentage of maximal available soil water
 **max-3d-precip** | [mm] | | | maximal 3 day precipitation sum
 **max-curr-day-precip** | [mm] | | | maximal current day precipitation
@@ -725,11 +737,11 @@ Define the harvesting time of the previously sowed crop, and set method to be us
 
 Fires **Harvest** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
-**method** | **total** or <br> **fruitHarvest** or <br> **cutting** or <br> **leafPruning** or <br> **tipPruning** or <br> **shootPruning** 
+**method** | **total** or <br> **fruitHarvest** or <br> **cutting** or <br> **leafPruning** or <br> **tipPruning** or <br> **shootPruning**
 **percentage** | [%] [0;1] | | | percentage to cut etc.
-**exported** | **true** or **false** | true | | if export = false, then the whole crop will be incorporated into the soil, else just roots and residues 
+**exported** | **true** or **false** | true | | if export = false, then the whole crop will be incorporated into the soil, else just roots and residues
 
 
 ### **AutomaticHarvest**
@@ -744,10 +756,10 @@ An automatic harvesting workstep, which will be carried out if conditions are me
 
 Fires **AutomaticHarvest** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
 **latest-date** | iso-date | | | last date when harvesting will in any case happen
-**min-%-asw** | [%] | | | percentage of minimal available soil water 
+**min-%-asw** | [%] | | | percentage of minimal available soil water
 **max-%-asw** | [%] | | | percentage of maximal available soil water
 **max-3d-precip** | [mm] | | | maximal 3 day precipitation sum
 **max-curr-day-precip** | [mm] | | | maximal current day precipitation
@@ -766,7 +778,7 @@ Apply **amount** kg N fertilizer, whose composition is described by **partition*
 
 Fires **MineralFertilization** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
 **partition** | JSON object | | ```{"Carbamid": 0, "NH4": 0.5, "NO3": 0.5}``` | Json object describing the composition of the N fertilizer
 **amount** | [kg N] | | | amount of N to put into the soil
@@ -778,7 +790,7 @@ Apply a calculated amount of N fertilizer, whose composition is described by **p
 
 Fires **NDemandFertilization** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
 **partition** | JSON object | | ```{"id": "AN",	"name": "ammonium nitrate", "Carbamid": 0, "NH4": 0.5, "NO3": 0.5}``` | Json object describing the composition of the N fertilizer
 **depth** | [m]
@@ -791,7 +803,7 @@ Apply **amount** kg organic fertilizer described by the **parameters** **JSON ob
 
 Fires **OrganicFertilization** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
 **parameters** | JSON object | | ```{"id": "CAM", "name": "cattle manure", "AOM_DryMatterContent": [0.196, "kg DM kg FM-1"], "AOM_FastDecCoeffStandard": [0.002, "d-1"], "AOM_NH4Content": [0.007, "kg N kg DM-1"], "AOM_NO3Content": [0, "kg N kg DM-1"], "AOM_SlowDecCoeffStandard": [0.0002, "d-1"], "CN_Ratio_AOM_Fast": 6.5, "CN_Ratio_AOM_Slow": 100, "NConcentration": 0, "PartAOM_Slow_to_SMB_Fast": [1, "kg kg-1"], "PartAOM_Slow_to_SMB_Slow": [0, "kg kg-1"], "PartAOM_to_AOM_Fast": [0.18, "kg kg-1"], "PartAOM_to_AOM_Slow": [0.72, "kg kg-1"]}``` | Json object describing the composition of the organic fertilizer
 **amount** | [kg] | | [30000, "kg"]
@@ -807,9 +819,9 @@ Till up to **depth** m.
 
 Fires **Tillage** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
-**depth** | [m] 
+**depth** | [m]
 
 
 ### **Irrigation**
@@ -818,21 +830,21 @@ Irrigate **amount** of water with optionally given nitrate/sulfate concentration
 
 Fires **Irrigation** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
 **parameters** | JSON object | | ```{"nitrateConcentration": [mg dm-3], "sulfateConcentration": [mg dm-3]}```
-**amount** | [mm]  
+**amount** | [mm]
 
 
 ### **SetValue**
 
-Set at the given **date** the **setable output expression** to either just a **value** (can be a scalar (5.0) or a **JSON array** if setable output expression is itself a **JSON array** (e.g. output expression is **["Mois, [1,3]]**, then value could be **[20, 30, 20]**)) or a simple arithmetic expression where **OP** can be [**+, -, \*, /**] and either side either a value or an output expression. **ONLY FEW SETABLE OUTPUT EXPRESSIONS ARE AVAILABLE CURRENTLY.** 
+Set at the given **date** the **setable output expression** to either just a **value** (can be a scalar (5.0) or a **JSON array** if setable output expression is itself a **JSON array** (e.g. output expression is **["Mois, [1,3]]**, then value could be **[20, 30, 20]**)) or a simple arithmetic expression where **OP** can be [**+, -, \*, /**] and either side either a value or an output expression. **ONLY FEW SETABLE OUTPUT EXPRESSIONS ARE AVAILABLE CURRENTLY.**
 
 Fires **SetValue** event.
 
-Parameter name | unit/type | default | example | description 
+Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
-**var** | setable output expression <br> | | ```["NO2", 1]``` | the setable variable to assign a value to 
+**var** | setable output expression <br> | | ```["NO2", 1]``` | the setable variable to assign a value to
 **value** | value or <br> JSON array <br> ```["=", output-name or value, OP, output-name or value]```] | | ```["=", ["NO2", 1], "*", 0.5]``` | an expression or number like the ones to be used to define outputs
 
 Some examples for the **SetValue** workstep.
@@ -868,49 +880,49 @@ Set on every september 25th the carbamid value in allen layers to 0.01
 ```json
 {
   "crops": {
-    "WR": { 
+    "WR": {
       "cropParams": {
         "species": ["include-from-file", "../monica-parameters/crops/rye.json"],
         "cultivar": ["include-from-file", "../monica-parameters/crops/rye/winter rye.json"]
       },
       "residueParams": ["include-from-file", "../monica-parameters/crop-residues/rye.json"]
     },
-    "SM": { 
+    "SM": {
       "cropParams": {
         "species": ["include-from-file", "../monica-parameters/crops/maize.json"],
         "cultivar": ["include-from-file", "../monica-parameters/crops/maize/silage maize.json"]
       },
       "residueParams": ["include-from-file", "../monica-parameters/crop-residues/maize.json"]
     },
-    "MEP": { 
+    "MEP": {
       "cropParams": {
         "species": ["include-from-file", "../monica-parameters/crops/potato.json"],
         "cultivar": ["include-from-file", "../monica-parameters/crops/potato/moderately early potato.json"]
       },
       "residueParams": ["include-from-file", "../monica-parameters/crop-residues/potato.json"]
     },
-    "WW": { 
+    "WW": {
       "cropParams": {
         "species": ["include-from-file", "../monica-parameters/crops/wheat.json"],
         "cultivar": ["include-from-file", "../monica-parameters/crops/wheat/winter wheat.json"]
       },
       "residueParams": ["include-from-file", "../monica-parameters/crop-residues/wheat.json"]
     },
-    "WG": { 
+    "WG": {
       "cropParams": {
         "species": ["include-from-file", "../monica-parameters/crops/barley.json"],
         "cultivar": ["include-from-file", "../monica-parameters/crops/barley/winter barley.json"]
       },
       "residueParams": ["include-from-file", "../monica-parameters/crop-residues/barley.json"]
     },
-    "SG": { 
+    "SG": {
       "cropParams": {
         "species": ["include-from-file", "../monica-parameters/crops/barley.json"],
         "cultivar": ["include-from-file", "../monica-parameters/crops/barley/spring barley.json"]
       },
       "residueParams": ["include-from-file", "../monica-parameters/crop-residues/barley.json"]
     },
-    "SC": { 
+    "SC": {
       "cropParams": {
         "species": ["include-from-file", "../monica-parameters/crops/rape.json"],
         "cultivar": ["include-from-file", "../monica-parameters/crops/rape/winter rape.json"]
@@ -918,30 +930,30 @@ Set on every september 25th the carbamid value in allen layers to 0.01
       "residueParams": ["include-from-file", "../monica-parameters/crop-residues/rape.json"]
     }
   },
-  
+
   "cropRotation": [
     {
       "worksteps": [
         { "date": "1991-09-23", "type": "Sowing", "crop": ["ref", "crops", "WR"] },
-        { 
-          "date": "1992-05-05", 
-          "type": "Irrigation", 
+        {
+          "date": "1992-05-05",
+          "type": "Irrigation",
           "amount": [1.0, "mm"],
-          "parameters": { 
-            "nitrateConcentration": [0.0, "mg dm-3"], 
-            "sulfateConcentration": [334, "mg dm-3"] 
+          "parameters": {
+            "nitrateConcentration": [0.0, "mg dm-3"],
+            "sulfateConcentration": [334, "mg dm-3"]
           }
         },
-        { 
-          "date": "1992-04-03", 
-          "type": "MineralFertilization", 
-          "amount": [40.0, "kg N"], 
+        {
+          "date": "1992-04-03",
+          "type": "MineralFertilization",
+          "amount": [40.0, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
-        { 
-          "date": "1992-05-07", 
-          "type": "MineralFertilization", 
-          "amount": [40.0, "kg N"], 
+        {
+          "date": "1992-05-07",
+          "type": "MineralFertilization",
+          "amount": [40.0, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1992-07-27", "type": "Harvest", "crop": ["ref", "crops", "WR"] }
@@ -949,25 +961,25 @@ Set on every september 25th the carbamid value in allen layers to 0.01
     },
     {
       "worksteps": [
-        { 
-          "date": "1993-04-23", 
-          "type": "MineralFertilization", 
-          "amount": [125, "kg N"], 
+        {
+          "date": "1993-04-23",
+          "type": "MineralFertilization",
+          "amount": [125, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1993-04-27", "type": "Tillage", "depth": [0.15, "m"] },
         { "date": "1993-05-04", "type": "Sowing", "crop": ["ref", "crops", "SM"] },
-        { 
-          "date": "1993-05-10", 
-          "type": "MineralFertilization", 
-          "amount": [60, "kg N"], 
+        {
+          "date": "1993-05-10",
+          "type": "MineralFertilization",
+          "amount": [60, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1993-09-23", "type": "Harvest", "crop": ["ref", "crops", "SM"] },
-        { 
-          "date": "1993-12-16", 
-          "type": "OrganicFertilization", 
-          "amount": [30000, "kg N"], 
+        {
+          "date": "1993-12-16",
+          "type": "OrganicFertilization",
+          "amount": [30000, "kg N"],
           "parameters": ["include-from-file", "../monica-parameters/organic-fertilisers/CADLM.json"],
           "incorporation": true
         },
@@ -977,10 +989,10 @@ Set on every september 25th the carbamid value in allen layers to 0.01
     {
       "worksteps": [
         { "date": "1994-04-25", "type": "Sowing", "crop": ["ref", "crops", "MEP"] },
-        { 
-          "date": "1994-05-04", 
-          "type": "MineralFertilization", 
-          "amount": [90, "kg N"], 
+        {
+          "date": "1994-05-04",
+          "type": "MineralFertilization",
+          "amount": [90, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1994-09-06", "type": "Harvest", "crop": ["ref", "crops", "MEP"] },
@@ -990,22 +1002,22 @@ Set on every september 25th the carbamid value in allen layers to 0.01
     {
       "worksteps": [
         { "date": "1994-10-11", "type": "Sowing", "crop": ["ref", "crops", "WW"] },
-        { 
-          "date": "1995-03-24", 
-          "type": "MineralFertilization", 
-          "amount": [60, "kg N"], 
+        {
+          "date": "1995-03-24",
+          "type": "MineralFertilization",
+          "amount": [60, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
-        { 
-          "date": "1995-04-27", 
-          "type": "MineralFertilization", 
-          "amount": [40, "kg N"], 
+        {
+          "date": "1995-04-27",
+          "type": "MineralFertilization",
+          "amount": [40, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
-        { 
-          "date": "1995-05-12", 
-          "type": "MineralFertilization", 
-          "amount": [60, "kg N"], 
+        {
+          "date": "1995-05-12",
+          "type": "MineralFertilization",
+          "amount": [60, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1995-08-02", "type": "Harvest", "crop": ["ref", "crops", "WW"] },
@@ -1015,10 +1027,10 @@ Set on every september 25th the carbamid value in allen layers to 0.01
     {
       "worksteps": [
         { "date": "1995-09-07", "type": "Sowing", "crop": ["ref", "crops", "WG"] },
-        { 
-          "date": "1996-03-21", 
-          "type": "MineralFertilization", 
-          "amount": [60, "kg N"], 
+        {
+          "date": "1996-03-21",
+          "type": "MineralFertilization",
+          "amount": [60, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1996-04-13", "type": "Harvest", "crop": ["ref", "crops", "WG"] },
@@ -1035,10 +1047,10 @@ Set on every september 25th the carbamid value in allen layers to 0.01
     {
       "worksteps": [
         { "date": "1997-04-04", "type": "Sowing", "crop": ["ref", "crops", "SC"] },
-        { 
-          "date": "1997-04-10", 
-          "type": "MineralFertilization", 
-          "amount": [80, "kg N"], 
+        {
+          "date": "1997-04-10",
+          "type": "MineralFertilization",
+          "amount": [80, "kg N"],
           "partition": ["include-from-file", "../monica-parameters/mineral-fertilisers/AN.json"]
         },
         { "date": "1997-07-08", "type": "Harvest", "crop": ["ref", "crops", "SC"] },
@@ -1046,7 +1058,7 @@ Set on every september 25th the carbamid value in allen layers to 0.01
       ]
     }
   ],
-  
+
   "CropParameters": {
     "DEFAULT": ["include-from-file", "../monica-parameters/user-parameters/hermes-crop.json"]
   }
