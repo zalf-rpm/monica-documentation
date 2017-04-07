@@ -159,8 +159,8 @@ ACD element | description (example) [unit]
 day | day of year (**5**)
 month | month of year (**11**)
 year | the year (**2017**)
-isoDate | date part of ISO date format (**2017-11-05**)
-deDate | german date format (**05.11.2017**)
+iso-date | date part of ISO date format (**2017-11-05**)
+de-date | german date format (**05.11.2017**)
 tmin | minimum daily temperature (**-2**) [**°C**]
 tavg | average daily temperature (**15.3**) [**°C**]
 tmax | maximum daily temperature (**34.7**) [**°C**]
@@ -530,16 +530,16 @@ NO3 | L | x | kgN m-3 |
 Carb | L | x | kgN m-3 | Soil Carbamid
 NH4 | L | x | kgN m-3 |
 NO2 | L | x | kgN m-3 |
-SOC | | | kgC kg-1 | get_SoilOrganicC
-SOC-X-Y | | | gC m-2 | SOC-X-Y
-AOMf | | | kgC m-3 | get_AOM_FastSum
-AOMs | | | kgC m-3 | get_AOM_SlowSum
-SMBf | | | kgC m-3 | get_SMB_Fast
-SMBs | | | kgC m-3 | get_SMB_Slow
-SOMf | | | kgC m-3 | get_SOM_Fast
-SOMs | | | kgC m-3 | get_SOM_Slow
-CBal | | | kgC m-3 | get_CBalance
-Nmin | | | kgN ha-1 | NetNMineralisationRate
+SOC | L | | kgC kg-1 | get_SoilOrganicC
+SOC-X-Y | L | | gC m-2 | SOC-X-Y
+AOMf | L | | kgC m-3 | get_AOM_FastSum
+AOMs | L | | kgC m-3 | get_AOM_SlowSum
+SMBf | L | | kgC m-3 | get_SMB_Fast
+SMBs | L | | kgC m-3 | get_SMB_Slow
+SOMf | L | | kgC m-3 | get_SOM_Fast
+SOMs | L | | kgC m-3 | get_SOM_Slow
+CBal | L | | kgC m-3 | get_CBalance
+Nmin | L | | kgN ha-1 | NetNMineralisationRate
 NetNmin | | | kgN ha-1 | NetNmin
 Denit | | | kgN ha-1 | Denit
 N2O | | | kgN ha-1 | N2O
@@ -556,21 +556,21 @@ Globrad | | |  |
 Relhumid | | |  |
 Sunhours | | |  |
 BedGrad | | | 0;1 |
-N | | | kgN m-3 |
-Co | | | kgC m-3 |
+N | L | | kgN m-3 |
+Co | L | | kgC m-3 |
 NH3 | | | kgN ha-1 | NH3_Volatilised
 NFert | | | kgN ha-1 | dailySumFertiliser
-WaterContent | | | %nFC | soil water content
-CapillaryRise | | | mm | capillary rise
-PercolationRate | | | mm | percolation rate
-SMB-CO2-ER | | |  | soilOrganic.get_SMB_CO2EvolutionRate
+WaterContent | L | | %nFC | soil water content
+CapillaryRise | L | | mm | capillary rise
+PercolationRate | L | | mm | percolation rate
+SMB-CO2-ER | L | |  | soilOrganic.get_SMB_CO2EvolutionRate
 Evapotranspiration | | | mm |
 Evaporation | | | mm |
 ETa/ETc | | | | actual evapotranspiration / potential evapotranspiration
 Transpiration | | | mm |
 GrainN | | | kg ha-1 | get_FruitBiomassNContent
-Fc | | | m3 m-3 | field capacity
-Pwp | | | m3 m-3 | permanent wilting point
+Fc | L | | m3 m-3 | field capacity
+Pwp | L | | m3 m-3 | permanent wilting point
 Nresid | | | kg N ha-1 | Nitrogen content in crop residues
 
 
