@@ -731,6 +731,7 @@ Key name | unit/type | default | optional? | description
 **perennialCropParams** | JSON object | = **cropParams** if **is-perennial-crop** = **true** | x | **cropParams** for the years after the planting year
 **is-winter-crop** | **true** or **false** | if DOY(seed-date) > DOY(harvest-date) <br> **true** else **false**  | x | 
 **is-perennial-crop** | **true** or **false** | **false** | x | 
+**cuttingDates** | JSON array of iso-dates | [] | x | define a list of cutting dates for the crop, is a shortcut for the same amount of **Cutting** worksteps
 
 #### **cropParams**/**perennialCropParams** JSON object
 
