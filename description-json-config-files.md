@@ -697,8 +697,47 @@ Fires the **Sowing** event.
 
 Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
-**crop** | **JSON object** | | | a complex **JSON object** specifying the crop top be planted
+**crop** | **JSON object** | | | a complex **JSON object** specifying the crop to be planted
 **PlantDensity** | [plants m-2] | | **10** for maize | plant density
+
+#### **crop** JSON object
+
+The key **crop** references a complex **JSON** structure describing the crop to be planted. It might look like:
+
+```Json
+{
+  "is-winter-crop": false,
+  "is-perennial-crop": true,
+  "cropParams": {
+    "species": ["include-from-file", "crops/clover-grass-ley.json"],
+    "cultivar": ["include-from-file", "crops/clover-grass-ley/.json"]
+  },
+  "residueParams": ["include-from-file", "crop-residues/clover-grass-ley.json"]
+}
+```
+
+If the to be planted crop is a perennial crop **is-perennial-crop** should be set to true, even though the cultivar parameters have a key **Perennial** which can define at the cultivar level that a crop is by default a perennial crop. If **is-perennial-crop** is given it will overwrite the key **Perennial**. If **is-perennial-crop** is set to **true**, but no **perennialCropParams** key is specified, then the **perennialCropParams** will be the same as **cropParams**. 
+
+Both **cropParams** and **residueParams** are compulsory keys. 
+
+If **is-winter-crop** is not given, then a crop will be defined as a winter crop if its sowing day of year is after the havesting day of year. **is-winter-crop** will currently be used to decide when to apply the N-Min method (if activated). If **true** the N-min method will be used at the defined DOY (eg. DOY = 89). If the crop is a summer crop, the N-min method will be carried out at sowing time.
+
+
+Key name | unit/type | default | optional? | description
+-------- | --------- | ------- | ------- | -----------
+**cropParams** | JSON object | | | contains the MONICA species and cultivar parameters
+**residueParams** | JSON object |  |  | the MONICA residue parameters 
+**perennialCropParams** | JSON object | = **cropParams** if **is-perennial-crop** = **true** | x | **cropParams** for the years after the planting year
+**is-winter-crop** | **true** or **false** | if DOY(seed-date) > DOY(harvest-date) <br> **true** else **false**  | x | 
+**is-perennial-crop** | **true** or **false** | **false** | x | 
+
+#### **cropParams**/**perennialCropParams** JSON object
+
+Key name | unit/type | description
+-------- | --------- | -----------
+**species** | JSON object | the MONICA species parameters 
+**cultivar** | JSON object | the MONICA cultivar specific parameters
+
 
 
 ### **Automatic Sowing**
