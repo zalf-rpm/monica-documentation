@@ -55,6 +55,7 @@ Most of the JSON object data which might be included from database or from a fil
 
 Right now there exists a single mechanism to add some dynamics to the otherwise static configuration files. In the value place of a key/value pair can appear a **JSON array** which starts with a **string/text value**. In that case upon reading and interpreting the configuration file, MONICA will check internally if there's a **function** with a name corresponding to the string value and if so interprets the whole JSON array as a function call. The first argument depicts the function being called, the rest of the array's elements depict the arguments to this function (same principle as function calls in LISP style programming languages). The result of this "function call" will be again a **JSON value** (e.g. **JSON object**) and replace the JSON array. If for some reason (e.g. wrong spelling, typo, whatever) no internal function is being found, the JSON array stays the way it is; this also being the reason for the lisp style syntax, to retain a valid **JSON document**.
 
+<!---
 ### include data from a SQLite database
 
 The following example taken from the **crop.json** configuration file, shows how to include data from a SQLite database. Right now there's a restricted set of data which can be included. The first parameter to the "include-from-db" function denotes the kind of data to fetch (in most cases a table). This can be thought of as a selector to another function, while the array's other values are the parameters to that specific function. In case of the **crop** function, the next two arguments are the name of the **species** (eg. **rye**) and **cultivar** (eg. **winter rye**) to include. In the case of the **crop_residue** "sub"-function, **rye** would be the species' crop residues and the other (here **empty ""**) argument the residue type (could also be for instance **cover** for just the rye's cover residues).
@@ -91,7 +92,7 @@ what [db-name] | parameter 1 (example) [key-name] | parameter 2 (example) [key-n
 "crop-params" ["monica"] | name of parameterset (**"hermes"**) ["name"] | - | include global user crop parameters
 "soil-profile" ["soil"] | profile id (**123**) ["id"] | - | include a whole soil profile with given profile id
 "soil-layer" ["soil"] | profile id (***123***) ["id"] | layer number (***2***) ["no"] | include just a single layer from a profile in the database
-
+-->
 
 ### include data from a file
 To include data from a file the example from above would look like the example below. The name of the function is **include-from-file** with its only parameter the path to the file to include. The whole contents of the named file should be **valid JSON** and will be included. The included JSON data may again contain other functions.
