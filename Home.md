@@ -6,6 +6,21 @@ The acronym MONICA is derived from „MOdel of Nitrogen and Carbon dynamics in A
 
 This Wiki contains information about the software development of MONICA as well as its use. Additional information of the model (processes, installation of version 1.2) can be found on [http://monica.agrosystem-models.com/](http://monica.agrosystem-models.com/).
 
+## Getting help / helping
+
+### Mailing list
+
+A mailing list for discussions and help regarding MONICA can be found in the [MONICA Google group](https://groups.google.com/forum/#!forum/zalf-rpm-monica). Everybody can read the list, but only accepted members of the group can post messages.
+
+### GitHub issues
+
+If you find bugs in MONICA, has improvement ideas or requests for enhancements, please use the [GitHub issue tracker](https://github.com/zalf-lsa/monica/issues).
+
+### helping / Pull requests
+
+If you'd like to help developing MONICA, fix bugs or offer improvements, please use the [GitHub Pull request](https://github.com/zalf-lsa/monica/pulls) mechanism.
+
+
 ## History
 
 Some information about the different versions of MONICA can be found here [MONICA versions](wiki/Monica-versions).
