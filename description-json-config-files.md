@@ -456,11 +456,12 @@ Here **Date** or **TraDef** are the allowed outputs. Additionally one can see af
 
 Output name | (L)ayers/(O)rgans? | Setable? | Unit | Description
 ----------- | -------------- | -------- | ---- | -----------
-Date | | |  | output current date
-DOY | | |  | output current day of year
-Month | | |  | output current Month
-Year | | |  | output current Year
-Crop | | |  | crop name
+Count | | | | output 1 for counting things
+Date | | | | output current date
+DOY | | | | output current day of year
+Month | | | | output current Month
+Year | | | | output current Year
+Crop | | | | crop name
 TraDef | | | 0;1 | TranspirationDeficit
 Tra | | | mm | ActualTranspiration
 NDef | | | 0;1 | CropNRedux
