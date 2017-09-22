@@ -344,7 +344,7 @@ In the created output file the order of the outputed results in the **events** l
       ["Mois", [1, 20]], "Precip", "Irrig", "Infilt", "Surface", "RunOff", "SnowD", "FrostD",
       "ThawD", ["PASW", [1, 20]], "SurfTemp", ["STemp", [1, 5]],
       "Act_Ev", "Act_ET", "ET0", "Kc", "AtmCO2", "Groundw", "Recharge", "NLeach",
-      ["NO3", [1, 20]], "Carb", ["NH4", [1, 20]], ["NO2", [1, 4]],
+      ["NO3", [1, 20]], ["Carb", 0], ["NH4", [1, 20]], ["NO2", [1, 4]],
       ["SOC", [1, 6]], ["SOC-X-Y", [1, 3, "SUM"]], ["SOC-X-Y", [1, 20, "SUM"]],
       ["AOMf", 1], ["AOMs", 1], ["SMBf", 1], ["SMBs", 1], ["SOMf", 1],
       ["SOMs", 1], ["CBal", 1], ["Nmin", [1, 3]], "NetNmin", "Denit", "N2O", "SoilpH",
@@ -659,7 +659,7 @@ Name of config file variable | Unit | Description
 
 ## Cultivation Methods
 
-A cultivation method is defined as a set of worksteps (class hierarchy **Workstep** in MONICA code). Worksteps can be the sowing of a crop, the harvesting thereof, fertilizer, irrigation water or tillage applications. A sowing application tells MONICA at which point in time which crop to grow. Within the sowing workstep a parameter **crop** will be set to a JSON object with **ALL** the crop's parameters MONICA needs. This can be done in-line, via a include function (**include-from-db** or **include-from-file**) or via a **ref** function. Because crops might be used in more than one workstep or cultivation method, the example below (at the end of the **CROP JSON** section) defines all used crops in a separate JSON object named **crops**, which maps shortcut names to the actual crop parameters. The mapping object is available under the top-level key **crops** which is the first parameter to the **ref** function, the second being the referenced shortcut name. The names chosen (**crops** and e.g. **WR** or **SM**) are abitrary.
+A cultivation method is defined as a set of worksteps (class hierarchy **Workstep** in MONICA code). The **order** of the worksteps is **important**. Putting static worksteps (with fixed relative/absolute dates) in the wrong order may prevent them from being executed! Worksteps can be the sowing of a crop, the harvesting thereof, fertilizer, irrigation water or tillage applications. A sowing application tells MONICA at which point in time which crop to grow. Within the sowing workstep a parameter **crop** will be set to a JSON object with **ALL** the crop's parameters MONICA needs. This can be done in-line, via a include function (**include-from-db** or **include-from-file**) or via a **ref** function. Because crops might be used in more than one workstep or cultivation method, the example below (at the end of the **CROP JSON** section) defines all used crops in a separate JSON object named **crops**, which maps shortcut names to the actual crop parameters. The mapping object is available under the top-level key **crops** which is the first parameter to the **ref** function, the second being the referenced shortcut name. The names chosen (**crops** and e.g. **WR** or **SM**) are abitrary.
 
 A cultivation method can also have parameters, which are described in the following table.
 
