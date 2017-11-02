@@ -457,7 +457,9 @@ Here **Date** or **TraDef** are the allowed outputs. Additionally one can see af
 Output name | (L)ayers/(O)rgans? | Setable? | Unit | Description
 ----------- | -------------- | -------- | ---- | -----------
 Count | | | | output 1 for counting things
+CM-count | | | | output the order number of the current cultivation method
 Date | | | | output current date
+days-since-start | | | | output number of days since simulation start
 DOY | | | | output current day of year
 Month | | | | output current Month
 Year | | | | output current Year
@@ -574,6 +576,11 @@ GrainN | | | kg ha-1 | get_FruitBiomassNContent
 Fc | L | | m3 m-3 | field capacity
 Pwp | L | | m3 m-3 | permanent wilting point
 Nresid | | | kg N ha-1 | Nitrogen content in crop residues
+Sand | | | kg kg-1 | Soil sand content
+Clay | | | kg kg-1 | Soil clay conten
+Silt | | | kg kg-1 | Soil silt content
+Stone | | | kg kg-1 | Soil stone content
+pH | | | kg kg-1 | Soil pH content
 
 
 # **SITE JSON**
@@ -836,7 +843,7 @@ Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
 **partition** | JSON object | | ```{"id": "AN",	"name": "ammonium nitrate", "Carbamid": 0, "NH4": 0.5, "NO3": 0.5}``` | Json object describing the composition of the N fertilizer
 **depth** | [m]
-**stage** | dev stage [1-6/7] | | 0 (sowing) or<br> 6 (maturity of maize) | MONICA development stage number
+**stage** | dev stage [1-6/7] | | 1 (sowing) or<br> 6 (maturity of maize) | MONICA development stage number
 
 
 ### **OrganicFertilization**
@@ -850,10 +857,6 @@ Parameter name | unit/type | default | example | description
 **parameters** | JSON object | | ```{"id": "CAM", "name": "cattle manure", "AOM_DryMatterContent": [0.196, "kg DM kg FM-1"], "AOM_FastDecCoeffStandard": [0.002, "d-1"], "AOM_NH4Content": [0.007, "kg N kg DM-1"], "AOM_NO3Content": [0, "kg N kg DM-1"], "AOM_SlowDecCoeffStandard": [0.0002, "d-1"], "CN_Ratio_AOM_Fast": 6.5, "CN_Ratio_AOM_Slow": 100, "NConcentration": 0, "PartAOM_Slow_to_SMB_Fast": [1, "kg kg-1"], "PartAOM_Slow_to_SMB_Slow": [0, "kg kg-1"], "PartAOM_to_AOM_Fast": [0.18, "kg kg-1"], "PartAOM_to_AOM_Slow": [0.72, "kg kg-1"]}``` | Json object describing the composition of the organic fertilizer
 **amount** | [kg] | | [30000, "kg"]
 **incorporation** | **true** or <br> **false**
-
-**depth** | [m]
-**stage** | dev stage [1-6/7] | | 0 (sowing) or<br> 6 (maturity of maize) | MONICA development stage number
-
 
 ### **Tillage**
 
