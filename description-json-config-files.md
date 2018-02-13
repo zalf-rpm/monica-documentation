@@ -219,7 +219,15 @@ In order to define requested outputs a few kinds of information have to be disti
 
 ISO-Dates are allowed to contain placeholders (**x**), which means that the year, month or day is unspecified and thus every available value is used.
 
+#### available events
+
 Additionally to date patterns every workstep generates an events with named like the Workstep, e.g. there are events like Sowing, Harvest, AutomaticSowing, SetValue etc.
+
+* **Stage-1**, **Stage-2**, ... 
+* **anthesis**
+* **maturity**
+* **Sowing**, **AutomaticSowing**, **Cutting**, ....
+
 
 The following table shows some event expressions, shortcuts (and their expansion):
 
@@ -484,6 +492,10 @@ AbBiom | | | kg ha-1 | AbovegroundBiomass
 OrgBiom | O | | kgDM ha-1 | get_OrganBiomass(i)
 Yield | | | kgDM ha-1 | get_PrimaryCropYield
 SumYield | | | kgDM ha-1 | get_AccumulatedPrimaryCropYield
+sumExportedCutBiomass | | | kgDM ha-1 | return sum (across cuts) of exported cut biomass for current crop
+exportedCutBiomass | | | kgDM ha-1 | return exported cut biomass for current crop and cut
+sumResidueCutBiomass | | | kgDM ha-1 | return sum (across cuts) of residue cut biomass for current crop
+residueCutBiomass | | | kgDM ha-1 | return residue cut biomass for current crop and cut
 GroPhot | | | kgCH2O ha-1 | GrossPhotosynthesisHaRate
 NetPhot | | | kgCH2O ha-1 | NetPhotosynthesis
 MaintR | | | kgCH2O ha-1 | MaintenanceRespirationAS
@@ -688,7 +700,7 @@ All worksteps have the parameters of the workstep **Workstep** in common. If no 
 
 ### **Workstep**
 
-Is the base workstep, does nothing but can be used in conjuction with the fired events **Workstep**. If no **date** is given **days** and **after** can be specified. Then **days** after the event **after** happend, the workstep will be carried out.
+Is the base workstep, does nothing but can be used in conjuction with the fired events **Workstep**. If no **date** is given **days** and **after** can be specified, or alternatively **at** which equals **after** with **days** set to 0. Then **days** after the event **after** happend, the workstep will be carried out. Please not that due to the internal workings of MONICA actually means that **after: 1** actually means basically the same as **after: 0**, because dynamic worksteps will be checked (and potentially executed) at the beginning of each day, but events like **anthesis** etc. will be issued later during the daily calculation. So there is no clear distinction between before or after a particular day as one has to know the implementation to decide what means before or after.
 
 Fires the **Workstep** event.
 
@@ -697,6 +709,7 @@ Parameter name | unit/type | default | example | description
 **date** | iso-date <br> "YYYY-MM-DD" | | "1991-05-21" <br> "0001-05-21" | absolute or <br> relative date
 **days** | [d] | 0 | |
 **after** | string | | "Harvest" | "event/workstep name"
+**at** | string | | "Harvest" | "event/workstep name"
 
 ### **Sowing**
 
@@ -816,9 +829,18 @@ Parameter name | unit/type | default | example | description
 
 ### **Cutting**
 
-Cut crop.
+Cut a crop. 
+
+The parameters **organs**, **export** and **cut-max-assimilation-rate** help to parameterize the cutting operation. **organs** tells which organs are to be cut, while **exports** optionally tells how much of each cut organ part to export (the rest will be left on the plot and added to the organic matter pools). If no **organs** are being defined, then the culivar parameter **OrganIdsForCutting** will be used (**yieldPercentage** and **organId**). To specify which organ to cut or how much to export, the same organ names can be used as in the specification of the outputs section (**"Root", "Leaf", "Shoot", "Fruit", "Struct", "Sugar"**).
 
 Fires **Cutting** event.
+
+
+Parameter name | unit/type | default | example | description
+-------------- | --------- | ------- | ------- | -----------
+**organs** | JSON-object | | ```{"Leaf": 85, "Fruit": [100, "%"]}``` | a mapping of organs to percentage to cut
+**export** | JSON-object or (**true** or **false**) | **true** | ```{"Leaf": 100, "Fruit": 0}``` | a mapping of organs to percentage to export after cut or just **true** or **false** if everything or nothing should be exported
+**cut-max-assimilation-rate** | [%] | **100** | | a percentage by which the maximal assimilation rate will be cut
 
 
 ### **MineralFertilization**
