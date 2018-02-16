@@ -424,6 +424,7 @@ Finally below you'll find an output-wise simplified full **sim.json** file.
   "WaterDeficitResponseOn": true,
   "EmergenceMoistureControlOn": true,
   "EmergenceFloodingControlOn": true,
+  "FrostKillOn": true,
 
   "UseAutomaticIrrigation": false,
   "AutoIrrigationParams": {
