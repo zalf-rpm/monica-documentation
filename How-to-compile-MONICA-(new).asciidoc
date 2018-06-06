@@ -23,8 +23,8 @@ make sure environment variables are set, usually this is done during installatio
 
   >git clone --recurse-submodules https://github.com/zalf-rpm/monica-master.git
 
- Note: --recurse-submodules parameter will checkout all required sub modules, without this parameter these folders will be empty.
- Previous versions of git used different parameters. If you are using < 2.13 parameters are diffent. 
+Note: --recurse-submodules parameter will checkout all required sub modules, without this parameter these folders will be empty.
+Previous versions of git used different parameters. If you are using < 2.13 parameters are diffent. 
 
 * download boost from https://www.boost.org/ (older versions are available on sourceforge, but should be linked on this website)
 * unzip boost, you will probably get something like this folder structure
@@ -61,30 +61,37 @@ Your folder structure should look like that:
 
 # Linux / Debian 9 ('stretch')
 
-gcc 
-python 2.7 
-cmake 
-boost (currently in version 1.62 for debian)
-zmq 
-git
+* gcc 
+* python 2.7 
+* cmake 
+* boost (currently in version 1.62 for debian)
+* zmq 
+* git
 
- ### note:
+Note:
    many packages are pre-installed
 
-sudo apt-get install python
-sudo apt-get install libboost-all-dev
-sudo apt-get install libczmq-dev
-sudo apt-get install gcc build-essential 
+   sudo apt-get install python
+   sudo apt-get install libboost-all-dev
+   sudo apt-get install libczmq-dev
+   sudo apt-get install gcc build-essential 
 
 * checkout monica-master
-> git clone --recurse-submodules https://github.com/zalf-rpm/monica-master.git
+
+   >git clone --recurse-submodules https://github.com/zalf-rpm/monica-master.git
+
 * change to monica-master
-> cd monica-master
+
+   >cd monica-master
+
 * create a cmake directory and cmake build files
-> mkdir -p _cmake_linux
-> cd _cmake_linux
-> cmake ../monica
+
+  >mkdir -p _cmake_linux
+  >cd _cmake_linux
+  >cmake ../monica
+
 * build
-> make
+
+  >make
 
 
