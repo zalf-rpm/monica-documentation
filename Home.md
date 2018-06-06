@@ -26,7 +26,8 @@ If you'd like to help developing MONICA, fix bugs or offer improvements, please 
 Some information about the different versions of MONICA can be found here [MONICA versions](wiki/Monica-versions).
 
 ## Compile MONICA
-An older german version of a compile how to can be found here [How to compile MONICA?](wiki/How-to-compile-MONICA). How to compile the current version can be found in the [README](https://github.com/zalf-lsa/monica/blob/master/README.md) in the repository.
+
+An older german version of a compile how to can be found here [How to compile MONICA? (old)](wiki/How-to-compile-MONICA). How to compile the current version can be found in the [README](https://github.com/zalf-lsa/monica/blob/master/README.md) in the repository.
 
 ## Use MONICA
 
