@@ -29,13 +29,9 @@ make sure environment variables are set, usually this is done during installatio
 * unzip boost, you will probably get something like this folder structure
 
    |_ boost_1_66_0
-
         |_ boost
-
         |_ doc
-
         |_ lib
-
         |_ ...
 
 * you can either copy the boost_1_66_0 folder into the  monica-master folder or create a symlink
