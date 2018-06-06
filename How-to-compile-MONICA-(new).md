@@ -21,8 +21,10 @@ make sure environment variables are set, usually this is done during installatio
 ## Steps
 * checkout monica-master with git
     >` git clone --recurse-submodules https://github.com/zalf-rpm/monica-master.git`
+
     Note:  --recurse-submodules parameter will checkout all required sub modules, without this parameter these folders will be empty
     Previous versions of git used different parameters. If you are using < 2.13 parameters are diffent. 
+
 * download boost from https://www.boost.org/ (older versions are available on sourceforge, but should be linked on this website)
 * unzip boost, you will probably get something like this folder structure
 `    |_ boost_1_66_0`
@@ -32,18 +34,18 @@ make sure environment variables are set, usually this is done during installatio
         `|_ ...`
 * you can either copy the boost_1_66_0 folder into the  monica-master folder or create a symlink
     `> mklink /D boost <your boost path>` (e.g. mklink /D boost C:\boost_1_66_0)
-Your folder structure should look like that:
 
-monica-master
-		|_ monica
-		|_ sys-lib
-		|_ util
-		|_ monica-parameters
-		|_ boost
-			|_ boost
-			|_ doc
-			|_ lib
-			|_ ...
+Your folder structure should look like that:
+`monica-master`
+		`|_ monica`
+		`|_ sys-lib`
+		`|_ util`
+		`|_ monica-parameters`
+		`|_ boost`
+			`|_ boost`
+			`|_ doc`
+			`|_ lib`
+			`|_ ...`
 
 
 * create a visual studio solution by using cmake
