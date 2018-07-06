@@ -59,6 +59,19 @@ Your folder structure should look like that:
 * change to the newly created _cmake_win32 folder or _cmake_win64
 * open monica.sln to compile
 
+## Creating an installer-file for Windows
+
+### Prerequesites
+
+* NSIS Installer (e.g. 3.0.3)
+* EnvVarUpdate.nsh (Download and save it in the 'installer'-Folder (e.g. monica-master/monica/installer)
+* MONICA should be built as Release using Visual Studio (s. above)
+
+### Run NSIS to create installer file
+
+* open command line and switch into the installer directory of MONICA
+* execute run-installer-x86.bat or run-installer-x64.bat
+
 # Linux / Debian 9 ('stretch')
 
 * gcc 
