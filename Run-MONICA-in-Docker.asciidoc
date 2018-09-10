@@ -1,0 +1,21 @@
+There is a Docker image for MONICA.[zalfrpm/monica-cluster/](https://hub.docker.com/r/zalfrpm/monica-cluster/)
+It is build on Debian9 as base. 
+
+It runs MONICA with an input proxy, an output proxy and an adjustable amount of MONICA working processes. 
+A container is meant to run on a multiprocessor machine as a service.
+
+  docker run -p <input port>:6666 -p <output port>:7777 --env monica_instances=<number of monica worker> --rm --name <monica cluster name> zalfrpm/monica-cluster:<tag>
+
+## Parameter explained:
+* zalfrpm/monica-cluster:<tag> - image name on docker hub find the available tags [here](https://hub.docker.com/r/zalfrpm/monica-cluster/tags)
+* -p <input port>:6666 - (optional) input port, without this parameter a random port will be chosen by docker
+* -p <output port>:7777 - (optional) output port, without this parameter a random port will be chosen by docker
+* --env monica_instances=<number of monica worker> - (optional) set number of monica worker processes that will be started, default is 3.
+* --rm - (optional) remove the container when stopped
+* --name <monica cluster name> - (optional) human readable name
+
+e.g.
+
+  docker run -p 6666:6666 -p 7777:7777 --env monica_instances=9 --rm --name my-monica-cluster zalfrpm/monica-cluster:2.0.3.150
+
+Note: It is possible to use the 'latest' tag. Though it is recommended to use a specific version to create reproducible results.  
