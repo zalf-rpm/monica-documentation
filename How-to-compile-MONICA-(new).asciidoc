@@ -27,15 +27,28 @@ make sure environment variables are set, usually this is done during installatio
 * cmake (e.g. C:\Program Files\CMake\bin)
 * (optional) msbuild -if using the VS Build Tools
 
-
-
 ## Steps
-* checkout monica-master with git
+* create and switch to your working folder e.g 'c:\zalf-rpm'
+  mkdir c:\zalf-rpm
+  cd c:\zalf-rpm
 
-  >git clone --recurse-submodules https://github.com/zalf-rpm/monica-master.git
+* checkout monica and related repositories with git
 
-Note: --recurse-submodules parameter will checkout all required sub modules, without this parameter these folders will be empty.
-Previous versions of git used different parameters. If you are using < 2.13 parameters are diffent. 
+  git clone https://github.com/zalf-rpm/monica.git
+  git clone https://github.com/zalf-rpm/monica.git
+  git clone https://github.com/zalf-rpm/sys-libs.git
+  git clone https://github.com/zalf-rpm/util.git
+
+* checkout vcpkg for dependent libs
+  git clone https://github.com/Microsoft/vcpkg.git
+
+* build vcpkg
+  cd vcpkg
+  bootstrap-vcpkg.bat
+  .\vcpkg install zeromq:x64-windows-static
+  .\vcpkg install zeromq:x86-windows-static
+
+
 
 * download boost from https://www.boost.org/ (older versions are available on sourceforge, but should be linked on this website)
 * unzip boost, you will probably get something like this folder structure
