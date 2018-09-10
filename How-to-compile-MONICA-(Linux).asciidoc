@@ -1,7 +1,6 @@
 # Linux / Debian 9 ('stretch')
 
 ## Prequisites
-* gcc 
 * python 2.7 
 * cmake 
 * boost (currently in version 1.62 for debian) 
