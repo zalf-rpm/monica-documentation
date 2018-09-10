@@ -27,7 +27,7 @@ Some information about the different versions of MONICA can be found here [MONIC
 
 ## Compile MONICA
 
-How to compile MONICA?[Windows](https://github.com/zalf-rpm/monica/wiki/How-to-compile-MONICA-(Windows))[Linux](https://github.com/zalf-rpm/monica/wiki/How-to-compile-MONICA-(Linux))
+How to compile MONICA?[(Windows)](https://github.com/zalf-rpm/monica/wiki/How-to-compile-MONICA-(Windows)) / [(Linux)](https://github.com/zalf-rpm/monica/wiki/How-to-compile-MONICA-(Linux))
 
 An older german version of a compile how to can be found here [How to compile MONICA? (old)](wiki/How-to-compile-MONICA). How to compile the current version also be found in the [README](https://github.com/zalf-lsa/monica/blob/master/README.md) in the repository.
 
