@@ -49,7 +49,7 @@ make sure environment variables are set, usually this is done during installatio
 * build vcpkg
 
   cd vcpkg
-  bootstrap-vcpkg.bat
+  .\bootstrap-vcpkg.bat
   .\vcpkg install zeromq:x64-windows-static
   .\vcpkg install zeromq:x86-windows-static
 
