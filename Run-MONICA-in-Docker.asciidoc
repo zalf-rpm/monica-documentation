@@ -1,4 +1,5 @@
-There is a Docker image for MONICA.[zalfrpm/monica-cluster/](https://hub.docker.com/r/zalfrpm/monica-cluster/)
+There is a Docker image for MONICA. https://hub.docker.com/r/zalfrpm/monica-cluster[zalfrpm/monica-cluster]
+
 It is build on Debian9 as base. 
 
 It runs MONICA with an input proxy, an output proxy and an adjustable amount of MONICA working processes. 
@@ -7,6 +8,7 @@ A container is meant to run on a multiprocessor machine as a service.
   docker run -p <input port>:6666 -p <output port>:7777 --env monica_instances=<number of monica worker> --rm --name <monica cluster name> zalfrpm/monica-cluster:<tag>
 
 ## Parameter explained:
+
 * zalfrpm/monica-cluster:<tag> - image name on docker hub find the available tags [here](https://hub.docker.com/r/zalfrpm/monica-cluster/tags)
 * -p <input port>:6666 - (optional) input port, without this parameter a random port will be chosen by docker
 * -p <output port>:7777 - (optional) output port, without this parameter a random port will be chosen by docker
