@@ -63,6 +63,7 @@ make sure environment variables are set, usually this is done during installatio
 
 * you can either copy the boost_1_66_0 folder into your working folder or create a symlink
  > mklink /D boost <your boost path>` (e.g. mklink /D boost C:\boost_1_66_0)
+
 Assuming boost has been extracted at C:\boost_1_66_0:
 
   cd c:\zalf-rpm
@@ -84,11 +85,28 @@ Your folder structure should look like that:
 
 
 * create a visual studio solution by using cmake
-    change to monica-master/monica folder
-    * execute update_solution.cmd to build a 32 bit version
-    * update_solution_x64.cmd to build a 64 bit version
+    change to monica in your working folder (e.g. 'c:\zalf-rpm')
+
+  cd c:\zalf-rpm\monica
+
+* execute update_solution.cmd to build a 32 bit version
+
+  update_solution.cmd
+
+* update_solution_x64.cmd to build a 64 bit version
+ 
+  update_solution_x64.cmd
+
 * change to the newly created _cmake_win32 folder or _cmake_win64
-* open monica.sln to compile
+  open monica.sln with visual studio and compile
+* (optional) or run msbuild 
+  
+  msbuild _cmake_win32/monica.sln /p:Configuration=Release /p:Platform="Win32"
+
+or
+
+  msbuild _cmake_win64/monica.sln /p:Configuration=Release /p:Platform="x64"
+
 
 ## Creating an installer-file for Windows
 
