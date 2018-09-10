@@ -9,7 +9,7 @@ A container is meant to run on a multiprocessor machine as a service.
 
 ## Parameter explained:
 
-* zalfrpm/monica-cluster:<tag> - image name on docker hub find the available tags [here](https://hub.docker.com/r/zalfrpm/monica-cluster/tags)
+* zalfrpm/monica-cluster:<tag> - image name on docker hub find the available tags https://hub.docker.com/r/zalfrpm/monica-cluster/tags[here]
 * -p <input port>:6666 - (optional) input port, without this parameter a random port will be chosen by docker
 * -p <output port>:7777 - (optional) output port, without this parameter a random port will be chosen by docker
 * --env monica_instances=<number of monica worker> - (optional) set number of monica worker processes that will be started, default is 3.
