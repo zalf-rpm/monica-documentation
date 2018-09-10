@@ -68,7 +68,7 @@ make sure environment variables are set, usually this is done during installatio
 Assuming boost has been extracted at C:\boost_1_66_0:
 
   cd c:\zalf-rpm
-  mklink /D boost C:\boost_1_66_0
+  cmd /c mklink /D boost C:\boost_1_66_0
 
 Your folder structure should look like that:
 
