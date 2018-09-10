@@ -38,7 +38,7 @@ make sure environment variables are set, usually this is done during installatio
 * checkout monica and related repositories with git
 
   git clone https://github.com/zalf-rpm/monica.git
-  git clone https://github.com/zalf-rpm/monica.git
+  git clone https://github.com/zalf-rpm/monica-parameters.git
   git clone https://github.com/zalf-rpm/sys-libs.git
   git clone https://github.com/zalf-rpm/util.git
 
