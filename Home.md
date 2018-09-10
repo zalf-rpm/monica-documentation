@@ -47,7 +47,6 @@ go to the c:\users\USER_PROFILE\MONICA directory and execute in a Commandshell
 Alternatively one can type always the full name of the tool, which are named monica-run, monica-zmq-run, monica-zmq-server etc, 
 monica is just a proxy program calling the actual tools. There are the following tools/versions of MONICA available.
 
-* libmonica ... the libmonica.dll/.so with the MONICA core functionality
 * monica ... the proxy tool, to call the other tools
 * monica-python ... the monica_python.dll/.so to be used as Python library, acting as simple bridge to call MONICA from Python
 * monica-run ... the standalone MONICA commandline model (using libmonica)
