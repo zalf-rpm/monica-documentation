@@ -40,9 +40,11 @@ make sure environment variables are set, usually this is done during installatio
   git clone https://github.com/zalf-rpm/util.git
 
 * checkout vcpkg for dependent libs
+
   git clone https://github.com/Microsoft/vcpkg.git
 
 * build vcpkg
+
   cd vcpkg
   bootstrap-vcpkg.bat
   .\vcpkg install zeromq:x64-windows-static
