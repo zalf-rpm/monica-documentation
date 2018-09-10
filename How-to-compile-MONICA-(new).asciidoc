@@ -21,6 +21,7 @@ Don't forget to install the English language package for Visual Studio(or Visual
 ## Environment Variables
 make sure environment variables are set, usually this is done during installation of the program
 'Path' should contain the executable paths to:
+
 * Python27 (e.g. C:\Python27\;C:\Python27\Scripts)
 * Python27-x86 (e.g. C:\Python27-x86\;C:\Python27-x86\Scripts)
 * git (2.13 or higher) (e.g. C:\Program Files\Git\cmd)
@@ -102,10 +103,8 @@ Your folder structure should look like that:
 * (optional) or run msbuild 
   
   msbuild _cmake_win32/monica.sln /p:Configuration=Release /p:Platform="Win32"
-
-or
-
   msbuild _cmake_win64/monica.sln /p:Configuration=Release /p:Platform="x64"
+
 
 
 ## Creating an installer-file for Windows
