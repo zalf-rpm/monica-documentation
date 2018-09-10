@@ -20,6 +20,5 @@ A container is meant to run on a multiprocessor machine as a service.
 
   docker run -p 6666:6666 -p 7777:7777 --env monica_instances=9 --rm --name my-monica-cluster zalfrpm/monica-cluster:2.0.3.150
 
-----
-Note: It is possible to use the 'latest' tag. Though it is recommended to use a specific version to create reproducible results.  
-----
+### Note: 
+It is possible to use the 'latest' tag. Though it is recommended to use a specific version to create reproducible results.  
