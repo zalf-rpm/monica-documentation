@@ -16,7 +16,7 @@ A container is meant to run on a multiprocessor machine as a service.
 * --rm - (optional) remove the container when stopped
 * --name <monica cluster name> - (optional) human readable name
 
-e.g.
+## Example
 
   docker run -p 6666:6666 -p 7777:7777 --env monica_instances=9 --rm --name my-monica-cluster zalfrpm/monica-cluster:2.0.3.150
 
