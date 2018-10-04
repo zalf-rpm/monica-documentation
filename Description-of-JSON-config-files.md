@@ -514,7 +514,7 @@ PotNup | | | kgN ha-1 | PotNUptake
 NFixed | | | kgN ha-1 | NFixed
 Target | | | kgN ha-1 | TargetNConcentration
 CritN | | | kgN ha-1 | CriticalNConcentration
-AbBiomNc | | | kgN ha-1 | AbovegroundBiomassNConcentration
+AbBiomNc | | | kgN ha-1 (Kg ha-1)-1| AbovegroundBiomassNConcentration
 Nstress | | | - | NitrogenStressIndex}
 YieldNc | | | kgN ha-1 | PrimaryYieldNConcentration
 Protein | | | kg kg-1 | RawProteinConcentration
