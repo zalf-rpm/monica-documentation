@@ -233,8 +233,8 @@ The following table shows some event expressions, shortcuts (and their expansion
 
 Shortcut | Expanded form | Meaning
 -------- | ------------- | -------
- | ```{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}``` | output results at every 15th from mai to july - daily results will be output
- | ```{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "<", 0.4]}``` | output aggregated results from "Sowing" event until (incl) the "anthesis" event, but include only results while actual to potential evapotranspiration was below 0.4
+| | ```{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}``` | output results at every 15th from mai to july - daily results will be output
+| | ```{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "<", 0.4]}``` | output aggregated results from "Sowing" event until (incl) the "anthesis" event, but include only results while actual to potential evapotranspiration was below 0.4
 "xxxx-03-31" | ```{"at": "xxxx-03-31"}``` | write results every year at the march 31st
 "daily" | ```{"at": "xxxx-xx-xx"}``` | write results daily
 "monthly" | ```{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}``` | write monthly aggregated results
