@@ -531,7 +531,7 @@ RunOff | | | mm | Surface water runoff
 SnowD | | | mm | Snow depth
 FrostD | | | m | Frost front depth in soil
 ThawD | | | m | Thaw front depth in soil
-PASW | L | | m3 m-3 | PASW
+PASW | L | | m3 m-3 | Plant Available Soil Water
 SurfTemp | | | °C |
 STemp | L | | °C |
 Act_Ev | | | mm |
