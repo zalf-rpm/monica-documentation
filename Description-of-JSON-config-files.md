@@ -629,6 +629,7 @@ Name of config file variable | Unit | Description
 **SoilOrganicCarbon** | % [0-100] ([kg C kg-1] * 100) | soil organic carbon, a percentage between 0 and 100
 **SoilOrganicMatter** | kg OM kg-1 (% [0-1]) | soil organic matter
 **SoilMoisturePercentFC** | % [0-100] | initial soil moisture in percent of field capacity
+**Slope** | [height m * length m-1]   [0-1] | site slope
 
 ## Example **site.json** file
 
@@ -1137,3 +1138,15 @@ Set on every september 25th the carbamid value in allen layers to 0.01
 
 
 
+
+***
+
+***
+
+***
+
+***
+
+***
+
+***
