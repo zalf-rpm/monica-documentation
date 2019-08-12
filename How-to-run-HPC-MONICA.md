@@ -96,7 +96,7 @@ Practically letting play the **producer**/**consumer** play the stable **server-
 
 ### Running multiple servers via **Docker** containers
 
-An easy way to get a setup of two proxies and a configurable number of MONICA server processes is to use the provided **Docker** images from **Docker-Hub**. More information of how to run a MONICA Docker image can be found [here](wiki/Run-MONICA-in-Docker.asciidoc).
+An easy way to get a setup of two proxies and a configurable number of MONICA server processes is to use the provided **Docker** images from **Docker-Hub**. More information of how to run a MONICA Docker image can be found [here](wiki/Run-MONICA-in-Docker-and-Singularity.asciidoc).
 
 
 
