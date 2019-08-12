@@ -27,39 +27,40 @@ It is possible to use the 'latest' tag. Though it is recommended to use a specif
 ## Running Monica in Singularity
 
 * build a singularity image with docker as blueprint 
+
   singularity pull docker://zalfrpm/monica-cluster:<tag>
 
 * create a log output folder e.g.
+
   mkdir -p ~/log/supervisor/monica/proxy
 
 ### run proxy as a service 
- shell script: 
-++
-#!/bin/bash -x
-VERSION=2.2.1.170 # or higher
-SINGULARITY_IMAGE=monica-cluster_${VERSION}.sif
+shell script: 
 
-LOGOUT=/var/log
-MOUNT_LOG=~/log/supervisor/monica/proxy
+  #!/bin/bash -x
+  VERSION=2.2.1.170 # or higher
+  SINGULARITY_IMAGE=monica-cluster_${VERSION}.sif
 
-export monica_intern_in_port=6677
-export monica_intern_out_port=7788
-export monica_consumer_port=7777
-export monica_producer_port=6666
+  LOGOUT=/var/log
+  MOUNT_LOG=~/log/supervisor/monica/proxy
+  
+  export monica_intern_in_port=6677
+  export monica_intern_out_port=7788
+  export monica_consumer_port=7777
+  export monica_producer_port=6666
  
-export monica_autostart_proxies=true
-export monica_autostart_worker=false
-export monica_auto_restart_proxies=true
-export monica_auto_restart_worker=false
+  export monica_autostart_proxies=true
+  export monica_autostart_worker=false
+  export monica_auto_restart_proxies=true
+  export monica_auto_restart_worker=false
 
-singularity instance start -B $MOUNT_LOG:$LOGOUT ${SINGULARITY_IMAGE} monica_proxy 
-nohup singularity run instance://monica_proxy  > /dev/null 2>&1 & 
-++
+  singularity instance start -B $MOUNT_LOG:$LOGOUT ${SINGULARITY_IMAGE} monica_proxy 
+  nohup singularity run instance://monica_proxy  > /dev/null 2>&1 & 
+
 
 ### run monica worker
 
 shell script:
-++
 
 #!/bin/bash -x
 VERSION=2.2.1.170      # or higher
