@@ -185,12 +185,12 @@ $` \small k(T)_{v_{cmax}} `$	Temperature function for Vcmax	 <br>
 
 Temperaturfunktion für Vcmax (Long 1991).
 
-![](MONICA_Photosynthese_Temperature_KTvmax.png)
+![](../images/crop_processes/MONICA_Photosynthese_Temperature_KTvmax.png)<br>
 Figure 1: Temperature function for Vcmax (Long 1991).
 
 For crops using the C4 metabolism, no direct impact of the atmospheric CO2 concentration on photosynthesis is assumed. The crop-specific maximum CO2 assimilation rate is merely modified by a simple temperature function.
 
-![](MONICA_Photosynthese_Temperature_C4.png)
+![](../images/crop_processes/MONICA_Photosynthese_Temperature_C4.png)<br>
 Figure 2: Temperature function for the CO2 assimilation rate of C4 crops (Sage & Kubien 2007).
 
 ## References

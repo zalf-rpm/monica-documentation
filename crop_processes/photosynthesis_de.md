@@ -185,12 +185,12 @@ $`\small V_{c_{max}}`$	Maximale gesättigte Carboxylierungsrate der Rubisco	$`\s
 $`\small A_{max} `$	Pflanzenspezifische maximale CO2-Assimilationsrate	$`\small [kg \, CO_2 \, ha^{-1} \, d^{-1}] `$<br>
 $`\small k(T)_{v_{cmax}} `$	Temperaturfunktion für Vcmax<br>
 
-![](MONICA_Photosynthese_Temperature_KTvmax.png)
+![](../images/crop_processes/MONICA_Photosynthese_Temperature_KTvmax.png)<br>
 Abbildung 1: Temperaturfunktion für Vcmax (Long 1991).
 
 Für Pflanzen, die einen C4-Stoffwechsel betreiben, wird kein direkter Einfluss der atmosphärischen CO2-Konzentration auf die Photosynthese angenommen. Die pflanzenspezifische maximale CO2-Assimilationsrate wird lediglich durch eine einfache Temperaturfunktion modifiziert.
  
-![](MONICA_Photosynthese_Temperature_C4.png)
+![](../images/crop_processes/MONICA_Photosynthese_Temperature_C4.png)<br>
 Abbildung 2: Temperaturfunktion der CO2-Assimilationsrate für C4-Pflanzen (Sage & Kubien 2007).
 
 # Literatur

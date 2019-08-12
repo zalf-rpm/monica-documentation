@@ -9,7 +9,7 @@ $`\small N_m`$	Minimum N concentration in the plant tissue	$`\small [kg \, N \, 
 $`\small N_{act}`$	Actual N concentration in the plant tissue	$`\small [kg \, N \, kg \, TM^{-1}] `$<br>
 $`\small N_{crit}`$	Critical N concentration in the plant tissue	$`\small [kg \, N \, kg \, TM^{-1}] `$<br>
 
-![](monica_stress_fig.1.png)
+![](../images/crop_processes/monica_stress_fig.1.png)<br>
 Figure 1: Reduction function for N stress in relation to the actual N concentration of the above-ground biomass. Ncrit = critical N concentration.
 
 In the case of stress due to drought or nitrogen deficiency acceleration of ontogenesis is assumed for some developmental stages.

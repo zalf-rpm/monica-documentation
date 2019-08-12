@@ -35,7 +35,7 @@ Satisfaction of the crop’s vernalisation requirement is considered as follows:
 
 $`\small b_V = \begin{cases}  \frac{(d_V - d_{VT})}{(d_{VR} - d_{VT})} & d_{VT} \geq 1 \\ 1 & d_{VT}<1  \end{cases}`$
 
-![](monica_ontogenesis_fig.1.png)
+![](../images/crop_processes/monica_ontogenesis_fig.1.png)<br>
 Figure 1: Effective vernalisation in relation to the daily mean air temperature.
 
 $`\small b_V`$	Vernalisation factor<br>

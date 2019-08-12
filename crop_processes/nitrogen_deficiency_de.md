@@ -9,7 +9,7 @@ $`\small N_m`$	Minimale N-Konzentration in der Pflanze	$`\small [kg \, N \, kg \
 $`\small N_{act}`$	Aktuelle N-Konzentration in der Pflanze	$`\small [kg \, N \, kg \, TM^{-1}] `$<br>
 $`\small N_{crit}`$	Kritische N-Konzentration in der Pflanze	$`\small [kg \, N \, kg \, TM^{-1}] `$<br>
 
-![](monica_stress_abb.1.png)
+![](../images/crop_processes/monica_stress_abb.1.png)<br>
 Abb. 1: Reduktionsfunktion für N-Stress in Abhängigkeit vom aktuellen N-Gehalt der oberirdischen Pflanzenteile. Ncrit = kritischer N-Gehalt.
 
 ## Literatur

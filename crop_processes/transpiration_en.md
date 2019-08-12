@@ -97,7 +97,7 @@ $`\small \omega_z`$	Root water uptake efficiency in layer z (Fig. 1)<br>
 $`\small \Lambda_z`$	Root length density in layer z	$`\small [m \, m^{-3}] `$<br>
 $`\small \zeta_o`$	Stress factor oxygen deficit<br>
  
-![](MONICA_Transpiration_Fig_1.png)
+![](../images/crop_processes/MONICA_Transpiration_Fig_1.png)<br>
 Figure 1: Reduction function for transpiration ($`\tau_z`$) and for root water uptake efficiency ($`\omega_z`$) in dependency of water availability in the respective soil layer.
 
 Given sufficient amounts of available water, it is removed from the soil layers according to the layer-wise calculated transpiration, from the soil surface downwards. A potential transpiration deficit is calculated for every layer.

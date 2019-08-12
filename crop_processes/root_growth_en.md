@@ -20,7 +20,7 @@ wobei der Einfluss des Sandgehalts auf Gehalte < 0.55 kg kg-1 limitiert wird.
 
 Die pflanzenspezifische Penetrationsrate der Wurzel in die Tiefe krzc wird bei niedrigen Tongehalten verringert.
 
-![](monica_wurzel_abb.1.png)
+![](../images/crop_processes/monica_wurzel_abb.1.png)
 Abbildung 1: Vertikale Penetrationsrate der Winterweizenwurzel in Abhängigkeit vom Tongehalt des Bodens.
 
 Die Wärmesumme für das Wurzelwachstum wird mit Hilfe einer das Wachstum begrenzenden minimalen Temperatur gebildet:
@@ -72,7 +72,7 @@ $`\small L_{root}`$	Gesamte Wurzellänge	$`\small [m \, m^{-2}] `$<br>
 
 Der Wurzeldurchmesser wird schließlich für Pflanzen mit oberirdischem Speicherorgan (Getreide, Mais, Raps, etc) als mit der Tiefe abnehmend, für Pflanzen mit unterirdischem Speicherorgan (Zuckerrübe, Kartoffel, Möhre, etc.) als konstant angenommen:
 
-![](monica_wurzel_abb.2.png)
+![](../images/crop_processes/monica_wurzel_abb.2.png)<br>
 Abbildung 2: Wurzeldurchmesser in Abhängigkeit von der Bodentiefe für Pflanzen mit oberirdischem (‑‑‑) und unterirdischem (—) Speicherorgan.
 
 # Literatur:

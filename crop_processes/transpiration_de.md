@@ -80,7 +80,7 @@ $`\small \omega_z`$	Wurzeleffektivität in Tiefe z (Abb. 1)<br>
 $`\small \Lambda_z`$	Wurzellängendichte in Tiefe z	$`\small [m \, m^{-3}] `$<br>
 $`\small \zeta_o`$	Stressfaktor Sauerstoffmangel<br>
 
-![](MONICA_Transpiration_Abb_1.png)
+![](../images/crop_processes/MONICA_Transpiration_Abb_1.png)<br>
 Abbildung 1: Reduktionsfunktion für die Transpiration ($`\tau_z`$) und für die Effektivität der Wasseraufnahme der Wurzel ($`\omega_z`$) in Abhängigkeit von der Wasserverfügbarkeit in der jeweiligen Bodenschicht.
 
 Dabei wird, ausgehend von der Bodenoberfläche, von oben nach unten Wasser entsprechend der berechneten schichtweisen Transpiration aus den Bodenschichten entnommen. Vorausgesetzt ist, dass dort ausreichend Wasser vorhanden ist. Für jede Schicht wird zu diesem ein potenzielles Transpirationsdefizit berechnet.

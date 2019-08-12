@@ -33,7 +33,7 @@ $`\small \zeta_N`$	Stressfaktor Stickstoffmangel<br>
  
 Effective vernalisation in relation to the daily mean air temperature.
 
-![](monica_ontogenese_abb.1.png)
+![](../images/crop_processes/monica_ontogenese_abb.1.png)<br>
 Abbildung 1:  Die effektive Vernalisation in Abhängigkeit von der Tagesmitteltemperatur der Luft..
 
 Die Erfüllung des Vernalisationsanspruchs der Pflanze wird wie folgt berücksichtigt: :
