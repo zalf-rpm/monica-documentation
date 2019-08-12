@@ -30,10 +30,6 @@ It is possible to use the 'latest' tag. Though it is recommended to use a specif
 
   singularity pull docker://zalfrpm/monica-cluster:<tag>
 
-* create a log output folder e.g.
-
-  mkdir -p ~/log/supervisor/monica/proxy
-
 ### run proxy as a service 
 shell script: 
 
@@ -41,9 +37,11 @@ shell script:
   VERSION=2.2.1.170 # or higher
   SINGULARITY_IMAGE=monica-cluster_${VERSION}.sif
 
+  #create a log output folder for proxy
   LOGOUT=/var/log
   MOUNT_LOG=~/log/supervisor/monica/proxy
-  
+  mkdir -p ~${MOUNT_LOG}
+
   export monica_intern_in_port=6677
   export monica_intern_out_port=7788
   export monica_consumer_port=7777
@@ -57,10 +55,15 @@ shell script:
   singularity instance start -B $MOUNT_LOG:$LOGOUT ${SINGULARITY_IMAGE} monica_proxy 
   nohup singularity run instance://monica_proxy  > /dev/null 2>&1 & 
 
+### Note:
+You can stop the container by using:
+  singularity instance stop monica_proxy 
 
 ### run monica worker
 
-shell script:
+Use this script in a job system, such as https://slurm.schedmd.com[SLURM]
+
+shell script for SLURM:
 
   #!/bin/bash -x
   VERSION=2.2.1.170      # or higher
@@ -70,8 +73,9 @@ shell script:
   PROXY_SERVER=localhost # host where your proxy is running
   INTERN_IN_PORT=6677
   INTERN_OUT_PORT=7788
-
   DATADIR=/monica_data/climate-data
+
+  #create a log output folder
   LOGOUT=/var/log
   MOUNT_LOG=~/log/supervisor/monica/worker
   mkdir -p $MOUNT_LOG
@@ -87,3 +91,7 @@ shell script:
   export monica_proxy_out_host=$PROXY_SERVER
 
   srun singularity run -B $MOUNT_DATA:$DATADIR,$MOUNT_LOG:$LOGOUT --pwd / ${SINGULARITY_IMAGE} 
+
+### Note:
+If you don't use it in a Job system, you should start it as a singularity service (singularity instance start, see proxy)
+
