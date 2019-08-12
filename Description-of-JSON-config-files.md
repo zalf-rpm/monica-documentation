@@ -233,8 +233,8 @@ The following table shows some event expressions, shortcuts (and their expansion
 
 Shortcut | Expanded form | Meaning
 -------- | ------------- | -------
- | ```{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}``` | output results at every 15th from mai to july - daily results will be output
- | ```{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "<", 0.4]}``` | output aggregated results from "Sowing" event until (incl) the "anthesis" event, but include only results while actual to potential evapotranspiration was below 0.4
+| | ```{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}``` | output results at every 15th from mai to july - daily results will be output
+| | ```{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "<", 0.4]}``` | output aggregated results from "Sowing" event until (incl) the "anthesis" event, but include only results while actual to potential evapotranspiration was below 0.4
 "xxxx-03-31" | ```{"at": "xxxx-03-31"}``` | write results every year at the march 31st
 "daily" | ```{"at": "xxxx-xx-xx"}``` | write results daily
 "monthly" | ```{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}``` | write monthly aggregated results
@@ -514,7 +514,7 @@ PotNup | | | kgN ha-1 | PotNUptake
 NFixed | | | kgN ha-1 | NFixed
 Target | | | kgN ha-1 | TargetNConcentration
 CritN | | | kgN ha-1 | CriticalNConcentration
-AbBiomNc | | | kgN ha-1 | AbovegroundBiomassNConcentration
+AbBiomNc | | | kgN ha-1 (Kg ha-1)-1| AbovegroundBiomassNConcentration
 Nstress | | | - | NitrogenStressIndex}
 YieldNc | | | kgN ha-1 | PrimaryYieldNConcentration
 Protein | | | kg kg-1 | RawProteinConcentration
@@ -531,7 +531,7 @@ RunOff | | | mm | Surface water runoff
 SnowD | | | mm | Snow depth
 FrostD | | | m | Frost front depth in soil
 ThawD | | | m | Thaw front depth in soil
-PASW | L | | m3 m-3 | PASW
+PASW | L | | m3 m-3 | Plant Available Soil Water
 SurfTemp | | | °C |
 STemp | L | | °C |
 Act_Ev | | | mm |
@@ -629,6 +629,7 @@ Name of config file variable | Unit | Description
 **SoilOrganicCarbon** | % [0-100] ([kg C kg-1] * 100) | soil organic carbon, a percentage between 0 and 100
 **SoilOrganicMatter** | kg OM kg-1 (% [0-1]) | soil organic matter
 **SoilMoisturePercentFC** | % [0-100] | initial soil moisture in percent of field capacity
+**Slope** | [height m * length m-1]   [0-1] | site slope
 
 ## Example **site.json** file
 
@@ -1137,3 +1138,15 @@ Set on every september 25th the carbamid value in allen layers to 0.01
 
 
 
+
+***
+
+***
+
+***
+
+***
+
+***
+
+***
