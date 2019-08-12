@@ -1,32 +1,21 @@
-If you look for the older version you will find it here [How to compile MONICA?(old)](wiki/How-to-compile-MONICA-old) 
-
 # Windows
 
 ## Required Software
 
-* VisualStudio 2017 (community edition) with Language package English
+* VisualStudio 2019 (community edition) with Language package English
 (If you don't want to run Visual Studio as editor, install Visual Studio Build Tools instead)
-* Boost (Version 1.66.0)
-* Python 2.7 (x64) and/or Python27-x86
-* cmake 3.6 or newer
+* cmake 3.12 or newer
 * git
-
-Please install 
-- Python 2.7 (x64) to a folder Python27 
-- Python 2.7 (x86) to a folder Python27-x86.
-
-Note: 
-Don't forget to install the English language package for Visual Studio(or Visual Studio Build Tools) 
 
 ## Environment Variables
 make sure environment variables are set, usually this is done during installation of the program
 'Path' should contain the executable paths to:
-
-* Python27 (e.g. C:\Python27\;C:\Python27\Scripts)
-* Python27-x86 (e.g. C:\Python27-x86\;C:\Python27-x86\Scripts)
 * git (2.13 or higher) (e.g. C:\Program Files\Git\cmd)
 * cmake (e.g. C:\Program Files\CMake\bin)
 * (optional) msbuild -if using the VS Build Tools
+
+Note: 
+Don't forget to install the English language package for Visual Studio(or Visual Studio Build Tools) 
 
 ## Steps (Windows 10 using PowerShell)
 
@@ -39,8 +28,8 @@ make sure environment variables are set, usually this is done during installatio
 
   git clone https://github.com/zalf-rpm/monica.git
   git clone https://github.com/zalf-rpm/monica-parameters.git
-  git clone https://github.com/zalf-rpm/sys-libs.git
   git clone https://github.com/zalf-rpm/util.git
+  git clone https://github.com/zalf-rpm/capnproto_schemas.git
 
 * checkout vcpkg for dependent libs
 
@@ -52,38 +41,17 @@ make sure environment variables are set, usually this is done during installatio
   .\bootstrap-vcpkg.bat
   .\vcpkg install zeromq:x64-windows-static
   .\vcpkg install zeromq:x86-windows-static
-
-* download boost from https://www.boost.org/ (older versions are available on sourceforge.net)
-* unzip boost, you will probably get something like this folder structure
-
-   |_ boost_1_66_0
-        |_ boost
-        |_ doc
-        |_ lib
-        |_ ...
-
-* you can either copy the boost_1_66_0 folder into your working folder or create a symlink
- > mklink /D boost <your boost path>` (e.g. mklink /D boost C:\boost_1_66_0)
-
-Assuming boost has been extracted at C:\boost_1_66_0:
-
-  cd c:\zalf-rpm
-  cmd /c mklink /D boost C:\boost_1_66_0
+  .\vcpkg install capnproto:x86-windows-static
+  .\vcpkg install capnproto:x64-windows-static
 
 Your folder structure should look like that:
 
  working folder (e.g. 'c:\zalf-rpm')
            |_ monica
-           |_ sys-lib
+           |_ capnproto_schemas
            |_ util
            |_ monica-parameters
            |_ vcpkg
-           |_ boost
-              |_ boost
-              |_ doc
-              |_ lib
-              |_ ...
-
 
 * create a visual studio solution by using cmake
     change to monica in your working folder (e.g. 'c:\zalf-rpm')
@@ -104,7 +72,6 @@ Your folder structure should look like that:
   
   msbuild _cmake_win32/monica.sln /p:Configuration=Release /p:Platform="Win32"
   msbuild _cmake_win64/monica.sln /p:Configuration=Release /p:Platform="x64"
-
 
 
 ## Creating an installer-file for Windows
