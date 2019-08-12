@@ -3,63 +3,63 @@ Modelling of crop growth follows a generic approach used with the SUCROS model (
 
  
 
-$` \fn_cm \small A_g = O_r \cdot A_0 + (1-O_r) \cdot A_c `$
+$` \small A_g = O_r \cdot A_0 + (1-O_r) \cdot A_c `$
 
  
 
-$` \fn_cm \small A_g`$	Gross CO2 assimilation rate	$` \fn_cm \small [kg\ , CO_2 \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small O_r`$	Relative sky cover duration	$` \fn_cm \small [d \, d^{-1}] `$
-$` \fn_cm \small A_0`$	CO2 assimilation under clouded sky	$` \fn_cm \small [kg\ , CO_2 \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small A_c`$	CO2 assimilation under clear sky	$` \fn_cm \small [kg\ , CO_2 \, ha^{-1} \, h^{-1}] `$
+$` \small A_g`$	Gross CO2 assimilation rate	$` \small [kg\ , CO_2 \, ha^{-1} \, h^{-1}] `$
+$` \small O_r`$	Relative sky cover duration	$` \small [d \, d^{-1}] `$
+$` \small A_0`$	CO2 assimilation under clouded sky	$` \small [kg\ , CO_2 \, ha^{-1} \, h^{-1}] `$
+$` \small A_c`$	CO2 assimilation under clear sky	$` \small [kg\ , CO_2 \, ha^{-1} \, h^{-1}] `$
  
 
 where
 
  
 
-$` \fn_cm \small O_r = \frac{R_c - (0.5 \cdot R_s \cdot 10^9)} {0.8 \cdot R_c}`$
+$` \small O_r = \frac{R_c - (0.5 \cdot R_s \cdot 10^9)} {0.8 \cdot R_c}`$
 
  
 
-$` \fn_cm \small O_r`$	Relative sky cover duration	$` \fn_cm \small [d \, d^{-1}] `$
-$` \fn_cm \small R_s`$	Global radiation	$` \fn_cm \small [MJ \, m^2 \, d^{-1}] `$
-$` \fn_cm \small R_c`$	Irradiation under clear sky	$` \fn_cm \small [J \, m^2] `$
+$` \small O_r`$	Relative sky cover duration	$` \small [d \, d^{-1}] `$
+$` \small R_s`$	Global radiation	$` \small [MJ \, m^2 \, d^{-1}] `$
+$` \small R_c`$	Irradiation under clear sky	$` \small [J \, m^2] `$
  
 
 Gross CO2 assimilation includes assimilation under clouded and under clear sky conditions.
 
  
 
-$` \fn_cm \small A_c = \begin{cases}  PHCL & LAI < 5  \\ PHCH & LAI \geq 5 \end{cases}`$
+$` \small A_c = \begin{cases}  PHCL & LAI < 5  \\ PHCH & LAI \geq 5 \end{cases}`$
 
  
 
-$` \fn_cm \small A_O = \begin{cases}  PHOL & LAI < 5 \\ PHOH & LAI \geq 5 \end{cases}`$
+$` \small A_O = \begin{cases}  PHOL & LAI < 5 \\ PHOH & LAI \geq 5 \end{cases}`$
 
  
 
-$` \fn_cm \small A_O`$	CO2 assimilation under clouded sky	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small A_C`$	CO2 assimilation under clear sky	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small LAI`$	Leaf area index	$` \fn_cm \small [m^2 \, m^{-2}] `$
+$` \small A_O`$	CO2 assimilation under clouded sky	$` \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
+$` \small A_C`$	CO2 assimilation under clear sky	$` \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
+$` \small LAI`$	Leaf area index	$` \small [m^2 \, m^{-2}] `$
  
 
 The following auxiliary algorithms were used:
 
  
 
-$` \fn_cm \small PHCL = \begin{cases} PHC3 \cdot \left(  1-e^{\frac{PHC4}{PHC3}}  \right) & PHC3 < PHC4 \\ PHC4 \cdot \left(  1-e^{\frac{PHC3}{PHC4}}\right) & PHC3 \geq PHC4 \end{cases} `$
+$` \small PHCL = \begin{cases} PHC3 \cdot \left(  1-e^{\frac{PHC4}{PHC3}}  \right) & PHC3 < PHC4 \\ PHC4 \cdot \left(  1-e^{\frac{PHC3}{PHC4}}\right) & PHC3 \geq PHC4 \end{cases} `$
 
  
 
-$` \fn_cm \small PHCH = 0.95 \cdot (PHCH1 + PHCH2) + 20.5 `$
+$` \small PHCH = 0.95 \cdot (PHCH1 + PHCH2) + 20.5 `$
 
  
 
-$` \fn_cm \small PHOL = \begin{cases} PHO3 \cdot \left(  1-e^{\frac{PHC4}{PHO3}}  \right) & PHO3 < PHC4 \\ PHC4 \cdot \left(  1-e^{\frac{PHO3}{PHC4}}\right) & PHO3 \geq PHC4 \end{cases} `$
+$` \small PHOL = \begin{cases} PHO3 \cdot \left(  1-e^{\frac{PHC4}{PHO3}}  \right) & PHO3 < PHC4 \\ PHC4 \cdot \left(  1-e^{\frac{PHO3}{PHC4}}\right) & PHO3 \geq PHC4 \end{cases} `$
 
  
 
-$` \fn_cm \small PHOH = 0.9935 \cdot PHOH1 + 1.1`$
+$` \small PHOH = 0.9935 \cdot PHOH1 + 1.1`$
 
  
 
@@ -67,199 +67,199 @@ where
 
  
 
-$` \fn_cm \small PHC3 = PHCH \cdot (1-e^{-0.8 \cdot LAI})`$
+$` \small PHC3 = PHCH \cdot (1-e^{-0.8 \cdot LAI})`$
 
  
 
-$` \fn_cm \small PHC4 = N_{atmo} \cdot LAI \cdot A `$
-
- 
-
- 
-
-$` \fn_cm \small N_{atmo} `$	Atmospheric day length	$` \fn_cm \small [h] `$
-$` \fn_cm \small LAI `$	Leaf area index	$` \fn_cm \small [m^2 \, m^{-2}] `$
-$` \fn_cm \small A`$	CO2 assimilation rate	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, h^{1}] `$
- 
-
-$` \fn_cm \small PHO3 = PHOH \cdot (1-e{-0.8 \cdot LAI}) `$
-
- 
-
-$` \fn_cm \small PHCH1 = h_p \cdot A \cdot N_{eff} \cdot \frac{X}{1+X}`$
+$` \small PHC4 = N_{atmo} \cdot LAI \cdot A `$
 
  
 
  
 
-$` \fn_cm \small LAI `$	Leaf area index	$` \fn_cm \small [m^2 \, m^{-2}] `$
-$` \fn_cm \small h_p`$	Sun’s culmination (vertical projection)	$` \fn_cm \small [^{\circ}] `$
-$` \fn_cm \small A`$	CO2 assimilation rate	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, h^{1}] `$
-$` \fn_cm \small N_{eff}`$	Effective day length	$` \fn_cm \small [h] `$
+$` \small N_{atmo} `$	Atmospheric day length	$` \small [h] `$
+$` \small LAI `$	Leaf area index	$` \small [m^2 \, m^{-2}] `$
+$` \small A`$	CO2 assimilation rate	$` \small [kg \, CO_2 \, ha^{-1} \, h^{1}] `$
  
 
-$` \fn_cm \small X = log \left( \frac{1+0.45 \cdot R_c} {N_{eff} \cdot 3600} \right)  \cdot \frac{\varepsilon_N}{h_p \cdot A}  `$
-
- 
-
-$` \fn_cm \small R_c`$	Irradiation under clear sky	$` \fn_cm \small [J \, m^{-2}] `$
-$` \fn_cm \small \varepsilon_N`$	Net radiation use efficiency of CO2´assimilation	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, h^{1}] `$
-$` \fn_cm \small N_{eff}`$	Effective day length	$` \fn_cm \small [h] `$
-$` \fn_cm \small h_p`$	Sun’s culmination (vertical projection)	$` \fn_cm \small [^{\circ}] `$
-$` \fn_cm \small A`$	CO2 assimilation rate	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, h^{1}] `$
- 
-
-$` \fn_cm \small PHCH_2 = (5-h_p) \cdot A \cdot N_{eff} \cdot \frac{Y}{1+Y}`$
+$` \small PHO3 = PHOH \cdot (1-e{-0.8 \cdot LAI}) `$
 
  
 
-$` \fn_cm \small h_p`$	Sun’s culmination (vertical projection)	$` \fn_cm \small [^{\circ}] `$
-$` \fn_cm \small A`$	CO2 assimilation rate	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small N_{eff}`$	Effective day length	$` \fn_cm \small [h] `$
- 
-
-$` \fn_cm \small Y=log \left(  \frac{1+0.55 \cdot R_c}{N_{eff} \cdot 3600} \right) \cdot \frac{\varepsilon_N}{(5-h_p) \cdot A}`$
+$` \small PHCH1 = h_p \cdot A \cdot N_{eff} \cdot \frac{X}{1+X}`$
 
  
 
-$` \fn_cm \small A`$	CO2 assimilation rate	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small \varepsilon_N`$	Net radiation use efficiency of CO2 assimilation	$` \fn_cm \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small R_c `$	Irradiation under clear sky
  
 
-$` \fn_cm \small [J \, m^{-2}] `$
-$` \fn_cm \small h_p `$	Sun’s culmination (vertical projection)	$` \fn_cm \small [^{\circ}] `$
+$` \small LAI `$	Leaf area index	$` \small [m^2 \, m^{-2}] `$
+$` \small h_p`$	Sun’s culmination (vertical projection)	$` \small [^{\circ}] `$
+$` \small A`$	CO2 assimilation rate	$` \small [kg \, CO_2 \, ha^{-1} \, h^{1}] `$
+$` \small N_{eff}`$	Effective day length	$` \small [h] `$
  
 
-$` \fn_cm \small PHOH1 = 5 \cdot A \cdot \varepsilon_N \cdot \frac{Z}{1+Z}`$
-
- 
-
-$` \fn_cm \small A`$	CO2 assimilation rate	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small \varepsilon_N`$	Net radiation use efficiency of CO2 assimilation	$` \fn_cm \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
- 
-
-$` \fn_cm \small Z = \frac{R_0}{N_{eff} \cdot 3600} \cdot \frac{\varepsilon_N}{5\cdot A}`$
+$` \small X = log \left( \frac{1+0.45 \cdot R_c} {N_{eff} \cdot 3600} \right)  \cdot \frac{\varepsilon_N}{h_p \cdot A}  `$
 
  
 
-$` \fn_cm \small Z`$	 	 
-$` \fn_cm \small N_{eff}`$	Effective day length	$` \fn_cm \small [h] `$
-$` \fn_cm \small \varepsilon_N `$	Net radiation use efficiency of CO2 assimilation	$` \fn_cm \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small A`$	CO2 assimilation rate	$` \fn_cm \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
+$` \small R_c`$	Irradiation under clear sky	$` \small [J \, m^{-2}] `$
+$` \small \varepsilon_N`$	Net radiation use efficiency of CO2´assimilation	$` \small [kg \, CO_2 \, ha^{-1} \, h^{1}] `$
+$` \small N_{eff}`$	Effective day length	$` \small [h] `$
+$` \small h_p`$	Sun’s culmination (vertical projection)	$` \small [^{\circ}] `$
+$` \small A`$	CO2 assimilation rate	$` \small [kg \, CO_2 \, ha^{-1} \, h^{1}] `$
  
 
-$` \fn_cm \small  h_p = \sin(90 + \delta + \varphi) \cdot \left( \frac{\pi}{180}\right)`$
-
- 
-
-$` \fn_cm \small h_p`$	Sun’s culmination (vertical projection)	$` \fn_cm \small [rad] `$
-$` \fn_cm \small \delte`$	Solar declination	$` \fn_cm \small [^{\circ}] `$
-$` \fn_cm \small \varphi`$	Latitude	$` \fn_cm \small [^{\circ}] `$
- 
-
-$` \fn_cm \small \varepsilon_N = (1-\alpha_c) \cdot \varepsilon_L`$
+$` \small PHCH_2 = (5-h_p) \cdot A \cdot N_{eff} \cdot \frac{Y}{1+Y}`$
 
  
 
-$` \fn_cm \small \varepsilon_N `$	Net radiation use efficiency of CO2 assimilation	$` \fn_cm \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small \alpha_c`$	Crop albedo	 
-$` \fn_cm \small \varepsilon_L `$	Radiation use efficiency of CO2 assimilation	$` \fn_cm \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
+$` \small h_p`$	Sun’s culmination (vertical projection)	$` \small [^{\circ}] `$
+$` \small A`$	CO2 assimilation rate	$` \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
+$` \small N_{eff}`$	Effective day length	$` \small [h] `$
  
 
-$` \fn_cm \small N_atmo = 12 \cdot \frac{ \left( \pi + 2 \cdot \acrsin \left( \frac{\delta_{sin}}{\delta{cos}} \right) \right)}{\pi} `$
-
- 
-
-$` \fn_cm \small N_{atmo}`$	Atmospheric day length	$` \fn_cm \small [h] `$
- 
-
-$` \fn_cm \small N_{eff} = 12 \cdot \frac{\left(\pi + 2 \cdot \arcsin \left( \frac{(-\sin(\frac{8 \cdot \pi}{180}) + \delta{sin})}{\delta_{cos}}   \right)  \right)}{\pi}`$
+$` \small Y=log \left(  \frac{1+0.55 \cdot R_c}{N_{eff} \cdot 3600} \right) \cdot \frac{\varepsilon_N}{(5-h_p) \cdot A}`$
 
  
 
-$` \fn_cm \small N_{eff}`$	Effective day length	$` \fn_cm \small [h] `$
+$` \small A`$	CO2 assimilation rate	$` \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
+$` \small \varepsilon_N`$	Net radiation use efficiency of CO2 assimilation	$` \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
+$` \small R_c `$	Irradiation under clear sky
  
 
-$` \fn_cm \small N_{photo} = 12 \cdot \frac{\left  \pi + 2 \cdot \arcsin \left( \frac{(-\sin(\frac{-6 \cdot \pi}{180}) + \delta_{sin})} {\delta_{cos}} \right)\right)}{\pi}`$
-
+$` \small [J \, m^{-2}] `$
+$` \small h_p `$	Sun’s culmination (vertical projection)	$` \small [^{\circ}] `$
  
 
-$` \fn_cm \small N_{photo} `$	Photoperiodic day length	$` \fn_cm \small [h] `$
- 
-
-$` \fn_cm \small R_c = 0.5 \cdot 1300 \cdot \bar{R}_{photo} \cdot e^{\frac{-0.14}{\bar{R}_{photo}}}`$
-
- 
-
-$` \fn_cm \small R_c`$	Irradiation under clear sky	$` \fn_cm \small [J \, m^{-2}] `$
- 
-
-$` \fn_cm \small R_o = 0.2 \cdot R_c`$
+$` \small PHOH1 = 5 \cdot A \cdot \varepsilon_N \cdot \frac{Z}{1+Z}`$
 
  
 
-$` \fn_cm \small R_o`$	Irradiation under clouded sky	$` \fn_cm \small [J \, m^{-2}] `$
+$` \small A`$	CO2 assimilation rate	$` \small [kg \, CO_2 \, ha^{-1} \, h^{-1}] `$
+$` \small \varepsilon_N`$	Net radiation use efficiency of CO2 assimilation	$` \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
  
 
-$` \fn_cm \small \bar{R}_{photo}  = 3600 \cdot \left(  \delta_{sin} \cdot \N_{astro} + \frac{24}{\pi} \cdot \delta_{cos}  \cdot \sqrt{\left(1-\left(\frac{\delta_{sin}}{\delta_{cos}}\right)^2\right)} \,\,\,\right)`$
+$` \small Z = \frac{R_0}{N_{eff} \cdot 3600} \cdot \frac{\varepsilon_N}{5\cdot A}`$
 
  
 
-$` \fn_cm \small \bar{R}_{photo}`$	Mittlere photosynthesewirksame Strahlung	$` \fn_cm \small [J \, m^{-2}] `$
+$` \small Z`$	 	 
+$` \small N_{eff}`$	Effective day length	$` \small [h] `$
+$` \small \varepsilon_N `$	Net radiation use efficiency of CO2 assimilation	$` \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
+$` \small A`$	CO2 assimilation rate	$` \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
+ 
+
+$` \small  h_p = \sin(90 + \delta + \varphi) \cdot \left( \frac{\pi}{180}\right)`$
+
+ 
+
+$` \small h_p`$	Sun’s culmination (vertical projection)	$` \small [rad] `$
+$` \small \delte`$	Solar declination	$` \small [^{\circ}] `$
+$` \small \varphi`$	Latitude	$` \small [^{\circ}] `$
+ 
+
+$` \small \varepsilon_N = (1-\alpha_c) \cdot \varepsilon_L`$
+
+ 
+
+$` \small \varepsilon_N `$	Net radiation use efficiency of CO2 assimilation	$` \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
+$` \small \alpha_c`$	Crop albedo	 
+$` \small \varepsilon_L `$	Radiation use efficiency of CO2 assimilation	$` \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
+ 
+
+$` \small N_atmo = 12 \cdot \frac{ \left( \pi + 2 \cdot \acrsin \left( \frac{\delta_{sin}}{\delta{cos}} \right) \right)}{\pi} `$
+
+ 
+
+$` \small N_{atmo}`$	Atmospheric day length	$` \small [h] `$
+ 
+
+$` \small N_{eff} = 12 \cdot \frac{\left(\pi + 2 \cdot \arcsin \left( \frac{(-\sin(\frac{8 \cdot \pi}{180}) + \delta{sin})}{\delta_{cos}}   \right)  \right)}{\pi}`$
+
+ 
+
+$` \small N_{eff}`$	Effective day length	$` \small [h] `$
+ 
+
+$` \small N_{photo} = 12 \cdot \frac{\left  \pi + 2 \cdot \arcsin \left( \frac{(-\sin(\frac{-6 \cdot \pi}{180}) + \delta_{sin})} {\delta_{cos}} \right)\right)}{\pi}`$
+
+ 
+
+$` \small N_{photo} `$	Photoperiodic day length	$` \small [h] `$
+ 
+
+$` \small R_c = 0.5 \cdot 1300 \cdot \bar{R}_{photo} \cdot e^{\frac{-0.14}{\bar{R}_{photo}}}`$
+
+ 
+
+$` \small R_c`$	Irradiation under clear sky	$` \small [J \, m^{-2}] `$
+ 
+
+$` \small R_o = 0.2 \cdot R_c`$
+
+ 
+
+$` \small R_o`$	Irradiation under clouded sky	$` \small [J \, m^{-2}] `$
+ 
+
+$` \small \bar{R}_{photo}  = 3600 \cdot \left(  \delta_{sin} \cdot \N_{astro} + \frac{24}{\pi} \cdot \delta_{cos}  \cdot \sqrt{\left(1-\left(\frac{\delta_{sin}}{\delta_{cos}}\right)^2\right)} \,\,\,\right)`$
+
+ 
+
+$` \small \bar{R}_{photo}`$	Mittlere photosynthesewirksame Strahlung	$` \small [J \, m^{-2}] `$
  
 
 [CO2] has an impact on the crop’s photosynthesis rate and stomata resistance, which in turn influences transpiration (Nendel et al. 2009). Mitchell et al. (1995) presented a set of algorithms for the calculation of the maximum photosynthesis rate, based on ideas of Farquhar and von Caemmerer (1982) and Long (1991)
 
  
 
-$` \fn_cm \small A =  \frac{( C_i - \Gamma^{*}) \cdot V_{c_{max}}}{C_i + K_c \cdot \left(  1 + \frac{O_i}{K_o} \right)} `$
+$` \small A =  \frac{( C_i - \Gamma^{*}) \cdot V_{c_{max}}}{C_i + K_c \cdot \left(  1 + \frac{O_i}{K_o} \right)} `$
 
  
 
-$` \fn_cm \small A`$	CO2 assimilation rate	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, d^{-1}] `$
-$` \fn_cm \small C_i `$	Inter-cellular CO2 concentration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small \Gamma^{*}`$	Compensation point of photosynthesis, related to Ci in absence of dark respiration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small O_i`$	Inter-cellular O2 concentration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small v_{c_{max}}`$	Maximum saturated Rubisco carboxylation rate	$` \fn_cm \small [\mu mol \, m^{-2} \, s^{-1}] `$
-$` \fn_cm \small K_c`$	Michaelis-Menten constant for CO2	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small K_o`$	Michaelis-Menten constant for O2	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
+$` \small A`$	CO2 assimilation rate	$` \small [kg \, CO_2 \, ha^{-1} \, d^{-1}] `$
+$` \small C_i `$	Inter-cellular CO2 concentration	$` \small [\mu mol \, mol^{-1}] `$
+$` \small \Gamma^{*}`$	Compensation point of photosynthesis, related to Ci in absence of dark respiration	$` \small [\mu mol \, mol^{-1}] `$
+$` \small O_i`$	Inter-cellular O2 concentration	$` \small [\mu mol \, mol^{-1}] `$
+$` \small v_{c_{max}}`$	Maximum saturated Rubisco carboxylation rate	$` \small [\mu mol \, m^{-2} \, s^{-1}] `$
+$` \small K_c`$	Michaelis-Menten constant for CO2	$` \small [\mu mol \, mol^{-1}] `$
+$` \small K_o`$	Michaelis-Menten constant for O2	$` \small [\mu mol \, mol^{-1}] `$
  
 
 Temperature dependencies of Ci, Oi, Kc, K0 and Vcmax and ist parameters were described by Long (1991). Accordingly, Ci is calculated from atmospheric CO2 concentration Ca as
 
  
 
-$` \fn_cm \tiny C_i = C_a \cdot 0.7 \cdot \frac{(1.674 - 6.1294 \cdot 10^{-2} \cdot T + 1.1688 \cdot 10^{-3} \cdot T^2 - 8.8741 \cdot 10^{-7} \cdot T^3 )}{0.73547}`$
+$` \tiny C_i = C_a \cdot 0.7 \cdot \frac{(1.674 - 6.1294 \cdot 10^{-2} \cdot T + 1.1688 \cdot 10^{-3} \cdot T^2 - 8.8741 \cdot 10^{-7} \cdot T^3 )}{0.73547}`$
 
  
 
-$` \fn_cm \small C_i`$	Inter-cellular CO2 concentration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small T`$	Daily mean air temperature in 2m height	$` \fn_cm \small [^{\circ} C] `$
+$` \small C_i`$	Inter-cellular CO2 concentration	$` \small [\mu mol \, mol^{-1}] `$
+$` \small T`$	Daily mean air temperature in 2m height	$` \small [^{\circ} C] `$
  
 
 Respectively Oi is calculated by
 
  
 
-$` \fn_cm \tiny O_i = 210 + \frac {( 0.047 - 1.3087 \cdot 10^{-4} \cdot T + 2.5603 \cdot 10^{-6} \cdot T^2 - 2.1441 \cdot 10^{-8} \cdot T^3 )}  {2.6934 \cdot 10^{-2}}`$
+$` \tiny O_i = 210 + \frac {( 0.047 - 1.3087 \cdot 10^{-4} \cdot T + 2.5603 \cdot 10^{-6} \cdot T^2 - 2.1441 \cdot 10^{-8} \cdot T^3 )}  {2.6934 \cdot 10^{-2}}`$
 
  
 
-$` \fn_cm \small O_i`$	Inter-cellular O2 concentration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small T `$	Daily mean air temperature in 2m height	$` \fn_cm \small [^{\circ} C] `$
+$` \small O_i`$	Inter-cellular O2 concentration	$` \small [\mu mol \, mol^{-1}] `$
+$` \small T `$	Daily mean air temperature in 2m height	$` \small [^{\circ} C] `$
  
 
 The seasonal dynamic of the atmosphericn CO2 concentration from 1958 until today is described using
 
  
 
-$` \fn_cm \small C_a = 222 + e ^{0.0119 \cdot (t_{dec} - 1580)} + 2.5 \cdot \sin \left( \frac{t_{dec} - 0.5} {0.1592} \right)`$
+$` \small C_a = 222 + e ^{0.0119 \cdot (t_{dec} - 1580)} + 2.5 \cdot \sin \left( \frac{t_{dec} - 0.5} {0.1592} \right)`$
 
  
 
-$` \fn_cm \small C_a`$	Atmospheric CO2 concentration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small t_{dec} `$	Date in decimal form	 
+$` \small C_a`$	Atmospheric CO2 concentration	$` \small [\mu mol \, mol^{-1}] `$
+$` \small t_{dec} `$	Date in decimal form	 
  
 
 The algorithm used for light intensities below saturation which Mitchell et al. (1995) presented, was not applied. Instead, Amax is adapted to light interception according to Goudriaan and van Laar (1978). Mitchell et al. (1995) proposed the following algorithm for the transition between photosynthetic quantum use efficiency and light-saturated photosynthesis:
@@ -268,13 +268,13 @@ The algorithm used for light intensities below saturation which Mitchell et al. 
 
  
 
-$` \fn_cm \small \varepsilon_L = \frac{0.37 \cdot (C_i - \Gamma^{*})} {4.5 \cdot C_i + 10.5 \cdot \Gamma^{*}}`$
+$` \small \varepsilon_L = \frac{0.37 \cdot (C_i - \Gamma^{*})} {4.5 \cdot C_i + 10.5 \cdot \Gamma^{*}}`$
 
  
 
-$` \fn_cm \small \varepsilon_L`$	Radiation use efficiency of CO2 assimilation	$` \fn_cm \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
-$` \fn_cm \small C_i`$	Inter-cellular CO2 concentration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small \Gamma^{*} `$	Compensation point of photosynthesis, related to Ci in absence of dark respiration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
+$` \small \varepsilon_L`$	Radiation use efficiency of CO2 assimilation	$` \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
+$` \small C_i`$	Inter-cellular CO2 concentration	$` \small [\mu mol \, mol^{-1}] `$
+$` \small \Gamma^{*} `$	Compensation point of photosynthesis, related to Ci in absence of dark respiration	$` \small [\mu mol \, mol^{-1}] `$
  
 
 The compensation point of photosynthesis is obtained from
@@ -283,27 +283,27 @@ The compensation point of photosynthesis is obtained from
 
  
 
-$` \fn_cm \small \Gamma^{*} = \frac{0.5 \cdot 0.21 \cdot V_{c_{max}} \cdot O_i} {V_{c_{max}} \cdot K_o} `$
+$` \small \Gamma^{*} = \frac{0.5 \cdot 0.21 \cdot V_{c_{max}} \cdot O_i} {V_{c_{max}} \cdot K_o} `$
 
  
 
-$` \fn_cm \small C_i`$	Inter-cellular CO2 concentration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small \Gamma^{*}`$	Compensation point of photosynthesis, related to Ci in absence of dark respiration	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
-$` \fn_cm \small V_{c_{max}} `$	Maximum saturated Rubisco carboxylation rate	$` \fn_cm \small [\mu mol \, m^{-2} \, s^{-1}] `$
-$` \fn_cm \small K_o `$	Michaelis-Menten constant for O2	$` \fn_cm \small [\mu mol \, mol^{-1}] `$
+$` \small C_i`$	Inter-cellular CO2 concentration	$` \small [\mu mol \, mol^{-1}] `$
+$` \small \Gamma^{*}`$	Compensation point of photosynthesis, related to Ci in absence of dark respiration	$` \small [\mu mol \, mol^{-1}] `$
+$` \small V_{c_{max}} `$	Maximum saturated Rubisco carboxylation rate	$` \small [\mu mol \, m^{-2} \, s^{-1}] `$
+$` \small K_o `$	Michaelis-Menten constant for O2	$` \small [\mu mol \, mol^{-1}] `$
  
 
 The maximum saturated Rubisco carboxylation rate Vcmax is calculated from
 
  
 
-$` \fn_cm \small V_{c_{max}} = 98 \cdot \frac{A_{max}} {34.668} \cdot k(T)_{v_{cmax}}`$
+$` \small V_{c_{max}} = 98 \cdot \frac{A_{max}} {34.668} \cdot k(T)_{v_{cmax}}`$
 
  
 
-$` \fn_cm \small V_{c_{max}}`$	Maximum saturated Rubisco carboxylation rate	$` \fn_cm \small [\mu mol \, m^{-2} \, s^{-1}] `$
-$` \fn_cm \small A_{max} `$	Plant-specific maximum CO2 assimilation rate	$` \fn_cm \small [kg \, CO_2 \, ha^{-1} \, d^{-1}] `$
-$` \fn_cm \small k(T)_{v_{cmax}} `$	Temperature function for Vcmax	 
+$` \small V_{c_{max}}`$	Maximum saturated Rubisco carboxylation rate	$` \small [\mu mol \, m^{-2} \, s^{-1}] `$
+$` \small A_{max} `$	Plant-specific maximum CO2 assimilation rate	$` \small [kg \, CO_2 \, ha^{-1} \, d^{-1}] `$
+$` \small k(T)_{v_{cmax}} `$	Temperature function for Vcmax	 
  
 
 Temperaturfunktion für Vcmax (Long 1991).
