@@ -154,7 +154,7 @@ $` \small  h_p = \sin(90 + \delta + \varphi) \cdot \left( \frac{\pi}{180}\right)
  
 
 $` \small h_p`$	Sun’s culmination (vertical projection)	$` \small [rad] `$
-$` \small \delte`$	Solar declination	$` \small [^{\circ}] `$
+$` \small \delta`$	Solar declination	$` \small [^{\circ}] `$
 $` \small \varphi`$	Latitude	$` \small [^{\circ}] `$
  
 
@@ -167,7 +167,7 @@ $` \small \alpha_c`$	Crop albedo
 $` \small \varepsilon_L `$	Radiation use efficiency of CO2 assimilation	$` \small [kg \, CO_2 \, J^{-1} \, ha^{-1} \, h^{-1}] `$
  
 
-$` \small N_atmo = 12 \cdot \frac{ \left( \pi + 2 \cdot \acrsin \left( \frac{\delta_{sin}}{\delta{cos}} \right) \right)}{\pi} `$
+$` \small N_atmo = 12 \cdot \frac{ \left( \pi + 2 \cdot \arcsin \left( \frac{\delta_{sin}}{\delta{cos}} \right) \right)}{\pi} `$
 
  
 
@@ -181,9 +181,8 @@ $` \small N_{eff} = 12 \cdot \frac{\left(\pi + 2 \cdot \arcsin \left( \frac{(-\s
 $` \small N_{eff}`$	Effective day length	$` \small [h] `$
  
 
-$` \small N_{photo} = 12 \cdot \frac{\left  \pi + 2 \cdot \arcsin \left( \frac{(-\sin(\frac{-6 \cdot \pi}{180}) + \delta_{sin})} {\delta_{cos}} \right)\right)}{\pi}`$
+$` \small N_{photo} = 12 \cdot \frac{\left(\pi + 2 \cdot \arcsin \left( \frac{(-\sin(\frac{-6 \cdot \pi}{180}) + \delta_{sin})} {\delta_{cos}} \right)\right)}{\pi}`$
 
- 
 
 $` \small N_{photo} `$	Photoperiodic day length	$` \small [h] `$
  
@@ -308,15 +307,12 @@ $` \small k(T)_{v_{cmax}} `$	Temperature function for Vcmax
 
 Temperaturfunktion für Vcmax (Long 1991).
 
+![Temperature function for Vcmax (Long 1991).][MONICA_Photosynthese_Temperature_KTvmax.png "Temperature function for Vcmax (Long 1991)."]
 Figure 1: Temperature function for Vcmax (Long 1991).
-
- 
 
 For crops using the C4 metabolism, no direct impact of the atmospheric CO2 concentration on photosynthesis is assumed. The crop-specific maximum CO2 assimilation rate is merely modified by a simple temperature function.
 
- 
-
-Abbildung: Temperaturfunktion der CO<sub>2</sub>-Assimilationsrate für C4-Pflanzen (Sage & Kubien 2007).
+![Temperature function for the CO2 assimilation rate of C4 crops (Sage & Kubien 2007).][MONICA_Photosynthese_Temperature_C4.png "Temperature function for the CO2 assimilation rate of C4 crops (Sage & Kubien 2007)."]
 
 Figure 2: Temperature function for the CO2 assimilation rate of C4 crops (Sage & Kubien 2007).
 
@@ -324,7 +320,7 @@ Figure 2: Temperature function for the CO2 assimilation rate of C4 crops (Sage &
 
  
 
-References
+## References
 Farquhar, G. D. & von Caemmerer, S. (1982). Modelling of photosynthetic response to environmental conditions. In: Encyclopedia of plant physiology. New series. Volume 12B. Physiological plant ecology. II. Water relations and carbon assimilation. (Eds O. L. Lange, P. S. Nobel, C. B. Osmond, & H. Ziegler), pp. 549-587. Berlin: Springer.
 
 Goudriaan, J. & van Laar, H. H. (1978). Relations between leaf resistance, CO2 concentration and CO2 assimilation in maize, beans, lalang grass and sunflower. Photosynthetica 12 (3), 241-249.
@@ -338,3 +334,5 @@ Nendel, C., Kersebaum, K. C., Mirschel, W., Manderscheid, R., Weigel, H. J., & W
 Sage, R. F. & Kubien, D. S. (2007). The temperature response of C3 and C4 photosynthesis. Plant Cell and Environment 30 (9), 1086-1106.
 
 van Keulen, H., Penning de Vries, F. W. T., & Drees, E. M. (1982). A summary model for crop growth. In: Simulation of plant growth and crop production (Eds F. W. T. Penning de Vries & H. H. van Laar), pp. 87-97. Wageningen: PUDOC.
+
+http://monica.agrosystem-models.com/images/phocagallery/prozesse/MONICA%20Photosynthese%20Temperature%20KTvmax.png
