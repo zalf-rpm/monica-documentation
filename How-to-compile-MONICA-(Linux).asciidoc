@@ -3,7 +3,6 @@
 ## Prequisites
 * python 2.7 
 * cmake 
-* boost (currently in version 1.62 for debian) 
 * git
 * curl 
 * unzip 
@@ -12,7 +11,6 @@
   sudo apt-get update
   sudo apt-get install build-essential
   sudo apt-get install python-dev
-  sudo apt-get install libboost-all-dev
   sudo apt-get install curl unzip tar
   sudo apt-get install git
   sudo apt-get install cmake
@@ -26,8 +24,8 @@
 
   git clone https://github.com/zalf-rpm/monica.git
   git clone https://github.com/zalf-rpm/monica-parameters.git
-  git clone https://github.com/zalf-rpm/sys-libs.git
   git clone https://github.com/zalf-rpm/util.git
+  git clone https://github.com/zalf-rpm/capnproto_schemas.git
 
   git clone https://github.com/Microsoft/vcpkg.git
 
@@ -39,6 +37,8 @@
 * build zmq lib
   
   ./vcpkg install zeromq:x64-linux
+* build capn proto
+  ./vcpkg install capnproto:x64-linux
 
 * create monica cmake folder and build monica
   
