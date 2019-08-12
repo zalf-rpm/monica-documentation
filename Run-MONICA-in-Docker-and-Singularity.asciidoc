@@ -62,30 +62,28 @@ shell script:
 
 shell script:
 
-#!/bin/bash -x
-VERSION=2.2.1.170      # or higher
-MOUNT_DATA=/my/path/to/climate/files
-SINGULARITY_IMAGE=monica-cluster_${VERSION}.sif
-NUM_WORKER=10          # number of cores used 
-PROXY_SERVER=localhost # host where your proxy is running
-INTERN_IN_PORT=6677
-INTERN_OUT_PORT=7788
+  #!/bin/bash -x
+  VERSION=2.2.1.170      # or higher
+  MOUNT_DATA=/my/path/to/climate/files
+  SINGULARITY_IMAGE=monica-cluster_${VERSION}.sif
+  NUM_WORKER=10          # number of cores used 
+  PROXY_SERVER=localhost # host where your proxy is running
+  INTERN_IN_PORT=6677
+  INTERN_OUT_PORT=7788
 
-DATADIR=/monica_data/climate-data
-LOGOUT=/var/log
-MOUNT_LOG=~/log/supervisor/monica/worker
-mkdir -p $MOUNT_LOG
+  DATADIR=/monica_data/climate-data
+  LOGOUT=/var/log
+  MOUNT_LOG=~/log/supervisor/monica/worker
+  mkdir -p $MOUNT_LOG
 
-export monica_instances=$NUM_WORKER
-export monica_intern_in_port=${INTERN_IN_PORT}
-export monica_intern_out_port=${INTERN_OUT_PORT}
-export monica_autostart_proxies=false
-export monica_autostart_worker=true
-export monica_auto_restart_proxies=false
-export monica_auto_restart_worker=true
-export monica_proxy_in_host=$PROXY_SERVER
-export monica_proxy_out_host=$PROXY_SERVER
+  export monica_instances=$NUM_WORKER
+  export monica_intern_in_port=${INTERN_IN_PORT}
+  export monica_intern_out_port=${INTERN_OUT_PORT}
+  export monica_autostart_proxies=false
+  export monica_autostart_worker=true
+  export monica_auto_restart_proxies=false
+  export monica_auto_restart_worker=true
+  export monica_proxy_in_host=$PROXY_SERVER
+  export monica_proxy_out_host=$PROXY_SERVER
 
-srun singularity run -B $MOUNT_DATA:$DATADIR,$MOUNT_LOG:$LOGOUT --pwd / ${SINGULARITY_IMAGE} 
-
-++
+  srun singularity run -B $MOUNT_DATA:$DATADIR,$MOUNT_LOG:$LOGOUT --pwd / ${SINGULARITY_IMAGE} 
