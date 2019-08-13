@@ -121,10 +121,11 @@ $`\small q`$	Verhältnis absolute zu simulierter Durchwurzelungstiefe	 <br>
 $`\small N_{up_z}`$	Tägliche N-Aufnahme aus der Bodenschicht z	$`\small [kg \, N \, m^{-2}]`$<br>
 
 ## Literatur
-Baldwin, J.P. et al. (1973): Uptake of solutes by multiple root systems from soil. III. A model for calculating the solute uptake by a randomly dispersed root system developing in a finite volume of soil. Plant Soil 38, 621 – 635.
 
-Groot, J.J.R. (1987): Simulation of nitrogen balance in a system of winter wheat and soil. Simulation Report CABO-TT 13. Centre for agrobiological research and Department of Theoretical Production Ecology, Landwirtschaftliche Universität Wageningen, Niederlande.
+* Baldwin, J.P. et al. (1973): Uptake of solutes by multiple root systems from soil. III. A model for calculating the solute uptake by a randomly dispersed root system developing in a finite volume of soil. Plant Soil 38, 621 – 635.
 
-Kersebaum, K.C. (1989): Die Simulation der Stickstoff-Dynamik von Ackerböden. Dissertation, Universität Hannover, p. 143.
+* Groot, J.J.R. (1987): Simulation of nitrogen balance in a system of winter wheat and soil. Simulation Report CABO-TT 13. Centre for agrobiological research and Department of Theoretical Production Ecology, Landwirtschaftliche Universität Wageningen, Niederlande.
+
+* Kersebaum, K.C. (1989): Die Simulation der Stickstoff-Dynamik von Ackerböden. Dissertation, Universität Hannover, p. 143.
 
  

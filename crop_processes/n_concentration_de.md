@@ -1,4 +1,5 @@
 # N-Konzentration
+
 Um die Wirkung mangelnder N-Versorgung auf die Pflanze ermitteln zu können, wird die kritische N-Konzentration in der Pflanze als Funktion ihrer relativen Entwicklung verwendet.
 
 $`\small N_{crit} = a \cdot (1.0 + b \cdot e^{-0.26 \cdot W})`$
@@ -20,6 +21,7 @@ Die N-Konzentration der Pflanze wird in jedem Tagesschritt neu berechnet. Die Di
 Unterschreitet sie die kritische N-Konzentration, wird die Photosyntheseleistung reduziert.
 
 ## Literatur
-Greenwood, D.J. et al. (1990): Weather, nitrogen supply and growth rate of field vegetables. Plant Soil 124 (2), 297-301.
 
-Rahn, C.R. et al. (2010): EU-Rotate_N - a European decision support system - to predict environmental and economic consequences of the management of nitrogen fertiliser in crop rotations. European Journal of Horticultural Science 75 (1), 20-32
+* Greenwood, D.J. et al. (1990): Weather, nitrogen supply and growth rate of field vegetables. Plant Soil 124 (2), 297-301.
+
+* Rahn, C.R. et al. (2010): EU-Rotate_N - a European decision support system - to predict environmental and economic consequences of the management of nitrogen fertiliser in crop rotations. European Journal of Horticultural Science 75 (1), 20-32

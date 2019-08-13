@@ -1,4 +1,5 @@
 # N concentration
+
 To determine the effect of insufficient N supply to the crop the concept of critical N concentration is applied.
 
 $`\small N_{crit} = a \cdot (1.0 + b \cdot e^{-0.26 \cdot W})`$
@@ -18,6 +19,7 @@ $`\small k_{lux}`$	Luxury-N supply factor	 <br>
 The N concentration in the plant tissue is calculated for every daily time step. The difference between the actual and the newly calculated optimum N concentration is acquired for uptake from the soil. Soil N supply is calculated under consideration of root architecture and transport parameters (N uptake). In case the supply from soil is sufficient the difference will be replaced in the crop. Otherwise, the N concentration in the plant tissue will drop. Once it falls below the critical N concentration, photosynthesis is reduced.
 
 ## References
-Greenwood, D.J. et al. (1990): Weather, nitrogen supply and growth rate of field vegetables. Plant Soil 124 (2), 297-301.
 
-Rahn, C.R. et al. (2010): EU-Rotate_N - a European decision support system - to predict environmental and economic consequences of the management of nitrogen fertiliser in crop rotations. European Journal of Horticultural Science 75 (1), 20-32
+* Greenwood, D.J. et al. (1990): Weather, nitrogen supply and growth rate of field vegetables. Plant Soil 124 (2), 297-301.
+
+* Rahn, C.R. et al. (2010): EU-Rotate_N - a European decision support system - to predict environmental and economic consequences of the management of nitrogen fertiliser in crop rotations. European Journal of Horticultural Science 75 (1), 20-32

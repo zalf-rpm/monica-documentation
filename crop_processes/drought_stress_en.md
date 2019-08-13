@@ -1,4 +1,5 @@
 # Drought stress
+
 Crop growth is limited by four different stress factors: drought, nitrogen deficiency oxygen deficiency and heat stress.
 
 Drought is indicated when potential transpiration increases beyond the amount stored in the soil. The reduction factor for drought stress is calculated by the relation of actual to potential transpiration.
@@ -22,8 +23,9 @@ $`\small \bar{\zeta}_w`$	Crop- and stage-specific threshold for drought stress	 
 Some crops react very sensitively on drought stress during bloom. Within a defined sensitive phase, drought reduces the fertility of the ovules.
 
 ## References
-Challinor et al. (2005): Simulation of the impact of high temperature stress on annual crop yields. Agricultural and Forest Meteorology 135, 180 - 189.
 
-Mirschel, W. & Wenkel, K.-O., 2007. Modelling soil-crop interactions with AGROSIM model family. In: K.C. Kersebaum, J.-M. Hecker, W. Mirschel and M. Wegehenkel (Editors), Modelling water and nutrient dynamics in soil crop systems. Springer, Stuttgart, pp. 59- 74.
+* Challinor et al. (2005): Simulation of the impact of high temperature stress on annual crop yields. Agricultural and Forest Meteorology 135, 180 - 189.
 
-Moriondo et al. (2011): Climate change impact assessment: the role of climate extremes in crop yield simulation. Climatic Change 104 (3-4), 679-701.
+* Mirschel, W. & Wenkel, K.-O., 2007. Modelling soil-crop interactions with AGROSIM model family. In: K.C. Kersebaum, J.-M. Hecker, W. Mirschel and M. Wegehenkel (Editors), Modelling water and nutrient dynamics in soil crop systems. Springer, Stuttgart, pp. 59- 74.
+
+* Moriondo et al. (2011): Climate change impact assessment: the role of climate extremes in crop yield simulation. Climatic Change 104 (3-4), 679-701.

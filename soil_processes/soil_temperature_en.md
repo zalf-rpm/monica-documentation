@@ -41,4 +41,5 @@ $`\small T_s(t-\Delta t)`$	Soil surface temperature at previous time step	$`\sma
 The impact of global radiation Rg on soil surface temperature is limited to values above 8.33  MJ m–2 d–1 .
 
 ## References
-Abrahamsen, P., Hansen, S., 2000. Daisy: an open soil-crop-atmosphere system
+
+* Abrahamsen, P., Hansen, S., 2000. Daisy: an open soil-crop-atmosphere system

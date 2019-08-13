@@ -71,6 +71,7 @@ The HERMES model (Kersebaum 1989) was the first simulation model for the year-ro
 However, HERMES used some input information that was specific for Germany, such as the German soil classification system and Haude’s evapotranspiration factors. For this reason it was not much used by international colleagues. In Germany, however, HERMES was applied in many case studies, including regional applications in combination with a geo-information system. More recent releases include alternative evapotranspiration algorithms and enable a less restrictive parameterisation of the soil. This version was also applied outside Europe (Kersebaum et al. 2008). The HERMES model is considered the heart of MONICA.
 
 ### References
+
 * Kersebaum, K.C. (1989): Die Simulation der Stickstoff-Dynamik von Ackerböden. Dissertation Universität Hannover.
 
 * Van Keulen, H., Penning de Vries, F.W.T., Drees, E.M. (1982): A summary model for crop growth. In: Penning de Vries, F.W.T. & Van Laar, H.H. (Hrsg.): Simulation of plant growth and crop production. PUDOC, Wageningen, 87 - 97.

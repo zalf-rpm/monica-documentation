@@ -194,16 +194,17 @@ For crops using the C4 metabolism, no direct impact of the atmospheric CO2 conce
 Figure 2: Temperature function for the CO2 assimilation rate of C4 crops (Sage & Kubien 2007).
 
 ## References
-Farquhar, G. D. & von Caemmerer, S. (1982). Modelling of photosynthetic response to environmental conditions. In: Encyclopedia of plant physiology. New series. Volume 12B. Physiological plant ecology. II. Water relations and carbon assimilation. (Eds O. L. Lange, P. S. Nobel, C. B. Osmond, & H. Ziegler), pp. 549-587. Berlin: Springer.
 
-Goudriaan, J. & van Laar, H. H. (1978). Relations between leaf resistance, CO2 concentration and CO2 assimilation in maize, beans, lalang grass and sunflower. Photosynthetica 12 (3), 241-249.
+* Farquhar, G. D. & von Caemmerer, S. (1982). Modelling of photosynthetic response to environmental conditions. In: Encyclopedia of plant physiology. New series. Volume 12B. Physiological plant ecology. II. Water relations and carbon assimilation. (Eds O. L. Lange, P. S. Nobel, C. B. Osmond, & H. Ziegler), pp. 549-587. Berlin: Springer.
 
-Long, S. P. (1991). Modification of the response of photosynthetic productivity to rising temperature by atmospheric CO2 concentrations - Has its importance been underestimated. Plant Cell and Environment 14 (8), 729-739.
+* Goudriaan, J. & van Laar, H. H. (1978). Relations between leaf resistance, CO2 concentration and CO2 assimilation in maize, beans, lalang grass and sunflower. Photosynthetica 12 (3), 241-249.
 
-Mitchell, R. A. C., Lawlor, D. W., Mitchell, V. J., Gibbard, C. L., White, E. M., & Porter, J. R. (1995). Effects of elevated CO2 concentration and increased temperature on winter-wheat - Test of ARCWHEAT1 simulation model. Plant Cell and Environment 18 (7), 736-748.
+* Long, S. P. (1991). Modification of the response of photosynthetic productivity to rising temperature by atmospheric CO2 concentrations - Has its importance been underestimated. Plant Cell and Environment 14 (8), 729-739.
 
-Nendel, C., Kersebaum, K. C., Mirschel, W., Manderscheid, R., Weigel, H. J., & Wenkel, K.-O. (2009). Testing different CO2 response algorithms against a FACE crop rotation experiment. NJAS - Wageningen Journal of Life Sciences 57 (1), 17-25.
+* Mitchell, R. A. C., Lawlor, D. W., Mitchell, V. J., Gibbard, C. L., White, E. M., & Porter, J. R. (1995). Effects of elevated CO2 concentration and increased temperature on winter-wheat - Test of ARCWHEAT1 simulation model. Plant Cell and Environment 18 (7), 736-748.
 
-Sage, R. F. & Kubien, D. S. (2007). The temperature response of C3 and C4 photosynthesis. Plant Cell and Environment 30 (9), 1086-1106.
+* Nendel, C., Kersebaum, K. C., Mirschel, W., Manderscheid, R., Weigel, H. J., & Wenkel, K.-O. (2009). Testing different CO2 response algorithms against a FACE crop rotation experiment. NJAS - Wageningen Journal of Life Sciences 57 (1), 17-25.
 
-van Keulen, H., Penning de Vries, F. W. T., & Drees, E. M. (1982). A summary model for crop growth. In: Simulation of plant growth and crop production (Eds F. W. T. Penning de Vries & H. H. van Laar), pp. 87-97. Wageningen: PUDOC.
+* Sage, R. F. & Kubien, D. S. (2007). The temperature response of C3 and C4 photosynthesis. Plant Cell and Environment 30 (9), 1086-1106.
+
+* van Keulen, H., Penning de Vries, F. W. T., & Drees, E. M. (1982). A summary model for crop growth. In: Simulation of plant growth and crop production (Eds F. W. T. Penning de Vries & H. H. van Laar), pp. 87-97. Wageningen: PUDOC.

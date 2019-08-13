@@ -75,9 +75,10 @@ Der Wurzeldurchmesser wird schließlich für Pflanzen mit oberirdischem Speicher
 ![](../images/crop_processes/monica_wurzel_abb.2.png)<br>
 Abbildung 2: Wurzeldurchmesser in Abhängigkeit von der Bodentiefe für Pflanzen mit oberirdischem (‑‑‑) und unterirdischem (—) Speicherorgan.
 
-# Literatur:
-Gerwitz, A., Page, E.R. (1974): An empirical mathematical model to describe plant root systems. J. Apl. Ecol. 11, 773-781.
+# Literatur
 
-Pedersen, A., Zhang, K.F., Thorup-Kristensen, K., Jensen, L.S. (2010): Modelling diverse root density dynamics and deep nitrogen uptake - A simple approach. Plant Soil 326 (1-2), 493-510.
+* Gerwitz, A., Page, E.R. (1974): An empirical mathematical model to describe plant root systems. J. Apl. Ecol. 11, 773-781.
+
+* Pedersen, A., Zhang, K.F., Thorup-Kristensen, K., Jensen, L.S. (2010): Modelling diverse root density dynamics and deep nitrogen uptake - A simple approach. Plant Soil 326 (1-2), 493-510.
 
  

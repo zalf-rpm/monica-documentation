@@ -37,4 +37,5 @@ Entsprechend wird die Wachstumsatmung berechnet.
 Mit den aus der Photosynthese gebildeten Assimilaten wird zunächst prioritär die Erhaltungsatmung bedient, dann erst die Wachstumsatmung. Die Assimilate werden den Organ-Kompartimenten nach einer Partitionierungs-Matrix zugewiesen, welche nach den Ontogenesestadien der Pflanze gegliedert ist. Die Ontogenese der Pflanze wiederum wird aus der Summe der Gradtage berechnet und, wenn notwendig, für jedes Stadium durch den Tageslängen- und Vernalisationsanspruch modifiziert.
 
 # Literatur
-Mirschel, W. und K.-O. Wenkel (2007): Modelling soil-crop interactions with AGROSIM model family. In: K.C. Kersebaum, J.-M. Hecker, W. Mirschel und M. Wegehenkel (Hrsg.), Modelling water and nutrient dynamics in soil crop systems. Springer, Stuttgart, 59-74.
+
+* Mirschel, W. und K.-O. Wenkel (2007): Modelling soil-crop interactions with AGROSIM model family. In: K.C. Kersebaum, J.-M. Hecker, W. Mirschel und M. Wegehenkel (Hrsg.), Modelling water and nutrient dynamics in soil crop systems. Springer, Stuttgart, 59-74.
