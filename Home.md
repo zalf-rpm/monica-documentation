@@ -10,7 +10,7 @@ This Wiki contains information about the software development of MONICA as well 
 
 ### Dokumentation
 
-The documentation of the MONICA processes can be found in our GitLab repository. [](https://gitlab.com/zalf-rpm/monica-docs/blob/master/Readme.md).
+The documentation of the MONICA processes can be found in our GitLab repository. [MONICA documentation](https://gitlab.com/zalf-rpm/monica-docs/blob/master/Readme.md)
 
 ### Mailing list
 
