@@ -8,6 +8,10 @@ This Wiki contains information about the software development of MONICA as well 
 
 ## Getting help / helping
 
+### Dokumentation
+
+The documentation of the MONICA processes can be found in our GitLab repository. [](https://gitlab.com/zalf-rpm/monica-docs/blob/master/Readme.md).
+
 ### Mailing list
 
 A mailing list for discussions and help regarding MONICA can be found in the [MONICA Google group](https://groups.google.com/forum/#!forum/zalf-rpm-monica). Everybody can read the list, but only accepted members of the group can post messages.
