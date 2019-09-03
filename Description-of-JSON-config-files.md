@@ -475,7 +475,7 @@ Year | | | | output current Year
 Crop | | | | crop name
 TraDef | | | 0;1 | TranspirationDeficit
 Tra | | | mm | ActualTranspiration
-NDef | | | 0;1 | CropNRedux
+NDef | | | 0;1 | CropNRedux,indicates N availability: 1 no stress, 0 no N available 
 HeatRed | | | 0;1 |  HeatStressRedux
 FrostRed | | | 0;1 | FrostStressRedux
 OxRed | | | 0;1 | OxygenDeficit
