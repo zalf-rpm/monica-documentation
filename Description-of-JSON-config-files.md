@@ -515,7 +515,7 @@ NFixed | | | kgN ha-1 | NFixed
 Target | | | kgN ha-1 | TargetNConcentration
 CritN | | | kgN ha-1 | CriticalNConcentration
 AbBiomNc | | | kgN ha-1 (Kg ha-1)-1| AbovegroundBiomassNConcentration
-Nstress | | | - | NitrogenStressIndex}
+Nstress | | | - | NitrogenStressIndex indicates N availability: 1 no stress, 0 no N available
 YieldNc | | | kgN ha-1 | PrimaryYieldNConcentration
 Protein | | | kg kg-1 | RawProteinConcentration
 NPP | | | kgC ha-1 | NPP
