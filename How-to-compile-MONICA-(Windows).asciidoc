@@ -61,11 +61,11 @@ Your folder structure should look like that:
 
 * execute update_solution.cmd to build a 32 bit version
 
-  update_solution.cmd
+  .\update_solution.cmd
 
 * update_solution_x64.cmd to build a 64 bit version
  
-  update_solution_x64.cmd
+  .\update_solution_x64.cmd
 
 * change to the newly created _cmake_win32 folder or _cmake_win64
   open monica.sln with visual studio and compile
