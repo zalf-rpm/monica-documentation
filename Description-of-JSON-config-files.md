@@ -557,7 +557,7 @@ SOMf | L | | kgC m-3 | get_SOM_Fast
 SOMs | L | | kgC m-3 | get_SOM_Slow
 CBal | L | | kgC m-3 | get_CBalance
 Nmin | L | | kgN ha-1 | NetNMineralisationRate
-NetNmin | | | kgN ha-1 | NetNmin
+NetNmin | | | kgN ha-1 | NetNminRate for the layers defined in the parameter MaxMineralizationDepth (general/soil-organic.json)
 Denit | | | kgN ha-1 | Denit
 N2O | | | kgN ha-1 | N2O
 SoilpH | | |  | SoilpH
