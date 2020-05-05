@@ -558,8 +558,11 @@ SOMs | L | | kgC m-3 | get_SOM_Slow
 CBal | L | | kgC m-3 | get_CBalance
 Nmin | L | | kgN ha-1 | NetNMineralisationRate
 NetNmin | | | kgN ha-1 | NetNminRate for the layers defined in the parameter MaxMineralizationDepth (general/soil-organic.json)
-Denit | | | kgN ha-1 | Denit
+Denit | | | kgN ha-1 | Amount of N resulting from denitrification
+actnitrate | | | kgN m-3 | Amount of N resulting from nitrification
 N2O | | | kgN ha-1 | N2O
+N2Onit| | | kgN ha-1 | N2O produced through nitrification
+N2Odenit| | | kgN ha-1 | N2O produced through denitrification
 SoilpH | | |  | SoilpH
 NEP | | | kgC ha-1 | NEP
 NEE | | | kgC ha- | NEE
