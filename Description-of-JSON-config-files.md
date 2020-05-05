@@ -560,7 +560,7 @@ Nmin | L | | kgN ha-1 | NetNMineralisationRate
 NetNmin | | | kgN ha-1 | NetNminRate for the layers defined in the parameter MaxMineralizationDepth (general/soil-organic.json)
 Denit | | | kgN ha-1 | Amount of N resulting from denitrification
 actnitrate | | | kgN m-3 | N production rate resulting from nitrification (N2O STICS module)
-N2O | | | kgN ha-1 | Total N2O produced (original Monica approach)
+N2O | | | kgN ha-1 | Total N2O produced (Monica's original approach)
 N2Onit| | | kgN ha-1 | N2O produced through nitrification (N2O STICS module)
 N2Odenit| | | kgN ha-1 | N2O produced through denitrification (N2O STICS module)
 SoilpH | | |  | SoilpH
