@@ -69,7 +69,7 @@ will start MONICA as server in **Request-Reply** mode listening on port **5555**
 
 ### Running a single server in **Pipeline** mode
 
-A single server can also be started in **pipeline** mode, which means that the server will accept requests on one port but send the request to clients connected to another (the output) port. To do that you start MONICA with
+A single server can also be started in **pipeline** mode, which means that the server will accept requests on one port but send the result to clients connected to another (the output) port. To do that you start MONICA with
 
 ```dos
 C:\> monica-zmq-server -bi -i tcp://*:6666 -bo -o tcp://*:7777
