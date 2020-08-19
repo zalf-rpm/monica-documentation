@@ -634,6 +634,32 @@ Name of config file variable | Unit | Description
 **SoilMoisturePercentFC** | % [0-100] | initial soil moisture in percent of field capacity
 **Slope** | [height m * length m-1]   [0-1] | site slope
 
+## Environment parameters for the whole simulation
+
+The following environment parameters for a whole simulation can be adjusted by referencing either the correct json file or overwriting selectively the parameters read from the default file. 
+
+### Atmospheric CO2 (O3)
+
+Currently the following procedure is being applied.
+
+1. Check if **co2** or **o3** field is present in daily climate data. If so use the supplied values!
+2. If the parameter **AtmosphericCO2s** (**AtmosphericO3s**) is set to an JSON object of "year" to "CO2 value" mappings. Then use these yearly values.
+3. If the parameter **AtmosphericCO2** (**AtmosphericCO2**) is set to 0 or is negative. Let **MONICA** calculate the CO2 concentration depending on the year.
+4. If none of the points 1.-3. is true, use the value of **AtmosphericCO2** (**AtmosphericO3**) for the whole simulation.
+
+Name of parameter | Unit | Default value | Description
+----------------- | ---- | ------------- | -----------
+**Albedo** | | 0.23 | 
+**AtmosphericCO2** | ppm | 0.0 | 
+**AtmosphericCO2s** | ppm | unset | example value: {"1991": 360, "1992": 370, "1993": 380}
+**AtmosphericO3**, | ppm | 0.0 
+**AtmosphericO3s** | ppm | unset | 
+**WindSpeedHeight** | m s-1 | 2.0 | 
+**LeachingDepth** | m | 0.0. | 
+**MaxGroundwaterDepth** | m | 18.0 | 
+**MinGroundwaterDepth** | m | 20.0 | 
+*MinGroundwaterDepthMonth** | m | 3.0 |
+
 ## Example **site.json** file
 
 ```json
