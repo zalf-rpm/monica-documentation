@@ -647,6 +647,7 @@ Currently the following procedure is being applied.
 3. If the parameter **AtmosphericCO2** (**AtmosphericCO2**) is set to 0 or is negative. Let **MONICA** calculate the CO2 concentration depending on the year.
 4. If none of the points 1.-3. is true, use the value of **AtmosphericCO2** (**AtmosphericO3**) for the whole simulation.
 
+
 Name of parameter | Unit | Default value | Description
 ----------------- | ---- | ------------- | -----------
 **Albedo** | | 0.23 | 
@@ -658,7 +659,8 @@ Name of parameter | Unit | Default value | Description
 **LeachingDepth** | m | 0.0. | 
 **MaxGroundwaterDepth** | m | 18.0 | 
 **MinGroundwaterDepth** | m | 20.0 | 
-*MinGroundwaterDepthMonth** | m | 3.0 |
+**MinGroundwaterDepthMonth** | m | 3.0 |
+
 
 ## Example **site.json** file
 
