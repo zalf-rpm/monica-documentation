@@ -624,8 +624,8 @@ Name of config file variable | Unit | Description
 **PoreVolume** | m3 m-3 | saturation
 **PermanentWiltingPoint** | m3 m-3 | permanent wilting point
 **KA5TextureClass** | | KA5 soil texture
-**SoilAmmonium** | kg NH4-N m-3 | soil ammonium
-**SoilNitrate** | kg NO3-N m-3 | soil nitrate
+**SoilAmmonium** | kg NH4-N m-3 | initial soil ammonium content
+**SoilNitrate** | kg NO3-N m-3 | initial soil nitrate content
 **CN** | | soil C/N ratio
 **SoilRawDensity** | kg m-3 | soil raw density
 **SoilBulkDensity** | kg m-3 | soil bulk density
