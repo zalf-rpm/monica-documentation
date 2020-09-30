@@ -597,6 +597,8 @@ Clay | | | kg kg-1 | Soil clay conten
 Silt | | | kg kg-1 | Soil silt content
 Stone | | | kg kg-1 | Soil stone content
 pH | | | kg kg-1 | Soil pH content
+rootDensity | L | | | cropGrowth->vc_RootDensity at layer
+rootingZone | | | | cropGrowth->vc_RootingZone = into which layer the root grows currently
 
 
 # **SITE JSON**
