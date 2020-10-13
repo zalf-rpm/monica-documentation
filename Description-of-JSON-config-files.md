@@ -224,6 +224,7 @@ ISO-Dates are allowed to contain placeholders (**x**), which means that the year
 Additionally to date patterns every workstep generates an events with named like the Workstep, e.g. there are events like Sowing, Harvest, AutomaticSowing, SetValue etc.
 
 * **Stage-1**, **Stage-2**, ... 
+* **emergence**
 * **anthesis**
 * **maturity**
 * **Sowing**, **AutomaticSowing**, **Cutting**, ....
