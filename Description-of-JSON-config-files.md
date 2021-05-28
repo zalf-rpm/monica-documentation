@@ -837,8 +837,6 @@ Fires **Harvest** event.
 
 Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
-**method** | **total** or <br> **fruitHarvest** or <br> **cutting** or <br> **leafPruning** or <br> **tipPruning** or <br> **shootPruning**
-**percentage** | [%] [0;1] | | | percentage to cut etc.
 **exported** | **true** or **false** | true | | if export = false, then the whole crop will be incorporated into the soil, else just roots and residues
 
 
