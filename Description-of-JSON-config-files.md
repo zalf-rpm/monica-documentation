@@ -865,14 +865,14 @@ Parameter name | unit/type | default | example | description
 
 Cut a crop. 
 
-The parameters **organs**, **export** and **cut-max-assimilation-rate** help to parameterize the cutting operation. **organs** tells which organs are to be cut, while **exports** optionally tells how much of each cut organ part to export (the rest will be left on the plot and added to the organic matter pools). If no **organs** are being defined, then the culivar parameter **OrganIdsForCutting** will be used (**yieldPercentage** and **organId**). To specify which organ to cut or how much to export, the same organ names can be used as in the specification of the outputs section (**"Root", "Leaf", "Shoot", "Fruit", "Struct", "Sugar"**).
+The parameters **organs**, **export** and **cut-max-assimilation-rate** help to parameterize the cutting operation. **organs** tells which organs are to be cut (or left on the plot), while **exports** optionally tells how much of each cut organ part to export (the rest will be left on the plot and added to the organic matter pools). If no **organs** are being defined, then the cultivar parameter **OrganIdsForCutting** will be used (**yieldPercentage** and **organId**). To specify which organ to cut or how much to export, the same organ names can be used as in the specification of the outputs section (**"Root", "Leaf", "Shoot", "Fruit", "Struct", "Sugar"**). To further specify how much of an organ to cut, a second parameter to the organ can be a **unit**, which specifies the **biomass (kg ha-1)**, the **LAI (m2 m-2)** or (the **default**) a **percentage (%)**. A third parameter to the JSON array for the value in the **organs** array can be **left** or **cut** (**default**). Specifiying either how much to cut or how much to leave on the plot.
 
 Fires **Cutting** event.
 
 
 Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
-**organs** | JSON-object | | ```{"Leaf": 85, "Fruit": [100, "%"]}``` | a mapping of organs to percentage to cut
+**organs** | JSON-object | | ```{"Leaf": 85, "Fruit": [100, "%"]}``` or ```{"Leaf": [1.5, "m2 m-2", "left"], "Fruit": [50, "%", "cut"]}``` | a mapping of organs to percentage to cut
 **export** | JSON-object or (**true** or **false**) | **true** | ```{"Leaf": 100, "Fruit": 0}``` | a mapping of organs to percentage to export after cut or just **true** or **false** if everything or nothing should be exported
 **cut-max-assimilation-rate** | [%] | **100** | | a percentage by which the maximal assimilation rate will be cut
 
