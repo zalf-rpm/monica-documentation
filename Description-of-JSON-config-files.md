@@ -838,7 +838,7 @@ Fires **Harvest** event.
 Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
 **exported** | **true** or **false** | true | | if export = false, then the whole crop will be incorporated into the soil, else just roots and residues. If no particular export rules for the organs are defined (see below), then the **cultivar parameters** **OrganIdsForPrimaryYield** and **OrganIdsForSecondaryYield** are used. If any parameter like **leaf** or **fruit** etc is defined the **export** parameter is ignored and the more specific ones are used.
-**leaf** or **fruit** or **shoot** or **stem** or **sugar** | JSON object | | {"export": [85, "%"], "incorporate": true} | Tells **MONICA** to export a certain percentage (if missing, **defaults to 100%**) of the organ used as parameter (e.g. **leaf**) and **incorporate** the residues into the soil (or leave the them as layer on the ground) (if missing, **defaults to true**). Missing organs are being treated as residues and will by default be **incorporated**. If you don't want this, specify the organ with {"export": 0, "incorporate": false}.
+**leaf** or **fruit** or **shoot** or **stem** or **sugar** | JSON object | | {"export": [85, "%"], "incorporate": true} | Tells **MONICA** to **export** a certain **percentage** (if missing, **defaults to 100%**) of the organ used as parameter (e.g. **leaf**) and **incorporate** the residues into the soil (or leave the them as layer on the ground) (if missing, **defaults to true**). Missing organs are being treated as residues and will by default be **incorporated** (as if specified **{"export": 0, "incorporate": true}**).
 
 
 ### **AutomaticHarvest**
