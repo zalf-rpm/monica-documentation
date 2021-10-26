@@ -25,6 +25,7 @@
 
 [Mildly early potato - Kartoffel](#mildly-early-potato---kartoffel)
 
+<!--
 ## Winter wheat - Winterweizen
 Stage | BBCH | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
 ----- | ---- | -------------- | -------------- | ---------- | ------ | --------------------- | -------------------
@@ -137,3 +138,4 @@ Stage | BBCH | EN Description | DE Description | BBCH start | BBCH end | BBCH st
 4 | 40 | Tuber growth | Beginn Knollenwachstum | 40 | | | | 
 5 | | | | | 48 | | | 
 6 | 48 | Harvest size | Erntegröße | 48 | | | | 
+-->
