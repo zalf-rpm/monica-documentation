@@ -42,3 +42,5 @@ MONICA can be used in two broad ways, as a standalone commandline application an
 How to use MONICA as a standalone commandline application is described [here](wiki/How-to-run-standalone-CMD-MONICA). 
 
 To find a description of how to use MONICA on high performance computers or with multiple machines look [here](wiki/How-to-run-HPC-MONICA). Basic information of how MONICA works is assumed in the HPC use case description.
+
+In order to use **MONICA** you have to understand it's configuration file format. This documenation you can find [here](JSON_config_files/index.md).
