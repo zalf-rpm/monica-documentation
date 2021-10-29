@@ -75,7 +75,7 @@ Changes to parameters on the commandline will always supercede the same informat
 
 # How to configure MONICA
 
-MONICA is now available in a version 2. There are a lot of changes especially regarding the configuration of MONICA, how to start it and how to get the results. Most of the changes are described in the this [description of the MONICA json config files](wiki/Description-of-JSON-config-files). 
+MONICA is now available in a version 2. There are a lot of changes especially regarding the configuration of MONICA, how to start it and how to get the results. Most of the changes are described in the this [description of the MONICA json config files](wiki/monica_config_index). 
 
 
 # How to convert the old HERMES style configuration to the new JSON format
