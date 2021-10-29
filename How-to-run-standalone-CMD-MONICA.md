@@ -1,52 +1,26 @@
 # How to start MONICA
 
-MONICA consists right now of a number of tools/parts. Most of them can be called at the commandline like
+MONICA consists right now of a number of different programs. Most of them can be called at the commandline like
 
-    monica command1 [command2] parameter1 parameter2 ....
+    monica-xxx parameter1 parameter2 ....
 
 eg. to run MONICA locally with the standard Hohenfinow2 example under Windows using the standard installer, 
 go to the c:\users\USER_PROFILE\MONICA directory and execute in a Commandshell
 
-    monica run Examples/Hohenfinow2/sim.json > out.csv
+    monica-run Examples/Hohenfinow2/sim.json > out.csv
 
-Alternatively one can type always the full name of the tool, which are named monica-run, monica-zmq-run, monica-zmq-server etc, 
-monica is just a proxy program calling the actual tools. There are the following tools/versions of MONICA available.
+There are the following programs of MONICA available.
 
-* monica ... the proxy tool, to call the other tools
-* monica-python ... the monica_python.dll/.so to be used as Python library, acting as simple bridge to call MONICA from Python
 * monica-run ... the standalone MONICA commandline model (using libmonica)
-* monica-zmq-control ... a tool to run on the server and accepting ZeroMQ messages to spawn MONICA servers/ZMQ Proxies etc
-* monica-zmq-control-send ... a client side tool to send ZMQ messages to the server 
-* monica-zmq-proxy ... a tool to run serverside and forward/distribute jobs (ZMQ job messages) to MONICA workers (servers)
-* monica-zmq-run ... the ZMQ client to monica-zmq-server/the equivalent to monica-run, but sends work to a monica-zmq-server
+* monica-zmq-proxy ... a tool to run serverside and forward/distribute jobs (ZMQ job messages) to MONICA workers (servers). Optionally it can also just start a number of MONICAs in an own thread and serve them
 * monica-zmq-server ... a MONICA server accepting ZeroMQ messages and process them, usually to be used in connection with ZMQ proxy/proxies and a cloud of worker monica-zmq-servers
+* monica-capnp-proxy ... a MONICA server which actually acts as a proxy to a single server but can start many MONICAs in threads and distribute work send to the proxy amongst the MONICAs
+* monica-capnp-server ... a MONICA server where communication with MONICA happens through a Cap'n Proto interface
 
-Every one of the tools can be called with a commandline parameter **-h** which will output the available parameters and how the command works. For example ```monica -h``` will result in:
-
-```dos
-C:\> monica -h
-
-monica commands/options
-
-commands/options:
-
- -h | --help ... this help output
- -v | --version ... outputs monica version
-
-   run PARAMETERS ... start monica-run with PARAMETERS
- | zmq   run PARAMETERS ... run MONICA ZeroMQ client 'monica-zmq-run' with PARAMETERS
-       | server PARAMETERS ... run MONICA ZeroMQ server 'monica-zmq-server' with PARAMETERS
-       | proxy PARAMETERS ... run MONICA ZeroMQ proxy 'monica-zmq-proxy' with PARAMETERS
-       | control PARAMETERS ... run MONICA ZeroMQ control node 'monica-zmq-control' with PARAMETERS
-       | control send PARAMETERS ... send command to MONICA ZeroMQ control node via calling 'monica-zmq-control-send' with PARMETERS
-```
-
-Which should be read as the tool **monica** can be called with the options **-h** (for this help) or **-v** (for the version number) or a list of **commands**. 
-
-The command **run** is for running MONICA locally (on the own computer) and `monica run` is equivalent to `monica-run`. Showing the help for **monica-run** would display:
+Every one of the tools can be called with a commandline parameter **-h** which will output the available parameters and how the command works. Showing the help for **monica-run** would display:
 
 ```dos
-C:\>monica run -h
+C:\>monica-run -h
 
 monica-run [options] path-to-sim-json
 
@@ -67,7 +41,7 @@ options:
 So for example outputing the results of the Hohenfinow2 example to the file **hohenfinow-out.csv** and show debug messages could be done with:
 
 ```
-monica run -d Examples\Hohenfinow2\sim.json
+monica-run -d Examples\Hohenfinow2\sim.json
 ```
 
 Changes to parameters on the commandline will always supercede the same information in the configuration files.
