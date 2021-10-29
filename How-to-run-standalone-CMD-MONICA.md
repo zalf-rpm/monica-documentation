@@ -11,11 +11,11 @@ go to the c:\users\USER_PROFILE\MONICA directory and execute in a Commandshell
 
 There are the following programs of MONICA available.
 
-* monica-run ... the standalone MONICA commandline model (using libmonica)
-* monica-zmq-proxy ... a tool to run serverside and forward/distribute jobs (ZMQ job messages) to MONICA workers (servers). Optionally it can also just start a number of MONICAs in an own thread and serve them
-* monica-zmq-server ... a MONICA server accepting ZeroMQ messages and process them, usually to be used in connection with ZMQ proxy/proxies and a cloud of worker monica-zmq-servers
-* monica-capnp-proxy ... a MONICA server which actually acts as a proxy to a single server but can start many MONICAs in threads and distribute work send to the proxy amongst the MONICAs
-* monica-capnp-server ... a MONICA server where communication with MONICA happens through a Cap'n Proto interface
+* **monica-run** ... the standalone MONICA commandline model (using libmonica)
+* **monica-zmq-proxy** ... a tool to run serverside and forward/distribute jobs (ZMQ job messages) to MONICA workers (servers). Optionally it can also just start a number of MONICAs in an own thread and serve them
+* **monica-zmq-server** ... a MONICA server accepting ZeroMQ messages and process them, usually to be used in connection with ZMQ proxy/proxies and a cloud of worker monica-zmq-servers
+* **monica-capnp-proxy** ... a MONICA server which actually acts as a proxy to a single server but can start many MONICAs in threads and distribute work send to the proxy amongst the MONICAs
+* **monica-capnp-server** ... a MONICA server where communication with MONICA happens through a Cap'n Proto interface
 
 Every one of the tools can be called with a commandline parameter **-h** which will output the available parameters and how the command works. Showing the help for **monica-run** would display:
 
