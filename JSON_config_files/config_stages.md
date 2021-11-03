@@ -1,141 +1,89 @@
-# MONICA crop stages
-
-**NOTE this is just a help and may be incomplete and/or not correct!!!**
+# MONICA crop stages and according BBCH codes
 
 ## Table of contents
 [Winter wheat - Winterweizen](#winter-wheat---winterweizen)
 
-[Spring wheat - Sommerweizen](#spring-wheat---sommerweizen)
+[Spring wheat - Sommerweizen](#winter-wheat---winterweizen)
 
-[Winter barley - Wintergerste](#winter-barley---wintergerste)
+[Winter barley - Wintergerste](#winter-wheat---winterweizen)
 
-[Spring barley - Sommergerste](#spring-barley---sommergerste)
+[Spring barley - Sommergerste](#winter-wheat---winterweizen)
 
-[Winter triticale - Wintertriticale](#winter-triticale---wintertriticale)
+[Winter triticale - Wintertriticale](#winter-wheat---winterweizen)
 
-[Winter rye - Winterroggen](#winter-rye---winterroggen)
+[Winter rye - Winterroggen](#winter-wheat---winterweizen)
 
 [Oilseed rape (winter) - Winterraps](#oilseed-rape-winter---winterraps)
 
 [Silage maize - Silomais](#silage-maize---silomais)
 
-[Grain maize - Futtermais](#grain-maize---futtermais)
+[Grain maize - Futtermais](#silage-maize---silomais)
 
 [Sugar beet - Zuckerrübe](#sugar-beet---zuckerrübe)
 
 [Mildly early potato - Kartoffel](#mildly-early-potato---kartoffel)
 
-<!--
+## How to read the tables
+
+MONICA issues events with labels like **Stage-1**, **Stage-5** or **anthesis** or **maturity**. When one of these events is issued MONICA will have reached the **BBCH** code noted in the third column. The second column **Event name** tells what other events (additional to **Stage-X**) can be used to react to the according stage.
+
 ## Winter wheat - Winterweizen
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | ------ | --------------------- | -------------------
-1 | Sowing to Emergence | | 0 | 11 | 0 | 9 
-2 | Emgence to Double Ridge | | 12 | 20 | 9 | 25 
-3 | Double Ridge to Heading | | 21 | 50 | | 25 | 31 
-4 | Heading to Anthesis | | 51 | 65 | 51 | 65 
-5 | Grain filling | | 65 | 79 | 65 | 89 
-6 | Senescence | | 80 | 99 | 89 | 99 
+**= Spring wheat** - Sommerweizen
+**= Winter barley** - Wintergerste
+**= Spring barley** - Sommergerste
+**= Winter triticale** - Wintertriticale
+**= Winter rye** - Winterroggen
 
-## Spring wheat - Sommerweizen
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | -------- | --------------------- | -------------------
-1 | Sowing to Emergence | | 0 | 11 | | | simply copied from WW   
-2 | Emergence to Double Ridge | | 12 | 20 | | | simply copied from WW   
-3 | Double Ridge to Heading | | 21 | 50 | | | simply copied from WW   
-4 | Heading to Anthesis | | 51 | 65 | | | simply copied from WW   
-5 | Grain filling | | 65 | 79 | | | simply copied from WW   
-6 | Senescence | | 80 | 99 | | | simply copied from WW   
-
-## Winter barley - Wintergerste
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | -------- | --------------------- | -------------------
-1 | Sowing to Emergence | | 0 | 11 | | 
-2 | Emergence to Double Ridge | | 12 | 20 | | 
-3 | Double Ridge to Heading | | 21 | 50 | | 
-4 | Heading to Anthesis | | 51 | 65 | | 
-5 | Grain filling | | 65 | 79 | | 
-6 | Senescence | | 80 | 99 | | 
-
-## Spring barley - Sommergerste
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | -------- | --------------------- | -------------------
-1 | sowing to emergence | | 0 | 11 | | 
-2 | emergence to double ridge | | 12 | 20 | | 
-3 | Double Ridge to Heading | | 21 | 50 | | 
-4 | Heading to Anthesis | | 51 | 65 | | 
-5 | grain filling | | 65 | 79 | | 
-6 | senescence | | 80 | 99 | | 
-
-## Winter triticale - Wintertriticale
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | -------- | --------------------- | -------------------
-1 | sowing to emergence | | 0 | 11 | | 
-2 | emergence to double ridge | | 12 | 20 | | 
-3 | Double Ridge to Heading | | 21 | 50 | |
-4 | Heading to Anthesis | | 51 | 65 | | 
-5 | grain filling | | 65 | 79 | | 
-6 | senescence | | 80 | 99 | | 
-
-## Winter rye - Winterroggen
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA | comment
------ | -------------- | -------------- | ---------- | -------- | --------------------- | ------------------- | -------
-1 | Sowing to Emergence | | 0 | 11 | | | simply copied from WW   
-2 | Emergence to Double Ridge | | 12 | 20 | | | simply copied from WW   
-3 | Double Ridge to Heading | | 21 | 50 | | | simply copied from WW   
-4 | Heading to Anthesis | | 51 | 65 | | | simply copied from WW   
-5 | Grain filling | | 65 | 79 | | | simply copied from WW   
-6 | Senescence | | 80 | 99 | | | simply copied from WW   
+Stage | Event name | BBCH code | EN description | DE description
+----- | ---------- | --------- | -------------- | --------------
+1 | Sowing | 00 | Sowing | Aussaat
+2 | | 09 | Emgence | Auflaufen
+_ | stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
+3 | | | Double Ridge | Doppelring
+4 | | 51 | Heading | Ährenschieben
+5 | anthesis | 65 | Anthesis | Blüte
+6 | maturity | 89 | Maturity | Vollreife
 
 ## Oilseed rape (winter) - Winterraps
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | -------- | --------------------- | -------------------
-1 | Sowing to emergence | Aussaat bis Auflaufen | 0 | 9 | |
-2 | Emergence to end Juvenile | Auflaufen bis Beginn Blüte | 10 | 30 | |
-3 | End Juvenile to floral initiation | | 31 | 49 | |
-4 | Floral initiation to flowering | | 50 | 59 | |
-5 | Flowering to start grain filling | | 60 | 69 | |
-6 | Start grain filling to maturity | | 80 | 99 | |
+Stage | Event name | BBCH code | EN description | DE description
+----- | ---------- | --------- | -------------- | --------------
+1 | Sowing | 00 | Sowing | Aussaat
+2 | | 09 | Emergence | Auflaufen
+3 | | 31 | Begin stem elongation | Beginn Längenwachstum
+4 | | 61 | Begin of flowering | Beginn Blüte
+5 | anthesis | 69 | End of flowering | Ende Blüte
+6 | maturity | 89 | Maturity | Vollreife
 
 ## Silage maize - Silomais
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | -------- | --------------------- | -------------------
-1 | Germination | Aussaat bis Auflaufen | 0 | 10 | 0 | 9  
-2 | Leaf development to stem elongation | Auflaufen bis Längenwachstum ~~Auflaufen bis Schossen (BBCH Phasen 20 bis 29 gibt es nicht)~~ | 10 | 39 | 9 | 31 
-stem-elongation | Stem elongation | Längenwachstum bis Rispenschieben | | | 31 | 51
-3 | Stem elongation to inflorescence emerging/heading | Rispenschieben bis Beginn männliche Blüte ~~Schossen bis Rispenschieben (BBCH Phasen 40-49 gibt es nicht)~~ | 30 | 49 | 51 | 61 
-4 | Inflorescence emergence & heading to flowering | Beginn männliche Blüte bis Beginn weibliche Blüte | 50 | 59 | 61 | 65
-5 | flowering to begin grain filling | Beginn weibliche Blüte bis Kornfüllung | 60 | 69 | 65 | 71 
-6 | grain filling (development of fruit) | Beginn Kornfüllung bis Vollreife | 70 | 79 | 71 | 89  
-7 | senescence (ripening & senescence) | Vollreife (Seneszenz) (stimmt hier der Startwert?) | 80 | 99 | 89 | 
+**= Grain maize** - Futtermais
 
-## Grain maize - Futtermais
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | -------- | --------------------- | -------------------
-1 | Germination | Aussaat bis Auflaufen | 0 | 10 | | 
-2 | Leaf development to stem elongation | Auflaufen bis Schossen (BBCH Phasen 20 bis 29 gibt es nicht) | 10 | 39 | |   
-3 | Stem elongation to inflorescence emerging/heading | Schossen bis Rispenschieben (BBCH Phasen 40-49 gibt es nicht | 30 | 49 | | 
-4 | Inflorescence emergence &  heading to flowering | Rispenschieben bis Blüte | 50 | 59 | |  
-5 | flowering to begin grain filling | Blüte-Kornfüllung | 60 | 69 | | 
-6 | grain filling (development of fruit) | Kornfüllung | 70 | 79 | | 
-7 | senescence (ripening & senescence) | Seneszenz | 80 | 99 | |
+Stage | Event name | BBCH code | EN description | DE description
+----- | ---------- | --------- | -------------- | --------------
+1 | Sowing | 00 | Germination | Aussaat
+2 | | 09 | Emergence | Auflaufen
+_ | stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
+3 | | 51 | Inflorescence emergence, heading | Rispenschieben
+4 | | 61 | Begin male anthesis | Beginn männliche Blüte
+5 | | 65 | Begin female anthesis | Beginn weibliche Blüte bis Kornfüllung
+6 | anthesis | 71 | Begin grain filling | Beginn Kornfüllung
+7 | maturity | 89 | Maturity | Vollreife
 
 ## Sugar beet - Zuckerrübe
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | -------- | --------------------- | -------------------
-1 | Sowing to Emergence | Aussaat bis Auflaufen | 0 | 11 | | 09 | Keimung bis 1. Laubblatt deutlich sichtbar   
-2 | Emergence to ten leaves | Auflaufen bis zehn Blätter | 12 | 20 | 09 | 19 | Blattentwicklung   
-3 | Ten leaves to tuber growth | Zehn Blätter bis Beginn Rübenwachstum | 21 | 50 | 19 | 40 | Rosettenwachstum &  Entwicklung Rübenkörper   
-4 | Tuber growth | Beginn Rübenwachstum | 51 | 59 | 40 | | Entwicklung der Blütenanlagen   
-5 | Until harvest size | bis Entegröße | 60 | 79 | | 49 | Blüte &  Fruchtentwicklung   
-6 | After harvest size | Erntegröße | 80 | 99 | 49 | | Samenreife und Absterben   
+Stage | Event name | BBCH code | EN description | DE description 
+----- | ---------- | --------- | -------------- | -------------- 
+1 | Sowing | 00 | Sowing | Aussaat 
+2 | | 09 | Emergence | Auflaufen 
+3 | | 19 | Ten leaves | Zehn Blätter 
+4 | | 40 | Begin tuber growth | Beginn Rübenwachstum 
+5 | | | Begin leaf senescence | Beginn Blattseneszenz 
+6 | | 49 | Harvest size | Erntegröße 
 
-## Mildly early potato - Kartoffel
-Stage | EN Description | DE Description | BBCH start | BBCH end | BBCH start DWD-MONICA | BBCH end DWD-MONICA
------ | -------------- | -------------- | ---------- | -------- | --------------------- | -------------------
-1 | Planting to emergence | Legen bis Auflaufen | | 09 | | | 
-2 | Emergence to total coverage | Auflaufen bis Bestandesschluss | 09 | 39 | | | 
-3 | Total coverage to tuber growth | Bestandesschluss bis Beginn Knollenwachstum | 39 | 40 | | | 
-4 | Tuber growth | Beginn Knollenwachstum | 40 | | | | 
-5 | Until harvest size | bis Erntegröße | | 48 | | | 
-6 | After harvest size | Erntegröße | 48 | | | | 
--->
+## Early potato - Kartoffel
+Stage | Event name | BBCH code | EN description | DE description
+----- | ---------- | --------- | -------------- | --------------
+1 | Sowing | 00 | Planting | Legen 
+2 | | 09 | Emergence | Auflaufen 
+3 | | 39 | Total coverage | Bestandesschluss 
+4 | | 40 | Tuber growth | Beginn Knollenwachstum 
+5 | | | Begin leaf senescence | Beginn Blattseneszenz 
+6 | | 48 | Harvest size | Erntegröße 

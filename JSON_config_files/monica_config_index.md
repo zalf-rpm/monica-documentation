@@ -8,5 +8,5 @@
 
 [The **site.json** file](config_site_json)
 
-[Table of crop stages](config_stages)
+[Table of crop stages and BBCH codes](config_stages)
 
