@@ -394,7 +394,7 @@ SurfTemp | | | °C |
 STemp | L | | °C |
 Act_Ev | | | mm |
 Pot_ET | | | mm |
-Act_ET | | | mm |
+Act_ET | | | mm | actual transpiration + actual evaporation + evaporation from interception + evaporation from surface
 ET0 | | | mm |
 Kc | | |  |
 AtmCO2 | | | ppm | Atmospheric CO2 concentration
