@@ -393,7 +393,7 @@ PASW | L | | m3 m-3 | Plant Available Soil Water
 SurfTemp | | | °C |
 STemp | L | | °C |
 Act_Ev | | | mm |
-Pot_ET | | | mm |
+Pot_ET | | | mm | ET0 * Kc
 Act_ET | | | mm | actual transpiration + actual evaporation + evaporation from interception + evaporation from surface
 ET0 | | | mm |
 Kc | | |  |
@@ -442,9 +442,9 @@ WaterContent | L | | %nFC | soil water content
 CapillaryRise | L | | mm | capillary rise
 PercolationRate | L | | mm | percolation rate
 SMB-CO2-ER | L | |  | soilOrganic.get_SMB_CO2EvolutionRate
-Evapotranspiration | | | mm |
-Evaporation | | | mm |
-ETa/ETc | | | | actual evapotranspiration / potential evapotranspiration
+Evapotranspiration | | | mm | remaining evapotranspiration after evaporation of intercepted water
+Evaporation | | | mm | evaporation from intercepted water
+ETa/ETc | | | | Act_ET / Pot_ET (actual evapotranspiration / potential evapotranspiration)
 Transpiration | | | mm |
 GrainN | | | kg ha-1 | get_FruitBiomassNContent
 Fc | L | | m3 m-3 | field capacity
