@@ -37,7 +37,9 @@
 * build zmq lib
   
   ./vcpkg install zeromq:x64-linux
-* build capn proto
+
+* build Cap'n Proto
+
   ./vcpkg install capnproto:x64-linux
 
 * create monica cmake folder and build monica
