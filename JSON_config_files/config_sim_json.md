@@ -83,6 +83,7 @@ Additionally to date patterns every workstep generates an events with named like
 * **Stage-1**, **Stage-2**, ... 
 * **emergence**
 * **anthesis**
+* **cereal-stem-elongation**
 * **maturity**
 * **Sowing**, **AutomaticSowing**, **Cutting**, ....
 
