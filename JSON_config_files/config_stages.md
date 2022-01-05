@@ -38,7 +38,7 @@ Stage | Event name | BBCH code | EN description | DE description
 ----- | ---------- | --------- | -------------- | --------------
 1 | Sowing | 00 | Sowing | Aussaat
 2 | | 09 | Emgence | Auflaufen
-_ | stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
+_ | cereal-stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
 3 | | | Double Ridge | Doppelring
 4 | | 51 | Heading | Ährenschieben
 5 | anthesis | 65 | Anthesis | Blüte
@@ -61,7 +61,7 @@ Stage | Event name | BBCH code | EN description | DE description
 ----- | ---------- | --------- | -------------- | --------------
 1 | Sowing | 00 | Germination | Aussaat
 2 | | 09 | Emergence | Auflaufen
-_ | stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
+_ | cereal-stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
 3 | | 51 | Inflorescence emergence, heading | Rispenschieben
 4 | | 61 | Begin male anthesis | Beginn männliche Blüte
 5 | | 65 | Begin female anthesis | Beginn weibliche Blüte bis Kornfüllung
