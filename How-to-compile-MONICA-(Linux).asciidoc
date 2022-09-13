@@ -45,6 +45,6 @@
 * create monica cmake folder and build monica
   
   cd ~/zalf-rpm/monica
-  sh update_linux.sh
-  cd _cmake_linux
+  sh update_linux_release.sh
+  cd _cmake_release
   make
