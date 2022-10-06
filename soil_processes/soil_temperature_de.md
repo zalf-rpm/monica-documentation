@@ -2,7 +2,7 @@
 
 Das Bodentemperaturmodell wurde dem Modell 4C (2002) entnommen. Dieser Ansatz verwendet eine empirische Funktion von Neusypina (1979) für die Beschreibung der Wärmeleitfähigkeit
 
-$`\small \lambda_h = \frac{3.0 \cdot \rho_B - 1.7}{1.0 + (11.5 - 5.0 \cdot \rho_B) \cdot e^{\left ( \frac{-50 \cdot \theta}{\rho_B} \right) ^{1.5} } } \cdot 418.4`$
+$`\small \lambda_h = \frac{3.0 \cdot \rho_B - 1.7}{1.0 + (11.5 - 5.0 \cdot \rho_B) \cdot e^{-50 \cdot \left( \frac{ \theta}{\rho_B} \right) ^{1.5} } } \cdot 418.4`$
 
 $`\small \lambda_h `$	Wärmeleitfähigkeit des Bodens	$`\small [J \, m^{-1} \, s^{-1} \, K^{-1}] `$<br>
 $`\small \rho_B `$	Trockenrohdichte des Bodens	$`\small [Mg \, m^{-1}] `$<br>
@@ -27,9 +27,7 @@ $`\small o`$	Volumetrischer Gehalt der organischen Substanz im Boden	$`\small [m
 
 Die Bodenoberflächentemperatur wird aus der Minimum- und der Maximumtemperatur der Luft und aus der Globalstrahlung nach Williams (1984) berechnet.
 
-$`\small T_s(t) = (1-\alpha(t)) \cdot (T_{min}(t) + ( T_{max}(t) - T_{min}(t) ) \cdot \sqrt{ 0.03 \cdot R_g(t)}  ) `$ 
-
-$`\small + \alpha(t) \cdot T_s(t_\Delta t))  `$
+$`\small T_s(t) = (1-\alpha(t)) \cdot (T_{min}(t) + ( T_{max}(t) - T_{min}(t) ) \cdot \sqrt{ 0.03 \cdot R_g(t)}  ) + \alpha(t) \cdot T_s(t_\Delta t))  `$
 
 $`\small T_s(t)`$	Bodenoberflächentemperatur zum Zeitpunkt t	$`\small [^{\circ}C] `$<br>
 $`\small T_{min}`$	Minimum-Lufttemperatur in 2m Höhe	$`\small [^{\circ}C] `$<br>
