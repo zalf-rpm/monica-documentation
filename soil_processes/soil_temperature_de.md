@@ -27,7 +27,7 @@ $`\small o`$	Volumetrischer Gehalt der organischen Substanz im Boden	$`\small [m
 
 Die Bodenoberflächentemperatur wird aus der Minimum- und der Maximumtemperatur der Luft und aus der Globalstrahlung nach Williams (1984) berechnet.
 
-$`\small T_s(t) = (1-\alpha(t)) \cdot (T_{min}(t) + ( T_{max}(t) - T_{min}(t) ) \cdot \sqrt{ 0.03 \cdot R_g(t)}  ) + \alpha(t) \cdot T_s(t_\Delta t))  `$
+$`\small T_s(t) = (1-\alpha(t)) \cdot (T_{min}(t) + ( T_{max}(t) - T_{min}(t) ) \cdot \sqrt{ 0.03 \cdot R_g(t)}  ) + \alpha(t) \cdot T_s(t-\Delta t)  `$
 
 $`\small T_s(t)`$	Bodenoberflächentemperatur zum Zeitpunkt t	$`\small [^{\circ}C] `$<br>
 $`\small T_{min}`$	Minimum-Lufttemperatur in 2m Höhe	$`\small [^{\circ}C] `$<br>
