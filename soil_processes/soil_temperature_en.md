@@ -27,7 +27,7 @@ $`\small o`$	Volumetric soil organic mater content	$`\small [m^{3} \, m^{-3}] `$
 
 The soil surface temperature is calculated using minimum and maximum air temperature and global radiation according to Williams (1984).
 
-$`\small T_s(t) = (1-\alpha(t)) \cdot (T_{min}(t) + ( T_{max}(t) - T_{min}(t) ) \cdot \sqrt{ 0.03 \cdot R_g(t)}  ) + \alpha(t) \cdot T_s(t_\Delta t))  `$
+$`\small T_s(t) = (1-\alpha(t)) \cdot (T_{min}(t) + ( T_{max}(t) - T_{min}(t) ) \cdot \sqrt{ 0.03 \cdot R_g(t)}  ) + \alpha(t) \cdot T_s(t_\Delta t)  `$
 
 $`\small T_s(t)`$	Soil surface temperature at time t	$`\small [^{\circ}C] `$<br>
 $`\small T_{min}`$	Minimum air temperature in 2m height	$`\small [^{\circ}C] `$<br>
