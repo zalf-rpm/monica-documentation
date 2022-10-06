@@ -2,7 +2,7 @@
 
 The model for soil temperature was taken from the 4C simulation model (Lasch et al., 2002). It uses an empirical function for the description of heat conductivity which was presented by Neusypina (1979).
 
-$`\small \lambda_h = \frac{3.0 \cdot \rho_B - 1.7}{1.0 + (11.5 - 5.0 \cdot \rho_B) \cdot e^{\left ( \frac{-50 \cdot \theta}{\rho_B} \right) ^{1.5} } } \cdot 418.4`$
+$`\small \lambda_h = \frac{3.0 \cdot \rho_B - 1.7}{1.0 + (11.5 - 5.0 \cdot \rho_B) \cdot e^{ -50 \cdot \left( \frac{\theta}{\rho_B} \right) ^{1.5} } } \cdot 418.4`$
 
 $`\small \lambda_h `$	Soil heat conductivity	$`\small [J \, m^{-1} \, s^{-1} \, K^{-1}] `$<br>
 $`\small \rho_B `$	Soil raw density	$`\small [Mg \, m^{-1}] `$<br>
@@ -27,9 +27,7 @@ $`\small o`$	Volumetric soil organic mater content	$`\small [m^{3} \, m^{-3}] `$
 
 The soil surface temperature is calculated using minimum and maximum air temperature and global radiation according to Williams (1984).
 
-$`\small T_s(t) = (1-\alpha(t)) \cdot (T_{min}(t) + ( T_{max}(t) - T_{min}(t) ) \cdot \sqrt{ 0.03 \cdot R_g(t)}  ) `$ 
-
-$`\small + \alpha(t) \cdot T_s(t_\Delta t))  `$
+$`\small T_s(t) = (1-\alpha(t)) \cdot (T_{min}(t) + ( T_{max}(t) - T_{min}(t) ) \cdot \sqrt{ 0.03 \cdot R_g(t)}  ) + \alpha(t) \cdot T_s(t_\Delta t))  `$
 
 $`\small T_s(t)`$	Soil surface temperature at time t	$`\small [^{\circ}C] `$<br>
 $`\small T_{min}`$	Minimum air temperature in 2m height	$`\small [^{\circ}C] `$<br>
