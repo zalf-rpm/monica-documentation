@@ -42,6 +42,10 @@
 
   ./vcpkg install capnproto:x64-linux
 
+* build libSodium
+
+  ./vcpkg install libsodium:x64-linux
+
 * create monica cmake folder and build monica
   
   cd ~/zalf-rpm/monica
