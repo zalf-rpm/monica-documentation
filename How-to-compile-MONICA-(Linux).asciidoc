@@ -24,7 +24,6 @@
 
   git clone https://github.com/zalf-rpm/monica.git
   git clone https://github.com/zalf-rpm/monica-parameters.git
-  git clone https://github.com/zalf-rpm/util.git
   git clone https://github.com/zalf-rpm/mas-infrastructure.git
 
   git clone https://github.com/Microsoft/vcpkg.git
@@ -49,6 +48,6 @@
 * create monica cmake folder and build monica
   
   cd ~/zalf-rpm/monica
-  sh update_linux_release.sh
+  sh create_cmake_release.sh
   cd _cmake_release
   make
