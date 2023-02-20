@@ -4,7 +4,7 @@ MONICA is a dynamic, process-based simulation model which describes transport an
 
 The acronym MONICA is derived from „MOdel of Nitrogen and Carbon dynamics in Agro-ecosystems”.
 
-This Wiki contains information about the software development of MONICA as well as its use. Additional information of the model (processes, installation of version 1.2) can be found on [http://monica.agrosystem-models.com/](http://monica.agrosystem-models.com/).
+This Wiki contains information about the software development of MONICA as well as its use. 
 
 ## Getting help / helping
 
