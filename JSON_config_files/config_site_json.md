@@ -14,14 +14,14 @@ The following table shows the names of the soil properties which can be set on a
 Name of config file variable | Unit | Description
 ---------------------------- | ---- | -----------
 **Thickness** | m | thickness of the soil layer
-**Sand** | kg kg-1 (% [0-1]) | soil sand content, a percentage between 0 and 1
-**Clay** | kg kg-1 (% [0-1]) | soil clay content, a percentage between 0 and 1
+**Sand** | kg kg-1 (fraction [0-1]) | soil sand content, a fraction between 0 and 1
+**Clay** | kg kg-1 (fraction [0-1]) | soil clay content, a fraction between 0 and 1
 **pH** | | soil pH value
-**Sceleton** | % [0-1] | soil stone content, a percentage between 0 and 1
+**Sceleton** | fraction [0-1] | soil stone content, a fraction between 0 and 1
 **Lambda** | | soil water conductivity coefficient
-**FieldCapacity** | m3 m-3 | fieldcapacity
-**PoreVolume** | m3 m-3 | saturation
-**PermanentWiltingPoint** | m3 m-3 | permanent wilting point
+**FieldCapacity** | m3 m-3 (fraction [0-1]) | field capacity
+**PoreVolume** | m3 m-3 (fraction [0-1]) | saturation
+**PermanentWiltingPoint** | m3 m-3 (fraction [0-1]) | permanent wilting point
 **KA5TextureClass** | | KA5 soil texture
 **SoilAmmonium** | kg NH4-N m-3 | initial soil ammonium content
 **SoilNitrate** | kg NO3-N m-3 | initial soil nitrate content
@@ -29,7 +29,7 @@ Name of config file variable | Unit | Description
 **SoilRawDensity** | kg m-3 | soil raw density
 **SoilBulkDensity** | kg m-3 | soil bulk density
 **SoilOrganicCarbon** | % [0-100] ([kg C kg-1] * 100) | soil organic carbon, a percentage between 0 and 100
-**SoilOrganicMatter** | kg OM kg-1 (% [0-1]) | soil organic matter
+**SoilOrganicMatter** | kg OM kg-1 (fraction [0-1]) | soil organic matter
 **SoilMoisturePercentFC** | % [0-100] | initial soil moisture in percent of field capacity
 
 
