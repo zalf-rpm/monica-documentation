@@ -31,7 +31,16 @@ Name of config file variable | Unit | Description
 **SoilOrganicCarbon** | % [0-100] ([kg C kg-1] * 100) | soil organic carbon, a percentage between 0 and 100
 **SoilOrganicMatter** | kg OM kg-1 (% [0-1]) | soil organic matter
 **SoilMoisturePercentFC** | % [0-100] | initial soil moisture in percent of field capacity
-**Slope** | [height m * length m-1]   [0-1] | site slope
+
+
+Further site specific variables.
+
+Name of config file variable | Unit | Description
+---------------------------- | ---- | -----------
+**Latitude** | [decimal degree] | site's latitude
+**Slope** | [height m * length m-1]   [0-1] | site's slope
+**HeightNN** | [m] | site's height above sea level
+**NDeposition** | | N deposition via atmosphere
 
 ## Environment parameters for the whole simulation
 
@@ -67,7 +76,7 @@ Name of parameter | Unit | Default value | Description
 {
   "SiteParameters": {
     "Latitude": 52.80939865112305,
-    "Slope": 0,
+    "Slope": 0.1,
     "HeightNN": [0 , "m"],
     "NDeposition": 30,
     "SoilProfileParameters": [
