@@ -4,7 +4,7 @@
 
 * VisualStudio 2022 (community edition) with Language package English
 (If you don't want to run Visual Studio as editor, install Visual Studio Build Tools instead)
-* cmake 3.12 or newer
+* cmake 3.28 or newer
 * git
 
 ## Environment Variables
