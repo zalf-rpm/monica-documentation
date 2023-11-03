@@ -2,7 +2,7 @@
 
 ## Required Software
 
-* VisualStudio 2019 (community edition) with Language package English
+* VisualStudio 2022 (community edition) with Language package English
 (If you don't want to run Visual Studio as editor, install Visual Studio Build Tools instead)
 * cmake 3.12 or newer
 * git
@@ -29,7 +29,6 @@ Don't forget to install the English language package for Visual Studio(or Visual
 
   git clone https://github.com/zalf-rpm/monica.git
   git clone https://github.com/zalf-rpm/monica-parameters.git
-  git clone https://github.com/zalf-rpm/util.git
   git clone https://github.com/zalf-rpm/mas-infrastructure.git
 
 * checkout vcpkg for dependent libs
@@ -41,16 +40,14 @@ Don't forget to install the English language package for Visual Studio(or Visual
   cd vcpkg
   .\bootstrap-vcpkg.bat
   .\vcpkg install zeromq:x64-windows-static
-  .\vcpkg install zeromq:x86-windows-static
-  .\vcpkg install capnproto:x86-windows-static
   .\vcpkg install capnproto:x64-windows-static
+  .\vcpkg install libsodium:x64-windows-static
 
 Your folder structure should look like that:
 
  working folder (e.g. 'c:\zalf-rpm')
            |_ monica
            |_ mas-infrastructure
-           |_ util
            |_ monica-parameters
            |_ vcpkg
 
@@ -59,31 +56,17 @@ Your folder structure should look like that:
 
   cd c:\zalf-rpm\monica
 
-* execute update_solution.cmd to build a 32 bit version
-
-  .\update_solution.cmd
-
-* update_solution_x64.cmd to build a 64 bit version
+* create_solution_x64_VS17_2022.cmd to build 
  
-  .\update_solution_x64.cmd
+  .\create_solution_x64_VS17_2022.cmd
 
-* change to the newly created _cmake_win32 folder or _cmake_win64
+* change to the newly created _cmake_win64
   open monica.sln with visual studio and compile
 * (optional) or run msbuild 
-  
-  msbuild _cmake_win32/monica.sln /p:Configuration=Release /p:Platform="Win32"
   msbuild _cmake_win64/monica.sln /p:Configuration=Release /p:Platform="x64"
-
 
 ## Creating an installer-file for Windows
 
 ### Prerequesites
 
-* NSIS Installer (e.g. 3.0.3)
-* EnvVarUpdate.nsh (Download and save it in the 'installer'-Folder (e.g. monica-master/monica/installer)
 * MONICA should be built as Release using Visual Studio (s. above)
-
-### Run NSIS to create installer file
-
-* open command line and switch into the installer directory of MONICA
-* execute run-installer-x86.bat or run-installer-x64.bat
