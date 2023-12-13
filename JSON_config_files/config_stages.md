@@ -37,7 +37,7 @@ MONICA issues events with labels like **Stage-1**, **Stage-5** or **anthesis** o
 Stage | Event name | BBCH code | EN description | DE description
 ----- | ---------- | --------- | -------------- | --------------
 1 | Sowing | 00 | Sowing | Aussaat
-2 | | 09 | Emgence | Auflaufen
+2 | emergence | 09 | Emgence | Auflaufen
 _ | cereal-stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
 3 | | | Double Ridge | Doppelring
 4 | | 51 | Heading | Ährenschieben
@@ -48,7 +48,7 @@ _ | cereal-stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
 Stage | Event name | BBCH code | EN description | DE description
 ----- | ---------- | --------- | -------------- | --------------
 1 | Sowing | 00 | Sowing | Aussaat
-2 | | 09 | Emergence | Auflaufen
+2 | emergence | 09 | Emergence | Auflaufen
 3 | | 31 | Begin stem elongation | Beginn Längenwachstum
 4 | | 61 | Begin of flowering | Beginn Blüte
 5 | anthesis | 69 | End of flowering | Ende Blüte
@@ -60,7 +60,7 @@ Stage | Event name | BBCH code | EN description | DE description
 Stage | Event name | BBCH code | EN description | DE description
 ----- | ---------- | --------- | -------------- | --------------
 1 | Sowing | 00 | Germination | Aussaat
-2 | | 09 | Emergence | Auflaufen
+2 | emergence | 09 | Emergence | Auflaufen
 _ | cereal-stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
 3 | | 51 | Inflorescence emergence, heading | Rispenschieben
 4 | | 61 | Begin male anthesis | Beginn männliche Blüte
@@ -72,7 +72,7 @@ _ | cereal-stem-elongation | 31 | Begin stem elongation | Beginn Längenwachstum
 Stage | Event name | BBCH code | EN description | DE description 
 ----- | ---------- | --------- | -------------- | -------------- 
 1 | Sowing | 00 | Sowing | Aussaat 
-2 | | 09 | Emergence | Auflaufen 
+2 | emergence | 09 | Emergence | Auflaufen 
 3 | | 19 | Ten leaves | Zehn Blätter 
 4 | | 40 | Begin tuber growth | Beginn Rübenwachstum 
 5 | | | Begin leaf senescence | Beginn Blattseneszenz 
@@ -82,7 +82,7 @@ Stage | Event name | BBCH code | EN description | DE description
 Stage | Event name | BBCH code | EN description | DE description
 ----- | ---------- | --------- | -------------- | --------------
 1 | Sowing | 00 | Planting | Legen 
-2 | | 09 | Emergence | Auflaufen 
+2 | emergence | 09 | Emergence | Auflaufen 
 3 | | 39 | Total coverage | Bestandesschluss 
 4 | | 40 | Tuber growth | Beginn Knollenwachstum 
 5 | | | Begin leaf senescence | Beginn Blattseneszenz 
