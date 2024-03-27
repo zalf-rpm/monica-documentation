@@ -6,11 +6,12 @@ The **sim.json** file contains simulation specific information like start and en
 
 ## Reading climate data (**climate.csv-options**)
 
-Climate data are being stored in a **.csv** formatted file. In **sim.json** is a section which can be used to configure some parts of what will be read and in which way. If the **JSON object** **climate.csv-options** contains the two keys **start-date** and **end-date**, only the designated time range will be read from the file. If they are missing all data will be read and thus determine how long MONICA will run.
+Climate data are stored in **.csv** formatted files, "climate.csv-options" in **sim.json** is used for their configuration. 
+The time range for the MONICA run is defined by the keys **start-date** and **end-date** of the **JSON object** **climate.csv-options**. If these keys are not present, the time range is set that of the **climate.csv**.
 
-The key **no-of-climate-file-header-lines** defines how many lines will be skiped initially, as there could be no (0) header in the file, just the column names (1) or maybe more (e.g. the units). **csv-separator** defines what character is being used to separate the columns and values. In a **Comma Separated Values** file this is usually a **,**, but could equally well be the tabulator character **\t** or spaces etc.
+The key **no-of-climate-file-header-lines** defines how many lines will be skipped initially, as there could be no header in the file (0), just the column names (1), or maybe more (e.g. the units). **csv-separator** defines what character is used to separate the columns and values. In a **Comma Separated Values** file this is usually a **,**, but could as well be the tabulator character **\t** or spaces etc.
 
-Then there may be a key **header-to-acd-names** which may have a **JSON object** as its value. The key/value pairs in the object define mappings from the column header names in the **climate.csv** file to **Available Climate Data (ACD)** names which MONICA knows and accepts. **ACD** are (case sensitivity is significant)
+MONICA accepts **Available Climate Data (ACD)** names for the climate input. These names are case sensitive!
 
 ACD element | description (example) [unit]
 ----------- | ----------------------------
@@ -28,7 +29,9 @@ wind | wind speed (**6.7**) [**m s-1**]
 relhumid | relative humidity (**90.0**) [**%**]
 skip | skip an existing element
 
-Unknown column headers will be skipped automatically, therefore the **skip** **ACD** is to consciously skip known elements, e.g. if there might be multiple columns for the same type of climate elements. The **header-to-acd-names** mapping is meant to provide a means to allow a wider range of existing **.csv** files to be used as is.
+Unknown column headers will be skipped automatically, therefore the **skip** **ACD** is to explicitely skip known elements, e.g. if there are multiple columns for the same type of climate elements. 
+
+In order to use any climate dataset without further adjustments, any column header names can be mapped to their according **ACD** names. The value of the optional key **header-to-acd-names** is a **JSON object** with its key/value pairs defining those mappings.
 
 Additionally it is possible that the value side of the mapping is actually a **JSON array**, which is allowed to contain two elements - first a simple arithmetic operation (__+, -, *, /__) and second a number value. Then instead of replacing the key (a name) by the value (a valid **ACD** name) the operation is applied to the key (a column name). In the example below the .csv** file contains a column **global_radiation** in **J cm-2** __global_radiation__ is mapped to **globrad** the valid MONICA **ACD** name for the global radiation and secondly it will be multiplied (__*__) by **100.0** to convert the values to **MJ m-2**.
 
@@ -47,7 +50,7 @@ Additionally it is possible that the value side of the mapping is actually a **J
 }
 ```
 
-## Outputing results from MONICA
+## Outputting results from MONICA
 
 The user can request the result output in **CSV** format from MONICA by defining options in the **JSON object** under the key **output**.
 
@@ -65,7 +68,7 @@ events | a list of pairs, which describe the events on which MONICA is requested
 
 ### events
 
-The key **events** defines a list of MONICA results which should be output. The definition consists of two pieces, so the **JSON array** which is the value to the key **events** has to consist of an even number of entries, always a pair of **event, [list of outputs]**. An event can either be a simple string like **"daily"** or a **JSON object** or a **JSON array**. A string and a **JSON array** are just shortcuts for a more complex **JSON object** which describes the event upon which output should be generated.
+The key **events** defines the list of MONICA results to be output. The events are defined in a **JSON array** each as a pair of an **event** followed by the according  **[list of outputs]**. An event can either be a simple string like **"daily"** or a **JSON object** or a **JSON array**. A string and a **JSON array** are just shortcuts for a more complex **JSON object** which describes the event upon which output should be generated.
 
 In order to define requested outputs a few kinds of information have to be distinguished:
 
@@ -74,11 +77,11 @@ In order to define requested outputs a few kinds of information have to be disti
 3. **at** which time/condition to write a result, which doesn't aggregate results
 4. **while** some condition is true, aggregate results
 
-ISO-Dates are allowed to contain placeholders (**x**), which means that the year, month or day is unspecified and thus every available value is used.
+ISO-Dates can contain placeholders (**x**). Every possible value for the year, month, or day of the placeholder is used.
 
 #### available events
 
-Additionally to date patterns every workstep generates an events with named like the Workstep, e.g. there are events like Sowing, Harvest, AutomaticSowing, SetValue etc.
+Additional to the date patterns, each workstep generates an event with the same name, e.g. there are events like Sowing, Harvest, AutomaticSowing, SetValue etc.
 
 * **Stage-1**, **Stage-2**, ... 
 * **emergence**
@@ -95,10 +98,10 @@ Shortcut | Expanded form | Meaning
 | | ```{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}``` | output results at every 15th from mai to july - daily results will be output
 | | ```{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "<", 0.4]}``` | output aggregated results from "Sowing" event until (incl) the "anthesis" event, but include only results while actual to potential evapotranspiration was below 0.4
 "xxxx-03-31" | ```{"at": "xxxx-03-31"}``` | write results every year at the march 31st
-"daily" | ```{"at": "xxxx-xx-xx"}``` | write results daily
+"daily" | ```{"at": "xxxx-xx-xx"}``` | write daily results 
 "monthly" | ```{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}``` | write monthly aggregated results
 "yearly" | ```{"from": "xxxx-01-01", "to": "xxxx-12-31"}``` | write yearly aggregated results
-"run" | ```{"from": <start-date>, "to": <end-date>}``` | write results aggregated over the whole run
+"run" | ```{"from": <start-date>, "to": <end-date>}``` | write results aggregated over the entire run
 "crop" | ```{"from": "Sowing", "to": "Harvest"}``` | write results aggregated during the cropping period
 ["while", "Stage", "=", 5] | ```{"while": ["Stage", "=", 5]}``` | write results aggregated only while the result **Stage** equals 5
 ["at", "Stage", "=", 2] | ```{"at": ["Stage", "=", 2]}``` | write results daily if the result **Stage** equals 2
