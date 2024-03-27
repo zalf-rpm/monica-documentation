@@ -52,7 +52,7 @@ Additionally it is possible that the value side of the mapping is actually a **J
 
 ## Outputting results from MONICA
 
-The user can request the result output in **CSV** format from MONICA by defining options in the **JSON object** under the key **output**.
+All results of a MONICA run can be stored in a **CSV** formatted file. Which results are output and how these results are aggregated can be defined in **sim.json** under the key **output**.
 
 The following table describes a couple of options which can be set:
 
@@ -68,11 +68,11 @@ events | a list of pairs, which describe the events on which MONICA is requested
 
 ### events
 
-The key **events** defines the list of MONICA results to be output. The events are defined in a **JSON array** each as a pair of an **event** followed by the according  **[list of outputs]**. An event can either be a simple string like **"daily"** or a **JSON object** or a **JSON array**. A string and a **JSON array** are just shortcuts for a more complex **JSON object** which describes the event upon which output should be generated.
+The key **events** defines the list of MONICA results to be output. The events are defined in a **JSON array**, each as a pair of an **event** followed by the according  **[list of outputs]**. An event can either be a simple string like **"daily"** or a **JSON object** or a **JSON array**. A string and a **JSON array** are just shortcuts for a more complex **JSON object** which describes the event upon which output should be generated.
 
 In order to define requested outputs a few kinds of information have to be distinguished:
 
-1. when to **start**/**end** outputing results (**start**/**end** keys)
+1. when to **start**/**end** outputting results (**start**/**end** keys)
 2. in the start/end period **from**/**to** when to aggregate data (**from**/**to** keys)
 3. **at** which time/condition to write a result, which doesn't aggregate results
 4. **while** some condition is true, aggregate results
@@ -97,7 +97,7 @@ Shortcut | Expanded form | Meaning
 -------- | ------------- | -------
 | | ```{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}``` | output results at every 15th from mai to july - daily results will be output
 | | ```{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "<", 0.4]}``` | output aggregated results from "Sowing" event until (incl) the "anthesis" event, but include only results while actual to potential evapotranspiration was below 0.4
-"xxxx-03-31" | ```{"at": "xxxx-03-31"}``` | write results every year at the march 31st
+"xxxx-03-31" | ```{"at": "xxxx-03-31"}``` | write results for every March 31st
 "daily" | ```{"at": "xxxx-xx-xx"}``` | write daily results 
 "monthly" | ```{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}``` | write monthly aggregated results
 "yearly" | ```{"from": "xxxx-01-01", "to": "xxxx-12-31"}``` | write yearly aggregated results
@@ -108,17 +108,18 @@ Shortcut | Expanded form | Meaning
 [["Mois", 1], "<", 0.5] | ```{"at": ["Mois", 1], "<", 0.5]}``` | write results daily if the soil-moisture in the first layer is below 0.5
 "Sowing" | ```{"at": "Sowing"}``` | at sowing time write a result
 
-As can be seen in the table above it is possible to use simple comparision expressions in the events. The available operators are **<, <=, =, >=, >**. On the lefthand and/or righthand side of the operator may appear either an output expression (e.g **"Stage"** or **["Mois", 1]**) or a numeric value (e.g. **1**).
+As shown in the table above, simple comparison expressions can be used in the events. The available operators are **<, <=, =, >=, >**. Output expressions, such as **"Stage"** or **["Mois", 1]**, as well as numeric values (e.g. **1**) can be used on both sides of these operators.
 
 ## List of outputs
 
-The previous section defined the events when MONICA should output results. What remains is to define what should be output. In the previous table appeared already some **outputs** in expressions like ```["at", "Stage", "=", 2]``` or ```[["Mois", 1], "<", 0.5]```. **"Stage"** outputs the current development stage the plant is in and **["Mois", 1]** outputs the soil-moisture in the first 10cm soil-layer. MONICA internally defines a lot of names which refer to results which can be output. There are three categories:
+The previous section defined the events, so the points in time for which MONICA results should be output. 
+What remains is to define what should be output. In the previous table appeared already some **outputs** in expressions like ```["at", "Stage", "=", 2]``` or ```[["Mois", 1], "<", 0.5]```. **"Stage"** outputs the current development stage the plant is in and **["Mois", 1]** outputs the soil-moisture in the first 10cm soil-layer. MONICA internally defines a lot of names which refer to results which can be output. There are three categories:
 
 1. scalar values like **Stage**
 2. array values like **Mois**, which actually consist of 20 values for the soil-moistures in all the layers
 3. array values like **["OrgBiom", "Root"]**, crop-organ specific results
 
-MONICA currently uses a fixed set of 20 10cm soil-layers. If an output requires to choose a layer or a range of layers, a number between 1 and 20 has to be supplied. If the output is about an crop-organ one of the following keywords is to be used: **"Root", "Leaf", "Shoot", "Fruit", "Struct", "Sugar"**.
+MONICA currently uses a fixed set of 20 10cm soil-layers. If an output requires to choose a layer or a range of layers, a number between 1 and 20 has to be supplied. If the output is about a crop-organ, one of the following keywords is to be used: **"Root", "Leaf", "Shoot", "Fruit", "Struct", "Sugar"**.
 
 Additionally the user has to tell MONICA whether ranges of values (in the arrays) are to be output as a bunch of scalars or instead be aggregated to a single value and if they should be aggregated, how to aggregate them. The following aggregation operations are available: **AVG, MEDIAN, SUM, MIN, MAX, FIRST, LAST, NONE**. Aggregation might happen on a daily basis to aggregate soil layers to a single scalar value (the **default** operation for layer aggregation is **NONE**) or in aggregation time ranges, e.g. to aggregate monthly values, where the **default** aggregation operation is **AVG**.
 
