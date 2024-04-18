@@ -39,6 +39,7 @@ An older german version of a compile how to can be found here [How to compile MO
 
 MONICA can be used in two broad ways, as a standalone commandline application and with scripts which will send jobs to a cloud of MONICA worker processes.
 
+How to "install" MONICA with the current zip version can be found [here](wiki/Installing-accessing-zip-version-of-MONICA-under-Windows).
 How to use MONICA as a standalone commandline application is described [here](wiki/How-to-run-standalone-CMD-MONICA). 
 
 To find a description of how to use MONICA on high performance computers or with multiple machines look [here](wiki/How-to-run-HPC-MONICA). Basic information of how MONICA works is assumed in the HPC use case description.
