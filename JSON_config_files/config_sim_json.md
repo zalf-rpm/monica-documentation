@@ -83,6 +83,7 @@ ISO-Dates can contain placeholders (**x**). Every possible value for the year, m
 
 Additional to the date patterns, each workstep generates an event with the same name, e.g. there are events like Sowing, Harvest, AutomaticSowing, SetValue etc.
 
+* **run-started**
 * **Stage-1**, **Stage-2**, ... 
 * **emergence**
 * **anthesis**
