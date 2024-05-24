@@ -464,4 +464,40 @@ pH | | | kg kg-1 | Soil pH content
 rootDensity | L | | | cropGrowth->vc_RootDensity at layer
 rootingZone | | | | cropGrowth->vc_RootingZone = into which layer the root grows currently
 
+## AutomaticIrrigation trigger
 
+key | default value | unit | description
+--- | ----- | ---- | -----------
+"UseAutomaticIrrigation" | true or false | | turn automatic irrigation on/off
+"nitrateConcentration" | 0 | mg dm-3 | the nitrate concentration in the irrigation water
+"sulfateConcentration" | 0 | mg dm-3 | **!!!currently irgnored!!!** the sulfate concentration in the irrigation water
+"amount" |  | mm | the amount of irrigation water to apply if the plant available water drops below the threshold
+"set_to_%nFC" | | %nFC | set the soil moisture of all the involved layers to that percentage of plant available water (nFC)
+"threshold" |  | fraction nFC | **!!!deprecated!!! use trigger_if_nFC_below_%** fraction of net field capacity (plant available water = field capacity - permanent wilting point to)  to drop below
+"trigger_if_nFC_below_%" |  |%nFC | trigger irrigation if percentage of net field capacity (plant available water = field capacity - permanent wilting point to) drops below that value
+"calc_nFC_until_depth_m" | 0.3 | m | the soil depth MONICA uses to check if irrigation should be triggered
+
+Minimal example to trigger irriation of 17mm each time the plant available water in the the first 30cm of the soil profile drops below 50%.
+
+```json
+"UseAutomaticIrrigation": false,
+"AutoIrrigationParams": {
+  "amount": [17, "mm"],
+  "trigger_if_nFC_below_%": [50, "%"],
+  "calc_nFC_until_depth_m": [0.3, "m"]
+}
+```
+
+Similar example, but this time set the soil moistures in the first 50cm of the soil profile to field capacity = 100%nFC if the plant available water drops below 50%. This time add 10 mg/dm of nitrate with the irrigation water.
+
+```json
+"UseAutomaticIrrigation": false,
+"AutoIrrigationParams": {
+  "irrigationParameters": {
+    "nitrateConcentration": [10, "mg dm-3"],
+  },
+  "trigger_if_nFC_below_%": [50, "%"],
+  "set_to_%nFC": [100, "%"],
+  "calc_nFC_until_depth_m": [0.5, "m"]
+}
+```
