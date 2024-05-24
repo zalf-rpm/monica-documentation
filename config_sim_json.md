@@ -466,6 +466,8 @@ rootingZone | | | | cropGrowth->vc_RootingZone = into which layer the root grows
 
 ## Automatic Irrigation trigger
 
+Turn automatic irrigation trigger on or of via the **UseAutomaticIrrigation** key set to **true**. If the key **amount** is set a fixed amount of irrigation water will be applied, else if **set_to_%nFC** is set, the soil moistures of the involved soil layers (**calc_nFC_until_depth_m**) will be set to the given percentage of available soil water. The trigger is only activated if there's a crop currently growing and if MONICAs internal current temperature sum is between **HeatSumIrrigationStart** and **HeatSumIrrigationEnd**. Both parameters can be found in the **cultivar** JSON file of the currently active crop.
+
 key | default value | unit | description
 --- | ----- | ---- | -----------
 "UseAutomaticIrrigation" | true or false | | turn automatic irrigation on/off
