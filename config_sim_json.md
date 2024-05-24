@@ -464,7 +464,7 @@ pH | | | kg kg-1 | Soil pH content
 rootDensity | L | | | cropGrowth->vc_RootDensity at layer
 rootingZone | | | | cropGrowth->vc_RootingZone = into which layer the root grows currently
 
-## AutomaticIrrigation trigger
+## Automatic Irrigation trigger
 
 key | default value | unit | description
 --- | ----- | ---- | -----------
