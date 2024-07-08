@@ -356,7 +356,6 @@ LT50 | | | °C | LT50
 AbBiom | | | kg ha-1 | AbovegroundBiomass
 OrgBiom | O | | kgDM ha-1 | get_OrganBiomass(i)
 Yield | | | kgDM ha-1 | get_PrimaryCropYield
-SumYield | | | kgDM ha-1 | get_AccumulatedPrimaryCropYield
 sumExportedCutBiomass | | | kgDM ha-1 | return sum (across cuts) of exported cut biomass for current crop
 exportedCutBiomass | | | kgDM ha-1 | return exported cut biomass for current crop and cut
 sumResidueCutBiomass | | | kgDM ha-1 | return sum (across cuts) of residue cut biomass for current crop
