@@ -188,6 +188,7 @@ Fires **NDemandFertilization** event.
 Parameter name | unit/type | default | example | description
 -------------- | --------- | ------- | ------- | -----------
 **partition** | JSON object | | ```{"id": "AN",	"name": "ammonium nitrate", "Carbamid": 0, "NH4": 0.5, "NO3": 0.5}``` | Json object describing the composition of the N fertilizer
+**N-demand** | [kg N] | | | the amount of N which is demanded by the crop (= the difference to the actually available N will be given)
 **depth** | [m]
 **stage** | dev stage [1-6/7] | | 1 (sowing) or<br> 6 (maturity of maize) | MONICA development stage number
 
