@@ -27,9 +27,8 @@ Don't forget to install the English language package for Visual Studio(or Visual
 
 * checkout monica and related repositories with git
 
-  git clone https://github.com/zalf-rpm/monica.git
+  git clone --recurse-submodules https://github.com/zalf-rpm/monica.git
   git clone https://github.com/zalf-rpm/monica-parameters.git
-  git clone https://github.com/zalf-rpm/mas-infrastructure.git
 
 * checkout vcpkg for dependent libs
 
@@ -47,7 +46,6 @@ Your folder structure should look like that:
 
  working folder (e.g. 'c:\zalf-rpm')
            |_ monica
-           |_ mas-infrastructure
            |_ monica-parameters
            |_ vcpkg
 
