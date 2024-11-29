@@ -22,9 +22,8 @@
 
 * checkout monica and dependencies 
 
-  git clone https://github.com/zalf-rpm/monica.git
+  git clone --recurse-submodules https://github.com/zalf-rpm/monica.git
   git clone https://github.com/zalf-rpm/monica-parameters.git
-  git clone https://github.com/zalf-rpm/mas-infrastructure.git
 
   git clone https://github.com/Microsoft/vcpkg.git
 
