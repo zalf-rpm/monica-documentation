@@ -33,8 +33,6 @@ Some information about the different versions of MONICA can be found here [MONIC
 
 How to compile MONICA?[(Windows)](https://github.com/zalf-rpm/monica/wiki/How-to-compile-MONICA-(Windows)) / [(Linux)](https://github.com/zalf-rpm/monica/wiki/How-to-compile-MONICA-(Linux))
 
-An older german version of a compile how to can be found here [How to compile MONICA? (old)](wiki/How-to-compile-MONICA). How to compile the current version also be found in the [README](https://github.com/zalf-lsa/monica/blob/master/README.md) in the repository.
-
 ## Use MONICA
 
 MONICA can be used in two broad ways, as a standalone commandline application and with scripts which will send jobs to a cloud of MONICA worker processes.
