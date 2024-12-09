@@ -455,11 +455,11 @@ GrainN | | | kg ha-1 | get_FruitBiomassNContent
 Fc | L | | m3 m-3 | field capacity
 Pwp | L | | m3 m-3 | permanent wilting point
 Nresid | | | kg N ha-1 | Nitrogen content in crop residues
-Sand | | | kg kg-1 | Soil sand content
-Clay | | | kg kg-1 | Soil clay conten
-Silt | | | kg kg-1 | Soil silt content
-Stone | | | kg kg-1 | Soil stone content
-pH | | | kg kg-1 | Soil pH content
+Sand | L | | kg kg-1 | Soil sand content
+Clay | L | | kg kg-1 | Soil clay conten
+Silt | L | | kg kg-1 | Soil silt content
+Stone | L | | kg kg-1 | Soil stone content
+pH | L | | kg kg-1 | Soil pH content
 rootDensity | L | | | cropGrowth->vc_RootDensity at layer
 rootingZone | | | | cropGrowth->vc_RootingZone = into which layer the root grows currently
 
