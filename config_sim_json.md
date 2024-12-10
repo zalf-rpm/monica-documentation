@@ -443,7 +443,7 @@ N | L | | kgN ha-1 | mineral nitrogen content of the soil
 Co | L | | kgC m-3 |
 NH3 | | | kgN ha-1 | NH3_Volatilised
 NFert | | | kgN ha-1 | dailySumFertiliser
-WaterContent | L | | %nFC | soil water content
+WaterContent | L | | fraction nFC | fraction of usable field capacity PASW/(FC-PWP)
 CapillaryRise | L | | mm | capillary rise
 PercolationRate | L | | mm | percolation rate
 SMB-CO2-ER | L | |  | soilOrganic.get_SMB_CO2EvolutionRate
