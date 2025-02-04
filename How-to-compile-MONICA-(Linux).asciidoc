@@ -32,17 +32,12 @@
   cd vcpkg
   ./bootstrap-vcpkg.sh
  
-* build zmq lib
+* build zmq, Cap'n Proto, sodium, toml++ libs
   
   ./vcpkg install zeromq:x64-linux
-
-* build Cap'n Proto
-
   ./vcpkg install capnproto:x64-linux
-
-* build libSodium
-
   ./vcpkg install libsodium:x64-linux
+  ./vcpkg install tomlplusplus:x64-linux
 
 * create monica cmake folder and build monica
   
