@@ -41,6 +41,7 @@ Don't forget to install the English language package for Visual Studio(or Visual
   .\vcpkg install zeromq:x64-windows-static
   .\vcpkg install capnproto:x64-windows-static
   .\vcpkg install libsodium:x64-windows-static
+  .\vcpkg install tomlplusplus:x64-windows-static
 
 Your folder structure should look like that:
 
