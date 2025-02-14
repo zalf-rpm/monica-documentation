@@ -25,6 +25,7 @@ tavg | average daily temperature (**15.3**) [**°C**]
 tmax | maximum daily temperature (**34.7**) [**°C**]
 precip | daily precipitation (**2.3**) [**mm**]
 globrad | global radiation (**27.431**) [**MJ m-2**]
+sunhours | hours of sunshine (better use globrad) (**8.5**) [**h**]
 wind | wind speed (**6.7**) [**m s-1**]
 relhumid | relative humidity (**90.0**) [**%**]
 skip | skip an existing element
