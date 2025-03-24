@@ -25,7 +25,9 @@
   git clone --recurse-submodules https://github.com/zalf-rpm/monica.git
   git clone https://github.com/zalf-rpm/monica-parameters.git
 
-  git clone https://github.com/Microsoft/vcpkg.git
+* checkout vcpkg for dependent libs, but use the tagged version found in the vcpkg_tag.txt file in the root of the MONICA repository
+
+  git clone -b 2024.09.30 https://github.com/Microsoft/vcpkg.git
 
 * build vcpkg
   
