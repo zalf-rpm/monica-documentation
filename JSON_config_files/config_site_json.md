@@ -59,15 +59,15 @@ Currently the following procedure is being applied.
 Name of parameter | Unit | Default value | Description
 ----------------- | ---- | ------------- | -----------
 **Albedo** | | 0.23 | 
-**AtmosphericCO2** | ppm | 0.0 | 
+**AtmosphericCO2** | ppm | 0.0 | Atmospheric CO<sub>2</sub> concentration
 **AtmosphericCO2s** | ppm | unset | example value: {"1991": 360, "1992": 370, "1993": 380}
-**AtmosphericO3**, | ppm | 0.0 
+**AtmosphericO3**, | ppm | 0.0 | 
 **AtmosphericO3s** | ppm | unset | 
-**WindSpeedHeight** | m s-1 | 2.0 | 
-**LeachingDepth** | m | 0.0. | 
-**MaxGroundwaterDepth** | m | 18.0 | 
-**MinGroundwaterDepth** | m | 20.0 | 
-**MinGroundwaterDepthMonth** | m | 3.0 |
+**WindSpeedHeight** | m | 2.0 | Height above ground surface at which wind speed is measured
+**LeachingDepth** | m | 0.0 | Depth below ground surface at which water and nitrate outflow is determined
+**MaxGroundwaterDepth** | m | 18.0 | Maximum annual depth of the groundwater table below the ground surface
+**MinGroundwaterDepth** | m | 20.0 | Minimum annual depth of the groundwater table below the ground surface
+**MinGroundwaterDepthMonth** |  | 3.0 | Month in which the minimum average groundwater table depth below ground surface is observed
 
 
 ## Example **site.json** file
