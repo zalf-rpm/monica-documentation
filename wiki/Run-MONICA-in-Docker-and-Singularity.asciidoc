@@ -1,0 +1,97 @@
+There is a Docker image for MONICA. https://hub.docker.com/r/zalfrpm/monica-cluster[zalfrpm/monica-cluster]
+
+It is build on Debian9 as base. 
+
+It runs MONICA with an input proxy, an output proxy and an adjustable amount of MONICA working processes. 
+A container is meant to run on a multiprocessor machine as a service.
+
+  docker run -p <input port>:6666 -p <output port>:7777 --env monica_instances=<number of monica worker> --rm --name <monica cluster name> zalfrpm/monica-cluster:<tag>
+
+## Parameter explained:
+
+* zalfrpm/monica-cluster:<tag> - image name on docker hub find the available tags https://hub.docker.com/r/zalfrpm/monica-cluster/tags[here]
+* -p <input port>:6666 - (optional) input port, without this parameter a random port will be chosen by docker
+* -p <output port>:7777 - (optional) output port, without this parameter a random port will be chosen by docker
+* --env monica_instances=<number of monica worker> - (optional) set number of monica worker processes that will be started, default is 3.
+* --rm - (optional) remove the container when stopped
+* --name <monica cluster name> - (optional) human readable name
+
+## Example
+
+  docker run -p 6666:6666 -p 7777:7777 --env monica_instances=9 --rm --name my-monica-cluster zalfrpm/monica-cluster:2.0.3.150
+
+### Note: 
+It is possible to use the 'latest' tag. Though it is recommended to use a specific version to create reproducible results.
+
+
+## Running Monica in Singularity
+
+* build a singularity image with docker as blueprint 
+
+  singularity pull docker://zalfrpm/monica-cluster:<tag>
+
+### run proxy as a service 
+shell script: 
+
+  #!/bin/bash -x
+  VERSION=2.2.1.170 # or higher
+  SINGULARITY_IMAGE=monica-cluster_${VERSION}.sif
+
+  #create a log output folder for proxy
+  LOGOUT=/var/log
+  MOUNT_LOG=~/log/supervisor/monica/proxy
+  mkdir -p ~${MOUNT_LOG}
+
+  export SINGULARITYENV_monica_intern_in_port=6677
+  export SINGULARITYENV_monica_intern_out_port=7788
+  export SINGULARITYENV_monica_consumer_port=7777
+  export SINGULARITYENV_monica_producer_port=6666
+ 
+  export SINGULARITYENV_monica_autostart_proxies=true
+  export SINGULARITYENV_monica_autostart_worker=false
+  export SINGULARITYENV_monica_auto_restart_proxies=true
+  export SINGULARITYENV_monica_auto_restart_worker=false
+
+  singularity instance start -B $MOUNT_LOG:$LOGOUT ${SINGULARITY_IMAGE} monica_proxy 
+  nohup singularity run instance://monica_proxy  > /dev/null 2>&1 & 
+
+### Note:
+You can stop the container by using:
+  singularity instance stop monica_proxy 
+
+### run monica worker
+
+Use this script in a job system, such as https://slurm.schedmd.com[SLURM]
+
+shell script for SLURM:
+
+  #!/bin/bash -x
+  VERSION=2.2.1.170      # or higher
+  MOUNT_DATA=/my/path/to/climate/files
+  SINGULARITY_IMAGE=monica-cluster_${VERSION}.sif
+  NUM_WORKER=10          # number of cores used 
+  PROXY_SERVER=localhost # host where your proxy is running
+  INTERN_IN_PORT=6677
+  INTERN_OUT_PORT=7788
+  DATADIR=/monica_data/climate-data
+
+  #create a log output folder
+  LOGOUT=/var/log
+  MOUNT_LOG=~/log/supervisor/monica/worker
+  mkdir -p $MOUNT_LOG
+
+  export SINGULARITYENV_monica_instances=$NUM_WORKER
+  export SINGULARITYENV_monica_intern_in_port=${INTERN_IN_PORT}
+  export SINGULARITYENV_monica_intern_out_port=${INTERN_OUT_PORT}
+  export SINGULARITYENV_monica_autostart_proxies=false
+  export SINGULARITYENV_monica_autostart_worker=true
+  export SINGULARITYENV_monica_auto_restart_proxies=false
+  export SINGULARITYENV_monica_auto_restart_worker=true
+  export SINGULARITYENV_monica_proxy_in_host=$PROXY_SERVER
+  export SINGULARITYENV_monica_proxy_out_host=$PROXY_SERVER
+
+  srun singularity run -B $MOUNT_DATA:$DATADIR,$MOUNT_LOG:$LOGOUT --pwd / ${SINGULARITY_IMAGE} 
+
+### Note:
+If you don't use it in a Job system, you should start it as a singularity service (singularity instance start, see proxy)
+

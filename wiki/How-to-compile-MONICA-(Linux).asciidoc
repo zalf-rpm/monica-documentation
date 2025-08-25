@@ -1,0 +1,51 @@
+# Linux / Debian 9 ('stretch')
+
+## Prequisites
+* python 3.6+ 
+* cmake 
+* git
+* curl 
+* unzip 
+* tar
+
+  sudo apt-get update
+  sudo apt-get install build-essential
+  sudo apt-get install python-dev
+  sudo apt-get install curl unzip tar
+  sudo apt-get install git
+  sudo apt-get install cmake
+  sudo apt-get install libtool 
+  sudo apt-get install autoconf
+
+* create a working folder (e.g ~/zalf-rpm)
+
+  mkdir zalf-rpm
+  cd zalf-rpm 
+
+* checkout monica and dependencies 
+
+  git clone --recurse-submodules https://github.com/zalf-rpm/monica.git
+  git clone https://github.com/zalf-rpm/monica-parameters.git
+
+* checkout vcpkg for dependent libs, but use the tagged version found in the vcpkg_tag.txt file in the root of the MONICA repository
+
+  git clone -b 2024.09.30 https://github.com/Microsoft/vcpkg.git
+
+* build vcpkg
+  
+  cd vcpkg
+  ./bootstrap-vcpkg.sh
+ 
+* build zmq, Cap'n Proto, sodium, toml++ libs
+  
+  ./vcpkg install zeromq:x64-linux
+  ./vcpkg install capnproto:x64-linux
+  ./vcpkg install libsodium:x64-linux
+  ./vcpkg install tomlplusplus:x64-linux
+
+* create monica cmake folder and build monica
+  
+  cd ~/zalf-rpm/monica
+  sh create_cmake_release.sh
+  cd _cmake_release
+  make
