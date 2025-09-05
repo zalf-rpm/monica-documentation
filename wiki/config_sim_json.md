@@ -440,7 +440,7 @@ Globrad | | |  |
 Relhumid | | |  |
 Sunhours | | |  |
 BedGrad | | | 0;1 |
-N | L | | kgN ha-1 | mineral nitrogen content of the soil
+N | L | | kgN m-3 | mineral nitrogen content of the soil
 Co | L | | kgC m-3 |
 NH3 | | | kgN ha-1 | NH3_Volatilised
 NFert | | | kgN ha-1 | dailySumFertiliser
