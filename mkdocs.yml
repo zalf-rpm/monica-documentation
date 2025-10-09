@@ -1,0 +1,21 @@
+site_name: MONICA Documentation
+site_description: Model for Nitrogen and Carbon in Agro-ecosystems
+site_url: https://zalf-rpm.github.io/monica-documentation/
+repo_url: https://github.com/zalf-rpm/monica-documentation
+repo_name: monica-documentation
+
+theme:
+    name: material
+    font: false
+    palette:
+      primary: green
+      accent: light green
+    features:
+      - navigation.tabs
+      - toc.integrate
+
+extra:
+  generator: false
+
+nav:
+  - Overview: index.md
