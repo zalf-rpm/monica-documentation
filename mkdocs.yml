@@ -28,6 +28,3 @@ nav:
   - User Guide:
       - Configuration Files:
           - Overview: user_guide/configuration_files/config_overview.md
-          - sim.json: user_guide/configuration_files/config_sim_json.md
-          - site.json: user_guide/configuration_files/config_site_json.md
-          - crop.json: user_guide/configuration_files/config_crop_json.md
