@@ -23,8 +23,13 @@ markdown_extensions:
   - pymdownx.superfences
   - admonition
 
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
+
 nav:
   - Overview: index.md
   - User Guide:
       - Configuration Files:
           - Overview: user_guide/configuration_files/config_overview.md
+          - sim.json: user_guide/configuration_files/config_sim_json.md
