@@ -93,3 +93,7 @@ ___
 
 ## Quick Start
 
+1. Download and Extract
+
+    * Get the latest monica-windows-x86_64.zip from the GitHub releases page.
+    * Extract it to a simple location, e.g. C:\monica\.
