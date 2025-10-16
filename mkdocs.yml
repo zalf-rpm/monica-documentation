@@ -22,10 +22,15 @@ markdown_extensions:
       toc_depth: 3
   - pymdownx.superfences
   - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - attr_list
 
 extra_javascript:
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
   - javascripts/tablesort.js
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
   - Overview: index.md
@@ -35,3 +40,14 @@ nav:
           - sim.json: user_guide/configuration_files/config_sim_json.md
           - crop.json: user_guide/configuration_files/config_crop_json.md
           - site.json: user_guide/configuration_files/config_site_json.md
+  - Model Science and Algorithm:
+      - Soil Processes:
+          - Overview: model_science/soil_processes/overview.md
+          - Soil temperature: model_science/soil_processes/soil_temperature.md
+          - Evaporation: model_science/soil_processes/evaporation.md
+          - Soil moisture: model_science/soil_processes/soil_moisture.md
+          - Soil frost: model_science/soil_processes/soil_frost.md
+          - Snow: model_science/soil_processes/snow.md
+          - Organic matter turn-over: model_science/soil_processes/organic_matter_turn-over.md
+          - Nitrification and denitrification: model_science/soil_processes/nitrification_and_denitrification.md
+          - Matter transport: model_science/soil_processes/matter_transport.md
