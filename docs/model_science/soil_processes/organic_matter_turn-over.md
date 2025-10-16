@@ -34,6 +34,8 @@ N volatilisation of manure and slurry is described using an empirical function o
 
 Urea hydrolysis and the respective gaseous N losses after application of urea-based fertilisers are calculated using algorithms of the AMOVOL model (Sadeghi, 1988). It considers the temperature-dependent equilibrium between ammonium ions in solution and gaseous ammonia, as well as effects of soil organic matter content, soil temperature, and soil moisture content on hydrolysis. The atmospheric resistance finally governs the loss of gaseous ammonia from soil.
 
+___
+
 #### References
 
 * Abrahamsen, P., Hansen, S., 2000. Daisy: an open soil-crop-atmosphere system model. Environ. Mod. Software 15, 313-330.

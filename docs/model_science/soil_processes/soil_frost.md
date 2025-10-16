@@ -50,6 +50,8 @@ $z_F$ Frost depth $[m]$<br>
 
 For the case of soil frost, it is assumed that no water moves in the frozen layers ($\lambda=0$). Water from rainfall or melting snow infiltrates into soil until saturation is reached. The remainder is stored in the surface pond or adds to surface run-off. Once the soil has thawn&mdash;i.e. the thaw front has reached the frost front ($z_T > z_F$)&mdash;gravitational water can pass through the profile, and water from the surface pond can infiltrate. The variables $z_T$, $z_F$, $dd_n$ and $d_F$ are then re-set to zero.
 
+___
+
 #### References
 
 * Hansson, K., Simunek, J., Mizoguchi, M., Lundin, L.C., van Genuchten, M.T. (2004): Water flow and heat transport in frozen soil: Numerical solution and freeze-thaw applications. Vadose Zone Journal 3, 693-704.

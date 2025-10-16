@@ -37,6 +37,8 @@ $f_D(\theta)$ Reduction factor soil moisture (Fig. 3) $[d^{-1}]$<br>
 $V_{NO_3}$ Transport rate $NO_3^-$ $[kg \, N \, m^{-3}]$<br>
 $C_{NO_3}$ Soil $NO_3^-$ concentration <br>
 
+___
+
 #### References
 
 * Abrahamsen, P., Hansen, S., 2000. Daisy: an open soil-crop-atmosphere system model. Environ. Mod. Software 15, 313-330.
