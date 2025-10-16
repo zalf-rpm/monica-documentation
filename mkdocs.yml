@@ -67,3 +67,5 @@ nav:
           - Oxygen deficiency: model_science/crop_processes/oxygen_deficiency.md
           - Heat stress: model_science/crop_processes/heat_stress.md
           - Yield: model_science/crop_processes/yield.md
+  - References and Further Reading:
+      - Publications: references/publications.md
