@@ -51,3 +51,19 @@ nav:
           - Organic matter turn-over: model_science/soil_processes/organic_matter_turn-over.md
           - Nitrification and denitrification: model_science/soil_processes/nitrification_and_denitrification.md
           - Matter transport: model_science/soil_processes/matter_transport.md
+      - Crop Processes:
+          - Overview: model_science/crop_processes/overview.md
+          - Photosynthesis: model_science/crop_processes/photosynthesis.md
+          - Respiration: model_science/crop_processes/respiration.md
+          - Assimilate partitioning: model_science/crop_processes/assimilate_partitioning.md
+          - Ontogenesis: model_science/crop_processes/ontogenesis.md
+          - Root growth: model_science/crop_processes/root_growth.md
+          - Leaf area and ground coverage: model_science/crop_processes/leaf_area_and_ground_coverage.md
+          - Transpiration: model_science/crop_processes/transpiration.md
+          - N uptake: model_science/crop_processes/n_uptake.md
+          - N concentration: model_science/crop_processes/n_concentration.md
+          - Drought stress: model_science/crop_processes/drought_stress.md
+          - Nitrogen deficiency: model_science/crop_processes/nitrogen_deficiency.md
+          - Oxygen deficiency: model_science/crop_processes/oxygen_deficiency.md
+          - Heat stress: model_science/crop_processes/heat_stress.md
+          - Yield: model_science/crop_processes/yield.md
