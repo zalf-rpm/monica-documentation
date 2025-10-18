@@ -30,8 +30,12 @@ extra_javascript:
 nav:
   - Overview: index.md
   - User Guide:
+      - Installation & Setup: user_guide/installation_and_setup.md
       - Configuration Files:
           - Overview: user_guide/configuration_files/config_overview.md
           - sim.json: user_guide/configuration_files/config_sim_json.md
           - crop.json: user_guide/configuration_files/config_crop_json.md
           - site.json: user_guide/configuration_files/config_site_json.md
+      - How to run: user_guide/how_to_run.md
+      - Outputs and Visualisation: user_guide/outputs_and_visualisation.md
+  - Parameter Reference and Calibration: parameter_reference_and_calibration.md
