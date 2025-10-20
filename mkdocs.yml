@@ -36,13 +36,13 @@ nav:
   - Overview: index.md
   - User Guide:
       - Installation and Setup: 
-          - Local installation: user_guide/installation_and_setup/local_installation.md
-          - Docker setup: user_guide/installation_and_setup/docker_setup.md
-          - Singularity Setup (HPC-friendly): user_guide/installation_and_setup/singularity_setup.md
-          - HPC Setup: user_guide/installation_and_setup/hpc_setup.md
-          - Rundeck setup: user_guide/installation_and_setup/rundeck_setup.md
-          - Dependencies & Python version (requirements.txt): user_guide/installation_and_setup/dependencies_and_python.md
-          - Troubleshooting Common Installation Issues: user_guide/installation_and_setup/troubleshooting_installation.md
+          - Local installation: user_guide/Installation_and_Setup/local_installation.md
+          - Docker setup: user_guide/Installation_and_Setup/docker_setup.md
+          - Singularity Setup (HPC-friendly): user_guide/Installation_and_Setup/singularity_setup.md
+          - HPC Setup: user_guide/Installation_and_Setup/hpc_setup.md
+          - Rundeck setup: user_guide/Installation_and_Setup/rundeck_setup.md
+          - Dependencies & Python version (requirements.txt): user_guide/Installation_and_Setup/dependencies_and_python.md
+          - Troubleshooting Common Installation Issues: user_guide/Installation_and_Setup/troubleshooting_installation.md
       - Configuration Files:
           - Overview: user_guide/configuration_files/config_overview.md
           - sim.json: user_guide/configuration_files/config_sim_json.md
