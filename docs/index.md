@@ -96,31 +96,35 @@ However, HERMES used some input information that was specific for Germany, such 
 ### **1. Download and Extract**
 
 - Get the latest **`monica-windows-x86_64.zip`** from the [GitHub releases page](https://github.com/zalf-rpm/monica/releases).
-- Extract it to a simple location, e.g.: C:\monica\
+- Extract it to a simple location, e.g.: `C:\monica\`
 - The folder structure should look like this:
 
-```bash
+```
 C:\monica
 ├── bin
 ├── monica-parameters
 ├── projects
 └── documentation\
-
+```
 
 ### **2. Run the Example Simulation**
 
-- Open **Command Prompt** and type:
-**`C:\monica\projects\Hohenfinow2-single-run`**
-**`run_monica.cmd`**
-- This automatically calls monica-run.exe from the bin folder and creates an output file named sim-out.csv.
+- Open **Command Prompt** and navigate to the example project directory:
+
+```
+C:\monica\projects\Hohenfinow2-single-run
+```
+
+- Run the simulation by typing:
+
+```
+run_monica.cmd
+```
+
+This automatically calls `monica-run.exe` from the `bin` folder and creates an output file named `sim-out.csv`.
 
 ### **3. Verify and Use**
 
--	If sim-out.csv appears, MONICA is working fine.
--	User can now edit the sim, crop.json, site.json, and climate.csv files to run their own simulations.
--	(Optional) Add C:\monica\bin to the PATH and set **`MONICA_PARAMETERS = C:\monica\monica-parameters`**  to use MONICA system-wide.
-
-
-
-
-
+-   If `sim-out.csv` appears, MONICA is working fine.
+-	Users can now edit the `sim.json`, `crop.json`, `site.json`, and `climate.csv` files to run their own simulations.
+-	(Optional) Add `C:\monica\bin` to the **PATH** and set **`MONICA_PARAMETERS = C:\monica\monica-parameters`**  to use MONICA system-wide.
