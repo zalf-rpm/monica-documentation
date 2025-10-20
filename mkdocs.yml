@@ -35,7 +35,7 @@ extra_javascript:
 nav:
   - Overview: index.md
   - User Guide:
-      - Installation & Setup: 
+      - Installation and Setup: 
           - Local installation: user_guide/installation_and_setup/local_installation.md
           - Docker setup: user_guide/installation_and_setup/docker_setup.md
           - Singularity Setup (HPC-friendly): user_guide/installation_and_setup/singularity_setup.md
