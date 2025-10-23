@@ -40,12 +40,7 @@ At harvest, marketable parts of the crop are removed and the remaining residues 
 
 ---
 
-## Key Features & Applications
-
-### Key Features
-
-
-### Applications
+## Applications
 
 MONICA has been applied so far in three major research projects:
 
@@ -88,6 +83,34 @@ However, HERMES used some input information that was specific for Germany, such 
 ---
 
 ## Publication & How to Cite MONICA
+
+### Official Reference
+
+**Nendel, C., Berg, M., Kersebaum, K. C., Mirschel, W., Manderscheid, R., Weigel, H.-J., and Wenkel, K.-O. (2011).**  
+*The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics.*  
+**Ecological Modelling, 222(9), 1614–1625.**  
+[https://doi.org/10.1016/j.ecolmodel.2011.02.018](https://doi.org/10.1016/j.ecolmodel.2011.02.018)
+
+### How to Cite MONICA
+
+When using MONICA in publications, please cite the main model description paper above. For example:
+
+> “Simulations were performed using the MONICA agro-ecosystem model (Nendel et al., 2011).”
+
+**Full reference example:**
+
+> Nendel, C., Berg, M., Kersebaum, K. C., Mirschel, W., Manderscheid, R., Weigel, H.-J., and Wenkel, K.-O. (2011).  
+> *The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics.*  
+> *Ecological Modelling, 222(9), 1614–1625.*  
+> [https://doi.org/10.1016/j.ecolmodel.2011.02.018](https://doi.org/10.1016/j.ecolmodel.2011.02.018)
+
+---
+
+### Model Version & Software Archive
+
+This reference applies to **MONICA version 3.6.32 and later**.  
+The model source code and documentation are archived under the following DOI:  
+*(DOI added later)*
 
 ---
 

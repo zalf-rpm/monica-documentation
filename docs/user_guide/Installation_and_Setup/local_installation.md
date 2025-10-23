@@ -30,7 +30,9 @@ There is no installation process. Simply unzipping the archive is enough to make
 ## 2. Running MONICA
 
 Because the ZIP version isn’t registered automatically in Windows, user can either:
+
 - Run the included example project, or
+
 - Add MONICA to the user system PATH to use it from anywhere.
 
 ### **Option 1: Run the Example Project (Recommended)**
@@ -68,9 +70,10 @@ If user prefer to run MONICA from anywhere on the system
 
 i.	 Add the path to bin folder (e.g. C:\monica\bin) to the PATH environment variable
 
-ii.	 Create a new environment variable named MONICA_PARAMETERS and set its value to: C:\monica\monica-parameters
+ii.	 Create a new environment variable named MONICA_PARAMETERS and set its value to: `C:\monica\monica-parameters`
 
-iii. Open a new Command Prompt and verify the installation: monica-run.exe - -help (In some versions, the executable is called monica.exe, whichever appears in the bin folder)
+iii. Open a new Command Prompt and verify the installation: `monica-run.exe - -help` 
+(In some versions, the executable is called monica.exe, whichever appears in the bin folder)
 
 **Note: Some releases include only monica-run.exe (and not monica.exe). This is normal as both serve the same purpose for running simulations.**
 
@@ -78,8 +81,8 @@ iii. Open a new Command Prompt and verify the installation: monica-run.exe - -he
 
 ## 3.Updating an Existing Installation
 
-- If the user already has an older MONICA installation (for example under
-%USERPROFILE%\AppData\MONICA), user can simply replace the files in the existing bin folder with those from the new ZIP.
+- If the user already has an older MONICA installation **(for example under%USERPROFILE%\AppData\MONICA)**, user can simply replace the files in the existing bin folder with those from the new ZIP.
+
 - However, it’s generally recommended to use the ZIP-based workflow exclusively. This avoids version conflicts and allows each project to reference its own MONICA version explicitly.
 
 ---
@@ -202,7 +205,7 @@ Once the build completes successfully, verify the installation:
 If the user see a list of available options and commands, MONICA has been built correctly.
 
 ### **8. Running a Test Simulation**
-To perform a test run, you can use one of the included example simulation files, for instance:
+To perform a test run, user can use one of the included example simulation files, for instance:
 
 ```
 ./monica-run -o ../../output_csv/out.csv ../installer/Hohenfinow2/sim-min.json
