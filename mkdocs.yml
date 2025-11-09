@@ -12,6 +12,7 @@ theme:
       accent: light green
     features:
       - navigation.tabs
+      - navigation.tabs.sticky
       - toc.integrate
 
 extra:
