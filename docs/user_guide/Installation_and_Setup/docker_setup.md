@@ -127,5 +127,5 @@ docker run -p 6666:6666 -p 7777:7777 \
   --env monica_instances=9 \
   --rm \
   --name my-monica-cluster \
-  zalfrpm/monica-cluster:3.6.12
+  zalfrpm/monica-cluster:3.6.32
 ```
