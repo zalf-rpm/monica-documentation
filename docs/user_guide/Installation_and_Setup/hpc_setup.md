@@ -121,4 +121,4 @@ monica-zmq-server --proxy-address tcp://<proxy-node>:6666 --output-address tcp:/
 
 - The control port (8888) can be used for remote process management and monitoring.
 
-- On HPC systems, user can manage MONICA processes via job schedulers like SLURM or PBS using scripts similar to the Singularity examples.3
+- On HPC systems, user can manage MONICA processes via job schedulers like SLURM or PBS using scripts similar to the Singularity examples.
