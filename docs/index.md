@@ -126,20 +126,20 @@ A DOI for the MONICA source code is not yet available. Until further notice, ple
 
 ---
 
-## **Quick Start**
+## **Quick Start for Windows Users**
 
 ### **1. Download and Extract**
 
-- Get the latest **`monica-windows-x86_64.zip`** from the [GitHub releases page](https://github.com/zalf-rpm/monica/releases).
-- Extract it to a simple location, e.g.: `C:\monica\`
+- Get the latest **`monica_win64_<version>.zip`** from the [GitHub releases page](https://github.com/zalf-rpm/monica/releases).
+- Extract the ZIP file to a simple location, e.g.: `C:\monica\`
 - The folder structure should look like this:
 
 ```
 C:\monica
 ├── bin
+├── documentation
 ├── monica-parameters
-├── projects
-└── documentation\
+└── projects
 ```
 
 ### **2. Run the Example Simulation**
@@ -147,7 +147,7 @@ C:\monica
 - Open **Command Prompt** and navigate to the example project directory:
 
 ```
-C:\monica\projects\Hohenfinow2-single-run
+cd C:\monica\projects\Hohenfinow2-single-run
 ```
 
 - Run the simulation by typing:
@@ -162,4 +162,4 @@ This automatically calls `monica-run.exe` from the `bin` folder and creates an o
 
 -   If `sim-out.csv` appears, MONICA is working fine.
 -	Users can now edit the `sim.json`, `crop.json`, `site.json`, and `climate.csv` files to run their own simulations.
--	(Optional) Add `C:\monica\bin` to the **PATH** and set **`MONICA_PARAMETERS = C:\monica\monica-parameters`**  to use MONICA system-wide.
+-	*(Optional)* Add `C:\monica\bin` to the **PATH** and set **`MONICA_PARAMETERS=C:\monica\monica-parameters`**  to use MONICA system-wide.
