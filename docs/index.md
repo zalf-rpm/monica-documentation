@@ -133,7 +133,6 @@ A DOI for the MONICA source code is not yet available. Until further notice, ple
 - Get the latest **`monica_win64_<version>.zip`** from the [GitHub releases page](https://github.com/zalf-rpm/monica/releases).
 - Extract the ZIP file to a simple location, e.g.: `C:\monica\`
 - The folder structure should look like this:
-
 ```
 C:\monica
 ├── bin
@@ -145,13 +144,11 @@ C:\monica
 ### **2. Run the Example Simulation**
 
 - Open **Command Prompt** and navigate to the example project directory:
-
 ```
 cd C:\monica\projects\Hohenfinow2-single-run
 ```
 
 - Run the simulation by typing:
-
 ```
 run_monica.cmd
 ```
