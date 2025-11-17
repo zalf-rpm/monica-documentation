@@ -86,60 +86,69 @@ However, HERMES used some input information that was specific for Germany, such 
 
 ### Official Reference
 
-**Nendel, C., Berg, M., Kersebaum, K. C., Mirschel, W., Manderscheid, R., Weigel, H.-J., and Wenkel, K.-O. (2011).**  
-*The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics.*  
-**Ecological Modelling, 222(9), 1614–1625.**  
-[https://doi.org/10.1016/j.ecolmodel.2011.02.018](https://doi.org/10.1016/j.ecolmodel.2011.02.018)
+!!! note ""
+    **Nendel, C., M. Berg, K.C. Kersebaum, W. Mirschel, X. Specka, M. Wegehenkel, K.O. Wenkel and R. Wieland (2011)**: *The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics.* Ecological Modelling, 222(9), 1614–1625. [https://doi.org/10.1016/j.ecolmodel.2011.02.018](https://doi.org/10.1016/j.ecolmodel.2011.02.018)
 
 ### How to Cite MONICA
 
-When using MONICA in publications, please cite the main model description paper above. For example:
+When using MONICA in publications, please cite the main model description paper.
+
+#### In-text citation example
 
 > “Simulations were performed using the MONICA agro-ecosystem model (Nendel et al., 2011).”
 
-**Full reference example:**
+#### Full reference example
 
-> Nendel, C., Berg, M., Kersebaum, K. C., Mirschel, W., Manderscheid, R., Weigel, H.-J., and Wenkel, K.-O. (2011).  
-> *The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics.*  
-> *Ecological Modelling, 222(9), 1614–1625.*  
-> [https://doi.org/10.1016/j.ecolmodel.2011.02.018](https://doi.org/10.1016/j.ecolmodel.2011.02.018)
+> Nendel, C., M. Berg, K.C. Kersebaum, W. Mirschel, X. Specka, M. Wegehenkel, K.O. Wenkel and R. Wieland (2011): *The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics.* Ecological Modelling, 222(9), 1614–1625. https://doi.org/10.1016/j.ecolmodel.2011.02.018
 
----
+### BibTeX entry
+
+```bibtex
+@article{NENDEL20111614,
+    title = {The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics},
+    journal = {Ecological Modelling},
+    volume = {222},
+    number = {9},
+    pages = {1614-1625},
+    year = {2011},
+    issn = {0304-3800},
+    doi = {https://doi.org/10.1016/j.ecolmodel.2011.02.018},
+    url = {https://www.sciencedirect.com/science/article/pii/S0304380011000998},
+    author = {C. Nendel and M. Berg and K.C. Kersebaum and W. Mirschel and X. Specka and M. Wegehenkel and K.O. Wenkel and R. Wieland},
+    keywords = {Simulation model, Climate change, Validation, Crop rotation, Yield prediction},
+    abstract = {A fundamentally revised version of the HERMES agro-ecosystem model, released under the name of MONICA, was calibrated and tested to predict crop growth, soil moisture and nitrogen dynamics for various experimental crop rotations across Germany, including major cereals, sugar beet and maize. The calibration procedure also included crops grown experimentally under elevated atmospheric CO2 concentration. The calibrated MONICA simulations yielded a median normalised mean absolute error (nMAE) of 0.20 across all observed target variables (n=42) and a median Willmott's Index of Agreement (d) of 0.91 (median modelling efficiency (ME): 0.75). Although the crop biomass, habitus and soil moisture variables were all within an acceptable range, the model often underperformed for variables related to nitrogen. Uncalibrated MONICA simulations yielded a median nMAE of 0.27 across all observed target variables (n=85) and a median d of 0.76 (median ME: 0.30), also showing predominantly acceptable results for the crop biomass, habitus and soil moisture variables. Based on the convincing performance of the model under uncalibrated conditions, MONICA can be regarded as a suitable simulation model for use in regional applications. Furthermore, its ability to reproduce the observed crop growth results in free-air carbon enrichment experiments makes it suited to predict agro-ecosystem behaviour under expected future climate conditions.}
+}
+```
 
 ### Model Version & Software Archive
 
-This reference applies to **MONICA version 3.6.32 and later**.  
-The model source code and documentation are archived under the following DOI:  
-*(DOI added later)*
+A DOI for the MONICA source code is not yet available. Until further notice, please cite the model using the official MONICA reference listed above and include the version used in your study.
 
 ---
 
-## **Quick Start**
+## **Quick Start for Windows Users**
 
 ### **1. Download and Extract**
 
-- Get the latest **`monica-windows-x86_64.zip`** from the [GitHub releases page](https://github.com/zalf-rpm/monica/releases).
-- Extract it to a simple location, e.g.: `C:\monica\`
+- Get the latest **`monica_win64_<version>.zip`** from the [GitHub releases page](https://github.com/zalf-rpm/monica/releases).
+- Extract the ZIP file to a simple location, e.g.: `C:\monica\`
 - The folder structure should look like this:
-
 ```
 C:\monica
 ├── bin
+├── documentation
 ├── monica-parameters
-├── projects
-└── documentation\
+└── projects
 ```
 
 ### **2. Run the Example Simulation**
 
 - Open **Command Prompt** and navigate to the example project directory:
-
 ```
-C:\monica\projects\Hohenfinow2-single-run
+cd C:\monica\projects\Hohenfinow2-single-run
 ```
 
 - Run the simulation by typing:
-
 ```
 run_monica.cmd
 ```
@@ -150,4 +159,4 @@ This automatically calls `monica-run.exe` from the `bin` folder and creates an o
 
 -   If `sim-out.csv` appears, MONICA is working fine.
 -	Users can now edit the `sim.json`, `crop.json`, `site.json`, and `climate.csv` files to run their own simulations.
--	(Optional) Add `C:\monica\bin` to the **PATH** and set **`MONICA_PARAMETERS = C:\monica\monica-parameters`**  to use MONICA system-wide.
+-	*(Optional)* Add `C:\monica\bin` to the **PATH** and set **`MONICA_PARAMETERS=C:\monica\monica-parameters`**  to use MONICA system-wide.
