@@ -100,7 +100,7 @@ monica-zmq-server --proxy-address tcp://proxy-hostname:6666 --output-address tcp
 This allows the MONICA instance to communicate through the proxy layer,
 distributing workloads across multiple workers.
 
-### **Example  –Cluster Node Setup**
+### **Example 3 –Cluster Node Setup**
 
 To use MONICA across several nodes (each node runs as a worker connected to a proxy):
 

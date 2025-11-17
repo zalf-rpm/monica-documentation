@@ -38,6 +38,7 @@ nav:
   - User Guide:
       - Installation and Setup: 
           - Local installation: user_guide/Installation_and_Setup/local_installation.md
+          - MONICA server: user_guide/Installation_and_Setup/monica_server.md
           - Docker setup: user_guide/Installation_and_Setup/docker_setup.md
           - Singularity Setup (HPC-friendly): user_guide/Installation_and_Setup/singularity_setup.md
           - HPC Setup: user_guide/Installation_and_Setup/hpc_setup.md
