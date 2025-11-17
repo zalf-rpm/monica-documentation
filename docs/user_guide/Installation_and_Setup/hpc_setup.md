@@ -6,7 +6,7 @@ This section explains how to run multiple MONICA simulations on a **High-Perform
 
 ## 1. Introduction
 
-When running MONICA on HPC systems or clusters, user can start MONICA in **server mode** using the command:
+When running MONICA on HPC systems or clusters, you can start MONICA in **server mode** using the command:
 
 ```
 monica-zmq-server
@@ -27,7 +27,7 @@ This setup allows distributed simulations across:
 
 ## 2. Basic Command Usage
 
-User can view available options with:
+You can view available options with:
 
 ```
 monica-zmq-server -h
@@ -91,7 +91,7 @@ and receive results from port 7777.
 
 ### **Example 2 – Connecting via Proxy**
 
-If user already have a MONICA proxy running (for example via Docker or Singularity),
+If you already have a MONICA proxy running (for example via Docker or Singularity),
 then connect MONICA server to it:
 
 ```
@@ -121,4 +121,4 @@ monica-zmq-server --proxy-address tcp://<proxy-node>:6666 --output-address tcp:/
 
 - The control port (8888) can be used for remote process management and monitoring.
 
-- On HPC systems, user can manage MONICA processes via job schedulers like SLURM or PBS using scripts similar to the Singularity examples.
+- On HPC systems, you can manage MONICA processes via job schedulers like SLURM or PBS using scripts similar to the Singularity examples.

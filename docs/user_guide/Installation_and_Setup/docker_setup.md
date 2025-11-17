@@ -89,6 +89,7 @@ docker pull zalfrpm/monica-cluster:3.6.32
 ### 3. Start Monica
 
 Start a MONICA container with 9 worker processes:
+
 ```
 docker run -p 6666:6666 -p 7777:7777 \
   --env monica_instances=9 \
@@ -108,17 +109,20 @@ This command starts a MONICA cluster with 9 workers, exposing input port 6666 an
 ### 4. Verify Container Status
 
 In another terminal, type:
+
 ```
 docker ps
 docker logs -f my-monica-cluster
 docker port my-monica-cluster
 ```
+
 ### 5. Stop the Container
 Press Ctrl + C in the running terminal, or from another terminal, type:
 
 ```
 docker stop my-monica-cluster
 ```
+
 ### 6. Restart MONICA
 Run the same command again:
 
