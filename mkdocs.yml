@@ -50,8 +50,18 @@ nav:
           - sim.json: user_guide/configuration_files/config_sim_json.md
           - crop.json: user_guide/configuration_files/config_crop_json.md
           - site.json: user_guide/configuration_files/config_site_json.md
-      - How to run: user_guide/how_to_run.md
-      - Outputs and Visualisation: user_guide/outputs_and_visualisation.md
+      - How to run: 
+          - Running MONICA from Command Line (CLI): user_guide/how_to_run/command_line.md
+          - Running MONICA in Docker: user_guide/how_to_run/docker.md
+          - Running MONICA in CMD: user_guide/how_to_run/cmd.md
+          - Running with Singularity: user_guide/how_to_run/singularity.md
+          - Running on HPC: user_guide/how_to_run/hpc.md
+          - Python API usage examples: user_guide/how_to_run.md
+          - Using Online MONICA: user_guide/how_to_run/online_monica.md
+      - Outputs and Visualisation: 
+          - Understanding MONICA Outputs (CSV / JSON structure): user_guide/outputs_and_visualisation/monica_output.md
+          - Visualization with Python/R (example scripts): user_guide/outputs_and_visualisation/visualisation.md
+          - Example graphs: user_guide/outputs_and_visualisation/example_graphs.md
   - Parameter Reference and Calibration: parameter_reference_and_calibration.md
   - Model Science and Algorithm:
       - Soil Processes:
