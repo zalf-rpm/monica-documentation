@@ -1,4 +1,4 @@
-### Running MONICA on HPC with Singularity
+# Running MONICA on HPC with Singularity
 
 This guide explains how to run the MONICA agro-ecosystem model in a High-Performance Computing (HPC) environment using Singularity. It follows best practices for distributed runs: a proxy service (I/O handler) and multiple worker instances (simulation executors).
 

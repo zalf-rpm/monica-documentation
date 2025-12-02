@@ -7,7 +7,8 @@ It covers Python environment issues, dependency conflicts, Docker/Singularity pr
 
 ## 1. Python / Environment Issues
 
-### **Error:** `ModuleNotFoundError: No module named 'numpy'`
+**Error:** `ModuleNotFoundError: No module named 'numpy'`
+
 **Cause:** Dependencies not installed.  
 
 **Fix:**
@@ -16,7 +17,7 @@ It covers Python environment issues, dependency conflicts, Docker/Singularity pr
 pip install -r requirements.txt
 ```
 
-### **Error:** `MONICA fails on Python 3.12 or lower than 3.8`
+**Error:** `MONICA fails on Python 3.12 or lower than 3.8`
 
 **Cause:** Use Python 3.8–3.11 for full compatibility with MONICA’s required libraries.
 
@@ -27,7 +28,7 @@ conda create -n monica python=3.10
 conda activate monica
 ```
 
-### **Error:** `pip: command not found`
+**Error:** `pip: command not found`
 
 **Cause:** Python installation missing or PATH not updated.
 
@@ -40,9 +41,11 @@ conda activate monica
 python -m pip install -r requirements.txt
 ```
 
+---
+
 ## 2. Virtual Environment Issues
 
-### **Error:** Environment not activating `(command not found: activate)`
+**Error:** Environment not activating `(command not found: activate)`
 
 **Fix:** (Windows):
 
@@ -54,7 +57,7 @@ monica-env\Scripts\activate
 ```bash
 source monica-env/bin/activate
 ```
-### **Error:** Dependencies conflict when installing
+**Error:** Dependencies conflict when installing
 
 **Fix:** (clean reinstallation):
 
@@ -63,14 +66,16 @@ rm -rf monica-env
 python -m venv monica-env
 pip install -r requirements.txt
 ```
+---
+
 ## 3. Docker Issues
 
-### **Error**: docker: `command not found`
+**Error**: docker: `command not found`
 
 Install Docker from the official documentation:
 [Get Docker](https://docs.docker.com/get-docker/)
 
-### **Error:** Permission denied running Docker
+**Error:** Permission denied running Docker
 
 **Fix:**  (Linux):
 
@@ -78,7 +83,7 @@ Install Docker from the official documentation:
 sudo usermod -aG docker $USER
 newgrp docker
 ```
-### **Error:** Container cannot bind ports 6666 or 7777
+**Error:** Container cannot bind ports 6666 or 7777
 
 **Fix:** 
 
@@ -89,7 +94,7 @@ docker stop <container_id>
 
 ## 4. Singularity Issues (HPC)
 
-### **Error:** FATAL: `container creation failed`
+**Error:** FATAL: `container creation failed`
 
 **Fix:**
 
@@ -99,7 +104,7 @@ docker stop <container_id>
 ```bash
 singularity exec -B /scratch:/scratch monica.sif ls /
 ```
-### **Error:** Failed to bind climate data folder
+**Error:** Failed to bind climate data folder
 
 **Fix:**
 Make sure the directory exists on the host:
@@ -108,7 +113,7 @@ Make sure the directory exists on the host:
 ls /shared/data/monica/climate-data
 ```
 
-### **Error:** Ports 6666/7777/8888 unavailable
+**Error:** Ports 6666/7777/8888 unavailable
 
 Proxy already running or firewall blocking.
 
@@ -119,9 +124,11 @@ singularity instance list
 singularity instance stop monica_proxy
 ```
 
+---
+
 ## 5. HPC (SLURM) Issues
 
-### **Error:** sbatch: command not found
+**Error:** sbatch: command not found
 
 SLURM module not loaded.
 
@@ -130,7 +137,7 @@ SLURM module not loaded.
 module load slurm
 ```
 
-### **Error:** Job stuck in PENDING
+**Error:** Job stuck in PENDING
 
 Check reasons:
 
@@ -143,7 +150,7 @@ Common causes:
 - Not enough CPUs or memory
 - Wrong partition name
 
-### **Error:** Worker cannot connect to proxy
+**Error:** Worker cannot connect to proxy
 
 Verify:
 
@@ -157,15 +164,17 @@ Verify:
 
 - Network visibility between cluster nodes
 
+---
+
 ## 6.  MONICA Server / Proxy Issues
 
-### **Error:** Connection refused
+**Error:** Connection refused
 
 Proxy not running.
 
 **Fix:** Start the proxy first (Docker, Singularity, or ZMQ mode).
 
-### **Error:** Worker receives no tasks
+**Error:** Worker receives no tasks
 
 **Cause:** Proxy autostart is disabled.
 
@@ -175,7 +184,7 @@ Proxy not running.
 export monica_autostart_proxies=true
 ```
 
-### **Error:** JSON decode errors
+**Error:** JSON decode errors
 
 Usually caused by malformed sim.json, crop.json, or site.json.
 
@@ -185,7 +194,7 @@ Usually caused by malformed sim.json, crop.json, or site.json.
 python -m json.tool sim.json
 ```
 
-### **Error:** Wrong parameter-set linked to config
+**Error:** Wrong parameter-set linked to config
 
 Double-check:
 
@@ -195,9 +204,11 @@ Double-check:
 
 - site.json → correct soil + climate data
 
+---
+
 ## 7. File / Permission Issues
 
-### **Error:** Permission denied writing logs
+**Error:** Permission denied writing logs
 
 **Fix:** Create the required directories:
 
@@ -206,7 +217,7 @@ mkdir -p ~/log/supervisor/monica/proxy
 mkdir -p ~/log/supervisor/monica/worker
 ```
 
-### **Error:** Cannot write to /var/log inside the container
+**Error:** Cannot write to /var/log inside the container
 
 Always bind a writable host directory:
 
@@ -214,9 +225,11 @@ Always bind a writable host directory:
 -B ~/log/supervisor/monica:/var/log
 ```
 
+---
+
 ## 8. Climate / Data Issues 
 
-### **Error:** “Climate file not found”
+**Error:** “Climate file not found”
 
 Check:
 
@@ -224,16 +237,18 @@ Check:
 - File exists in the mounted folder
 - Docker/Singularity bind paths include the climate directory
 
-### **Error:** Wrong climate file format
+**Error:** Wrong climate file format
 
 Ensure:
 
 - CSV headers match MONICA expectations
 - Required variables: Tmin, Tmax, precip, radiation, etc.
 
+---
+
 ## 9. Miscellaneous Issues
 
-### **Error:** `monica-zmq-server: command not found`
+**Error:** `monica-zmq-server: command not found`
 
 MONICA not installed or PATH not set.
 
@@ -243,7 +258,7 @@ MONICA not installed or PATH not set.
 python -m monica.zmq.server
 ```
 
-### **Error:** Missing environment variables
+**Error:** Missing environment variables
 
 Check that all required environment variables are exported:
 

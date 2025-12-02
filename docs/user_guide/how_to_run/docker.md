@@ -1,8 +1,10 @@
-# Docker Setup
+# Running MONICA in Docker (Cluster Mode)
 
 ---
 
 ## Overview
+MONICA provides an official Docker image for running a MONICA cluster with input/output proxies and multiple MONICA worker processes.  
+This container is intended for multi-core systems and server environments where MONICA is used as a service.
 
 There is a Docker image for MONICA available on Docker Hub:
 
@@ -17,16 +19,19 @@ There is a Docker image for MONICA available on Docker Hub:
 
 ---
 
-## Basic Run Command
+## 1. Basic Run Command
 
-```
+```bash
 docker run -p <input port>:6666 -p <output port>:7777 \
   --env monica_instances=<number of monica worker> \
   --rm \
   --name <monica cluster name> \
   zalfrpm/monica-cluster:<tag>
 ```
-## Parameter Explanation
+
+---
+
+## 2. Parameter Explanation
 
 | Parameter | Description |
 |------------|--------------|
@@ -40,7 +45,7 @@ docker run -p <input port>:6666 -p <output port>:7777 \
 ---
 
 
-### For Example
+### 3. For Example
 
 ```
 docker run -p 6666:6666 -p 7777:7777 \
@@ -49,6 +54,19 @@ docker run -p 6666:6666 -p 7777:7777 \
   --name my-monica-cluster \
   zalfrpm/monica-cluster:2.0.3.150
 ```
+
+This starts:
+
+- input proxy → host port 6666
+
+- output proxy → host port 7777
+
+- 9 MONICA worker processes inside the container
+
+- a container named `my-monica-cluster`
+
+- version 2.0.3.150 of the MONICA cluster image
+
 **Note on Tags**
 
 It is possible to use the tag latest, for example:
@@ -56,14 +74,16 @@ It is possible to use the tag latest, for example:
 ```
 docker run ... zalfrpm/monica-cluster:latest
 ```
+
 However, it is recommended to use a specific version tag (e.g., 3.6.32) to ensure reproducible results.
 Using latest might pull a newer image later, which could lead to slightly different results.
 
-## Step-by-Step Guide (for New Users)
-
 ---
 
-### 1. Install Docker
+### 4. Step-by-Step Guide (for New Users)
+
+
+#### Install Docker
 
 - **Windows/macOS:** Install [Docker Desktop](https://www.docker.com).  
 - **Linux:** Install Docker Engine via your package manager.  
@@ -79,14 +99,14 @@ docker --version
 ```
 A version number (for example: Docker version 27.xx...) will appear.
 
-### 2. Pull the MONICA Image
+#### Pull the MONICA Image
 
 Choose a tag (recommended: a specific version such as 3.6.32):
 
 ```
 docker pull zalfrpm/monica-cluster:3.6.32
 ```
-### 3. Start Monica
+#### Start Monica
 
 Start a MONICA container with 9 worker processes:
 
@@ -106,7 +126,7 @@ docker run -p 6666:6666 -p 7777:7777 \
 
 This command starts a MONICA cluster with 9 workers, exposing input port 6666 and output port 7777.
 
-### 4. Verify Container Status
+#### Verify Container Status
 
 In another terminal, type:
 
@@ -116,14 +136,14 @@ docker logs -f my-monica-cluster
 docker port my-monica-cluster
 ```
 
-### 5. Stop the Container
+#### Stop the Container
 Press Ctrl + C in the running terminal, or from another terminal, type:
 
 ```
 docker stop my-monica-cluster
 ```
 
-### 6. Restart MONICA
+#### Restart MONICA
 Run the same command again:
 
 ```
@@ -133,3 +153,4 @@ docker run -p 6666:6666 -p 7777:7777 \
   --name my-monica-cluster \
   zalfrpm/monica-cluster:3.6.32
 ```
+

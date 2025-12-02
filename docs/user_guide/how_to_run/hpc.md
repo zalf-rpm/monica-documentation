@@ -1,4 +1,4 @@
-# HPC Setup
+# Running multiple MONICAs on High Performance Computers (Clusters)
 
 This section explains how to run multiple MONICA simulations on a **High-Performance Computing (HPC)** cluster or across multiple machines. MONICA can be launched in **server mode**, allowing it to receive simulation jobs via **ZeroMQ** and run them in parallel.
 

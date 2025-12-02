@@ -37,11 +37,9 @@ nav:
   - Overview: index.md
   - User Guide:
       - Installation and Setup: 
-          - Local installation: user_guide/Installation_and_Setup/local_installation.md
+          - Windows installation: user_guide/Installation_and_Setup/windows_installation.md
+          - Linux installation: user_guide/Installation_and_Setup/linux_installation.md
           - MONICA server: user_guide/Installation_and_Setup/monica_server.md
-          - Docker setup: user_guide/Installation_and_Setup/docker_setup.md
-          - Singularity Setup (HPC-friendly): user_guide/Installation_and_Setup/singularity_setup.md
-          - HPC Setup: user_guide/Installation_and_Setup/hpc_setup.md
           - Rundeck setup: user_guide/Installation_and_Setup/rundeck_setup.md
           - Dependencies & Python version (requirements.txt): user_guide/Installation_and_Setup/dependencies_and_python.md
           - Troubleshooting Common Installation Issues: user_guide/Installation_and_Setup/troubleshooting_installation.md
@@ -51,13 +49,11 @@ nav:
           - crop.json: user_guide/configuration_files/config_crop_json.md
           - site.json: user_guide/configuration_files/config_site_json.md
       - How to run: 
-          - Running MONICA from Command Line (CLI): user_guide/how_to_run/command_line.md
+          - Running MONICA from the Command Line (CLI & CMD): user_guide/how_to_run/command_line.md
           - Running MONICA in Docker: user_guide/how_to_run/docker.md
-          - Running MONICA in CMD: user_guide/how_to_run/cmd.md
           - Running with Singularity: user_guide/how_to_run/singularity.md
           - Running on HPC: user_guide/how_to_run/hpc.md
-          - Python API usage examples: user_guide/how_to_run.md
-          - Using Online MONICA: user_guide/how_to_run/online_monica.md
+          - Python API usage examples: user_guide/how_to_run/python_api_usage.md
       - Outputs and Visualisation: 
           - Understanding MONICA Outputs (CSV / JSON structure): user_guide/outputs_and_visualisation/monica_output.md
           - Visualization with Python/R (example scripts): user_guide/outputs_and_visualisation/visualisation.md
