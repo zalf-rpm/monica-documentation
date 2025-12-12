@@ -1,3 +1,7 @@
+<figure markdown="span">
+  ![MONICA logo](images/index/MONICA_Logo.png){ width="600" }
+</figure>
+
 # MONICA: The Model for Nitrogen and Carbon Dynamics in Agro-Ecosystems
 
 ## Introduction
