@@ -53,6 +53,7 @@ This section provides an overview of the key-value pairs in a JSON file containi
 | `TargetNSamplingDepth`                    | Integer         |                   | Target nitrogen concentration at maximum rooting depth                                                                                          | `"TargetNSamplingDepth":230`                                         |
 | `type`                                    | String          |                   | Declares that this JSON defines species parameters                                                                                              | `"type":"SpeciesParameters"`                                         |
 
+---
 
 ## Example: `wheat.json`
 
