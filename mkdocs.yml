@@ -59,7 +59,10 @@ nav:
           - Understanding MONICA Outputs (CSV / JSON structure): user_guide/outputs_and_visualisation/monica_output.md
           - Visualization with Python/R (example scripts): user_guide/outputs_and_visualisation/visualisation.md
           - Example graphs: user_guide/outputs_and_visualisation/example_graphs.md
-  - Parameter Reference and Calibration: parameter_reference_and_calibration.md
+  - Parameter Reference and Calibration:
+      - Crop Parameters:
+          - Overview: parameters/crop_parameters/overview.md
+          - Species parameters: parameters/crop_parameters/species_parameters.md
   - Model Science and Algorithm:
       - Soil Processes:
           - Overview: model_science/soil_processes/overview.md
