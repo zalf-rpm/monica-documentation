@@ -1,0 +1,3498 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Model for Nitrogen and Carbon in Agro-ecosystems">
+      
+      
+      
+        <link rel="canonical" href="https://zalf-rpm.github.io/monica-documentation/user_guide/configuration_files/config_crop_json/">
+      
+      
+        <link rel="prev" href="../config_sim_json/">
+      
+      
+        <link rel="next" href="../config_site_json/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>crop.json - MONICA Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-cropjson-configuration-file" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MONICA Documentation" class="md-header__button md-logo" aria-label="MONICA Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MONICA Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              crop.json
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zalf-rpm/monica-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monica-documentation
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Installation_and_Setup/windows_installation/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../parameters/crop_parameters/overview/" class="md-tabs__link">
+          
+  
+  
+  Parameter Reference and Calibration
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../model_science/soil_processes/overview/" class="md-tabs__link">
+          
+  
+  
+  Model Science and Algorithm
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../references/publications/" class="md-tabs__link">
+          
+  
+  
+  References and Further Reading
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MONICA Documentation" class="md-nav__button md-logo" aria-label="MONICA Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MONICA Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zalf-rpm/monica-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monica-documentation
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation and Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Installation and Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Installation_and_Setup/windows_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Installation_and_Setup/linux_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Installation_and_Setup/monica_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONICA server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Installation_and_Setup/rundeck_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rundeck setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Installation_and_Setup/dependencies_and_python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies & Python version (requirements.txt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Installation_and_Setup/troubleshooting_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting Common Installation Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration Files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuration Files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_sim_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sim.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    crop.json
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    crop.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cultivation-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cultivation Methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worksteps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worksteps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worksteps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workstep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workstep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sowing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sowing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-sowing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic Sowing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#harvest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Harvest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automaticharvest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AutomaticHarvest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cutting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cutting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mineralfertilization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MineralFertilization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndemandfertilization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NDemandFertilization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organicfertilization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OrganicFertilization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tillage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tillage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#irrigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Irrigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setvalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SetValue
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-cropjson-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example crop.json file
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_site_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    site.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to run
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How to run
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/command_line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA from the Command Line (CLI & CMD)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA in Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/singularity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running with Singularity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/hpc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running on HPC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/python_api_usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python API usage examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Outputs and Visualisation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Outputs and Visualisation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outputs_and_visualisation/monica_output.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Understanding MONICA Outputs (CSV / JSON structure)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outputs_and_visualisation/visualisation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualization with Python/R (example scripts)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outputs_and_visualisation/example_graphs.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Example graphs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameter Reference and Calibration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parameter Reference and Calibration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop Parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crop Parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/species_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Species parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/cultivar_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cultivar parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Science and Algorithm
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model Science and Algorithm
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil Processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soil Processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_temperature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil temperature
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/evaporation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaporation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_moisture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil moisture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_frost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil frost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/snow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Snow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/organic_matter_turn-over/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organic matter turn-over
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/nitrification_and_denitrification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nitrification and denitrification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/matter_transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matter transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop Processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crop Processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/photosynthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Photosynthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/respiration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Respiration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/assimilate_partitioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assimilate partitioning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/ontogenesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ontogenesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/root_growth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Root growth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/leaf_area_and_ground_coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Leaf area and ground coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/transpiration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transpiration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/n_uptake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N uptake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/n_concentration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N concentration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/drought_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Drought stress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/nitrogen_deficiency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nitrogen deficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/oxygen_deficiency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oxygen deficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/heat_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat stress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/yield/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yield
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References and Further Reading
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    References and Further Reading
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../references/publications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="the-cropjson-configuration-file">The <code>crop.json</code> configuration file</h1>
+<p><code>crop.json</code> defines all crop-specific input data for MONICA. The top-level JSON object must contain exactly two keys: <code>cropRotation</code> and <code>CropParameters</code>. </p>
+<ul>
+<li><code>cropRotation</code> is a <strong>JSON array</strong> of objects, each representing a cultivation method (class <code>CultivationMethod</code> in the MONICA C++ code). </li>
+<li><code>CropParameters</code> contains global crop-related MONICA parameters, which are taken either from the <strong>user-parameter</strong> database table or a referenced file.</li>
+</ul>
+<hr />
+<h2 id="cultivation-methods">Cultivation Methods</h2>
+<p>A <strong>cultivation method</strong> is defined as a set of <strong>worksteps</strong> (class hierarchy <code>Workstep</code> in the MONICA code). The <strong>order</strong> of the worksteps is <strong>important</strong>. Putting static worksteps (with fixed relative or absolute dates) in the wrong order may prevent them from being executed. </p>
+<p>Worksteps can represent sowing, harvesting, fertilization, irrigation, or tillage applications. A sowing workstep tells MONICA when and which crop to grow. Within the sowing workstep, the <code>crop</code> parameter must contain a JSON object with <strong>all</strong> crop parameters MONICA requires. This can be defined inline, included via <code>include-from-db</code> or <code>include-from-file</code>, or referenced using <code>ref</code>. </p>
+<p>Because crops might be used in more than one workstep or cultivation method, the example below (at the end of this section) defines all crops in a separate JSON object named <code>crops</code>, which maps shortcut names to crop parameter objects. The mapping object is stored under the top-level key <code>crops</code>, which becomes the first parameter to the <code>ref</code> function, with the second being the crop's shortcut name. The names (<code>crops</code>, <code>WR</code>, <code>SM</code>, etc.) are arbitrary.</p>
+<p>A cultivation method can also have parameters, as described in the following table:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>can-be-skipped</code></strong></td>
+<td><strong><code>true</code></strong> or <strong><code>false</code></strong></td>
+<td><strong><code>false</code></strong></td>
+<td></td>
+<td>If <strong>true</strong>, this cultivation method can be skipped if its earliest starting date is before the current date (e.g., when the climate data start later than the first workstep in the cultivation method). If <strong>false</strong>, MONICA will wait until the <strong>date</strong> (condition) of the first workstep is reached, which might never happen if that date is in the past.</td>
+</tr>
+<tr>
+<td><strong><code>is-cover-crop</code></strong></td>
+<td><strong><code>true</code></strong> or <strong><code>false</code></strong></td>
+<td><strong><code>false</code></strong></td>
+<td></td>
+<td>If <strong>true</strong>, the cultivation method describes a catch or cover crop. Similarly to <code>can-be-skipped</code>, it will be skipped if the previous primary crop was harvested later than the latest sowing <strong>date</strong> (in contrast to the earliest workstep <strong>date</strong> using <code>can-be-skipped</code>). If <strong>false</strong>, MONICA might not continue the crop rotation because it waits for the the cover/catch crop sowing workstep, whose <strong>latest</strong> sowing date is already in the past.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="worksteps">Worksteps</h2>
+<p>The following table lists all worksteps available in MONICA. All worksteps require a <code>date</code> parameter. If <code>date</code> is missing, the workstep is interpreted as <strong>dynamic</strong>, meaning it depends on one or more <strong>conditions</strong> that MONICA checks daily. Once the conditions are met, the workstep is executed once per <strong>CultivationMethod</strong>.</p>
+<p>Every non-dynamic workstep (e.g., <code>Sowing</code>, <code>Harvest</code>, <code>Tillage</code>, <code>SetValue</code>, etc.) can have a <code>days</code> (default 0[d]) and an <code>after</code> ([event-name]) property. If both are set, the workstep will be executed <code>days</code> after the <code>after</code> event occurs.</p>
+<p>A workstep date can be <strong>relative</strong> (e.g., <code>"0000-12-01"</code> for every December 1st, or <code>"0001-12-01"</code> for the next year's December 1st), which means its year part is a four-digit number between 0 and 100, padded with 0s, or <strong>absolute</strong> (e.g., <code>"2017-12-01"</code> for December 1st, 2017). </p>
+<ul>
+<li>In <strong>relative crop rotation</strong>, worksteps are repeated throughout the available climate data period, wrapping around when the end is reached. </li>
+<li>In an <strong>absolute crop rotation</strong>, worksteps are only executed when their dates occur within the simulation period, so care must be taken to ensure they are reachable (e.g., a workstep before the start of the climate date will never execute).</li>
+</ul>
+<p>All worksteps share the parameters of the <code>Workstep</code> base class. If <code>date</code> is not given, at least one conditional parameter must be defined. Otherwise, the workstep will never be executed.</p>
+<hr />
+<h3 id="workstep"><strong>Workstep</strong></h3>
+<p>The base workstep itself does nothing but can be used in conjunction with the <code>Workstep</code> event. If no <code>date</code> is given, <code>days</code> and <code>after</code> can be specified, or alternatively <code>at</code>, which is equivalent to <code>after</code> with <code>days</code> set to 0. Then the workstep will be executed the specified number of <code>days</code> after the <code>after</code> event occurs. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Due to MONICA's internal scheduling, <code>after: 1</code> effectively behaves like <code>after: 0</code>, because dynamic worksteps are checked (and potentially executed) at the start of each day, while events like <code>anthesis</code>, etc. are triggered later in the daily calculation. Therefore, "before" and "after" distinctions may depend on implementation details.</p>
+</div>
+<p>Fires the <code>Workstep</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>date</strong></td>
+<td>ISO date <code>"YYYY-MM-DD"</code></td>
+<td></td>
+<td><code>"1991-05-21"</code> or <code>"0001-05-21"</code></td>
+<td>Absolute or relative date</td>
+</tr>
+<tr>
+<td><strong>days</strong></td>
+<td>[d]</td>
+<td>0</td>
+<td></td>
+<td>Days after event</td>
+</tr>
+<tr>
+<td><strong>after</strong></td>
+<td>string</td>
+<td></td>
+<td><code>"Harvest"</code></td>
+<td>Event/workstep name</td>
+</tr>
+<tr>
+<td><strong>at</strong></td>
+<td>string</td>
+<td></td>
+<td><code>"Harvest"</code></td>
+<td>Event/workstep name</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="sowing"><strong>Sowing</strong></h3>
+<p>Defines the sowing date via the <code>date</code> parameter, and specifies the crop to be planted via the <code>crop</code> parameter.</p>
+<p>Fires the <code>Sowing</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>crop</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td></td>
+<td>JSON object specifying the crop to plant</td>
+</tr>
+<tr>
+<td><strong><code>PlantDensity</code></strong></td>
+<td>[plants m-2]</td>
+<td></td>
+<td><code>10</code> for maize</td>
+<td>Plant density</td>
+</tr>
+</tbody>
+</table>
+<h4 id="crop-json-object"><strong>crop</strong> JSON object</h4>
+<p>The <code>crop</code> key references a complex JSON structure describing the crop to be planted. It might look like:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;is-winter-crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;is-perennial-crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cropParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops/clover-grass-ley.json&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;cultivar&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops/clover-grass-ley/.json&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;residueParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crop-residues/clover-grass-ley.json&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>If the crop is a perennial, <code>is-perennial-crop</code> should be set to <strong>true</strong>, even though the cultivar parameters may already contain the key <code>Perennial</code>, which can define at the cultivar level that a crop is by default a perennial crop. </p>
+<p>If <code>is-perennial-crop</code> is given, it overrides <code>Perennial</code>. </p>
+<p>If <code>is-perennial-crop</code> is set to <strong>true</strong> but no <code>perennialCropParams</code> key is specified, then the <strong>perennialCropParams</strong> will be the same as <strong>cropParams</strong>. </p>
+<p>Both <code>cropParams</code> and <code>residueParams</code> are compulsory keys. </p>
+<p>If <code>is-winter-crop</code> is not specified, MONICA determines it automatically. A crop is treated as a winter crop if its sowing day of year (DOY) is after its harvest DOY. <code>is-winter-crop</code> is currently used to determine when the N-Min method (if activated) is applied. If <strong>true</strong>, the N-Min method is applied on the defined DOY (e.g., DOY = 89). For summer crops, the N-Min method is applied at sowing.</p>
+<table>
+<thead>
+<tr>
+<th>Key name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Optional?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>cropParams</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td></td>
+<td>Contains the MONICA species and cultivar parameters</td>
+</tr>
+<tr>
+<td><strong><code>residueParams</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td></td>
+<td>The MONICA residue parameters</td>
+</tr>
+<tr>
+<td><strong><code>perennialCropParams</code></strong></td>
+<td>JSON object</td>
+<td>= <code>cropParams</code> if <code>is-perennial-crop</code> = <strong>true</strong></td>
+<td>x</td>
+<td>The <code>cropParams</code> used for the years after the planting year</td>
+</tr>
+<tr>
+<td><strong><code>is-winter-crop</code></strong></td>
+<td><strong>true</strong> or <strong>false</strong></td>
+<td>If DOY(seed-date) &gt; DOY(harvest-date) -&gt; <strong>true</strong>, else <strong>false</strong></td>
+<td>x</td>
+<td>Defines whether the crop is a winter crop. If not provided, MONICA derives it automatically from sowing and harvest DOYs.</td>
+</tr>
+<tr>
+<td><strong><code>is-perennial-crop</code></strong></td>
+<td><strong>true</strong> or <strong>false</strong></td>
+<td><strong>false</strong></td>
+<td>x</td>
+<td>Defines whether the crop is perennial. Overrides the cultivar's <code>Perennial</code> parameter if given.</td>
+</tr>
+<tr>
+<td><strong><code>cuttingDates</code></strong></td>
+<td>JSON array of ISO dates</td>
+<td>[]</td>
+<td>x</td>
+<td>Defines a list of cutting dates for the crop. Serves as a shortcut for the same number of <strong>Cutting</strong> worksteps.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cropparamsperennialcropparams-json-object"><code>cropParams</code>/<code>perennialCropParams</code> JSON object</h4>
+<table>
+<thead>
+<tr>
+<th>Key name</th>
+<th>Unit/Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>species</code></strong></td>
+<td>JSON object</td>
+<td>The MONICA species parameters</td>
+</tr>
+<tr>
+<td><strong><code>cultivar</code></strong></td>
+<td>JSON object</td>
+<td>The MONICA cultivar-specific parameters</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="automatic-sowing"><strong>Automatic Sowing</strong></h3>
+<p>An <strong>automatic sowing</strong> workstep whose algorithm starts checking conditions from <code>earliest-date</code> onward. If no conditions are met before <code>latest-date</code>, sowing will still occur on that date.</p>
+<p><strong>Conditions</strong></p>
+<ul>
+<li><code>min-temp</code> and <code>days-in-temp-window</code>:</li>
+<li><strong>Spring crops</strong>: sowing is possible if the daily minimum air temperature (<code>tmin</code>) &gt;= <code>min-temp</code> and the average temperature (<code>tavg</code>) over the time window <code>days-in-temp-window</code> &gt;= <code>min-temp</code>.</li>
+<li><strong>Winter crops</strong>: sowing is possible if the running average air temperature (<code>tavg</code>) within <code>days-in-temp-window</code> &lt;= <code>min-temp</code>.</li>
+<li><code>min-%-asw</code> and <code>max-%-asw</code>: bounds (in % of available soil water) within which the 0-10 cm soil moisture (<code>["Mois", 1]</code>) must lie for possible sowing.</li>
+<li><code>max-3d-precip</code>: maximum 3-day precipitation sum [mm] (including the current day) for possible sowing</li>
+<li><code>max-curr-day-precip</code>: maximum daily precipitation sum [mm] allowed on the current day for possible sowing</li>
+<li><code>temp-sum-above-base-temp</code> and <code>base-temp</code>: defines the temperature sum above <code>base-temp</code> required for sowing</li>
+</ul>
+<p>Fires the <code>AutomaticSowing</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>crop</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td></td>
+<td>The crop to be sown</td>
+</tr>
+<tr>
+<td><strong><code>earliest-date</code></strong></td>
+<td>ISO date</td>
+<td></td>
+<td></td>
+<td>Earliest date when sowing may take place</td>
+</tr>
+<tr>
+<td><strong><code>latest-date</code></strong></td>
+<td>ISO date</td>
+<td></td>
+<td></td>
+<td>Latest date by which sowing will occur regardless of conditions</td>
+</tr>
+<tr>
+<td><strong><code>min-temp</code></strong></td>
+<td>[°C]</td>
+<td></td>
+<td></td>
+<td>Minimum temperature required</td>
+</tr>
+<tr>
+<td><strong><code>days-in-temp-window</code></strong></td>
+<td>[d]</td>
+<td></td>
+<td></td>
+<td>Number of consecutive days the minimum temperature must be met</td>
+</tr>
+<tr>
+<td><strong><code>min-%-asw</code></strong></td>
+<td>[%]</td>
+<td></td>
+<td></td>
+<td>Minimum percentage of available soil water</td>
+</tr>
+<tr>
+<td><strong><code>max-%-asw</code></strong></td>
+<td>[%]</td>
+<td></td>
+<td></td>
+<td>Maximum percentage of available soil water</td>
+</tr>
+<tr>
+<td><strong><code>max-3d-precip</code></strong></td>
+<td>[mm]</td>
+<td></td>
+<td></td>
+<td>Maximum precipitation sum over the last 3 days</td>
+</tr>
+<tr>
+<td><strong><code>max-curr-day-precip</code></strong></td>
+<td>[mm]</td>
+<td></td>
+<td></td>
+<td>Maximum precipitation allowed on the current day</td>
+</tr>
+<tr>
+<td><strong><code>temp-sum-above-base-temp</code></strong></td>
+<td>[K]</td>
+<td></td>
+<td></td>
+<td>Required temperature sum above base temperature</td>
+</tr>
+<tr>
+<td><strong><code>base-temp</code></strong></td>
+<td>[°C]</td>
+<td></td>
+<td></td>
+<td>Base temperature used to calculate temperature sums</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="harvest"><strong>Harvest</strong></h3>
+<p>Defines the harvesting time of the previously sown crop and specifies whether to <strong>export</strong> biomass (add only roots and residues to AOMs).</p>
+<p>Fires <code>Harvest</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>exported</code></strong></td>
+<td><strong>true</strong> or <strong>false</strong></td>
+<td><strong>true</strong></td>
+<td></td>
+<td>If <strong>exported = false</strong>, the whole crop is incorporated into the soil. If <strong>true</strong>, only roots and residues remain. If no particular export rules for the organs are defined (see below), then the <strong>cultivar parameters</strong> <code>OrganIdsForPrimaryYield</code> and <code>OrganIdsForSecondaryYield</code> are used. If organ-specific parameters (e.g., <code>leaf</code>, <code>fruit</code>, etc.) are provided, the <code>export</code> parameter is ignored and the more specific ones are used.</td>
+</tr>
+<tr>
+<td><strong><code>leaf</code></strong> and/or <strong><code>fruit</code></strong> and/or <strong><code>shoot</code></strong> and/or <strong><code>struct</code></strong> and/or <strong><code>sugar</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td><code>{"export": [85, "%"], "incorporate": true}</code></td>
+<td>Tells <strong>MONICA</strong> to <strong>export</strong> a certain <strong>percentage</strong> (if missing, <strong>defaults to 100%</strong>) of the organ used as parameter (e.g., <code>leaf</code>) and <code>incorporate</code> the residues into the soil (~~or leave the them as layer on the ground~~ -&gt; right now always true and not changeable!) (if missing, <strong>defaults to true</strong>). Missing organs are treated as residues and <strong>incorporated</strong> by default (as if specified <code>{"export": 0, "incorporate": true}</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="automaticharvest"><strong>AutomaticHarvest</strong></h3>
+<p>An <strong>automatic harvesting</strong> workstep that is triggered once conditions are met after crop <strong>maturity</strong>, or on <code>latest-date</code> if conditions remain unmet.</p>
+<p><strong>Conditions</strong></p>
+<ul>
+<li><code>min-%-asw</code> and <code>max-%-asw</code>: soil moisture bounds (in % of available soil water) wherein the soil moisture (0-10cm) <code>["Mois", 1]</code> has to lie for possible harvesting</li>
+<li><code>max-3d-precip</code>: maximum 3-day precipitation sum [mm] (including current day) for possible harvesting</li>
+<li><code>max-curr-day-precip</code>: maximum precipitation sum [mm] on the current day for possible harvesting</li>
+</ul>
+<p>Fires <code>AutomaticHarvest</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>latest-date</code></strong></td>
+<td>ISO date</td>
+<td></td>
+<td></td>
+<td>Latest possible harvest date</td>
+</tr>
+<tr>
+<td><strong><code>min-%-asw</code></strong></td>
+<td>[%]</td>
+<td></td>
+<td></td>
+<td>Percentage of minimum available soil water for harvesting</td>
+</tr>
+<tr>
+<td><strong><code>max-%-asw</code></strong></td>
+<td>[%]</td>
+<td></td>
+<td></td>
+<td>Percentage of maximum available soil water for harvesting</td>
+</tr>
+<tr>
+<td><strong><code>max-3d-precip</code></strong></td>
+<td>[mm]</td>
+<td></td>
+<td></td>
+<td>Maximum 3-day precipitation sum</td>
+</tr>
+<tr>
+<td><strong><code>max-curr-day-precip</code></strong></td>
+<td>[mm]</td>
+<td></td>
+<td></td>
+<td>Maximum current day precipitation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="cutting"><strong>Cutting</strong></h3>
+<p>Performs a cutting operation on the crop. </p>
+<p>The parameters <code>organs</code>, <code>export</code>, and <code>cut-max-assimilation-rate</code> help to parameterize the cutting operation. </p>
+<ul>
+<li><code>organs</code> specifies which crop organs are cut or left on the plot</li>
+<li><code>exports</code> specifies how much of each cut organ part to export (the rest will be left on the plot and added to the organic matter pools). </li>
+</ul>
+<p>If <code>organs</code> are not defined, MONICA uses the cultivar parameters <code>OrganIdsForCutting</code> (<code>yieldPercentage</code> and <code>organId</code>). To specify which organ to cut or how much to export, the same organ names can be used as in the specification of the outputs section (<code>"Root"</code>, <code>"Leaf"</code>, <code>"Shoot"</code>, <code>"Fruit"</code>, <code>"Struct"</code>, <code>"Sugar"</code>). To further specify how much of an organ to cut, a second parameter to the organ can be a <strong>unit</strong>, which specifies the <strong>biomass (kg ha-1)</strong>, the <strong>LAI (m2 m-2)</strong> or <strong>percentage (%)</strong> (default). A third parameter to the JSON array for the value in the <strong>organs</strong> array can be <strong>left</strong> or <strong>cut</strong> (default), specifying either how much to cut or how much to leave on the plot.</p>
+<p>Fires <code>Cutting</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>organs</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td><code>{"Leaf": 85, "Fruit": [100, "%"]}</code> or <code>{"Leaf": [1.5, "m2 m-2", "left"], "Fruit": [50, "%", "cut"]}</code></td>
+<td>Mapping of organs to percentage to cut</td>
+</tr>
+<tr>
+<td><strong><code>export</code></strong></td>
+<td>JSON object or (<strong>true</strong>/<strong>false</strong>)</td>
+<td><strong>true</strong></td>
+<td><code>{"Leaf": 100, "Fruit": 0}</code></td>
+<td>Mapping of organs to percentage to export after cut or just <strong>true</strong> or <strong>false</strong> if everything or nothing should be exported</td>
+</tr>
+<tr>
+<td><strong><code>cut-max-assimilation-rate</code></strong></td>
+<td>[%]</td>
+<td><strong>100</strong></td>
+<td></td>
+<td>Percentage reduction in the maximum assimilation rate</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="mineralfertilization"><strong>MineralFertilization</strong></h3>
+<p>Applies a given <strong>amount</strong> nitrogen (kg N) fertilizer, whose composition is described by <code>partition</code>. The <code>partition</code> object can also be included from an external <strong>JSON file</strong>.</p>
+<p>Fires <code>MineralFertilization</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>partition</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td><code>{"Carbamid": 0, "NH4": 0.5, "NO3": 0.5}</code></td>
+<td>JSON object describing the composition of the nitrogen fertilizer</td>
+</tr>
+<tr>
+<td><strong><code>amount</code></strong></td>
+<td>[kg N]</td>
+<td></td>
+<td></td>
+<td>Amount of nitrogen fertilizer to be applied to the soil</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ndemandfertilization"><strong>NDemandFertilization</strong></h3>
+<p>Applies a <strong>calculated</strong> amount of nitrogen fertilizer based on the crop's N demand. The composition of the fertilizer is described by <code>partition</code>, which can also be included from an external <strong>JSON file</strong>. The fertilizer occurs either at the specified <code>date</code> or, if no date is given, when the specified development stage <code>stage</code> is reached. The soil nitrogen status is measured down to the given <code>depth</code>.</p>
+<p>Fires <code>NDemandFertilization</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>partition</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td><code>{"id": "AN",   "name": "ammonium nitrate", "Carbamid": 0, "NH4": 0.5, "NO3": 0.5}</code></td>
+<td>JSON object describing the composition of the nitrogen fertilizer</td>
+</tr>
+<tr>
+<td><strong><code>N-demand</code></strong></td>
+<td>[kg N]</td>
+<td></td>
+<td></td>
+<td>The crop's nitrogen demand. The model applies the difference between the demand and the actually available N.</td>
+</tr>
+<tr>
+<td><strong><code>depth</code></strong></td>
+<td>[m]</td>
+<td></td>
+<td></td>
+<td>Depth down to which soil nitrogen is measured</td>
+</tr>
+<tr>
+<td><strong><code>stage</code></strong></td>
+<td>Development stage [1-6/7]</td>
+<td></td>
+<td>1 (sowing) or 6 (maturity of maize)</td>
+<td>MONICA development stage number at which fertilization occurs (if no date is specified)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="organicfertilization"><strong>OrganicFertilization</strong></h3>
+<p>Applies an organic fertilizer of the specified <strong>amount</strong> (kg), described by the <code>parameters</code> JSON object. The material is incorporated into the soil if <code>incorporation</code> is set to <strong>true</strong>.</p>
+<p>Fires <code>OrganicFertilization</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>parameters</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td><code>{"id": "CAM", "name": "cattle manure", "AOM_DryMatterContent": [0.196, "kg DM kg FM-1"], "AOM_FastDecCoeffStandard": [0.002, "d-1"], "AOM_NH4Content": [0.007, "kg N kg DM-1"], "AOM_NO3Content": [0, "kg N kg DM-1"], "AOM_SlowDecCoeffStandard": [0.0002, "d-1"], "CN_Ratio_AOM_Fast": 6.5, "CN_Ratio_AOM_Slow": 100, "NConcentration": 0, "PartAOM_Slow_to_SMB_Fast": [1, "kg kg-1"], "PartAOM_Slow_to_SMB_Slow": [0, "kg kg-1"], "PartAOM_to_AOM_Fast": [0.18, "kg kg-1"], "PartAOM_to_AOM_Slow": [0.72, "kg kg-1"]}</code></td>
+<td>JSON object describing the composition and properties of the organic fertilizer</td>
+</tr>
+<tr>
+<td><strong><code>amount</code></strong></td>
+<td>[kg]</td>
+<td></td>
+<td>[30000, "kg"]</td>
+<td>Amount of organic fertilizer applied</td>
+</tr>
+<tr>
+<td><strong><code>incorporation</code></strong></td>
+<td><strong>true</strong> or <strong>false</strong></td>
+<td></td>
+<td></td>
+<td>Whether the fertilizer is incorporated into the soil (<strong>true</strong>) or left on the surface (<strong>false</strong>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="tillage"><strong>Tillage</strong></h3>
+<p>Performs tillage down to a specified <strong>depth</strong> (m).</p>
+<p>Fires <code>Tillage</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>depth</code></strong></td>
+<td>[m]</td>
+<td></td>
+<td></td>
+<td>Tillage depth</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="irrigation"><strong>Irrigation</strong></h3>
+<p>Applies an <strong>amount</strong> of irrigation water with optionally specified <strong>nitrate</strong> and <strong>sulfate</strong> concentrations.</p>
+<p>Fires <code>Irrigation</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>parameters</code></strong></td>
+<td>JSON object</td>
+<td></td>
+<td><code>{"nitrateConcentration": [mg dm-3], "sulfateConcentration": [mg dm-3]}</code></td>
+<td>JSON object describing the nitrate and sulfate concentrations of the irrigation water</td>
+</tr>
+<tr>
+<td><strong><code>amount</code></strong></td>
+<td>[mm]</td>
+<td></td>
+<td></td>
+<td>Amount of irrigation water to be applied</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="setvalue"><strong>SetValue</strong></h3>
+<p>Sets the given <strong>settable output expression</strong> to a new value at the specified <strong>date</strong>. The <strong>value</strong> can be:</p>
+<ul>
+<li>A single scalar (e.g., <code>5.0</code>),</li>
+<li>A <strong>JSON array</strong> if settable output expression is also a <strong>JSON array</strong> (e.g., output expression is <code>["Mois, [1,3]]</code>, then value could be <code>[20, 30, 20]</code>), or</li>
+<li>An arithmetic expression where <strong>OP</strong> can be <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> and either side a value or an output expression. </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only a limited set of variables are currently available.</p>
+</div>
+<p>Fires <code>SetValue</code> event.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Unit/Type</th>
+<th>Default</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>var</code></strong></td>
+<td>Settable output expression</td>
+<td></td>
+<td><code>["NO2", 1]</code></td>
+<td>Variable or array element to set</td>
+</tr>
+<tr>
+<td><strong><code>value</code></strong></td>
+<td>Value or JSON array <code>["=", output-name or value, OP, output-name or value]</code></td>
+<td></td>
+<td><code>["=", ["NO2", 1], "*", 0.5]</code></td>
+<td>Expression or number like the ones to be used to define outputs</td>
+</tr>
+</tbody>
+</table>
+<p>Some examples for the <strong>SetValue</strong> workstep:</p>
+<p>Set every September 22 the NO<sub>2</sub> value in layer 0 (first layer) to the value which will be calculated by layer 1 * 0.5:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000-09-22&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SetValue&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;var&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Double the NO<sub>3</sub> values in layers 1-10 every September 23:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000-09-23&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SetValue&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;var&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;NO3&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">]],</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;NO3&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">]],</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Set the NH<sub>4</sub> value in layer 1 to its current value every September 24 (no effect):</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000-09-24&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SetValue&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;var&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;NH4&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;NH4&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Set the carbamide (Carb) value in all layers to 0.01 every September 25:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000-09-25&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SetValue&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;var&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Carb&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">]],</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="example-cropjson-file">Example <strong>crop.json</strong> file</h2>
+<p>Below is an example <code>crop.json</code> file defining a complete crop rotation over multiple years.</p>
+<p>It demonstrates:</p>
+<ul>
+<li>How to define crops and residues under the <code>"crops"</code> key.</li>
+<li>How to reference them in the <code>"cropRotation"</code> using the <code>["ref", "crops", "&lt;crop code&gt;"]</code> syntax.</li>
+<li>How to schedule various worksteps such as <strong>sowing</strong>, <strong>fertilization</strong>, <strong>irrigation</strong>, <strong>tillage</strong>, and <strong>harvest</strong>.</li>
+<li>How to include parameter files from external sources (via <code>include-from-file</code>).</li>
+</ul>
+<p>This example illustrates a crop rotation that includes winter rye, silage maize, potato, winter wheat, winter barley, spring barley, and winter rape.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;crops&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;WR&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;cropParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/rye.json&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;cultivar&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/rye/winter rye.json&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;residueParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crop-residues/rye.json&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;SM&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;cropParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/maize.json&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;cultivar&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/maize/silage maize.json&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;residueParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crop-residues/maize.json&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;MEP&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;cropParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/potato.json&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;cultivar&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/potato/moderately early potato.json&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;residueParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crop-residues/potato.json&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;WW&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;cropParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/wheat.json&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;cultivar&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/wheat/winter wheat.json&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;residueParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crop-residues/wheat.json&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;WG&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;cropParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/barley.json&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;cultivar&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/barley/winter barley.json&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;residueParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crop-residues/barley.json&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;SG&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;cropParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/barley.json&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;cultivar&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/barley/spring barley.json&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;residueParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crop-residues/barley.json&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;SC&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;cropParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/rape.json&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;cultivar&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crops/rape/winter rape.json&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;residueParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/crop-residues/rape.json&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;cropRotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;worksteps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1991-09-23&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sowing&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WR&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1992-05-05&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Irrigation&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mm&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;nitrateConcentration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mg dm-3&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;sulfateConcentration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">334</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mg dm-3&quot;</span><span class="p">]</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1992-04-03&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">40.0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1992-05-07&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">40.0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1992-07-27&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harvest&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WR&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;worksteps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1993-04-23&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">125</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1993-04-27&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tillage&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.15</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1993-05-04&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sowing&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SM&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1993-05-10&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1993-09-23&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harvest&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SM&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1993-12-16&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OrganicFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">30000</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/organic-fertilisers/CADLM.json&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;incorporation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1993-12-22&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tillage&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;worksteps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1994-04-25&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sowing&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MEP&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1994-05-04&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1994-09-06&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harvest&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MEP&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1994-09-29&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tillage&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.15</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;worksteps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1994-10-11&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sowing&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WW&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1995-03-24&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1995-04-27&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1995-05-12&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1995-08-02&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harvest&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WW&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1995-08-03&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tillage&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.15</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;worksteps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1995-09-07&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sowing&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WG&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1996-03-21&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1996-04-13&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harvest&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WG&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1996-04-14&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tillage&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;worksteps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1996-04-17&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sowing&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SG&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1996-09-10&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harvest&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SG&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1996-09-17&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tillage&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;worksteps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1997-04-04&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sowing&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SC&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1997-04-10&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MineralFertilization&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;kg N&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/mineral-fertilisers/AN.json&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1997-07-08&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harvest&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;crop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;crops&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SC&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1997-07-09&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tillage&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;m&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;CropParameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;DEFAULT&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;include-from-file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;../monica-parameters/user-parameters/hermes-crop.json&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../../javascripts/tablesort.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
