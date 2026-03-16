@@ -64,6 +64,7 @@ nav:
           - Overview: parameters/crop_parameters/overview.md
           - Species parameters: parameters/crop_parameters/species_parameters.md
           - Cultivar parameters: parameters/crop_parameters/cultivar_parameters.md
+  - Validation and Testing: model_testing_and_applications.md
   - Model Science and Algorithm:
       - Soil Processes:
           - Overview: model_science/soil_processes/overview.md

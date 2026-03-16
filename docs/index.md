@@ -18,6 +18,11 @@ The acronym MONICA is derived from “**MO**del of **NI**trogen and **C**arbon d
 
 For daily time steps, MONICA calculates all processes that interact with the bio-chemical turn-over of carbon and nitrogen in soil and with their transport in soil, air and plant. A broad range of variables being of interest for the user can be accessed day-by-day. This could be easily measurable items, such as soil moisture, carbon and nitrogen contents, the crop’s biomass, or yield. These quantities are well suited to evaluate the performance of the MONICA simulations. However, MONICA also shows items that can only be quantified with great effort, such as nitrogen mineralisation from crop residues or organic fertilisers, NH<sub>3</sub>-, N<sub>2</sub>O-, and CO<sub>2</sub> emissions from soil, denitrification, potential groundwater recharge, crop evapotranspiration, or the leaching of nitrates into deeper soil layers.
 
+![MONICA Overview](images/homepage_overview.png)
+
+Figure 1: Scheme of MONICA
+
+
 ---
 
 ## Which processes are described?
