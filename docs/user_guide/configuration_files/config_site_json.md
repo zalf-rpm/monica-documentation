@@ -52,27 +52,62 @@ The following environment parameters for the entire simulation can be adjusted b
 
 ### Atmospheric CO<sub>2</sub> (O<sub>3</sub>) handling logic
 
-Currently, the following procedure is applied:
+The atmospheric CO<sub>2</sub> and O<sub>3</sub> concentrations in MONICA are determined using the following priority order:
 
-1. Check if **co2** or **o3** field is present in the daily climate data. If so, use the supplied values.
-2. If the parameter `AtmosphericCO2s` (`AtmosphericO3s`) is set to a JSON object mapping of "year" to "CO2 value", use these yearly values.
-3. If the parameter `AtmosphericCO2` (`AtmosphericO3`) is set to 0 or a negative value, let **MONICA** calculate the CO<sub>2</sub> concentration depending on the year.
-4. If none of the above apply, use the value of `AtmosphericCO2` (`AtmosphericO3`) for the entire simulation.
+1. **Daily climate data**
+
+    If the field `co2` or `o3` is present in the daily climate input, this value is used directly.
+
+2. **Yearly concentration mapping**
+    
+    If no daily value is available and `AtmosphericCO2s` or `AtmosphericO3s` is provided as a JSON object mapping years to concentration values, the value corresponding to the simulation year is used.
+
+3. **Dynamic calculation by MONICA**
+
+    If no daily or yearly value is available, and if the parameter `AtmosphericCO2` or `AtmosphericO3` is set to **0 or a negative value**, MONICA internally calculates the concentration based on the simulation date and the selected `rcp` scenario.
+
+4. **Constant concentration**
+
+    If none of the above conditions apply, the constant value defined in `AtmosphericCO2` or `AtmosphericO3` is used for the entire simulation period.
 
 ### Environment parameter table
 
-| Name of parameter              | Unit  | Default value  | Description                                                                            |
-|--------------------------------|-------|----------------|----------------------------------------------------------------------------------------|
-| **Albedo**                     |       | 0.23           | Surface reflectivity coefficient                                                       |
-| **AtmosphericCO2**             | ppm   | 0.0            | Atmospheric CO<sub>2</sub> concentration                                               |
-| **AtmosphericCO2s**            | ppm   | unset          | Example value: `{"1991": 360, "1992": 370, "1993": 380}`                               |
-| **AtmosphericO3**,             | ppm   | 0.0            | Atmospheric O<sub>3</sub> concentration                                                |
-| **AtmosphericO3s**             | ppm   | unset          |                                                                                        |
-| **WindSpeedHeight**            | m     | 2.0            | Height above ground surface at which wind speed is measured                            |
-| **LeachingDepth**              | m     | 0.0            | Depth below ground surface at which water and nitrate outflow is determined            |
-| **MaxGroundwaterDepth**        | m     | 18.0           | Maximum annual groundwater depth below the ground surface                              |
-| **MinGroundwaterDepth**        | m     | 20.0           | Minimum annual groundwater depth below the ground surface                              |
-| **MinGroundwaterDepthMonth**   |       | 3.0            | Month in which the minimum average groundwater depth below ground surface is observed  |
+| Name of parameter            | Unit | Default value | Description                                                                              |
+|------------------------------|------|---------------|------------------------------------------------------------------------------------------|
+| **Albedo**                   |      | 0.23          | Surface reflectivity coefficient                                                         |
+| **AtmosphericCO2**           | ppm  | 0.0           | Atmospheric CO<sub>2</sub> concentration                                                 |
+| **AtmosphericCO2s**          | ppm  | unset         | Yearly CO<sub>2</sub> values, e.g. `{"1991": 360, "1992": 370, "1993": 380}`             |
+| **AtmosphericO3**            | ppm  | 0.0           | Atmospheric O<sub>3</sub> concentration                                                  |
+| **AtmosphericO3s**           | ppm  | unset         | Yearly O<sub>3</sub> values                                                              |
+| **WindSpeedHeight**          | m    | 2.0           | Height above ground surface at which wind speed is measured                              |
+| **LeachingDepth**            | m    | 0.0           | Depth below ground surface at which water and nitrate outflow is determined              |
+| **MaxGroundwaterDepth**      | m    | 18.0          | Maximum annual groundwater depth below the ground surface                                |
+| **MinGroundwaterDepth**      | m    | 20.0          | Minimum annual groundwater depth below the ground surface                                |
+| **MinGroundwaterDepthMonth** |      | 3.0           | Month in which the minimum average groundwater depth below ground surface is observed    |
+| **rcp**                      |      | rcp85         | Climate scenario used for internal CO<sub>2</sub> calculation when `AtmosphericCO2` <= 0 |
+
+!!! note
+    The `rcp` parameter is only used when CO<sub>2</sub> is calculated internally (i.e. `AtmosphericCO2` <= 0 and no climate or yearly values are provided).
+    
+    Supported scenarios depend on the MONICA version:
+
+    | MONICA version | Supported scenarios |
+    |----------------|---------------------|
+    | `< 3.6.54` | `rcp26`, `rcp45`, `rcp60`, `rcp85` |
+    | `>= 3.6.54` | `rcp19`, `rcp26`, `rcp34`, `rcp45`, `rcp60`, `rcp70`, `rcp85` |
+
+    If your climate data is based on SSP scenarios, use the corresponding `rcp` value.
+
+    The following mapping can be used to select the appropriate `rcp` value:
+
+    | SSP scenario | MONICA `rcp` value |
+    |--------------|--------------------|
+    | `ssp119`     | `rcp19`            |
+    | `ssp126`     | `rcp26`            |
+    | `ssp245`     | `rcp45`            |
+    | `ssp370`     | `rcp70`            |
+    | `ssp460`     | `rcp60`            |
+    | `ssp585`     | `rcp85`            |
 
 ---
 
