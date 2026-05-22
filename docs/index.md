@@ -112,24 +112,27 @@ Root growth, as the part of MONICA linking the soil and plant part, has been tak
 
 ## Publication & How to Cite MONICA
 
-### Official Reference
+### Official References
 
 !!! note ""
     **Nendel, C., M. Berg, K.C. Kersebaum, W. Mirschel, X. Specka, M. Wegehenkel, K.O. Wenkel and R. Wieland (2011)**: *The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics.* Ecological Modelling, 222(9), 1614–1625. [https://doi.org/10.1016/j.ecolmodel.2011.02.018](https://doi.org/10.1016/j.ecolmodel.2011.02.018)
 
+!!! note ""
+    **Nendel, C., M. Berg, R. Escueta, G. Ghazaryan, L. Inforsato, B. Kamali, M. Palka, A. Raza, E. Rezaei, X. Specka and J. Yu (2025)**: *The MONICA agroecosystem model.* In: *Current crop models: State-of-the-art and future developments*, pp. 555–596. [https://doi.org/10.19103/AS.2025.0155.19](https://doi.org/10.19103/AS.2025.0155.19)
+
 ### How to Cite MONICA
 
-When using MONICA in publications, please cite the main model description paper.
+When using MONICA in publications, please cite the main model description paper (Nendel et al., 2011). For recent model developments and an overview of the current MONICA framework, the book chapter by Nendel et al. (2025) is also recommended.
 
 #### In-text citation example
 
-> “Simulations were performed using the MONICA agro-ecosystem model (Nendel et al., 2011).”
+> “Simulations were performed using the MONICA agro-ecosystem model (Nendel et al., 2011: Nendel et al., 2025).”
 
 #### Full reference example
 
 > Nendel, C., M. Berg, K.C. Kersebaum, W. Mirschel, X. Specka, M. Wegehenkel, K.O. Wenkel and R. Wieland (2011): *The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics.* Ecological Modelling, 222(9), 1614–1625. https://doi.org/10.1016/j.ecolmodel.2011.02.018
 
-### BibTeX entry
+### BibTeX entries
 
 ```bibtex
 @article{NENDEL20111614,
@@ -145,6 +148,20 @@ When using MONICA in publications, please cite the main model description paper.
     author = {C. Nendel and M. Berg and K.C. Kersebaum and W. Mirschel and X. Specka and M. Wegehenkel and K.O. Wenkel and R. Wieland},
     keywords = {Simulation model, Climate change, Validation, Crop rotation, Yield prediction},
     abstract = {A fundamentally revised version of the HERMES agro-ecosystem model, released under the name of MONICA, was calibrated and tested to predict crop growth, soil moisture and nitrogen dynamics for various experimental crop rotations across Germany, including major cereals, sugar beet and maize. The calibration procedure also included crops grown experimentally under elevated atmospheric CO2 concentration. The calibrated MONICA simulations yielded a median normalised mean absolute error (nMAE) of 0.20 across all observed target variables (n=42) and a median Willmott's Index of Agreement (d) of 0.91 (median modelling efficiency (ME): 0.75). Although the crop biomass, habitus and soil moisture variables were all within an acceptable range, the model often underperformed for variables related to nitrogen. Uncalibrated MONICA simulations yielded a median nMAE of 0.27 across all observed target variables (n=85) and a median d of 0.76 (median ME: 0.30), also showing predominantly acceptable results for the crop biomass, habitus and soil moisture variables. Based on the convincing performance of the model under uncalibrated conditions, MONICA can be regarded as a suitable simulation model for use in regional applications. Furthermore, its ability to reproduce the observed crop growth results in free-air carbon enrichment experiments makes it suited to predict agro-ecosystem behaviour under expected future climate conditions.}
+}
+```
+
+Book chapter:
+
+```bibtex
+@inbook{inbook,
+author = {Nendel, Claas and Berg, Michael and Escueta, Rachel and Ghazaryan, Gohar and Inforsato, Leonardo and Kamali, Bahareh and Palka, Marlene and Raza, Ahsan and Rezaei, Ehsan and Specka, Xenia and Yu, Jing},
+year = {2025},
+month = {12},
+pages = {555-596},
+title = {The MONICA agroecosystem model},
+isbn = {9781801469722},
+doi = {10.19103/AS.2025.0155.19}
 }
 ```
 
