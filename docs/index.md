@@ -126,7 +126,7 @@ When using MONICA in publications, please cite the main model description paper 
 
 #### In-text citation example
 
-> “Simulations were performed using the MONICA agro-ecosystem model (Nendel et al., 2011: Nendel et al., 2025).”
+> “Simulations were performed using the MONICA agro-ecosystem model (Nendel et al., 2011; Nendel et al., 2025).”
 
 #### Full reference example
 
@@ -155,13 +155,13 @@ Book chapter:
 
 ```bibtex
 @inbook{inbook,
-author = {Nendel, Claas and Berg, Michael and Escueta, Rachel and Ghazaryan, Gohar and Inforsato, Leonardo and Kamali, Bahareh and Palka, Marlene and Raza, Ahsan and Rezaei, Ehsan and Specka, Xenia and Yu, Jing},
-year = {2025},
-month = {12},
-pages = {555-596},
-title = {The MONICA agroecosystem model},
-isbn = {9781801469722},
-doi = {10.19103/AS.2025.0155.19}
+    author = {Nendel, Claas and Berg, Michael and Escueta, Rachel and Ghazaryan, Gohar and Inforsato, Leonardo and Kamali, Bahareh and Palka, Marlene and Raza, Ahsan and Rezaei, Ehsan and Specka, Xenia and Yu, Jing},
+    year = {2025},
+    month = {12},
+    pages = {555-596},
+    title = {The MONICA agroecosystem model},
+    isbn = {9781801469722},
+    doi = {10.19103/AS.2025.0155.19}
 }
 ```
 
