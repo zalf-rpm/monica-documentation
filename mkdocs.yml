@@ -22,7 +22,11 @@ extra:
 markdown_extensions:
   - toc:
       toc_depth: 3
-  - pymdownx.superfences
+  - pymdownx.superfences:
+        custom_fences:
+            - name: mermaid
+              class: mermaid
+              format: !!python/name:pymdownx.superfences.fence_code_format
   - admonition
   - pymdownx.arithmatex:
         generic: true
@@ -89,5 +93,6 @@ nav:
           - Oxygen deficiency: model_science/crop_processes/oxygen_deficiency.md
           - Heat stress: model_science/crop_processes/heat_stress.md
           - Yield: model_science/crop_processes/yield.md
+          - Phenology: model_science/crop_processes/phenology.md
   - References and Further Reading:
       - Publications: references/publications.md
