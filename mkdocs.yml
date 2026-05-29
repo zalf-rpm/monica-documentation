@@ -82,7 +82,7 @@ nav:
           - Photosynthesis: model_science/crop_processes/photosynthesis.md
           - Respiration: model_science/crop_processes/respiration.md
           - Assimilate partitioning: model_science/crop_processes/assimilate_partitioning.md
-          - Ontogenesis: model_science/crop_processes/ontogenesis.md
+          - Phenology: model_science/crop_processes/phenology.md
           - Root growth: model_science/crop_processes/root_growth.md
           - Leaf area and ground coverage: model_science/crop_processes/leaf_area_and_ground_coverage.md
           - Transpiration: model_science/crop_processes/transpiration.md
@@ -93,6 +93,6 @@ nav:
           - Oxygen deficiency: model_science/crop_processes/oxygen_deficiency.md
           - Heat stress: model_science/crop_processes/heat_stress.md
           - Yield: model_science/crop_processes/yield.md
-          - Phenology: model_science/crop_processes/phenology.md
+
   - References and Further Reading:
       - Publications: references/publications.md
