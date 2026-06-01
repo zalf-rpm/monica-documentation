@@ -85,6 +85,10 @@ $N_{req}$ Crop-specific day length requirement $[h]$<br>
 
 ## Crop-specific phenology
 
+MONICA models the development process through thermal time (the temperature sum) being accumulated throughout six successive stages, starting from sowing up until harvest. The stage 1 (germination) where the soil temperature at a 10 cm soil level determines development. This starts once the soil temperature is above the base temperature (TempBase) and continues until the temperature sum is greater than the threshold for that stage (StageTemperatureSum). At this point, the plant moves into the Stage 2, indicating emergence. Alternatively, the crop may emerge based on the moisture and flooding state of the soil if the variables EmergenceMoistureControlOn and EmergenceFloodingControlOn in sim.json are TRUE.
+
+Starting from Stage 2, the use of soil temperature is replaced with Tempavg. In the case when Tempavg is higher than TempBase each day, the temperature sum will increase; otherwise, the crop stays in the same stage. As soon as the accumulated temperature sum surpasses the threshold for that particular stage, the crop moves to the next stage. During this process, both the Julian day and water and nitrogen availability (H2O/N availability) are tracked. The vernalization factor applies only to winter crops and requires that they should have been exposed to a necessary amount of frost days to continue their development. Another limiting factor for the growth process is the length of a day, which distinguishes between long-day and short-day crops. All these criteria should be fulfilled in order for the crop to move to the next stage. In addition, there are limiting factors associated with unfavorable temperature conditions and lack of water and nitrogen needed to develop properly (e.g., grain filling). The values for all these factors are defined in the cultivar-specific JSON files.
+
 The following sections describe the crop-specific phenological development currently implemented in MONICA.
 
 ### Cereals
@@ -136,3 +140,186 @@ flowchart LR
 |     5     | **maturity**               | grain filling      | end anthesis           | physiological maturity |     71      |     90     |                                                                                           |
 |     6     |                            | ripening           | physiological maturity | harvest                |     91      |     99     |                                                                                           |
 |  &ndash;  | **cereal-stem-elongation** |                    |                        |                        |     31      |     31     | Calculated as soon as 25% of the temperature sum required to complete Stage 3 is reached. |
+
+
+### Maize
+
+
+```mermaid
+%%{init: {
+  "theme": "default",
+  "themeVariables": {
+    "fontSize": "38px"
+  },
+  "flowchart": {
+    "nodeSpacing": 90,
+    "rankSpacing": 140
+  }
+}}%%
+
+flowchart LR
+
+    A["<b>Sowing</b>"]
+    B["<b>Emergence</b>"]
+    C["<b>Beginning inflorescence emergence</b>"]
+    D["<b>Beginning male anthesis</b>"]
+    E["<b>Beginning female anthesis</b>"]
+    F["<b>End female anthesis</b>"]
+    G["<b>Physiological maturity</b>"]
+    H["<b>Harvest</b>"]
+
+    A -->|<b>Stage 1</b><br>Germination| B
+    B -->|<b>Stage 2</b><br>Vegetative growth| C
+    C --> X -->|<b>Stage 3</b><br>Heading| D
+    D -->|<b>Stage 4</b><br>Male anthesis| E
+    E -->|<b>Stage 5</b><br>Female anthesis| F
+    F -->|<b>Stage 6</b><br>Grain filling| G
+    G -->|<b>Stage 7</b><br>Ripening| H
+
+    X -.-> I["<i>Cereal stem elongation</i>"]
+
+    style X fill:none,stroke:none
+```
+
+
+|   Stage   | MONICA event name          | Physiological name    | From                              | To                                | From BBCH | To BBCH | Notes                                                                                     |
+|:---------:|----------------------------|-----------------------|-----------------------------------|-----------------------------------|:---------:|:-------:|-------------------------------------------------------------------------------------------|
+|     1     | **emergence**              | germination           | sowing                            | emergence                         |     0     |    9    |                                                                                           |
+|     2     |                            | vegetative growth     | emergence                         | beginning inflorescence emergence |    10     |   50    |                                                                                           |
+|     3     |                            | heading               | beginning inflorescence emergence | beginning male anthesis           |    51     |   60    |                                                                                           |
+|     4     |                            | male anthesis         | beginning male anthesis           | beginning female anthesis         |    61     |   64    |                                                                                           |
+|     5     |                            | female anthesis       | beginning female anthesis         | end female anthesis               |    65     |   70    |                                                                                           |
+|     6     |                            | grain filling         | end female anthesis               | physiological maturity            |    71     |   90    |                                                                                           |
+|     7     |                            | ripening              | physiological maturity            | harvest                           |    91     |   99    |                                                                                           |
+| &ndash;   | **cereal-stem-elongation** |                       |                                   |                                   |    31     |   31    | Calculated as soon as 25% of the temperature sum required to complete Stage 3 is reached. |
+
+
+### Oilseed rape
+
+```mermaid
+%%{init: {
+  "theme": "default",
+  "themeVariables": {
+    "fontSize": "38px"
+  },
+  "flowchart": {
+    "nodeSpacing": 90,
+    "rankSpacing": 140
+  }
+}}%%
+
+flowchart LR
+
+    A["<b>Sowing</b>"]
+    B["<b>Emergence</b>"]
+    C["<b>Beginning stem elongation</b>"]
+    D["<b>Beginning anthesis</b>"]
+    E["<b>End anthesis</b>"]
+    F["<b>Physiological maturity</b>"]
+    G["<b>Harvest</b>"]
+
+    A -->|<b>Stage 1</b><br>Germination| B
+    B -->|<b>Stage 2</b><br>Vegetative growth| C
+    C -->|<b>Stage 3</b><br>Heading| D
+    D -->|<b>Stage 4</b><br>Anthesis| E
+    E -->|<b>Stage 5</b><br>Grain filling| F
+    F -->|<b>Stage 6</b><br>Ripening| G
+```
+
+
+
+|   Stage   | MONICA event name | Physiological name | From                      | To                        | From BBCH | To BBCH | Notes |
+|:---------:|-------------------|--------------------|---------------------------|---------------------------|:---------:|:-------:|-------|
+|     1     | **emergence**     | germination        | sowing                    | emergence                 |     0     |    9    |       |
+|     2     |                   | vegetative growth  | emergence                 | beginning stem elongation |    10     |   30    |       |
+|     3     |                   | heading            | beginning stem elongation | beginning anthesis        |    31     |   60    |       |
+|     4     | **anthesis**      | anthesis           | beginning anthesis        | end anthesis              |    61     |   70    |       |
+|     5     | **maturity**      | grain filling      | end anthesis              | physiological maturity    |    71     |   90    |       |
+|     6     |                   | ripening           | physiological maturity    | harvest                   |    91     |   99    |       |
+
+
+### Sugar beet
+
+```mermaid
+%%{init: {
+  "theme": "default",
+  "themeVariables": {
+    "fontSize": "38px"
+  },
+  "flowchart": {
+    "nodeSpacing": 90,
+    "rankSpacing": 140
+  }
+}}%%
+
+flowchart LR
+
+    A["<b>Sowing</b>"]
+    B["<b>Emergence</b>"]
+    C["<b>10-leaf</b>"]
+    D["<b>Beginning tuber growth</b>"]
+    E["<b>Beginning leaf senescence</b>"]
+    F["<b>Physiological maturity</b>"]
+    G["<b>Harvest</b>"]
+
+    A -->|<b>Stage 1</b><br>Germination| B
+    B -->|<b>Stage 2</b><br>Leaf development| C
+    C -->|<b>Stage 3</b><br>Vegetative growth| D
+    D -->|<b>Stage 4</b><br>Generative growth| E
+    E -->|<b>Stage 5</b><br>Leaf senescence| F
+    F -->|<b>Stage 6</b><br>Ripening| G
+```
+
+
+
+|   Stage   | MONICA event name | Physiological name | From                      | To                           | From BBCH  |  To BBCH   | Notes |
+|:---------:|-------------------|--------------------|---------------------------|------------------------------|:----------:|:----------:|-------|
+|     1     | **emergence**     | germination        | sowing                    | emergence                    |     0      |     9      |       |
+|     2     |                   | leaf development   | emergence                 | 10-leaf                      |     10     |     20     |       |
+|     3     |                   | vegetative growth  | 10-leaf                   | beginning tuber growth       |     21     |     39     |       |
+|     4     |                   | generative growth  | beginning tuber growth    | beginning leaf senescence    |     40     |  &ndash;   |       |
+|     5     |                   | leaf senescence    | beginning leaf senescence | physiological maturity       |  &ndash;   |  &ndash;   |       |
+|     6     |                   | ripening           | physiological maturity    | harvest                      |  &ndash;   |     49     |       |
+
+
+### Potato
+
+```mermaid
+%%{init: {
+  "theme": "default",
+  "themeVariables": {
+    "fontSize": "38px"
+  },
+  "flowchart": {
+    "nodeSpacing": 90,
+    "rankSpacing": 140
+  }
+}}%%
+
+flowchart LR
+
+    A["<b>Sowing</b>"]
+    B["<b>Emergence</b>"]
+    C["<b>Canopy closed</b>"]
+    D["<b>Beginning tuber growth</b>"]
+    E["<b>Beginning leaf senescence</b>"]
+    F["<b>Physiological maturity</b>"]
+    G["<b>Harvest</b>"]
+
+    A -->|<b>Stage 1</b><br>Germination| B
+    B -->|<b>Stage 2</b><br>Leaf development| C
+    C -->|<b>Stage 3</b><br>Vegetative growth| D
+    D -->|<b>Stage 4</b><br>Generative growth| E
+    E -->|<b>Stage 5</b><br>Leaf senescence| F
+    F -->|<b>Stage 6</b><br>Ripening| G
+```
+
+
+|   Stage   | MONICA event name | Physiological name | From                      | To                           | From BBCH |  To BBCH  | Notes |
+|:---------:|-------------------|--------------------|---------------------------|------------------------------|:---------:|:---------:|-------|
+|     1     | **emergence**     | germination        | sowing                    | emergence                    |     0     |     9     |       |
+|     2     |                   | leaf development   | emergence                 | canopy closed                |    10     |    39     |       |
+|     3     |                   | vegetative growth  | canopy closed             | beginning tuber growth       | &ndash;   | &ndash;   |       |
+|     4     |                   | generative growth  | beginning tuber growth    | beginning leaf senescence    |    40     | &ndash;   |       |
+|     5     |                   | leaf senescence    | beginning leaf senescence | physiological maturity       | &ndash;   | &ndash;   |       |
+|     6     |                   | ripening           | physiological maturity    | harvest                      | &ndash;   |    49     |       |
