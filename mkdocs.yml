@@ -65,6 +65,7 @@ nav:
           - Overview: parameters/crop_parameters/overview.md
           - Species parameters: parameters/crop_parameters/species_parameters.md
           - Cultivar parameters: parameters/crop_parameters/cultivar_parameters.md
+          - Crop residue parameters: parameters/crop_parameters/crop_residue_parameters.md
       - Soil parameters: 
           - Soil organic parameters: parameters/soil_parameters/soil_organic_parameters.md
           - Soil moisture parameters: parameters/soil_parameters/soil_moisture_parameters.md
@@ -73,7 +74,9 @@ nav:
       - Management parameters: 
           - Mineral fertiliser parameters: parameters/management_parameters/mineral_fertiliser_parameters.md
           - Organic fertiliser parameters: parameters/management_parameters/organic_fertiliser_parameters.md
-      - Environment parameters: parameters/environment_parameters.md
+      - General parameters: 
+          - Environmental parameters: parameters/general_parameters/environment_parameters.md
+          - Crop parameters: parameters/general_parameters/crop_parameters.md
   - Validation and Testing: model_testing_and_applications.md
   - Model Science and Algorithm:
       - Soil Processes:
@@ -102,6 +105,7 @@ nav:
           - Oxygen deficiency: model_science/crop_processes/oxygen_deficiency.md
           - Heat stress: model_science/crop_processes/heat_stress.md
           - Yield: model_science/crop_processes/yield.md
-
   - References and Further Reading:
       - Publications: references/publications.md
+  - Support and Community:
+      - FAQ & Support: support_and_community/faq_and_support.md
