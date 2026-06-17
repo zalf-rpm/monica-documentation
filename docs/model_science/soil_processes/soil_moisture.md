@@ -53,9 +53,9 @@ The surface resistance for the actual crop is calculated in the crop growth modu
 
 ---
 
-## Pedo-Transfer Functions
+## Pedotransfer Functions
 
-A Pedo-Transfer Function (PTF) mechanism that transforms soil physical properties (mainly texture) into water retention capacity parameters. These parameters, known as pore space (PS or saturation water capacity), field capacity (FC) and permanent wilting point (WP). These parameters are required by the tipping-bucket water balance approach used in MONICA to simulate soil water content dynamics.
+A Pedotransfer Function (PTF) is a mechanism that transforms soil physical properties, mainly texture, into water retention capacity parameters. These parameters include pore space (PS, or saturation water capacity), field capacity (FC), and permanent wilting point (WP). They are required by the tipping-bucket water balance approach used in MONICA to simulate soil water content dynamics.
 
 MONICA currently supports four PTFs, divided into two types:
 
@@ -64,80 +64,98 @@ MONICA currently supports four PTFs, divided into two types:
 These methods use lookup tables or regression equations to directly relate soil properties to PS, FC, and WP.
 
 **Wessolek2009**
-Uses a lookup table that relates categorical soil types to water retention parameters. The table is stored in [`SoilCharacteristicData.json`](https://github.com/zalf-rpm/monica-parameters/blob/master/soil/SoilCharacteristicData.json), where `airCapacity` = PS and `nFieldCapacity` = WP. Based on Wessolek et al. (2009).
+
+This method uses a lookup table that relates categorical soil types to water retention parameters. The table is stored in [`SoilCharacteristicData.json`](https://github.com/zalf-rpm/monica-parameters/blob/master/soil/SoilCharacteristicData.json), where `airCapacity` = PS and `nFieldCapacity` = WP. The implementation is based on Wessolek et al. (2009).
 
 **Toth**
-Based on regression equations reported in Tóth et al. (2015), specifically equations 5, 9, and 12 of Table S1 (Supplementary Material). Implemented as `fcSatPwpFromToth` in [`soil.cpp`](https://github.com/zalf-rpm/mas_cpp_misc/blob/5f0c31b0dc01ef3984f5eca21a067ecf84e70af4/soil/soil.cpp), line 911.
+
+This method is based on the regression equations reported in Tóth et al. (2015), specifically equations 5, 9, and 12 of Table S1 in the Supplementary Material. It is implemented as `fcSatPwpFromToth` in [`soil.cpp`](https://github.com/zalf-rpm/mas_cpp_misc/blob/5f0c31b0dc01ef3984f5eca21a067ecf84e70af4/soil/soil.cpp), line 911.
 
 ### Van Genuchten PTFs
 
-These methods build a soil water retention curve using the Van Genuchten formula. Five parameters are estimated from soil texture and organic carbon, and PS, FC, and WP are then derived from this curve at defined matric head values.
+These methods build a soil water retention curve using the Van Genuchten formula. Five parameters are estimated from soil texture and organic carbon content, from which PS, FC, and WP are derived at defined matric head values.
 
-The Van Genuchten retention curve relates soil moisture $\theta$ to matric head $h$:
+The Van Genuchten retention curve relates soil moisture ($\theta$) to matric head ($h$):
 
 $$\theta(h) = \theta_r + \frac{\theta_s - \theta_r}{\left[1 + (\alpha |h|)^n\right]^m}$$
 
-In MONICA, because the current soil moisture $\theta$ is already known at each time step, the equation is inverted to compute the matric head $h$, which is then converted to a pF value:
+The pF values corresponding to FC and WP are used to derive the water retention parameters.
+
+In its standard form, the Van Genuchten equation is used to calculate soil moisture from a given matric head. In MONICA, however, the current soil moisture ($\theta$) is already known at each time step. Therefore, the equation is inverted to compute the matric head ($h$), which can then be used in hydraulic calculations.
 
 $$pF = \log_{10}(|h|)$$
 
-The workflow in the code is therefore:
+The pF scale is a logarithmic representation of soil suction, where $h$ is expressed in centimeters of water column.
 
-```
-soil moisture (θ)
-      ↓
-inverse Van Genuchten
-      ↓
-matric head (h)
-      ↓
-pF value
-      ↓
-water retention parameters (PS, FC, WP)
-```
+The workflow is therefore:
 
-The pF values corresponding to FC and WP are then used to derive the water retention parameters.
+```mermaid
+flowchart LR
+    A["Soil moisture (θ)"]
+    B["Inverse Van Genuchten"]
+    C["Matric head (h)"]
+    D["Hydraulic calculations"]
+
+    A --> B
+    B --> C
+    C --> D
+```
 
 **VanGenuchtenVereecken**
-Based on Vereecken et al. (1989). This method assumes $\theta_r$ = WP (i.e. permanent wilting point equals residual water content) and fixes $m = 1$. Because $\theta_s$ = PS and $\theta_r$ = WP are already known, only FC needs to be calculated. FC is not calculated at a single pF value but varies between pF 1.9 and 2.4 depending on clay and sand content. Implemented as `fcSatPwpFromVanGenuchtenVereecken` in [`soil.cpp`](https://github.com/zalf-rpm/mas_cpp_misc/blob/5f0c31b0dc01ef3984f5eca21a067ecf84e70af4/soil/soil.cpp), line 847.
+
+This method is based on Vereecken et al. (1989). It assumes that $\theta_r$ = WP, meaning that the residual water content is equal to the permanent wilting point, and fixes $m = 1$. Because $\theta_s$ = PS and $\theta_r$ = WP are already known, only FC needs to be calculated. FC is not calculated at a single pF value. Instead, the pF value varies between 1.9 and 2.4 depending on clay and sand content. This method is implemented as `fcSatPwpFromVanGenuchtenVereecken` in [`soil.cpp`](https://github.com/zalf-rpm/mas_cpp_misc/blob/5f0c31b0dc01ef3984f5eca21a067ecf84e70af4/soil/soil.cpp), line 847.
 
 !!! note
-    Setting $m = 1$ is a simplification and is physically inaccurate. It removes one degree of freedom from the retention curve, causing the drying tail to become flatter meaning the soil appears to retain more water in the dry range than it should. This affects plant water availability, drying dynamics, and hydraulic conductivity calculations. The assumption $\theta_r$ = WP is also physically questionable. Because $m = 1$, the shape of the retention curve depends almost entirely on the pedotransfer function for $n$.
+    Setting $m = 1$ is a simplification that reduces the flexibility of the retention curve. This may affect the representation of soil water retention under dry conditions, as well as plant water availability, drying dynamics, and hydraulic conductivity calculations. The assumption that $\theta_r$ = WP is also a simplification. Because $m$ is fixed, the shape of the retention curve becomes more dependent on the parameter $n$.
 
 **VanGenuchtenToth**
-Based on Tóth et al. (2015), equation set 21 of the Supplementary Material. WP is estimated at a matric head of −15,000 cm, PS equals $\theta_s$, and FC is calculated in the same way as in VanGenuchtenVereecken. Unlike VanGenuchtenVereecken, the parameter $m$ is not fixed at 1 but is derived from $n$ using its own formula, making the retention curve more physically realistic. Implemented as `fcSatPwpFromVanGenuchtenToth` in [`soil.cpp`](https://github.com/zalf-rpm/mas_cpp_misc/blob/5f0c31b0dc01ef3984f5eca21a067ecf84e70af4/soil/soil.cpp), line 881.
+
+This method is based on equation set 21 of the Supplementary Material in Tóth et al. (2015). WP is estimated at a matric head of −15,000 cm, while PS is assumed to be equal to $\theta_s$. FC is calculated using the same approach as in `VanGenuchtenVereecken`. Unlike `VanGenuchtenVereecken`, the parameter $m$ is not fixed at 1. Instead, it is derived from $n$, resulting in a more flexible and physically realistic retention curve. This method is implemented as `fcSatPwpFromVanGenuchtenToth` in [`soil.cpp`](https://github.com/zalf-rpm/mas_cpp_misc/blob/5f0c31b0dc01ef3984f5eca21a067ecf84e70af4/soil/soil.cpp), line 881.
 
 ### Summary of available PTFs
 
-| PTF | Type | Based on | Key assumption |
-|---|---|---|---|
-| `Wessolek2009` | Empirical | Wessolek et al. (2009) | Lookup table by soil type |
-| `Toth` | Empirical | Tóth et al. (2015) | Regression equations |
-| `VanGenuchtenVereecken` | Van Genuchten curve | Vereecken et al. (1989) | $\theta_r$ = WP, $m$ = 1 |
-| `VanGenuchtenToth` | Van Genuchten curve | Tóth et al. (2015) | WP at pF 4.2, $m$ from $n$ |
+| PTF                     | Type                | Based on                | Key assumption                     |
+|-------------------------|---------------------|-------------------------|------------------------------------|
+| `Wessolek2009`          | Empirical           | Wessolek et al. (2009)  | Lookup table based on soil type    |
+| `Toth`                  | Empirical           | Tóth et al. (2015)      | Regression equations               |
+| `VanGenuchtenVereecken` | Van Genuchten curve | Vereecken et al. (1989) | $\theta_r$ = WP, $m$ = 1           |
+| `VanGenuchtenToth`      | Van Genuchten curve | Tóth et al. (2015)      | WP at pF 4.2, $m$ derived from $n$ |
 
 ### Configuration
 
-The PTF to use is specified in `site.json` via the `pwpFcSatFunction` key:
+The PTF used by MONICA is specified in `site.json` via the `pwpFcSatFunction` parameter:
 
 ```json
 "pwpFcSatFunction": "Wessolek2009"
 ```
 
-Accepted values: `"Wessolek2009"`, `"Toth"`, `"VanGenuchtenVereecken"`, `"VanGenuchtenToth"`
+Accepted values are: `"Wessolek2009"`, `"Toth"`, `"VanGenuchtenVereecken"`, `"VanGenuchtenToth"`
 
 ---
 
 ## Lambda Factor
 
-Lambda ($\lambda$) is an empirical, texture-dependent percolation rate coefficient that governs how much water exceeding field capacity at a given soil layer is transferred to the layer below. A higher lambda value results in faster percolation.
+Lambda ($\lambda$) is an empirical, texture-dependent percolation rate coefficient. It is multiplied by the amount of water exceeding field capacity in a soil layer to determine how much water is transferred to the layer below. A higher lambda value results in faster percolation.
 
 ### Default formula in MONICA
 
-The default lambda is calculated from sand, clay, and silt fractions. In the MONICA source code (`soil_io3.py` and `mas_cpp_misc/soil/conversion.cpp`, line 78), it is implemented as:
+The default lambda is calculated from sand, clay, and silt fractions. In the MONICA source code (`soil_io3.py` and `mas_cpp_misc/soil/conversion.cpp`, lines 78-82), it is implemented as:
 
-```python
-lambda = (2.0 * (sand * sand * 0.575)) + (clay * 0.1) + ((1.0 - sand - clay) * 0.35)
-```
+=== "soil_io3.py"
+
+    ```python
+    def sand_and_clay_to_lambda(sand, clay):
+        return (2.0 * (sand * sand * 0.575)) + (clay * 0.1) + ((1.0 - sand - clay) * 0.35)
+    ```
+
+=== "conversion.cpp"
+
+    ```cpp
+    double Soil::sandAndClay2lambda(double sand, double clay) {
+      double lambda = (2.0 * (sand * sand * 0.575)) + (clay * 0.1) + ((1.0 - sand - clay) * 0.35);
+      return lambda;
+    }
+    ```
 
 where `sand` and `clay` are given as fractions (kg kg⁻¹).
 
@@ -150,16 +168,10 @@ Alternative methods for calculating lambda have been described in the literature
 
 ### Overriding the default lambda
 
-A custom lambda value can be provided directly in the soil input file by including a `Lambda` column in `Soil.csv` and reading it in the run-producer script:
-
-```python
-"Lambda": [float(row['lambda']), "-"]
-```
-
-To use the MONICA default lambda instead, this line can be commented out.
+A custom lambda value can be specified for individual soil layers through the `Lambda` parameter in the soil profile definition. If no value is provided, MONICA calculates a default value from the soil texture fractions.
 
 !!! note
-    A known issue exists in the source code regarding low water percolation in loam soils. A temporary override (`lambda = 1.0`) is noted in `conversion.cpp` and is currently under investigation.
+    A known issue exists in the source code regarding low water percolation in loam soils. As a temporary workaround, a fixed value of `lambda = 1.0` is noted in `conversion.cpp`.
 
 ---
 
