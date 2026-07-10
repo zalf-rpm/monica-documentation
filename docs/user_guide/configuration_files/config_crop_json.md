@@ -264,6 +264,36 @@ Fires `Irrigation` event.
 
 ---
 
+### **AutomaticIrrigation**
+
+Triggers irrigation events automatically based on soil moisture thresholds, developmental stages, and/or specific date ranges. It allows the model to dynamically apply irrigation water to maintain soil moisture within a desired range.
+
+Fires `AutomaticIrrigation` event.
+
+| Parameter name     | Unit/Type   | Default | Example                | Description                                                                      |
+|--------------------|-------------|---------|------------------------|----------------------------------------------------------------------------------|
+| **`irrigateCrop`** | Boolean     |         | `"irrigateCrop": true` | If `true`, automatic irrigation is restricted to periods when a crop is growing. |
+| **`startStage`**   | Integer     |         | `"startStage": 4`      | The developmental stage at which automatic irrigation becomes active.            |
+| **`endStage`**     | Integer     |         | `"endStage": 4`        | The developmental stage at which automatic irrigation becomes inactive.          |
+| **`parameters`**   | JSON object |         | (See table below)      | Configuration object for thresholds, amounts, and timing.                        |
+
+`parameters` object details:
+
+| Parameter name                 | Unit/Type | Default | Example                                                            | Description                                                                                                                                                       |
+|--------------------------------|-----------|---------|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`"startDate"`**              | ISO Date  |         | `"startDate": "0000-09-23"`                                        | Earliest date when automatic irrigation can be triggered. Can be specified either as an absolute or a relative date.                                              |
+| **`"endDate"`**                | ISO Date  |         | `"endDate": "0001-08-25"`                                          | Latest date when automatic irrigation can be triggered. Can be specified either as an absolute or a relative date.                                                |
+| **`"amount"`**                 | [mm]      |         | `"amount": [17, "mm"]`                                             | Fixed amount of irrigation water to apply when triggered.                                                                                                         |
+| **`"set_to_%nFC"`**            | [%]       |         | `"set_to_%nFC": [100, "%"]`                                        | Alternative to `amount`. Applies the amount of water required to restore the soil moisture to the specified percentage of nFC.                                    |
+| **`trigger_if_nFC_below_%`**   | [%]       |         | `"trigger_if_nFC_below_%": [90, "%"],`                             | Soil moisture threshold, expressed as a percentage of nFC, that triggers irrigation. Irrigation is applied when plant-available water falls below this threshold. |
+| **`"calc_nFC_until_depth_m"`** | [m]       |         | `"calc_nFC_until_depth_m": [0.3, "m"]`                             | Soil depth considered when evaluating whether the irrigation trigger threshold has been reached.                                                                  |
+| **`"nitrateConcentration"`**   | [mg dm-3] |         | `"irrigationParameters": {"nitrateConcentration": [0, "mg dm-3"]}` | Nitrate concentration in irrigation water                                                                                                                         |
+
+!!! note
+    `UseAutomaticIrrigation` must be set to `false` or omitted in `sim.json` for the `AutomaticIrrigation` workstep in `crop.json` to function correctly. If `UseAutomaticIrrigation` is set to `true` in `sim.json`, the model uses the global automatic irrigation settings defined in `sim.json`.
+
+---
+
 ### **SetValue**
 
 Sets the given **settable output expression** to a new value at the specified **date**. The **value** can be:
