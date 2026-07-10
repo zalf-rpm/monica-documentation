@@ -517,7 +517,8 @@ Automatic irrigation can be enabled or disabled using the `UseAutomaticIrrigatio
 | Key                            | Default value     | Unit         | Description                                                                                                                                                                                                         |
 |--------------------------------|-------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **`"UseAutomaticIrrigation"`** | `true` or `false` |              | Enables or disables automatic irrigation                                                                                                                                                                            |
-| **`"startDate`**               |                   | ISO Date     | The date from which automatic irrigation becomes active. Can only be specified as an absolute date.                                                                                                                 |
+| **`"startDate"`**               |                   | ISO Date     | The date from which automatic irrigation becomes active. Can only be specified as an absolute date.                                                                                                                 |
+| **`"stopDate"`**                |                   | ISO Date     | The date until which automatic irrigation remains active. Can only be specified as an absolute date.
 | **`"amount"`**                 |                   | mm           | Amount of irrigation water to apply when plant available water drops below the trigger threshold. If > 0, `set_to_%nFC` is ignored.                                                                                 |
 | **`"set_to_%nFC"`**            |                   | % nFC        | Sets soil moisture of the involved layers to the specified percentage of plant available water (nFC). Used only if `amount` is 0 or is not specified.                                                               |
 | **`"threshold"`**              |                   | fraction nFC | Fraction of net field capacity (plant available water = field capacity - permanent wilting point to) that must be reached before irrigation is triggered <br>⚠️ *Deprecated, use `trigger_if_nFC_below_%` instead.* |
@@ -531,12 +532,13 @@ Automatic irrigation can be enabled or disabled using the `UseAutomaticIrrigatio
 
 **Example 1: Fixed Amount**
 
-Apply 17 mm irrigation each time the plant available water in the first 30 cm of the soil profile drops below 50%, starting from May 1st.
+Apply 17 mm irrigation each time the plant available water in the first 30 cm of the soil profile drops below 50%, starting from May 1st and August 31st.
 
 ```json
 "UseAutomaticIrrigation": true,
 "AutoIrrigationParams": {
   "startDate": "2024-05-01",
+  "stopDate": "2024-08-31",
   "amount": [17, "mm"],
   "trigger_if_nFC_below_%": [50, "%"],
   "calc_nFC_until_depth_m": [0.3, "m"]
