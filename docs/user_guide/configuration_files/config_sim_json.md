@@ -517,34 +517,38 @@ Automatic irrigation can be enabled or disabled using the `UseAutomaticIrrigatio
 | Key                            | Default value     | Unit         | Description                                                                                                                                                                                                         |
 |--------------------------------|-------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **`"UseAutomaticIrrigation"`** | `true` or `false` |              | Enables or disables automatic irrigation                                                                                                                                                                            |
-| **`"nitrateConcentration"`**   | 0                 | mg dm-3      | Nitrate concentration in irrigation water                                                                                                                                                                           |
-| **`"sulfateConcentration"`**   | 0                 | mg dm-3      | Sulfate concentration in irrigation water (*currently ignored by MONICA*)                                                                                                                                           |
-| **`"amount"`**                 |                   | mm           | Amount of irrigation water to apply when plant available water drops below the trigger threshold                                                                                                                    |
-| **`"set_to_%nFC"`**            |                   | % nFC        | Sets soil moisture of the involved layers to the specified percentage of plant available water (nFC)                                                                                                                |
+| **`"startDate`**               |                   | ISO Date     | The date from which automatic irrigation becomes active. Can only be specified as an absolute date.                                                                                                                 |
+| **`"amount"`**                 |                   | mm           | Amount of irrigation water to apply when plant available water drops below the trigger threshold. If > 0, `set_to_%nFC` is ignored.                                                                                 |
+| **`"set_to_%nFC"`**            |                   | % nFC        | Sets soil moisture of the involved layers to the specified percentage of plant available water (nFC). Used only if `amount` is 0 or is not specified.                                                               |
 | **`"threshold"`**              |                   | fraction nFC | Fraction of net field capacity (plant available water = field capacity - permanent wilting point to) that must be reached before irrigation is triggered <br>⚠️ *Deprecated, use `trigger_if_nFC_below_%` instead.* |
 | **`"trigger_if_nFC_below_%"`** |                   | % nFC        | Triggers irrigation if the percentage of net field capacity (plant available water = field capacity - permanent wilting point to) drops below this value                                                            |
 | **`"calc_nFC_until_depth_m"`** | 0.3               | m            | The soil depth used by MONICA to check whether the irrigation trigger condition is met                                                                                                                              |
+| **`"nitrateConcentration"`**   | 0                 | mg dm-3      | Nitrate concentration in irrigation water                                                                                                                                                                           |
+| **`"sulfateConcentration"`**   | 0                 | mg dm-3      | Sulfate concentration in irrigation water (*currently ignored by MONICA*)                                                                                                                                           |
 
 
-#### Example 1:
+### Examples
 
-Apply 17 mm irrigation each time the plant available water in the first 30 cm of the soil profile drops below 50%.
+**Example 1: Fixed Amount**
+
+Apply 17 mm irrigation each time the plant available water in the first 30 cm of the soil profile drops below 50%, starting from May 1st.
 
 ```json
-"UseAutomaticIrrigation": false,
+"UseAutomaticIrrigation": true,
 "AutoIrrigationParams": {
+  "startDate": "2024-05-01",
   "amount": [17, "mm"],
   "trigger_if_nFC_below_%": [50, "%"],
   "calc_nFC_until_depth_m": [0.3, "m"]
 }
 ```
 
-#### Example 2:
+**Example 2: Refill to Field Capacity**
 
 Set soil moisture in the first 50 cm of the soil profile to field capacity = 100% nFC, if the plant available water drops below 50%. This time add 10 mg dm-3 of nitrate with the irrigation water.
 
 ```json
-"UseAutomaticIrrigation": false,
+"UseAutomaticIrrigation": true,
 "AutoIrrigationParams": {
   "irrigationParameters": {
     "nitrateConcentration": [10, "mg dm-3"],
