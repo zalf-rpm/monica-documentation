@@ -89,7 +89,22 @@ MONICA models the development process through thermal time (the temperature sum)
 
 Starting from Stage 2, the use of soil temperature is replaced with Tempavg. In the case when Tempavg is higher than TempBase each day, the temperature sum will increase; otherwise, the crop stays in the same stage. As soon as the accumulated temperature sum surpasses the threshold for that particular stage, the crop moves to the next stage. During this process, both the Julian day and water and nitrogen availability (H2O/N availability) are tracked. The vernalization factor applies only to winter crops and requires that they should have been exposed to a necessary amount of frost days to continue their development. Another limiting factor for the growth process is the length of a day, which distinguishes between long-day and short-day crops. All these criteria should be fulfilled in order for the crop to move to the next stage. In addition, there are limiting factors associated with unfavorable temperature conditions and lack of water and nitrogen needed to develop properly (e.g., grain filling). The values for all these factors are defined in the cultivar-specific JSON files.
 
+## Phenological events
+
+During simulation, the crop module emits the following phenological events through its event callback.
+
+| Event                    | Trigger                                                                                                      |
+|--------------------------|--------------------------------------------------------------------------------------------------------------|
+| `emergence`              | Transition from internal stage 0 to stage 1.                                                                 |
+| `anthesis`               | Transition from stage 3 to 4 for six-stage crops, or from stage 4 to 5 for seven-stage crops.                |
+| `maturity`               | Transition from stage 4 to 5 for six-stage crops, or from stage 5 to 6 for seven-stage crops.                |
+| `cereal-stem-elongation` | Emitted once when accumulated thermal time reaches `StageTemperatureSum[1] + 0.25 × StageTemperatureSum[2]`. |
+
 The following sections describe the crop-specific phenological development currently implemented in MONICA.
+
+---
+
+## Crop-specific stage interpretation
 
 ### Cereals
 
@@ -187,7 +202,7 @@ flowchart LR
 |     1     | **emergence**              | germination           | sowing                            | emergence                         |     0     |    9    |                                                                                           |
 |     2     |                            | vegetative growth     | emergence                         | beginning inflorescence emergence |    10     |   50    |                                                                                           |
 |     3     |                            | heading               | beginning inflorescence emergence | beginning male anthesis           |    51     |   60    |                                                                                           |
-|     4     |                            | male anthesis         | beginning male anthesis           | beginning female anthesis         |    61     |   64    |                                                                                           |
+|     4     | **anthesis**               | male anthesis         | beginning male anthesis           | beginning female anthesis         |    61     |   64    |                                                                                           |
 |     5     |                            | female anthesis       | beginning female anthesis         | end female anthesis               |    65     |   70    |                                                                                           |
 |     6     |                            | grain filling         | end female anthesis               | physiological maturity            |    71     |   90    |                                                                                           |
 |     7     |                            | ripening              | physiological maturity            | harvest                           |    91     |   99    |                                                                                           |
