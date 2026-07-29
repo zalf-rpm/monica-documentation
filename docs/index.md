@@ -18,10 +18,9 @@ The acronym MONICA is derived from “**MO**del of **NI**trogen and **C**arbon d
 
 For daily time steps, MONICA calculates all processes that interact with the bio-chemical turn-over of carbon and nitrogen in soil and with their transport in soil, air and plant. A broad range of variables being of interest for the user can be accessed day-by-day. This could be easily measurable items, such as soil moisture, carbon and nitrogen contents, the crop’s biomass, or yield. These quantities are well suited to evaluate the performance of the MONICA simulations. However, MONICA also shows items that can only be quantified with great effort, such as nitrogen mineralisation from crop residues or organic fertilisers, NH<sub>3</sub>-, N<sub>2</sub>O-, and CO<sub>2</sub> emissions from soil, denitrification, potential groundwater recharge, crop evapotranspiration, or the leaching of nitrates into deeper soil layers.
 
-![MONICA Overview](images/homepage_overview.png)
+![MONICA Overview](images/index/homepage_overview.png)
 
-Figure 1: Scheme of MONICA
-
+*Figure 1: Scheme of MONICA*
 
 ---
 
@@ -29,7 +28,7 @@ Figure 1: Scheme of MONICA
 
 MONICA describes processes in the soil–plant system and the energy and matter exchange with the hydrosphere and atmosphere. Using daily weather data, it calculates the soil temperature for single discrete layers in the soil. The movement of water in the soil is modelled using a capacity approach. This approach assumes that water that cannot be stored in a soil layer will be passed on to the adjacent layer below. The layer’s storage capacity and its percolation rate are governed by its texture and soil organic matter content. Evaporation and water uptake by the root influence the water budget. If groundwater is accessible, capillary water can rise into the root zone.
 
-Soil organic matter turnover is based on conceptual carbon pools, representing labile and stabilised carbon, each with two different turnover rates. Alongside, two populations of microbes, r- and K-strategists are represented, summing up to six organic carbon pools in total. Efficiency parameters determine CO2 losses from microbial turnover, and the C-to-N stoichiometry requires nitrogen to be released as ammonium (ammonification), accordingly. Through nitrification ammonium is turned intro nitrate which may move with the water through the soil.
+Soil organic matter turnover is based on conceptual carbon pools, representing labile and stabilised carbon, each with two different turnover rates. Alongside, two populations of microbes, r- and K-strategists are represented, summing up to six organic carbon pools in total. Efficiency parameters determine CO<sub>2</sub> losses from microbial turnover, and the C-to-N stoichiometry requires nitrogen to be released as ammonium (ammonification), accordingly. Through nitrification ammonium is turned into nitrate which may move with the water through the soil.
 
 If oxygen is deficient, nitrate can be transformed into atmospheric nitrogen (denitrification), a process during which the greenhouse gas N<sub>2</sub>O is produced. The microorganisms facilitating these processes and producing CO<sub>2</sub> from their metabolism are also simulated. When organic fertilisers are applied, gaseous NH<sub>3</sub> is set free. Furthermore, also urea fertiliser hydrolyses in the soil and releases NH<sub>3</sub>.
 
@@ -41,23 +40,23 @@ At harvest, crop residues remain. They are decomposed and contribute to soil org
 
 ## MONICA’s crop growth concept
 
-The crop growth concept of MONICA is based on the calculation of assimilate production from radiation using a simplified Farquhar approach that allows considering the effect of atmospheric CO2 concentrations on photosynthesis and transpiration. The efficiency of carbohydrate production is dependent on temperature. The virtual crop’s development from seed to harvest maturity is determined using the accumulating temperature. For each developmental stage, the distribution of carbohydrates within the crop is continuously adjusted. In early stages root and leaf growth is promoted, while shoot and fruit growth will be increasingly supported at later stages. The distributed carbohydrates will be converted into dry matter biomass and – in the case of leaves – also in leaf area. In turn, leaf area, as the main location for photosynthesis, finds its way into the calculation of carbohydrate production.
+The crop growth concept of MONICA is based on the calculation of assimilate production from radiation using a simplified Farquhar approach that allows considering the effect of atmospheric CO<sub>2</sub> concentrations on photosynthesis and transpiration. The efficiency of carbohydrate production is dependent on temperature. The virtual crop’s development from seed to harvest maturity is determined using the accumulating temperature. For each developmental stage, the distribution of carbohydrates within the crop is continuously adjusted. In early stages root and leaf growth is promoted, while shoot and fruit growth will be increasingly supported at later stages. The distributed carbohydrates will be converted into dry matter biomass and – in the case of leaves – also in leaf area. In turn, leaf area, as the main location for photosynthesis, finds its way into the calculation of carbohydrate production.
 
-The amount of dry matter assigned to the root is distributed down the soil profile according to an empirical formula. The current rooting depth is depending on soil texture, but also on the crop itself. Further on, root length density limits the root’s ability to take up water and nitrogen.  
+The amount of dry matter assigned to the root is distributed down the soil profile according to an empirical formula. The current rooting depth is depending on soil texture, but also on the crop itself. Further on, root length density limits the root’s ability to take up water and nitrogen.
 
 From leaf area, the degree of soil coverage is estimated, which in turn determines the fraction of transpiration from total evapotranspiration. Actual evapotranspiration is calculated relative to a cut grass crop, using crop-specific coefficients. The resulting water loss is then – a sufficient supply assumed – taken from the respective soil layers according to the root distribution. In case water supply is insufficient and falls below a specific threshold value, crop growth will be reduced. This also applies in the case of nitrogen supply from soil being insufficient for maintaining the N concentration in the crop tissue above a critical level.
 
-At harvest, marketable parts of the crop are removed and the remaining residues are allocated to conceptual organic matter pools in the soil. Nitrogen in the crop is then divided between marketable yield and crop residues.
+At harvest, marketable parts of the crop are removed, and the remaining residues are allocated to conceptual organic matter pools in the soil. Nitrogen in the crop is then divided between marketable yield and crop residues.
 
 ---
 
 ## Applications
 
-MONICA has been applied so far in a range of research projects 
+MONICA has been applied so far in a range of research projects: 
 
 * The **LandCaRe 2020** project focused on the development of a knowledge platform on which stakeholders can access information on the expected impact of climate change on agriculture in Germany (BMBF Funding Focus *klimazwei*).
 * In the **CarBioCial** project, three regions along a land use gradient in Southern Amazonia (Brazil) are currently analysed to derive recommendations for a carbon-neutral land management under climate change conditions in Brazil (BMBF Funding Focus *Sustainable Land Management*).
-* Within the **EVA2**, project crop rotations for energy production are currently grown on different sites across Germany. MONICA is used to evaluate the impact of energy cropping on the environment, especially on groundwater recharge and nitrogen leaching (FNR).
+* Within the **EVA2** project crop rotations for energy production are currently grown on different sites across Germany. MONICA is used to evaluate the impact of energy cropping on the environment, especially on groundwater recharge and nitrogen leaching (FNR).
 * In **AgMIP**, MONICA contributed to multi-model ensembles for the assessment of uncertainty introduced into climate change impact assessments. Several model intercomparisons and improvements have been driven by this unfunded international initiative.
 * Similarly, during the **MACSUR** project, MONICA simulates were fed into assessments of scaling effects, impact response surfaces and crop rotations. The community still collaborates on European climate change outlooks, especially involving legumes (EU FACCE JPI Knowledge Hub). 
 * Within the **SattGrün** project, MONICA was made fit for simulating grass communities of intensively managed hay meadows. First interfaces to remote sensing data were created, preparing a data assimilation pipeline (BMEL Funding Focus Innovation).
@@ -67,8 +66,6 @@ MONICA has been applied so far in a range of research projects
 * In the framework of the **SpreeWasser:N** project, MONICA became part of ZALF’s irrigation advisory platform, allowing farmers to play field-specific irrigation scenarios for tactical planning (BMBF Funding Focus Water Extreme Events). 
 * In the **Safe-H2O-Farm** project, MONICA was prepared for simulating tomato production across the Mediterranean and its impact on nitrate leaching (EU Prima). 
 * During the **KIKompAg project**, we coupled MONICA with the GRASSMIND competition model to represent changes in grass communities responding to variations in water supply (BMBF Funding Focus Data Competences).
-
-
 
 ---
 
@@ -94,11 +91,13 @@ The HERMES model (Kersebaum 1989) was the first simulation model for the year-ro
 
 However, HERMES used some input information that was specific for Germany, such as the German soil classification system and Haude’s evapotranspiration factors. For this reason, it was not much used by international colleagues. In Germany, however, HERMES was applied in many case studies, including regional applications in combination with a geo-information system. More recent releases include alternative evapotranspiration algorithms and enable a less restrictive parameterisation of the soil. This version was also applied outside Europe (Kersebaum et al. 2008). The HERMES model is considered the heart of MONICA.
 
-Including other models and algorithms. There were a few more functionalities that HERMES was lacking, and that were gradually added to MONICA. One of them was the soil temperature module, which was borrowed from the 4C forest simulation model (Bugmann et al., 1997). From the THESEUS modelling toolbox (Wegehenkel, 2000), the control of the water flux via an empirical conductivity parameter was added. This allowed the addition of a module for soil water freezing, thawing and for a snow layer. Groundwater dynamics were introduced, enabling the simulation of ascending water from surface-near groundwater (Khaledi et al., 2024b).
+### Including other models and algorithms
 
-The crop module was enhanced by integrating a more sophisticated plant physiology module from ARCWHEAT1 (Mitchell et al., 1995). It allows to simulate the effect of elevated atmospheric CO2 concentrations on both the photosynthesis and the transpiration (Nendel et al., 2009). For this purpose, the Penman-Monteith equation for evapotranspiration (Allen et al., 1998) was introduced to MONICA, linking photosynthesis and transpiration via the stomata. 
-Root growth, as the part of MONICA linking the soil and plant part, has been taken from the EU-Rotate_N model (Rahn et al., 2010), but remaining with the 1D approach. The representation of rooting systems with different morphology originates from Pedersen et al. (2009) for annual or from Nendel and Kersebaum (2004) for perennial crops
+There were a few more functionalities that HERMES was lacking, and that were gradually added to MONICA. One of them was the soil temperature module, which was borrowed from the 4C forest simulation model (Bugmann et al., 1997). From the THESEUS modelling toolbox (Wegehenkel, 2000), the control of the water flux via an empirical conductivity parameter was added. This allowed the addition of a module for soil water freezing, thawing and for a snow layer. Groundwater dynamics were introduced, enabling the simulation of ascending water from surface-near groundwater (Khaledi et al., 2024b).
 
+The crop module was enhanced by integrating a more sophisticated plant physiology module from ARCWHEAT1 (Mitchell et al., 1995). It allows to simulate the effect of elevated atmospheric CO<sub>2</sub> concentrations on both the photosynthesis and the transpiration (Nendel et al., 2009). For this purpose, the Penman-Monteith equation for evapotranspiration (Allen et al., 1998) was introduced to MONICA, linking photosynthesis and transpiration via the stomata.
+
+Root growth, as the part of MONICA linking the soil and plant part, has been taken from the EU-Rotate_N model (Rahn et al., 2010), but remaining with the 1D approach. The representation of rooting systems with different morphology originates from Pedersen et al. (2009) for annual or from Nendel and Kersebaum (2004) for perennial crops.
 
 #### References
 
@@ -122,7 +121,7 @@ Root growth, as the part of MONICA linking the soil and plant part, has been tak
 
 ### How to Cite MONICA
 
-When using MONICA in publications, please cite the main model description paper (Nendel et al., 2011). For recent model developments and an overview of the current MONICA framework, the book chapter by Nendel et al. (2025) is also recommended.
+When using MONICA in publications, please cite the main model description paper (Nendel et al., 2011). For studies using recent developments or the current MONICA framework, we additionally recommend citing the book chapter by Nendel et al. (2025).
 
 #### In-text citation example
 
@@ -131,6 +130,8 @@ When using MONICA in publications, please cite the main model description paper 
 #### Full reference example
 
 > Nendel, C., M. Berg, K.C. Kersebaum, W. Mirschel, X. Specka, M. Wegehenkel, K.O. Wenkel and R. Wieland (2011): *The MONICA model: Testing predictability for crop growth, soil moisture and nitrogen dynamics.* Ecological Modelling, 222(9), 1614–1625. https://doi.org/10.1016/j.ecolmodel.2011.02.018
+
+> Nendel, C., M. Berg, R. Escueta, G. Ghazaryan, L. Inforsato, B. Kamali, M. Palka, A. Raza, E. Rezaei, X. Specka and J. Yu (2025): *The MONICA agroecosystem model.* In: *Current crop models: State-of-the-art and future developments*, pp. 555–596. https://doi.org/10.19103/AS.2025.0155.19
 
 ### BibTeX entries
 
