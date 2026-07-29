@@ -18,6 +18,8 @@
 
 * Kuhnert, M., J. Yeluripati, P. Smith, H. Hoffmann, M. van Oijen, J. Constantin, C. Sosa, R. Dechow, H. Eckersten, T. Gaiser, B. Grosz, E. Haas, K.C. Kersebaum, R. Kiese, S. Klatt, E. Lewan, C. Nendel, H. Raynal, X. Specka, E. Teixeira, E. Wang, L. Weihermüller, G. Zhao, Z. Zhao and F. Ewert (2017): Impact analysis of climate data aggregation at different scales on simulated Net Primary Productivity for croplands. Eur. J. Agron. 88, 41-52.
 
+* Nendel, C., M. Berg, R. Escueta, G. Ghazaryan, L. Inforsato, B. Kamali, M. Palka, A. Raza, E. Rezaei, X. Specka and J. Yu (2025): The MONICA agroecosystem model. In: Current crop models: State-of-the-art and future developments, pp. 555–596. [https://doi.org/10.19103/AS.2025.0155.19](https://doi.org/10.19103/AS.2025.0155.19)
+
 ---
 
 ## 2024
