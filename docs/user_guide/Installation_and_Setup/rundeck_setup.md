@@ -19,7 +19,7 @@ This section provides a step-by-step guide to starting a MONICA simulation on th
 
 ### Step 1: Log in to Rundeck
 
-![Rundeck Login Page](images/rundeck_login.png)
+![Rundeck Login Page](../../images/user_guide/rundeck_login.png)
 
 1. Open the Rundeck web interface in your browser: [Rundeck Web Interface](https://mas-service.zalf.de/rundeck)
 
@@ -32,30 +32,27 @@ This section provides a step-by-step guide to starting a MONICA simulation on th
 
 ### Step 2: Navigate to the MONICA jobs
 
-![Rundeck Login Page](images/rundeck_dashboard.png)
+![Rundeck Login Page](../../images/user_guide/rundeck_dashboard.png)
 
 1. In the left-hand menu, click **Jobs**.
 
 2. Go to the **MONICA** job folder.
 
-    ![Rundeck Login Page](images/rundeck_job.png)
+    ![Rundeck Login Page](../../images/user_guide/rundeck_job.png)
 
-3.	You will see several MONICA-related jobs. The most relevant ones are:
-
-    - Monica Project (new) (multi-node)
-    - Start Tiny Monica Project (single node)
+3.	You will see several MONICA-related jobs. The most relevant one for running your simulation is the job **Monica Project**.
 
 ### Step 3: Open the MONICA job
 
-1. Click on Monica Project (new) or Start Tiny Monica Project.
+1. Click on Monica Project.
 
 2. The job configuration form will open.
 
-    ![Rundeck Login Page](images/rundeck_job_config_form1.png)
+    ![Rundeck Login Page](../../images/user_guide/rundeck_job_config_form1.png)
 
-    ![Rundeck Login Page](images/rundeck_job_config_form2.png)
+    ![Rundeck Login Page](../../images/user_guide/rundeck_job_config_form2.png)
 
-    ![Rundeck Login Page](images/rundeck_job_config_form3.png)
+    ![Rundeck Login Page](../../images/user_guide/rundeck_job_config_form3.png)
 
 3. All parameters required to start the MONICA simulation are specified on this page.
 
@@ -72,11 +69,11 @@ This section provides a step-by-step guide to starting a MONICA simulation on th
 
 **Producer**
 
-- Path (relative to the project root) of the producer script. Example: `myproject/producer.py`
+- Path (relative to the project root) of the producer script. Example: `producer.py`
 
 **Consumer**
 
-- Path (relative to the project root) of the consumer script. Example: `myproject/consumer.py`
+- Path (relative to the project root) of the consumer script. Example: `consumer.py`
 
 ### Step 6:	Select simulation setups
 
@@ -112,8 +109,6 @@ This section provides a step-by-step guide to starting a MONICA simulation on th
 
 - Total number of MONICA worker processes 
 - For large simulations, increase this value to distribute the workload.
-- For Monica Project (new), workers are distributed across multiple nodes. 
-- For Start Tiny Monica Project, all workers run on a single node.
 
 **HighMem** 
 
@@ -183,7 +178,7 @@ For most jobs, `tiny` or `normal` is sufficient. Use `high` or `veryhigh` if the
 ### Step 11: Retrieve Simulations Results
 
 Simulation outputs are written to: 
-`/beegfs/rpm/projects/monica/out/<USER>_<JOB_EXEC_ID>_<DATE>/`
+`/beegfs/rpm/projects/monica_user/<USER>/<DATE>_<JOB_EXEC_ID>_<DATE>_<JOB_NAME>/out/`
 
 You can use tools such as WinSCP to access and download your simulation results from the HPC system.
 
