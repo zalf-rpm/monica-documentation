@@ -50,7 +50,7 @@ nav:
           - Linux compilation: user_guide/Installation_and_Setup/linux_installation.md
           - MONICA server: user_guide/Installation_and_Setup/monica_server.md
           - Rundeck setup: user_guide/Installation_and_Setup/rundeck_setup.md
-          - Dependencies & Python version (requirements.txt): user_guide/Installation_and_Setup/dependencies_and_python.md
+          - Python Support and Dependencies: user_guide/Installation_and_Setup/dependencies_and_python.md
           - Troubleshooting Common Installation Issues: user_guide/Installation_and_Setup/troubleshooting_installation.md
       - Configuration Files:
           - Overview: user_guide/configuration_files/config_overview.md

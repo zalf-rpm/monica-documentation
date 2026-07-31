@@ -1,94 +1,119 @@
-# Dependencies & Python Version (requirements.txt)
+# Python Support and Dependencies
 
-MONICA is written in Python and requires specific libraries for data handling, communication, and model execution.  
-This section explains how to prepare Python environment and install all dependencies.
+MONICA's simulation core is implemented in C++. Python is used by selected examples, producer/consumer workflows, and auxiliary service scripts. Python dependencies depend on the workflow being used.
 
 ---
 
-## 1. Recommended Python Version
+## 1. Python Environment
 
-Use **Python ≥ 3.8** (tested with Python 3.8 – 3.11).
+A virtual environmment is recommended for Python-based examples:
 
-> Using older versions (≤3.7) or newer releases (≥3.12) may lead to dependency conflicts or unexpected errors.
-
-It is recommended to create a dedicated virtual environment for MONICA to keep dependencies isolated from your system Python.
-
-Create a virtual environment
-
-```
-python -m venv monica-env
+```bash
+python -m venve monica-env
 ```
 
-Activate the environment
+Activate it with:
 
 ```
 # Windows
 monica-env\Scripts\activate
 
-# Linux / macOS
+# Linux
 source monica-env/bin/activate
 ```
 
-## 2. Install Dependencies
+Use a Python version compatible with the selected example and its external MONICA infrastructure dependencies. The MONICNA repository itself does not formally specify or test a Python range.
 
-All required Python packages are listed in the `requirements.txt` file located in the MONICA repository root.
+---
 
-Install them with:
+## 2. Python Dependencies
 
-```
-pip install -r requirements.txt
-```
-This will install all necessary libraries such as:
+Insall only the dependencies required by the workflow.
 
-- numpy, pandas, scipy – numerical & data handling
+**Producer/consumer examples**
 
-- pyzmq – ZeroMQ communication (for proxy / worker mode)
-
-- flask or fastapi – web service support (optional)
-
-- matplotlib / seaborn – visualization (optional)
-
-**Example: requirements.txt**
-
-The following example shows the typical dependencies used in MONICA:
+The ZeroMQ examples use `pyzmq`:
 
 ```
-# MONICA simulation environment dependencies
-
-numpy>=1.19
-pandas>=1.3
-scipy>=1.7
-pyzmq>=23.0
-psutil>=5.8
-tqdm>=4.62
-
-# Optional service / API / visualization layers
-flask>=2.0
-fastapi>=0.85
-uvicorn>=0.17
-gunicorn>=20.1
-matplotlib>=3.4
-seaborn>=0.11
-requests>=2.26
-pydantic>=1.8
+python -m pip install pyzmq
 ```
 
+**Examples using numerical array processing**
 
-## 3. Updating Dependencies
-
-To update existing installations to the latest compatible versions:
-
-```
-pip install -U -r requirements.txt
-```
-
-## 4. Verifying Installation
-
-Check that MONICA and its dependencies are correctly installed:
+Some auxiliary scripts use NumPy:
 
 ```
-python -m monica --version
+python -m pip install numpy
 ```
-You should see the current MONICA version printed in their terminal.
 
-> Tip: If you are planning to run MONICA on HPC or Singularity, install dependencies inside the container or virtual environment before running simulations.
+**Cap'n Proto Python services**
+
+The Cap'n Proto service examples import the `capnp` module, provided by the `pycapnp` package:
+
+```
+python -m pip install pycapnp
+```
+
+These examples may also require generated Python schema modules and supporting packages from the MONICA/MAS infrastucture repositories. Installing `pycapnp` alone may not be sufficient.
+
+---
+
+## 3. Native MONICA Dependencies
+
+The `monica-run`, `monica-zmq-server`, and related executables are native C++ programs. They are built with CMake and require native build dependencies, including C++, ZeroMQ, Cap'n Proto, and the repositories or submodules specified by the build instructions.
+
+Python packages are not required to run the native `monica-run` executable.
+
+For containerized builds, see the repository's [Dockerfile](https://github.com/zalf-rpm/monica/blob/master/Dockerfile).
+
+---
+
+## 4. Running MONICA
+
+After building MONICA, run a simulation with:
+
+```
+monica-run -o output.csv path/to/sim.json
+```
+
+The simulation configuration normally refers to a climate, site, and crop input files. The `MONICA_PARAMETERS` environment variable must point to the `monica-parameters` directory when required by the configuration.
+
+---
+
+## 5. Verifying the Installation
+
+Verify the native MONICA executable with:
+
+```
+monica-run --version
+```
+
+The command should print the installed MONICA version.
+
+For Python-based workflows, verify the installed Python packages with:
+
+```
+python -c "import zmq; print('pyzmq:', zmq.__version__)"
+python -c "import numpy; print('numpy:', numpy.__version__)"
+python -c "import capnp; print('pycapnp is available')"
+```
+
+Only run the checks for packages required by your selected workflow.
+
+---
+
+## 6. Updating Python Packages
+
+If dependencies were installed manually, update them selectively:
+
+```
+python -m pip install --upgrade pyzmq numpy pycapnp
+```
+
+Avoid upgrading unrelated packages indiscriminately, because external MONICA and MAS infrastructure components may require specific compatible versions.
+
+---
+
+## 7. Docker and HPC
+
+The repository contains a Docker build for the native MONICA services. When using Docker, Singularity, or another HPC container runtime, use the corresponding container definition and install Python packages inside the container only when running Python-based workflows.
