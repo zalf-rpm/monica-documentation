@@ -105,6 +105,3 @@ run_monica.cmd
 ```
 
 If the setup is correct, the model will complete a short test simulation and generate an output file named `sim-out.csv` in the same directory. This confirms that MONICA is successfully installed and functional.
-
----
-
