@@ -1,73 +1,71 @@
-# 2. Linux installation
+# Compiling MONICA on Linux
 
-## Compiling MONICA on Linux
-
-Currently, MONICA does not provide a precompiled ZIP version for Linux.  
-However, you can easily install and build it locally using the following steps (tested on Debian/Ubuntu systems).
+MONICA can be built from source on Linux. The instructions below are intended for Debian- or Ubuntu-based systems.
 
 ---
 
 ### **1. Prerequisites**
 
-Before building MONICA, make sure the following software is installed on the system:
-
-- Python **3.6+**
-- CMake
-- Git
-- Curl
-- Unzip
-- Tar
-
-Install all dependencies on Debian/Ubuntu with:
+Install the required build tools:
 
 ```bash
 sudo apt-get update
 sudo apt-get install build-essential
-sudo apt-get install python3-dev
-sudo apt-get install curl unzip tar
+sudo apt-get install curl
+sudo apt-get install unzip
+sudo apt-get install tar
 sudo apt-get install git
 sudo apt-get install cmake
-sudo apt-get install libtool autoconf
+sudo apt-get install libtool
+sudo apt-get install autoconf
 ```
-These packages provide the basic tools and libraries required to build MONICA from source.
 
-### **2. Create a working folder (e.g, `~/zalf-rpm`)**
-
-Create a directory to store MONICA and its dependencies:
+Python 3 is optional for the Python-based examples and tools:
 
 ```bash
-mkdir zalf-rpm
-cd zalf-rpm
+sudo apt-get install python3
 ```
 
-### **3. Clone MONICA and Dependencies**
+MONICA requires CMake 3.22 or newer and a C++17-compatible compiler.
 
-Clone the MONICA source code along with its submodules and the parameter repository:
+### **2. Create a working directory**
+
+```bash
+mkdir ~/zalf-rpm
+cd ~/zalf-rpm
+```
+
+### **3. Clone MONICA and its parameter repository**
+
+Clone MONICA together with its submodules:
 
 ```bash
 git clone --recurse-submodules https://github.com/zalf-rpm/monica.git
 git clone https://github.com/zalf-rpm/monica-parameters.git
 ```
 
-### **4. Setup Up vcpkg for Dependent Libraries**
+The resulting directory structure should be:
 
-MONICA uses vcpkg to manage external libraries.
-Clone the vcpkg repository using the version tag specified in the `vcpkg_tag.txt` file found in the MONICA repository root.
-
-```bash
-git clone -b 2024.09.30 https://github.com/Microsoft/vcpkg.git
+```
+~/zalf-rpm/
+├── monica/
+└── monica-parameters/
 ```
 
-Build vcpkg:
+### **4. Install vcpkg**
+
+MONICA uses vcpkg to manage external C++ libraries. The required vcpkg version is stored in `monica/vcpkg_tag.txt`.
 
 ```bash
+cd ~/zalf-rpm
+git clone -b "$(cat monica/vcpkg_tag.txt)" https://github.com/Microsoft/vcpkg.git
 cd vcpkg
 ./bootstrap-vcpkg.sh
 ```
 
-### **5. Install Required Libraries via vcpkg**
+### **5. Install MONICA dependencies**
 
-Install the following dependencies: 
+For a 64-bit Linux system, install the required libraries using the `x64-linux` triplet: 
 
 ```bash
 ./vcpkg install zeromq:x64-linux
@@ -76,36 +74,60 @@ Install the following dependencies:
 ./vcpkg install tomlplusplus:x64-linux
 ```
 
-These libraries enable communication, serialization, encryption, and configuration parsing within MONICA.
+### **6. Configure and build MONICA**
 
-### **6. Build MONICA**
-
-After installing all dependencies, build MONICA using its provided build script.
+The provided script creates the CMake build directory and configures the project:
 
 ```bash
 cd ~/zalf-rpm/monica
 sh create_cmake_release.sh
-cd _cmake_release
-make
 ```
-The script creates a CMake build directory named `_cmake_release` and compiles MONICA.
-The resulting executable (`monica-run`) will be located inside this folder.
 
-### **7. Run MONICA**
-
-Once the build completes successfully, verify the installation:
+Compile the project:
 
 ```bash
+cmake _cmake_release
+make
+```
+
+The main executable will be created at:
+
+```bash
+~/zalf-rpm/monica/_cmake_release/monica-run
+```
+
+### **7. Verify the build**
+
+```bash
+cd ~/zalf-rpm/monica/_cmake_release
 ./monica-run --help
 ```
 
-If you see a list of available options and commands, MONICA has been built correctly.
+A list of available command-line options indicates that the build completed successfully.
 
-### **8. Running a Test Simulation**
-To perform a test run, user can use one of the included example simulation files, for instance:
+### **8. Configure the MONICA parameter path**
 
+MONICA's example simulations use files from the `monica-parameters` repository. Set the `MONICA_PARAMETERS` environment variable:
+
+```bash
+export MONICA_PARAMETERS="$HOME/zalf-rpm/monica-parameters"
 ```
-./monica-run -o ../../output_csv/out.csv ../installer/Hohenfinow2/sim-min.json
+
+To set this variable automatically for future shell sessions, add the command to `~/.bashrc` or the corresponding shell configuration file.
+
+### **9. Run a test simulation**
+
+Create a directory for simulation output:
+
+```bash
+mkdir -p ~/zalf-rpm/output_csv
 ```
 
-This command runs a short test simulation and writes results to `output_csv/out.csv`.
+Run the included Hohenfinow2 example:
+
+```bash
+cd ~/zalf-rpm/monica
+./_cmake_release/monica-run -o ~/zalf-rpm/output_csv/out.csv installer/Hohenfinow2/sim-min.json
+```
+
+If the simulation completes successfully, the result will be written to: `~/zalf-rpm/output_csv/out.csv`.
