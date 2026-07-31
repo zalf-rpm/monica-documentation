@@ -1,103 +1,324 @@
-# Understanding MONICA Server
+# Understanding the MONICA Server
 
 ## ZeroMQ
 
-[ZeroMQ](https://zeromq.org/) is a small messaging library which is available for many different platforms and programming languages. It allows to send easily messages which can contain arbitrary information between connected parties (nodes/programs/etc).
+[ZeroMQ](https://zeromq.org/) is a messaging library available for many platforms and programming languages. It provides message-based communication between processes and programs.
 
-In the case of MONICA that means that a **ZeroMQ message** is actually a **JSON** string, which contains all the information MONICA needs to run a full simulation. This includes all (climate-) data, soil- and crop-parameters as well as the configuration of the particular simulation. One possible exception at the moment are climate data, which optionally can be read by the MONICA server process itself if the path to a climate **.csv** file is given. This has been done for performance reasons.
+MONICA uses ZeroMQ to exchange JSON messages. A simulation request is an `Env` JSON object containing the information required to run a simulation, including:
 
-`monica-zmq-server` can thus be treated as a stateless process, which receives via ZeroMQ messages/jobs, runs a single simulation and returns a result message. This result message is again a **JSON** string which contains the results requested by the configuration in the `sim/output/events section` of the received message.
+- climate data or climate CSV files paths
+- soil parameters
+- crop parameters
+- simulation configuration
+- requested output events
 
-**ZeroMQ** makes it easy to connect processes/programs/scripts using a message-passing system. Usually, if two processes have to communicate, there will be a **server-like** part and a **client-like** part. The server part being usually the more stable one (like a normal webserver), whereas clients come and go, connect and disconnect. In order to communicate, both parties have to agree on a supported transport protocol (in our cases here **TCP**), an **IP address** or **DNS name**, and a **port**.
+Climate data can be supplied directly in the message. Alternatively, the MONICA server can load climate data from a CSV string or from one or more CSV file paths.
 
-Thus when a client **connects** to an URL like: `tcp://my-domain.de:6666`. It will tell the ZeroMQ library used by MONICA to use the TCP protocol to transport the messages and connect to a server listening on port `6666` at domain `my-domain.de`. The server would do something called bind to network interfaces at a given port and with a transport protocol. So `tcp://*:6666` would be the counterpart to the client address, which tells **ZeroMQ** to use **TCP** as transport protocol, bind to all available network interfaces (*) and port `6666`.
+The `monica-zmq-server` process normally behaves as a stateless worker: 
 
-Because we're using ZeroMQ to transport our messages you don't have to care if the client or the server is there first. If one of the connecting parties starts up it will try to connect to the other party. Also ZeroMQ allows n:m connections, if it makes sense. This means multiple clients can at the same time be connected to multiple servers. This is especially relevant if the processes are connected in **pipeline** mode, where one process will receive data (input) on one port and send results (output) on to other connected processes on other port(s). Have also a look at the following picture.
+1. receive one simulation request
+2. runs the simulation
+3. return the result
+4. wait for the next request
 
+The result is also encoded as JSON. It contains the outputs requested through the simulation configuration, especially `sim.output.events`. Results can additionally contain warnings, errors, and custom identifiers.
 
-                             ┌────────────┐
-                             │  Producer  │
-                             │    PUSH    │
-                             └──────┬─────┘
-                                    │  Jobs
-                                    ▼
-                             ┌────────────┐
-                             │ ZeroMQ     │
-                             │  Proxy     │
-                             └──────┬─────┘
-            ┌───────────────────────┼────────────────────────┐
-            ▼                       ▼                        ▼
+ZeroMQ messages may also be used for control messages, such as `finish` message used to stop a server.
 
-      ┌───────────┐          ┌───────────┐            ┌───────────┐
-      │ Worker 1  │          │ Worker 2  │      ...   │ Worker n  │
-      │   PULL    │          │   PULL    │            │   PULL    │
-      │   PUSH    │          │   PUSH    │            │   PUSH    │
-      └─────┬─────┘          └─────┬─────┘            └─────┬─────┘
-            │                      │                        │
-            └──────────────┬──────┴─────────────┬──────────┘
-                           │                    │
-                           ▼                    ▼
-                       ┌────────────┐     (all workers push results)
-                       │ ZeroMQ     │
-                       │  Proxy     │
-                       └──────┬─────┘
-                              │  Results
-                              ▼
-                        ┌────────────┐
-                        │ Consumer   │
-                        │    PULL    │
-                        └────────────┘
+### Addresses and socket roles
 
+ZeroMQ addresses use the following form:
 
-This picture shows the general workflow employed currently with MONICA for running on HPCs/cluster computers. There will be a producer process (usually a **Python script**) which creates work (simulations) which are being send to an intermediate process (called a ZeroMQ **proxy**), which distributes the received messages (simulation jobs) amongst connected (to the proxy) `monica-zmq-server` processses. Each `monica-zmq-server` process waits for simulation jobs (messages), runs the simulation and sends the simulation result on to another ZeroMQ **proxy** which collects all results and forwards them to a connected consuming/aggregating process (usually a **Python script**). Producer and consumer as well as the MONICA processes (**client-like**) connect to the ZeroMQ proxy processes, which play the stable **server-like** role in this setup.
+```
+transport://host:port
+```
 
-This simple setup allows to start an arbitrary/necessary amount of MONICA processes to handle the workload created by the producer process. In general there could be multiple producers connected to the **input side proxy** as well as multiple consumers to the **output side proxy**. But while conceptually it's easy to add more producers, it might be more difficult to have more consumers (to handle aggregation) as usually aggregation can't be separated easily. Also in normal setups often the producer process can become a bottleneck as a single process has to create all the simulation setups for N MONICAs.
+For example:
 
-For more information and details, please look up the ZeroMQ documentation.
+```
+tcp://my-domain.example:6666
+```
 
-## Running single server in Request-Reply mode
+This means that TCP is used to connect to port `6666` on `my-domain.example`.
 
+A process the provides an endpoint usually uses `bind`:
 
-The simplest way to use MONICA in server mode is to execute by
+```
+tcp://*:6666
+```
 
-```bash
+The `*` means that the process binds to all available network interfaces. A client or worker normally uses `connect` with a concrete hostname or IP address:
+
+```
+tcp://localhost:6666
+```
+
+`tcp://*:<port>` is a bind address and must not be used as a connect address.
+
+The communicating processes must agree on both:
+
+- the address and transport
+- compatible ZeroMQ socket patterns, such as `REQ/REP` or `PUSH/PULL`
+
+A ZeroMQ connection may be established before either side is running. ZeroMQ queues messages while the connection is being established, subject to the normal socket and queue limitations.
+
+---
+
+### Pipeline mode
+
+In pipeline mode, a producer sends jobs to one or more workers, and workers send results to one or more consumers.
+
+The following diagram shows the PULL/PUSH pipeline configuration:
+
+```mermaid
+%%{init: {
+  "theme": "base",
+  "flowchart": {
+    "htmlLabels": true,
+    "curve": "linear",
+    "nodeSpacing": 40,
+    "rankSpacing": 35
+  },
+  "themeVariables": {
+    "fontFamily": "inherit",
+    "lineColor": "#546e7a",
+    "edgeLabelBackground": "#ffffff"
+  }
+}}%%
+
+flowchart TB
+    producer(["Producer<br/><b>PUSH</b>"])
+    inputProxy["ZeroMQ<br/>Proxy"]
+
+    worker1["<b>PULL</b><br/>Worker 1<br/><b>PUSH</b>"]
+    worker2["<b>PULL</b><br/>Worker 2<br/><b>PUSH</b>"]
+    workerN["<b>PULL</b><br/>Worker n<br/><b>PUSH</b>"]
+
+    outputProxy["ZeroMQ<br/>Proxy"]
+    consumer(["<b>PULL</b><br/>Consumer"])
+
+    producer -->|Jobs| inputProxy
+
+    inputProxy --> worker1
+    inputProxy --> worker2
+    inputProxy --> workerN
+
+    worker1 --> outputProxy
+    worker2 --> outputProxy
+    workerN --> outputProxy
+
+    outputProxy -->|Results| consumer
+
+    classDef endpoint fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b1b1b
+    classDef proxy fill:#f5f7f8,stroke:#546e7a,stroke-width:1.5px,color:#263238
+    classDef worker fill:#ffffff,stroke:#43a047,stroke-width:1.5px,color:#263238
+
+    class producer,consumer endpoint
+    class inputProxy,outputProxy proxy
+    class worker1,worker2,workerN worker
+
+    linkStyle default stroke:#546e7a,stroke-width:1.5px
+```
+
+The diagram uses PULL/PUSH sockets. Start the proxy with `-pps` or `--pull-push-sockets` when using this topology. The proxy's default socket configuration is ROUTER/DEALER and requires compatible clients.
+
+The input proxy distributes jobs among connected MONICA workers. Each worker runs one simulation at a time and sends its result to the output proxy. The output proxy forwards results to the consumer.
+
+This architecture makes it possible to run multiple MONICA workers in parallel. Multiple producers can send jobs through the input proxy. Multiple consumers can receive results through the output proxy, although aggregation is often easier with a single consumer.
+
+The producer can become a bottleneck if it must construct all simulation environments in one process. This can be addressed by using multiple producers or by moving part of the preparation work elsewhere.
+
+---
+
+## Running single server in request-reply mode
+
+The simplest server configuration uses ZeroMQ request-reply messaging.
+
+Start the server with its default address:
+
+```
 C:\> monica-zmq-server -s
 ```
 
-This will start monica-zmq-server and will listen on all network interface on port `6666` by default. This is similar to a normal webserver. The user could send a ZeroMQ message to the started server, wait for the simulation to execute and receive the simulation result on the same port.
+The server binds a `REP` socket to:
 
-Via the commandline parameters -s you can choose a different port for the server to listen on. So 
+```
+tcp://*:6666
+```
 
-```bash
+A client must connect to the server using a compatible `REQ` socket:
+
+```
+tcp://localhost:6666
+```
+
+The client sends one JSON request and waits for the corresponding JSON response.
+
+A different address can be supplied with `-s` or `--serve-address`:
+
+```
 C:\> monica-zmq-server -s tcp://*:5555
 ```
 
-This will start MONICA as server in Request-Reply mode listening on port 5555.
+The server now binds to port `5555`.
 
-## Running a single server in Pipeline mode
+---
 
-A single server can also be started in pipeline mode, which means that the server will accept requests on one port but send the result to clients connected to another (the output) port. To do that you start MONICA with 
+## Running a single server in pipeline mode
 
-```bash
+Pipeline mode uses separate sockets for receiving jobs and sending results.
+
+To make MONICA bind both endpoints:
+
+```
 C:\> monica-zmq-server -bi -i tcp://*:6666 -bo -o tcp://*:7777
 ```
 
-This will start a MONICA server process listening on port ``6666` for job messages and sending results on port `7777` to connected clients. This will be done by playing the "ZeroMQ server role" (**binding** to the port), so clients have to **connect** to the given port (**bi = bind input** port and **bo = bind output** port).
+The options mean:
 
-On the other hand, starting `monica-zmq-server` with
+- `-bi`: bind the input socket
+- `-i`: input address
+- `-bo`: bind the output socket
+- `-o`: output address
 
-```bash
+The input socket uses a `PULL` socket and receives jobs. The output socket uses a `PUSH` socket and sends results.
+
+A producer can connect to the input endpoint:
+
+```
+tcp://localhost:6666
+```
+
+A consumer can connect to the output endpoint:
+
+```
+tcp://localhost:7777
+```
+
+---
+
+## Connecting the server to externally bound endpoints
+
+A MONICA worker can instead connect to endpoints bound by other processes:
+
+```
 C:\> monica-zmq-server -ci -i tcp://*:5555 -co -o tcp://*:5556
 ```
 
-This will "listen" for jobs on port **5555** and send results on port **5556**. But this time the MONICA server would have to **connect** to the processes/scripts/clients who will send jobs or receive the simulation results. Under normal single server use cases the first version using **bind = -bi / -bo** should be used.
+The options mean:
 
-## Running and using multiple servers via ZeroMQ proxy processes in pipeline mode
+- `-ci`: connect the input socket
+- `-i`: input address
+- `-co`: connect the output socket
+- `-o`: output address
 
-To utilize many `monica-zmq-server` processes at the same time, it makes sense to distribute work amongst many MONICAs via another process called a ZeroMQ **proxy**. In theory one could start a producer process (e.g. a **Python script**) as a **server-like** process (e.g. binding to `tcp://*:6666`) and let many `monica-zmq-servers` connect (e.g. via connecting to `tcp://localhost:6666`) to the **producer** process. The same could happen for the output side, where a **consumer** process binds to tcp://*:7777 and all MONICAS connect to `tcp://localhost:7777`. Then ZeroMQ would take care to distribute the work from the single producer to many MONICAs and send all results on to a single consumer.
+In this configuration, another process must bind the endpoints, for example:
 
-Practically letting play the **producer/consumer** play the stable **server-like** is not the best solution, as these are actually the mostly changing part in such a setup and it will always take a few seconds until all MONICAs automatically have been connected to a newly started producer and consumer. For that reason it makes sense to introduce into the setup two stable processes **(proxies)** as can be seen on the picture in the ZeroMQ section, which are for instance running steadily on a high performance cluster, playing the **server-like** part and **bind** to the network interfaces and let an arbitrary amount of MONICAs connect to them. This network/cloud of MONICAs is stable and waiting for simulation jobs at the proxy gatekeepers input ports. Then both, **producer** and **consumer** can **connect** to the their respective proxy and start sending/receiving messages.
+```
+tcp://*:5555
+tcp://*:5556
+```
 
-## Running multiple servers via Docker containers
+The MONICA processes must connect using a concrete address such as:
 
-An easy way to get a setup of two proxies and a configurable number of MONICA server processes is to use the provided **Docker images** from **Docker-Hub**. More information of how to run a MONICA Docker image can be found in Docke setup section.
+```
+tcp://localhost:5555
+tcp://localhost:5556
+```
+
+Do not use `tcp://*:<port>` with `-ci` or `-co`. Wildcard addresses are for binding only.
+
+---
+
+## Running multiple servers with ZeroMQ proxies
+
+For larger workloads, multiple MONICA workers can be connected through two ZeroMQ proxies:
+
+- an input proxy distributes jobs to workers
+- an output proxy collects worker results and forwards them to consumers
+
+The following example uses PULL/PUSH sockets.
+
+Start the input proxy:
+
+```
+C:\> monica-zmq-proxy -pps -f 6666 -b 6677
+```
+
+Start the output proxy:
+
+```
+C:\> monica-zmq-proxy -pps -f 7777 -b 7788
+```
+
+The options are:
+
+- `-pps`: use PULL/PUSH sockets
+- `-f`: frontend port
+- `-b`: backend port
+
+The resulting topology is:
+
+```mermaid
+flowchart TB
+
+    Producer([Producer])
+    Workers([Workers])
+    Consumer([Consumer])
+
+    subgraph Input["Input Proxy"]
+        direction TB
+        IF["Frontend<br/><code>tcp://localhost:6666</code>"]
+        IB["Backend<br/><code>tcp://localhost:6677</code>"]
+    end
+
+    subgraph Output["Output Proxy"]
+        direction TB
+        OF["Frontend<br/><code>tcp://localhost:7777</code>"]
+        OB["Backend<br/><code>tcp://localhost:7788</code>"]
+    end
+
+    Producer -->|connect| IF
+    Workers -->|connect| IB
+
+    Workers -->|connect| OF
+    Consumer -->|connect| OB
+```
+
+Start each MONICA worker with:
+
+```
+C:\> monica-zmq-server -ci -i tcp://localhost:6677 -co -o tcp://localhost:7788
+```
+
+The producer connects to port `6666` and sends jobs. The workers connect to port `6677`, process the jobs, and send results to port `7788`. The consumer connects to port `7777` and receives the results.
+
+The proxies bind their frontend and backend ports, while producers, consumers, and MONICA workers connect to them. This allows the proxy processes and worker pool to remain running while producers and consumers are started or restarted independently.
+
+The proxy executablbe defaults to ROUTER/DEALER sockets. When using the PULL/PUSH topology shown above, start it with `-pps`. The older `-p` option is retained for compatibility but is deprecated.
+
+---
+
+## Running multiple servers with Docker
+
+The repository includes a Docker-based setup that starts:
+
+- an input proxy
+- an output proxy
+- a configurable number of MONICA worker processes
+
+The number of workers can be configured through the `monica_instances` environment variable. 
+
+The default Docker configuration starts three workers. The default container ports are:
+
+| Purpose                      | Port   |
+|------------------------------|--------|
+| Producer-facing input proxy  | `6666` |
+| Worker-facing input proxy    | `6677` |
+| Consumer-facing output proxy | `7777` |
+
+The Docker workers connect to the internal proxy addresses, while producers and consumers connect to the externally exposed producer and consumer ports.
+
+Refer to the repository's Docker configuration for the current image, environment variables, startup command, and port mappings.
+
+For additional details, see the [ZeroMQ documentation](https://zguide.zeromq.org/).
