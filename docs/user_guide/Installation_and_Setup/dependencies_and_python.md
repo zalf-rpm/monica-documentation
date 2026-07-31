@@ -9,7 +9,7 @@ MONICA's simulation core is implemented in C++. Python is used by selected examp
 A virtual environmment is recommended for Python-based examples:
 
 ```bash
-python -m venve monica-env
+python -m venv monica-env
 ```
 
 Activate it with:
