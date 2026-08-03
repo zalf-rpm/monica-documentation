@@ -1,294 +1,435 @@
-# Running MONICA from the Command Line (CLI & CMD)
+# Running MONICA from the Command Line
 
-This section explains how to run MONICA as a standalone program using:
-- **Windows CMD / PowerShell**
-- **Linux Terminal**
+MONICA can be run as a standalone command-line program on Windows and Linux.
 
-The commands are the same on all systems, except for file paths (`\` vs `/`) and optional `.exe` suffix on Windows.
+The main executable is `monica-run` which runs a simulation from a `sim.json` configuration file.
 
 ---
 
-## 1. Available MONICA Executables
+## 1. MONICA Executables
 
-MONICA installs several command-line tools:
+The build and Windows installer provide the following executables:
 
-| Executable | Purpose |
-|-----------|---------|
-| **monica-run** | Run a standalone MONICA simulation using a `sim.json` file |
-| **monica-zmq-proxy** | Distribute jobs to MONICA workers using ZeroMQ |
-| **monica-zmq-server** | Worker process for ZeroMQ-based execution |
-| **monica-capnp-proxy** | Proxy using Cap’n Proto, able to start many MONICA threads |
-| **monica-capnp-server** | MONICA server using Cap’n Proto RPC |
+| Executable                   | Purpose                                     |
+|------------------------------|---------------------------------------------|
+| `monica-run`                 | Run a local MONICA simulation               |
+| `monica-zmq-proxy`           | Forward and distribute ZeroMQ jobs          |
+| `monica-zmq-server`          | Process MONICA jobs received through ZeroMQ |
+| `monica-capnp-proxy`         | Forward Cap'n Proto RPC requests            |
+| `monica-capnp-server`        | Run MONICA through Cap'n Proto RPC          |
+| `monica-capnp-fbp-component` | MONICA Cap'n Proto FBP component            |
 
-Most users only need **`monica-run`** for local simulations.
+Most users running a local simulation only need **`monica-run`**.
 
 ---
 
 ## 2. Basic Usage
 
-A MONICA simulation is started by passing a single `sim.json` file:
+A simulation is started by passing a `sim.json` file.
 
-### **Windows CMD**
+=== "Windows CMD"
 
-```cmd
-monica-run.exe Examples\Hohenfinow2\sim.json > out.csv
+    ```cmd
+    monica-run.exe Examples\Hohenfinow2\sim.json
+    ```
+
+=== "PowerShell"
+
+    ```powershell
+    .\monica-run.exe Examples\Hohenfinow2\sim.json
+    ```
+
+=== "Linux"
+
+    ```bash
+    ./monica-run Examples/Hohenfinow2/sim.json
+    ```
+
+The paths to `crop.json`, `site.json`, and `climate.csv` are normally read from `sim.json`. Relative paths are resolved to the directory containing `sim.json`.
+
+For the repository examples, use:
+
 ```
-### **Linux**
-
-```bash
-monica-run Examples/Hohenfinow2/sim.json > out.csv
+./monica-run installer/Hohenfinow2/sim.json
 ```
 
-This runs the Hohenfinow2 example and writes output to out.csv.
+On Windows, the standard installer places the examples in:
+
+```
+%USERPROFILE\MONICA\Examples\Hohenfinow2
+```
 
 ---
 
-### 3. Command-Line Options (monica-run -h)
+## 3. Output Files
 
-To view all available flags:
+The recommended way to write output to a specific file is the `-o` option:
 
-```bash
+```
+monica-run.exe -o results.csv Examples\Hohenfinow2\sim.json
+```
+
+```
+./monica-run -o results.csv Examples/Hohenfinow2/sim.json
+```
+
+The output file format and default filename are controlled by the `output` section in `sim.json`.
+
+MONICA also writes simulation output to standard output when no output file is configured. Standard-output redirection is therefore possible:
+
+```
+./monica-run Examples/Hohenfinow2/sim.json > results.csv
+```
+
+However, using `-o` is preferred because the simulation configuration may already enable file output.
+
+---
+
+## 4. Command-Line Options
+
+Use `-h` or `--help` to display the available options:
+
+```
 monica-run -h
 ```
 
-Typical output:
+Current options include:
 
-```
-monica-run [options] path-to-sim.json
+| Flag  | Long Flag                       | Description                       |
+|-------|---------------------------------|-----------------------------------|
+| `-h`  | `--help`                        | Show help                         |
+| `-v`  | `--version`                     | Show version information          |
+| `-d`  | `--debug`                       | Enable debug output               |
+| `-sd` | `--start-date ISO-DATE`         | Override the climate start date   |
+| `-ed` | `--end-date ISO-DATE`           | Override the climate end date     |
+| `-m`  | `--write-multiple-output-files` | Write one file per output section |
+| `-op` | `--path-to-output DIRECTORY`    | Specify an output directory       |
+| `-o`  | `--path-to-output-file FILE`    | Specify an output file            |
+| `-c`  | `--path-to-crop FILE`           | Specify the crop file             |
+| `-s`  | `--path-to-site FILE`           | Specify the site file             |
+| `-w`  | `--path-to-climate FILE`        | Specify the climate file          |
 
-Options:
- -h  | --help                       Show this help message
- -v  | --version                    Show version information
- -d  | --debug                      Print debug output
- -w  | --write-output-files         Write MONICA output files
- -op | --path-to-output DIR         Output directory (default: .)
- -o  | --path-to-output-file FILE   Path to output file
- -c  | --path-to-crop FILE          Path to crop.json   (default: ./crop.json)
- -s  | --path-to-site FILE          Path to site.json   (default: ./site.json)
- -cl | --path-to-climate FILE       Path to climate.csv (default: ./climate.csv)
-```
+!!! note
 
-**Important:**
-Any parameter provided via CLI overrides values inside sim.json.
+    - Command-line crop, site, and climate paths override the corresponding values from `sim.json`.
 
 ---
 
-### 4. Examples
+## 5. Examples
 
-#### 4.1 Run a simulation with debug messages
+### Enable debug output
 
-For Windows:
+=== "Windows CMD"
 
-```bash
-monica-run.exe -d Examples\Hohenfinow2\sim.json
-```
+    ```cmd
+    monica-run.exe -d Examples\Hohenfinow2\sim.json
+    ```
 
-For Linux:
+=== "PowerShell"
 
-```bash
-monica-run -d Examples/Hohenfinow2/sim.json
-```
+    ```powershell
+    .\monica-run.exe -d Examples\Hohenfinow2\sim.json
+    ```
 
-#### 4.2 Write results to a custom output file
+=== "Linux"
+
+    ```bash
+    ./monica-run -d Examples/Hohenfinow2/sim.json
+    ```
+
+### Select an output file
 
 ```bash 
 monica-run -o results.csv Examples/Hohenfinow2/sim.json
 ```
 
-#### 4.3 Override crop, site, or climate file
+### Override crop, site, and climate files
 
-For windows:
+=== "Windows CMD"
 
-```bash
-monica-run ^
-  -c alt_crop.json ^
-  -s alt_site.json ^
-  -cl alt_climate.csv ^
-  Examples\Hohenfinow2\sim.json
+    ```cmd
+    monica-run.exe -c alt_crop.json -s alt_site.json -w alt_climate.csv Examples\Hohenfinow2\sim.json
+    ```
+
+=== "PowerShell"
+
+    ```powershell
+    .\monica-run.exe -c alt_crop.json -s alt_site.json -w alt_climate.csv Examples\Hohenfinow2\sim.json
+    ```
+
+=== "Linux"
+
+    ```bash
+    monica-run -c alt_crop.json -s alt_site.json -w alt_climate.csv Examples/Hohenfinow2/sim.json
+    ```
+
+### Restrict the simulation period
+
 ```
-*(Windows CMD uses ^ for line breaks; Linux uses \.)*
+monica-run -sd 1995-01-01 -ed 1995-12-31 Examples/Hohenfinow2/sim.json
+```
 
-For Linux:
+### Write one file per output section
 
-```bash
-monica-run \
-  -c alt_crop.json \
-  -s alt_site.json \
-  -cl alt_climate.csv \
-  Examples/Hohenfinow2/sim.json
+```
+monica-run -m Examples/Hohenfinow2/sim.json
 ```
 
 ---
 
-### 5. Windows CMD Notes
-Adding MONICA to PATH
+## 6. Windows Installation and PATH
 
-If monica-run is not recognized, add installation folder to PATH:
+The Windows installer adds the MONICA executable directory to the user `PATH`.
 
-```bash
-setx PATH "%PATH%;C:\Users\%USERNAME%\MONICA"
+After installation, open a new CMD or PowerShell window before running MONICA.
+
+If MONICA is not found, run it using its full installation path or add the installation directory to the user PATH manually. The executable installation directory is normally:
+
+```
+%LOCALAPPDATA%\MONICA
 ```
 
-Running from PowerShell
+The examples, parameters, and conversion tools are installed below:
 
-```bash
-.\monica-run.exe sim.json
+```
+%USERPROFILE%\MONICA
 ```
 
-Path separators
+For PowerShell, an executable in the current directory must normally be prefixed with `.\`:
 
-Windows: \
+```
+.\monica-run.exe .\sim.json
+```
 
-Linux/macOS: /
+Windows uses `\` as the usual path separator. Linux uses `/`.
 
 ---
 
-### 6. Directory-Based Execution
+## 7. Directory-Based Execution
 
-If all required JSON files (sim.json, site.json, crop.json) are inside a folder:
+A typical simulation directory contains:
 
-```bash
-monica-run config/sim.json
 ```
-
-Folder structure example:
-
-```bash
 config/
 ├── sim.json
 ├── site.json
 ├── crop.json
 └── climate.csv
 ```
----
 
-### 8. Converting Old HERMES-Style Configuration to the New MONICA JSON Format
+The `sim.json` file should reference the other files, for example:
 
-After installing MONICA version **≥ 2.0.1**, a folder named **`monica-ini-to-json`** is included in the installation directory.  
-This folder contains a **Python 2.7 conversion script** that reads a classic HERMES-style `monica.ini` file (including crop, fertilizer, irrigation, and weather files) and generates the corresponding MONICA JSON configuration files:
-
-- `sim.json`
-- `site.json`
-- `crop.json`
-- `climate.csv`
-
----
-
-#### 8.1 Requirements
-
-You must have **Python 2 (2.7)** installed.
-
----
-
-### 8.2 Running the Conversion Script
-
-Navigate to the `monica-ini-to-json` directory and run:
-
-**Windows CMD Example:**
-```cmd
-C:\Users\USER-NAME\MONICA\monica-ini-to-json>python monica-ini-to-json.py monica.ini=PATH-TO-monica.ini
-```
-
-The script automatically uses the default template filevwhich is located in the same folder:
-
-```pgsql
-conversion-template-sim.json
-```
-
-#### 8.3 Viewing Available Options
-
-To see all parameters run:
-
-```pgsql
-usage: [python] monica-ini-to-json.py 
-       [monica.ini=path-to-monica.ini] 
-       [sim.json=path-to-template-sim.json] 
-       [out-suffix=suffix-to-append-to-sim-site-crop-climate.files]
-
-defaults: {
-  'out-suffix': '-from-monica-ini',
-  'monica.ini': './monica.ini',
-  'sim.json': './conversion-template-sim.json'
+```json
+{
+  "crop": "crop.json",
+  "site": "site.json",
+  "climate": "climate.csv"
 }
 ```
 
-You can run this script from any directory, but then you must provide the full path to the template `sim.json`.
+Run the simulation with:
 
-#### 8.4 Output Naming and File Safety
-
-The converter automatically adds a suffix (default: `-from-monica-ini`) to prevent overwriting existing files:
-
-Example outputs:
-
-```pgsql
-sim-from-monica-ini.json
-site-from-monica-ini.json
-crop-from-monica-ini.json
-climate-from-monica-ini.csv
 ```
-To disable the suffix
-
-```ini
-out-suffix=""
+monica-run config/sim.json
 ```
-#### 8.5 Climate File Handling
 
-The converter assembles all weather data into a single `climate.csv` file.
+Relative crop, site, and climate paths are resolved relative to the directory containing `sim.json`.
 
-Handling rules:
+---
 
-- If global radiation values in the HERMES files are all zero, then sunhours will be included.
+## 8. Converting HERMES Configuration to MONICA JSON
 
-- Otherwise, only global radiation (globrad) is written.
+The repository and Windows installer include the Python converter:
 
-- Only the weather records between startdate and enddate (as defined in `monica.ini`) are included.
+```
+monica-ini-to-json/
+├── monica-ini-to-json.py
+├── conversion-template-sim.json
+├── conversion-template-site.json
+└── conversion-template-crop.json
+```
 
-#### 8.6 Year Interpretation (Century Switching)
+The converter reads a HERMES-style `monica.ini` file and generates:
 
-Two global parameters control how 2-digit years in HERMES files are interpreted:
+- `sim-from-monica-ini.json`
+- `site-from-monica-ini.json`
+- `crop-from-monica-ini.json`
+- `climate-from-monica-ini.csv`
+
+The output files are written to the directory containing `monica.ini`.
+
+---
+
+### 8.1 Requirements
+
+The converter requires Python 3.
+
+Check the installed Python version with:
+
+```
+python --version
+```
+
+On systems where Python 3 is invoked as `python3`:
+
+```
+python3 --version
+```
+
+---
+
+### 8.2 Running the Converter
+
+From the converter directory:
+
+=== "Windows CMD"
+
+    ```cmd
+    python monica-ini-to-json.py monica.ini=C:\path\to\monica.ini
+    ```
+=== "Linux"
+
+    ```bash
+    python3 monica-ini-to-json.py monica.ini=/path/to/monica.ini
+    ```
+
+The default template is:
+
+```
+./conversion-template-sim.json
+```
+
+Therefore, if the script is run from another directory, provide the full path to the template:
+
+```
+python3 monica-ini-to-json.py monica.ini=/path/to/monica.ini sim.json=/path/to/conversion-template-sim.json
+```
+
+Arguments use the following format:
+
+```
+name=value
+```
+
+Do not add spaces around the `=` character.
+
+---
+
+### 8.3 Displaying Converter Options
+
+Use `-h`:
+
+```
+python3 monica-ini-to-json.py -h
+```
+
+The available arguments are:
+
+```
+monica.ini=path-to-monica.ini
+sim.json=path-to-template-sim.json
+out-suffix=suffix-to-append-to-output-files
+```
+
+Defaults:
+
+```
+monica.ini=./monica.ini
+sim.json=./conversion-template-sim.json
+out-suffix=-from-monica-ini
+```
+
+---
+
+### 8.4 Changing the Output Suffix
+
+To use a custom suffix:
+
+```
+python3 monica-ini-to-json.py monica.ini=/path/to/monica.ini out-suffix=-converted
+```
+
+This produces files such as:
+
+```
+sim-converted.json
+site-converted.json
+crop-converted.json
+climate-converted.csv
+```
+
+To disable the suffix:
+
+```
+python3 monica-ini-to-json.py monica.ini=/path/to/monica.ini out-suffix=
+```
+
+Review the output carefully before overwriting existing configuration files.
+
+---
+
+### 8.5 Climate Date Handling
+
+The converted combines the yearly HERMES weather files into one climate CSV file.
+
+The simulation start and end years are read from the `[simulation_time]` section of `monica.ini`. The converter:
+
+1. Reads the climate file for each year in that range.
+2. Combines the records into one climate file.
+3. Sets MONICA's `start-date` and `end-date` options to January 1 and December 31 of the selected years.
+
+The converter does not generally remove individual rows outside arbitrary start and end dates.
+
+Radiation handling is as follows:
+
+- If any positive global-radiation value is found, the output keeps global radiation and removes sunhours.
+
+- If no positive global-radiation value is found but sunhours are present, the output keeps sunhours and removes global radiation.
+
+- If neither value is present, both columns may remain.
+
+---
+
+### 8.6 Two-Digit Year Interpretation
+
+The converter uses the following rules:
 
 ```python
 YEAR_BORDERS = [[0, 30, 2000], [31, 99, 1900]]
 YEAR_SUFFIX_DIGITS = 3
 ```
 
-Explanation:
+This means:
 
-- `YEAR_SUFFIX_DIGITS = 3`
-        → weather file names end with the last 3 digits of the year.
+- Two-digit years from `00` through `30` are interpreted as 2000-2030.
+- Two-digit years from `31` through `99` are interpreted as 1931-1999.
+- Climate filenames use the last three digits of the year.
 
-- YEAR_BORDERS defines the century:
+For example:
 
-        - Years ending 00–30 → interpreted as 2000–2030
+- `020506` → `2006-05-02`
+- `020598` → `1998-05-02`
 
-        - Years ending 31–99 → interpreted as 1931–1999
+---
 
-Examples:
+### 8.7 Converter Limitations
 
-- `020506` → interpreted as **2006-05-02**
+The generated files must be reviewed manually.
 
-- `020598` → interpreted as **1998-05-02**
+Important considerations include:
 
-#### 8.7 Important Notes and Limitations
-
-The converter cannot detect all conditions automatically. Users must check the output manually.
-
-Key points:
-
-- If ``incorporate = 1` in the HERMES fertilizer file → converter creates an **OrganicFertilization** workstep.
-
-- If `incorporate = 0` → converter creates a **MineralFertilization** workstep.
-
-- Crop and fertilizer names are linked via MONICA’s reference mechanism:
-
-```css
-["ref", "xxx", "name"]
+- `incorporate = 1` creates an `OrganicFertilization` workstep.
+- `incorporate = 0` creates a `MineralFertilization` workstep.
+- Crop references use the form:
+```json
+["ref", "crops", "crop-name"]
 ```
 
+- Fertilizer references use the form:
+```json
+["ref", "fert-params", "fertilizer-name"]
+```
 
-Ensure the referenced names exist in the template or adjust manually.
+The referenced crop and fertilizer names must exist in the configured parameter files or templates.
 
-- If crop or fertilizer references are correct, the generated JSON files should work immediately with MONICA.
-
-
-The `monica-ini-to-json` script provides an automated way to migrate from old HERMES `.ini` configurations to the MONICA v2 JSON schema. Users must review the outputs for correctness, but the script greatly simplifies transition to the modern MONICA format.
+The converter currently processes the first crop rotation found in the HERMES crop-rotation file. Verify the resulting crop rotation, fertilization, irrigation, tillage, climate, and date settings before using the generated configuration for production simulations.

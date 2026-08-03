@@ -59,7 +59,7 @@ nav:
           - crop.json: user_guide/configuration_files/config_crop_json.md
           - site.json: user_guide/configuration_files/config_site_json.md
       - How to run: 
-          - Running MONICA from the Command Line (CLI & CMD): user_guide/how_to_run/command_line.md
+          - Running MONICA from the Command Line: user_guide/how_to_run/command_line.md
           - Running MONICA in Docker: user_guide/how_to_run/docker.md
           - Running with Singularity: user_guide/how_to_run/singularity.md
           - Running on HPC: user_guide/how_to_run/hpc.md
