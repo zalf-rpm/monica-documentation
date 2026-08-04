@@ -1,6 +1,6 @@
 # Running MONICA in Docker
 
-## Overview
+## 1. Overview
 
 MONICA provides a project-published Docker image for running a MONICA cluster with:
 
@@ -22,7 +22,7 @@ The current repository Dockerfile is based on Debian 13. The base image may diff
 
 ---
 
-## Requirements
+## 2. Requirements
 
 Install Docker:
 
@@ -37,7 +37,7 @@ docker --version
 
 ---
 
-## Ports
+## 3. Ports
 
 The cluster exposes two external ports:
 
@@ -50,7 +50,7 @@ The image also uses internal proxy hosts `6677` and `7788`. These normally do no
 
 ---
 
-## Basic Usage
+## 4. Basic Usage
 
 ```
 docker run -p <host-input-port>:6666 -p <host-output-port>:7777 --env monica_instances=<number-of-workers> --rm --name <container-name> zalfrpm/monica-cluster:<version-tag>
@@ -82,7 +82,7 @@ Use a specific version tag for reproducible runs. The `latest` tag may point to 
 
 ---
 
-## Publishing Random Host Ports
+## 5. Publishing Random Host Ports
 
 If you want Docker to select random host ports, omit the host-port portion of the mapping:
 
@@ -100,7 +100,7 @@ If the `-p` options are omitted entirely, the ports are not published to the hos
 
 ---
 
-## Local-Only Access
+## 6. Local-Only Access
 
 Docker publishes ports to all host interfaces by default. To restrict access to the local machine, bind the ports to `127.0.0.1`:
 
@@ -110,7 +110,7 @@ docker run -p 127.0.0.1:6666:6666 -p 127.0.0.1:7777:7777 --env monica_instance=9
 
 ---
 
-## Pull the Image Before Running
+## 7. Pull the Image Before Running
 
 To download a specific image tag:
 
@@ -126,7 +126,7 @@ docker pull zalfrpm/monica-cluster:3.6.60.sand_or_clay_0_fix
 
 ---
 
-## Monitor the Container
+## 8. Monitor the Container
 
 List running containers:
 
@@ -148,7 +148,7 @@ docker port my-monica-cluster
 
 ---
 
-## Stop the Container
+## 9. Stop the Container
 
 The standard command runs in the foreground. Press `Ctrl + C` in the terminal running Docker, or stop the container from another terminal:
 
@@ -160,7 +160,7 @@ Because the command uses `--rm`, Docker removes the container automatically afte
 
 ---
 
-## Run in the Background
+## 10. Run in the Background
 
 To run the cluster in detached mode, add `--detach` or `-d`:
 
@@ -177,7 +177,7 @@ docker logs -f my-monica-cluster
 
 ---
 
-## Restart the Cluster
+## 11. Restart the Cluster
 
 Since `-rm` removes the container when it stops, restart if by running the `docker run` command again:
 
