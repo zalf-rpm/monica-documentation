@@ -1,33 +1,26 @@
-# Running multiple MONICAs on High Performance Computers (Clusters)
+# Running Multiple MONICA Instances on HPC Clusters
 
-This section explains how to run multiple MONICA simulations on a **High-Performance Computing (HPC)** cluster or across multiple machines. MONICA can be launched in **server mode**, allowing it to receive simulation jobs via **ZeroMQ** and run them in parallel.
+MONICA can run as a ZeroMQ server and receive simulation requests from clients or a ZeroMQ proxy. Multiple MONICA server processes can be started to process independent simulations concurrently on one or more compute nodes.
 
----
-
-## 1. Introduction
-
-When running MONICA on HPC systems or clusters, you can start MONICA in **server mode** using the command:
-
-```
-monica-zmq-server
-```
-
-In this mode, MONICA acts as a server process that listens for incoming simulation requests sent through ZeroMQ sockets.
-Each message contains the full configuration for one simulation run.
-
-This setup allows distributed simulations across:
-
-- Multiple CPU cores on the same node,
-
-- Multiple nodes within a cluster,
-
-- Or even different machines connected via a network
+> A single `monica-zmq-server` process does not automatically use multiple CPU cores. Parallel execution requires multiple MONICA server processes.
 
 ---
 
-## 2. Basic Command Usage
+## 1. Server modes
 
-You can view available options with:
+MONICA supports three common configurations:
+
+1. Direct request/reply mode
+2. Proxy-based worker mode
+3. Pipeline mode using separate input and output sockets
+
+For HPC workloads, proxy-based worker mode is generally the most suitable because multiple workers can connect to the same proxy.
+
+---
+
+## 2. Display command-line options
+
+Show the available options with:
 
 ```
 monica-zmq-server -h
@@ -38,87 +31,240 @@ or
 monica-zmq-server --help
 ```
 
-This will display all supported flags and their default values.
+Display version information with:
+
+```
+monica-zmq-server --version
+```
+
+The version command prints the MONICA version and the ZeroMQ version used by the executable.
 
 ---
 
-## 3. Command Syntax
+## 3. Command syntax
 
 ```
 monica-zmq-server [options]
 ```
-Example (default single-node configuration):
+
+---
+
+## 4. Command-line options
+
+
+| Short option | Long option               | Description                                                                                 | Default                              |
+|--------------|---------------------------|---------------------------------------------------------------------------------------------|--------------------------------------|
+| `-h`         | `--help`                  | Display help and exit.                                                                      | —                                    |
+| `-v`         | `--version`               | Display MONICA and ZeroMQ version information.                                              | —                                    |
+| `-d`         | `--debug`                 | Enable debug output.                                                                        | Disabled                             |
+| `-s`         | `--serve-address`         | Address on which direct request/reply requests are accepted.                                | `tcp://*:6666`                       |
+| `-p`         | `--proxy-address`         | Connect to one or more ZeroMQ proxy backend addresses. Addresses can be comma-separated.    | Use an explicit proxy backed address |
+| `-bi`        | `--bind-input`            | Bind the input socket locally.                                                              | —                                    |
+| `-ci`        | `--connect-input`         | Connect the input socket to a remote address.                                               | Default                              |
+| `-i`         | `--input-address`         | Input address or comma-separated input addresses.                                           | `tcp://localhost:6666`               |
+| `-bo`        | `--bind-output`           | Bind the output socket locally.                                                             | —                                    |
+| `-co`        | `--connect-output`        | Connect the output socket to a remote address.                                              | Default                              |
+| `-o`         | `--output-address`        | Output address or comma-separated output addresses. Enables pipeline mode.                  | `tcp://localhost:7777`               |
+| `-or`        | `--router-output-address` | Use a ROUTER output socket instead of the normal PUSH output socket. Enables pipeline mode. | —                                    |
+| `-c`         | `--control-address`       | Address of the ZeroMQ control publisher to which the server subscribes.                     | `tcp://localhost:8888`               |
+
+When the `--output-adress` or `--router-output-address` is supplied, MONICA uses pipeline mode. In that mode, input and output socket options must be configured explicitly when the server is binding locally.
+
+---
+
+## 5. Direct request/reply mode
+
+Direct mode is useful for a single MONICA server or for manually addressing individual servers.
+
+Start a server that accepts requests on port `6666`:
 
 ```
-monica-zmq-server --serve-address tcp://*:6666 --output-address tcp://*:7777
+monica-zmq-server -s tcp://*:6666
+```
+
+Client connects to:
+
+```
+tcp://server-hostname:6666
+```
+
+In direct mode, requests and results use the same ZeroMQ request/reply socket. The server does not use a separate output port.
+
+To run several independent servers on the same host, each server must use a different listening port:
+
+```
+monica-zmq-server -s tcp://*:6666
+monica-zmq-server -s tcp://*:6667
+monica-zmq-server -s tcp://*:6668
+```
+
+Clients must distribute requests among those addresses themselves.
+
+---
+
+## 6. Proxy-based worker mode
+
+A proxy distributes requests from clients to multiple MONICA workers.
+
+---
+
+### 6.1 Start the proxy
+
+The default proxy configuration uses:
+
+- Frontend port: `5555`
+- Backend port: `5566`
+
+Start the proxy with:
+
+```
+monica-zmq-proxy --frontend-port 5555 --backend-port 5566
+```
+
+Clients connect to the proxy frontend:
+
+```
+tcp://proxy-hostname:5555
 ```
 
 ---
 
-## 4. Available Options
+### 6.2 Starting MONICA workers
 
-Overview of all configuration option.
+Each worker connects to the proxy backend:
 
-| Option | Long Form | Description | Default Value |
-|---------|------------|--------------|----------------|
-| `-h` | `--help` | Show help output and exit. | — |
-| `-v` | `--version` | Print MONICA and ZeroMQ version info. | — |
-| `-d` | `--debug` | Enable detailed debug output for troubleshooting. | — |
-| `-s` | `--serve-address` | Bind the MONICA server to a specific address (used for direct client connections). | `tcp://*:6666` |
-| `-p` | `--proxy-address` | Connect to one or more proxy addresses for receiving work. Multiple addresses can be comma-separated. | `tcp://localhost:6666` |
-| `-bi` | `--bind-input` | Bind the input port manually (for use when controlling binding explicitly). | — |
-| `-ci` | `--connect-input` | Connect the input port (default mode). | _(default)_ |
-| `-i` | `--input-address` | Specify one or more input addresses for receiving simulation jobs (comma-separated). | `tcp://localhost:6666` |
-| `-bo` | `--bind-output` | Bind the output port manually (for explicit output binding). | — |
-| `-co` | `--connect-output` | Connect the output port (default mode). | _(default)_ |
-| `-o` | `--output-address` | Set output address(es) for sending results to clients or proxies. | `tcp://localhost:7777` |
-| `-or` | `--router-output-address` | Send results using a router socket instead of the default dealer socket. | `tcp://localhost:7777` |
-| `-c` | `--control-address` | Address for MONICA’s control interface (used for starting, stopping, or monitoring processes). | `tcp://localhost:8888` |
+```
+monica-zmq-server -p tcp://proxy-hostname:5566
+```
+
+Start multiple workers on the same node or on different nodes using the same backend address:
+
+```
+monica-zmq-server -p tcp://proxy-hostname:5566
+monica-zmq-server -p tcp://proxy-hostname:5566
+monica-zmq-server -p tcp://proxy-hostname:5566
+```
+
+Workers connect to the proxy. They do not bind the backend port themselves. Therefore, workers running on the same host do not need different input or output ports.
 
 ---
 
-## 5. Example Configurations
+## 7. Pipeline mode
 
-### **Example 1 – Basic Local Setup**
+Pipeline mode uses separate sockets for receiving jobs and sending results. It is useful when clients use separate producer and consumer connections or when separate input and output proxies are required.
 
-Run MONICA on a single machine, serving jobs locally:
-
-```
-monica-zmq-server --serve-address tcp://*:6666 --output-address tcp://*:7777
-```
-Clients (or scripts) can then send simulation requests to port 6666
-and receive results from port 7777.
-
-### **Example 2 – Connecting via Proxy**
-
-If you already have a MONICA proxy running (for example via Docker or Singularity),
-then connect MONICA server to it:
+Start a locally bound pipeline server:
 
 ```
-monica-zmq-server --proxy-address tcp://proxy-hostname:6666 --output-address tcp://proxy-hostname:7777
+monica-zmq-server -bi -i tcp://*:6666 --bind-output -o tcp://*:7777
 ```
-This allows the MONICA instance to communicate through the proxy layer,
-distributing workloads across multiple workers.
 
-### **Example 3 –Cluster Node Setup**
+The input and output socket roles are:
 
-To use MONICA across several nodes (each node runs as a worker connected to a proxy):
+| Role                    | Address                      | Socket |
+|-------------------------|------------------------------|--------|
+| Receive simulation jobs | `tcp://server-hostname:6666` | PULL   |
+| Send simulation results | `tcp://server-hostname:7777` | PUSH   |
 
-1. Run the proxy on the master node (see the Singularity or Docker setup).
+Do not combine `--proxy-address` with `--output-address` unless you intentionally want pipeline mode. When pipeline mode is enabled, the proxy address is not used for receiving jobs.
 
-2. Start MONICA worker processes on each compute node, connecting them to the proxy:
+---
+
+## 8. Multiple workers with pipeline proxies
+
+A common distributed setup uses two proxies:
+
+- an input proxy distributes jobs to workers
+- an output proxy collects results from workers
+
+Example input proxy:
 
 ```
-monica-zmq-server --proxy-address tcp://<proxy-node>:6666 --output-address tcp://<proxy-node>:7777
+monica-zmq-proxy --pull-push-sockets --frontend-port 6666 --backend-port 6677
 ```
-3.  Monitor performance via logs or the control port (default: 8888).
 
-**Notes:**
+Example output proxy:
 
-- Use different ports if multiple MONICA servers are running on the same host.
+```
+monica-zmq-proxy --pull-push-sockets --frontend-port 7788 --backend-port 7777
+```
 
-- For distributed runs, make sure all machines can communicate via TCP on the specified ports.
+Start each MONICA worker with:
 
-- The control port (8888) can be used for remote process management and monitoring.
+```
+monica-zmq-server -i tcp://proxy-hostname:6677 -o tcp://proxy-hostname:7788 -c tcp://proxy-hostname:8899
+```
 
-- On HPC systems, you can manage MONICA processes via job schedulers like SLURM or PBS using scripts similar to the Singularity examples.
+Multiple workers can use the same proxy address:
+
+```
+monica-zmq-server -i tcp://proxy-hostname:6677 -o tcp://proxy-hostname:7788 -c tcp://proxy-hostname:8899
+monica-zmq-server -i tcp://proxy-hostname:6677 -o tcp://proxy-hostname:7788 -c tcp://proxy-hostname:8899
+monica-zmq-server -i tcp://proxy-hostname:6677 -o tcp://proxy-hostname:7788 -c tcp://proxy-hostname:8899
+```
+
+The client-facing addresses in this example are:
+
+- Submit jobs to `tcp://proxy-hostname:6666`
+- Receive results from `tcp://proxy-hostname:7777`
+
+---
+
+## 9. Running workers through a scheduler
+
+The exact command depends on the HPC scheduler. For example, with SLURM:
+
+```
+srun --nodes=2 --ntasks-per-node=4 monica-zmq-server --proxy-address tcp://proxy-hostname:5566
+```
+
+This starts one MONICA server process per task. Each process connects to the same proxy backend and can process independent simulation jobs.
+
+For pipeline mode:
+
+```
+srun --nodes=2 --ntasks-per-node=4 monica-zmq-server --input-address tcp://proxy-hostname:6677 --output-address tcp://proxy-hostname:7788 --control-address tcp://proxy-hostname:8899
+```
+
+Adapt the scheduler options, executable path, environment variables, and module or container setup to the local HPC system.
+
+---
+
+## 10. Cluster requirements
+
+Before starting a distributed run:
+
+- Ensure all nodes can resolve the proxy hostname.
+- Allow the required TCP ports through firewalls.
+- Use explicit non-localhost addresses for cross-node connections.
+- Ensure `MONICA_PARAMETERS` and required input data are available on every worker node.
+- Use unique listening ports when multiple processes bind sockets on the same host.
+- Use the same MONICA version and compatible configuration on all workers.
+- Size the number of worker processes according to the available CPU cores and memory.
+
+The default control address uses `localhost` and is therefore suitable only for a local control publisher. For distributed deployments, configure `--control-address` to point to the host and port where the control publisher is available.
+
+---
+
+## 11. Docker reference configuration
+
+The repository's Docker configuration starts two proxies and multiple MONICA workers.
+
+The relevant defaults are:
+
+- Input proxy frontend: `6666`
+- Input proxy backend: `6677`
+- Output proxy frontend: `7788`
+- Output proxy backend: `7777`
+- Number of workers: `3`
+
+This corresponds conceptually to:
+
+```
+monica-zmq-proxy -pps -f 6666 --b 6677
+monica-zmq-proxy -pps -f 7788 --b 7777
+
+monica zmq-server -i tcp://proxy-hostname:6677 -o tcp://proxy-hostname:7788 -c tcp://proxy-hostname:8899
+```
+
+Additional worker processes can be started with the same input, output, and control addresses.
