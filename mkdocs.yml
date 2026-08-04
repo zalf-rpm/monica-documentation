@@ -63,7 +63,7 @@ nav:
           - Running MONICA in Docker: user_guide/how_to_run/docker.md
           - Running with Singularity: user_guide/how_to_run/singularity.md
           - Running on HPC: user_guide/how_to_run/hpc.md
-          - Python API usage examples: user_guide/how_to_run/python_api_usage.md
+          - Running with Python producer-consumer pipeline: user_guide/how_to_run/python_producer_consumer.md
   - Parameter Reference and Calibration:
       - Crop Parameters:
           - Overview: parameters/crop_parameters/overview.md
