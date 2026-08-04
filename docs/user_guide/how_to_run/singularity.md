@@ -1,80 +1,114 @@
 # Running MONICA on HPC with Singularity
 
-This guide explains how to run the MONICA agro-ecosystem model in a High-Performance Computing (HPC) environment using Singularity. It follows best practices for distributed runs: a proxy service (I/O handler) and multiple worker instances (simulation executors).
+This guide describes how to run MONICA in an HPC environment using Singularity.
 
-## 1. Overview
+The recommended setup uses:
 
-MONICA runs in a **two-layer architecture** within an HPC (High-Performance Computing) environment.
+- one proxy service, which handles communication and job coordination
+- one or more worker jobs on compute nodes, which execute simulations
 
-| Component | Role | Typical Host |
-|------------|------|---------------|
-| **Proxy** | Manages input/output, job coordination, and communication between client and workers. | Login or head node (long-running service). |
-| **Workers** | Execute the MONICA simulations based on tasks assigned by the proxy. | Compute nodes (parallel jobs, e.g., submitted via SLURM). |
+The same container image is used for both components.
 
-The same **Singularity container image** is used for both the proxy and the worker components:
+---
 
+## 1. Architecture
+
+| Component | Role                                                                        | Typical location  |
+|-----------|-----------------------------------------------------------------------------|-------------------|
+| Proxy     | Receives requests, manages input/output communication, and distributes work | Dedicated service |
+| Workers   | Execute MONICA simulations assigned by the proxy                            | Compute nodes     |
+
+The proxy node must be reachable from the compute nodes. Login nodes should only be used if permitted by the HPC administrator.
+
+---
+
+## 2. Prerequisites
+
+You need:
+
+- Singularity installed
+- access to a Docker Hub image tag
+- a shared filesystem accessible from all relevant nodes
+- a hostname or IP address through which workers can reach the proxy
+- permission to run a long-lived proxy service
+
+---
+
+## 3. Download the container image
+
+Choose a MONICA version that exists as a Docker Hub tag:
+
+```bash
+VERSION=2.2.1.170
+IMAGE=/shared/apps/monica/monica-cluster_${VERSION}.sif
+
+singularity pull --name "$IMAGE" "docker://zalfrpm/monica-cluster:${VERSION}"
 ```
-monica-cluster_<tag>.sif
-```
 
-## 2. Build the Singularity Image
+Store the resulting image in a shared, read-only location:
 
-Pull the container image directly from Docker Hub:
-
-```
-singularity pull docker://zalfrpm/monica-cluster:<tag>
-```
-This builds a **Singularity image using the Docker image as a blueprint**.
-
-**Note:** Replace tag with the desired MONICA version (e.g., 3.6.32).
-
-Resulting image:
-
-```
-monica-cluster_<tag>.sif
-```
-Store this .sif in a shared, read-only location accessible to all compute nodes, e.g.:
-
-```
+```bash
 /shared/apps/monica/monica-cluster_2.2.1.170.sif
 ```
-## 3. Configure Shared Directories
 
-Before launching, create directories accessible from all nodes:
+Verify that the image is available on a compute node:
 
-```
-mkdir -p ~/log/supervisor/monica/proxy
-mkdir -p ~/log/supervisor/monica/worker
-mkdir -p /shared/data/monica/climate-data
+```bash
+singularity inspect "$IMAGE"
 ```
 
-- /log/supervisor/monica — persistent logs
+---
 
-- /shared/data/monica/climate-data — shared input data accessible to all nodes
+## 4. Create shared directories
 
-## 4. Run the Proxy (Head Node)
+Create directories for logs and input data:
 
-The proxy should run as a persistent Singularity instance on a node reachable by workers.
+```bash
+mkdir -p "$HOME/log/supervisor/monica/proxy"
+mkdir -p "$HOME/log/supervisor/monica/worker"
+mkdir -p "/shared/data/monica/climate-data"
+```
+
+The following paths are used inside the container:
+
+| Host path                            | Container path              | Purpose             |
+|--------------------------------------|-----------------------------|---------------------|
+| `$HOME/log/supervisor/monica/proxy`  | `/var/log`                  | Proxy logs          |
+| `$HOME/log/supervisor/monica/worker` | `/var/log`                  | Worker logs         |
+| `/shared/data/monica/climate-data`   | `/monica_data/climate-data` | Shared climate data |
+
+The host directories must be accessible and writable by the user running Singularity.
+
+---
+
+## 5. Run the Proxy
+
+The proxy exposes the following ports:
+
+| Port | Purpose                  |
+|------|--------------------------|
+| 6677 | Worker input connection  |
+| 7788 | Worker output connection |
+| 7777 | Proxy consumer endpoint  |
+| 6666 | Proxy producer endpoint  |
 
 Create `run_monica_proxy.sh`:
 
-```
+```shell
 #!/bin/bash -x
 #SBATCH --job-name=monica_proxy
-#SBATCH --output=~/log/supervisor/monica/proxy/%x_%j.out
-#SBATCH --error=~/log/supervisor/monica/proxy/%x_%j.err
 #SBATCH --ntasks=1
-#SBATCH --time=7-00:00:00   # run for up to 7 days
-#SBATCH --partition=long    # adjust to your HPC queue
+#SBATCH --time=7-00:00:00
+#SBATCH --partition=long
+#SBATCH --output=monica_proxy_%x_%j.out
+#SBATCH --error=monica_proxy_%x_%j.err
 
-VERSION=2.2.1.170 # or higher
-SINGULARITY_IMAGE=/shared/apps/monica/monica-cluster_${VERSION}.sif
+VERSION=2.2.1.170
+IMAGE=/shared/apps/monica/monica-cluster_${VERSION}.sif
 
-# Log binding
-LOGOUT=/var/log
-MOUNT_LOG=~/log/supervisor/monica/proxy
+LOG_DIR="$HOME/log/supervisor/monica/proxy"
+mkdir -p "$LOG_DIR"
 
-# MONICA environment
 export SINGULARITYENV_monica_intern_in_port=6677
 export SINGULARITYENV_monica_intern_out_port=7788
 export SINGULARITYENV_monica_consumer_port=7777
@@ -85,58 +119,67 @@ export SINGULARITYENV_monica_autostart_worker=false
 export SINGULARITYENV_monica_auto_restart_proxies=true
 export SINGULARITYENV_monica_auto_restart_worker=false
 
-# Start instance and run proxy
-singularity instance start -B $MOUNT_LOG:$LOGOUT ${SINGULARITY_IMAGE} monica_proxy
-nohup singularity run instance://monica_proxy > /dev/null 2>&1 &
+# Run in the foreground so that SLURM manages the service lifetime
+exec singularity run -B "$LOG_DIR":/var/log "$IMAGE"
 ```
-Submit it:
 
-```
+Submit the proxy job:
+
+```bash
 sbatch run_monica_proxy.sh
 ```
 
-To stop the proxy later:
+Find the node running the proxy:
 
+```bash
+squeue -u "$USER" -n monica_proxy -o "%.18i %.20j %.20 B %.10T"
 ```
-singularity instance stop monica_proxy
+
+Use the node hostname as `PROXY_SERVER` in the worker script. Confirm that the hostname is resolvable and reachable from compute nodes.
+
+Stop the proxy by cancelling its job:
+
+```bash
+scancel <proxy-job-id>
 ```
-## 5. Run Workers
-Workers connect to the proxy and execute simulations. Each worker node can host multiple MONICA worker processes.
+
+---
+
+## 6. Run Workers with SLURM
 
 Create `run_monica_worker.sh`:
 
-```
+```shell
 #!/bin/bash -x
 #SBATCH --job-name=monica_worker
-#SBATCH --output=~/log/supervisor/monica/worker/%x_%j.out
-#SBATCH --error=~/log/supervisor/monica/worker/%x_%j.err
+#SBATCH --ntasks=1
 #SBATCH --cpus-per-task=10
 #SBATCH --time=24:00:00
 #SBATCH --partition=compute
+#SBATCH --output=monica_worker_%x_%j.out
+#SBATCH --error=monica_worker_%x_%j.err
 
 VERSION=2.2.1.170
-SINGULARITY_IMAGE=/shared/apps/monica/monica-cluster_${VERSION}.sif
+IMAGE=/shared/apps/monica/monica-cluster_${VERSION}.sif
 
-# Data mounts
+# Replace this with the hostname or IP address of the proxy node
+PROXY_SERVER=<proxy-hostname-or-ip>
+
 MOUNT_DATA=/shared/data/monica/climate-data
+MOUNT_LOG="$HOME/log/supervisor/monica/worker"
+
 DATADIR=/monica_data/climate-data
-
-# Logging
 LOGOUT=/var/log
-MOUNT_LOG=~/log/supervisor/monica/worker
 
-# Worker configuration
-NUM_WORKER=$SLURM_CPUS_PER_TASK
-PROXY_SERVER=<proxy_host_or_IP>   # replace with proxy node hostname
+mkdir -p "$MOUNT_LOG"
 
-INTERN_IN_PORT=6677
-INTERN_OUT_PORT=7788
+NUM_WORKER="${SLURM_CPUS_PER_TASK:-10}"
 
-# Environment variables
-export SINGULARITYENV_monica_instances=$NUM_WORKER
-export SINGULARITYENV_monica_intern_in_port=${INTERN_IN_PORT}
-export SINGULARITYENV_monica_intern_out_port=${INTERN_OUT_PORT}
-export SINGULARITYENV_monica_proxy_in_host=$PROXY_SERVER
+export SINGULARITYENV_monica_instances="$NUM_WORKER"
+export SINGULARITYENV_monica_intern_in_port=6677
+export SINGULARITYENV_monica_intern_out_port=7788
+
+export SINGULARITYENV_monica_proxy_in_host="$PROXY_SERVER"
 export SINGULARITYENV_monica_proxy_out_host=$PROXY_SERVER
 
 export SINGULARITYENV_monica_autostart_proxies=false
@@ -144,22 +187,84 @@ export SINGULARITYENV_monica_autostart_worker=true
 export SINGULARITYENV_monica_auto_restart_proxies=false
 export SINGULARITYENV_monica_auto_restart_worker=true
 
-# Execute MONICA worker inside container
-srun singularity run \
-  -B $MOUNT_DATA:$DATADIR,$MOUNT_LOG:$LOGOUT \
-  --pwd / \
-  ${SINGULARITY_IMAGE}
+srun --ntasks=1 singularity run -B "$MOUNT_DATA:$DATADIR,$MOUNT_LOG:$LOGOUT" --pwd / "$IMAGE"
 ```
-Submit to SLURM:
 
-```
+Submit the worker job:
+
+```bash
 sbatch run_monica_worker.sh
 ```
-**Note:**  If you do not use a job scheduler such as SLURM, you can start the worker manually as a Singularity service using:
 
+Each worker job starts `SLURM_CPUS_PER_TASK` MONICA worker processes. Ensure that this matches the resources allocated by the scheduler.
+
+To start multiple independent worker jobs:
+
+```bash
+for i in {1..10}; do
+  sbatch run_monica_worker.sh
+done
 ```
-singularity instance start -B $MOUNT_LOG:$LOGOUT ${SINGULARITY_IMAGE} monica_worker
+
+---
+
+## 7. Run a worker without a scheduler
+
+On a node where direct execution is permitted:
+
+```shell
+VERSION=2.2.1.170
+IMAGE=/shared/apps/monica/monica-cluster_${VERSION}.sif
+
+PROXY_SERVER=<proxy-hostname-or-ip>
+MOUNT_DATA=/shared/data/monica/climate-data
+MOUNT_LOG="$HOME/log/supervisor/monica/worker"
+
+mkdir -p "$MOUNT_LOG"
+
+export SINGULARITYENV_monica_instances=10
+export SINGULARITYENV_monica_intern_in_port=6677
+export SINGULARITYENV_monica_intern_out_port=7788
+export SINGULARITYENV_monica_proxy_in_host="$PROXY_SERVER"
+export SINGULARITYENV_monica_proxy_out_host="$PROXY_SERVER"
+
+export SINGULARITYENV_monica_autostart_proxies=false
+export SINGULARITYENV_monica_autostart_worker=true
+export SINGULARITYENV_monica_auto_restart_proxies=false
+export SINGULARITYENV_monica_auto_restart_worker=true
+
+exec singularity run -B "$MOUNT_DATA:/monica_data/climate-data,$MOUNT_LOG:/var/log" --pwd / "$IMAGE"
 ```
 
+This process remains attached to the terminal. Use the HPC scheduler or an approved service mechanism for persistent production workloads.
 
+---
 
+## 8. Troubleshooting
+
+Check the proxy logs:
+
+```bash
+ls -la "$HOME/log/supervisor/monica/proxy"
+```
+
+Check the worker logs:
+```bash
+ls -la "$HOME/log/supervisor/monica/worker"
+```
+
+Verify network connectivity from a compute node:
+
+```bash
+nc -vz <proxy-hostname-or-ip> 6677
+nc -vz <proxy-hostname-or-ip> 7788
+```
+
+Common problems include:
+
+- using `localhost` as `PROXY_SERVER` when the proxy runs on another node
+- using a climate-data path that is not shared across compute nodes
+- insufficient permissions on the mounted log directory
+- firewall rules blocking ports `6677` or `7788`
+- requesting fewer CPUs that the configured `monica_instances` value
+- using a Docker image tag that does not exist
