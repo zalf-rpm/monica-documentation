@@ -45,6 +45,7 @@ extra_javascript:
 nav:
   - Overview: index.md
   - User Guide:
+      - Overview: user_guide/overview.md
       - Installation:
           - Windows installation: user_guide/installation/windows_installation.md
           - Windows compilation: user_guide/installation/windows_compilation.md
