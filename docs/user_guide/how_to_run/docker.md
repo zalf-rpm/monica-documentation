@@ -1,156 +1,188 @@
-# Running MONICA in Docker (Cluster Mode)
-
----
+# Running MONICA in Docker
 
 ## Overview
-MONICA provides an official Docker image for running a MONICA cluster with input/output proxies and multiple MONICA worker processes.  
-This container is intended for multi-core systems and server environments where MONICA is used as a service.
 
-There is a Docker image for MONICA available on Docker Hub:
+MONICA provides a project-published Docker image for running a MONICA cluster with:
 
-**Image name:** `zalfrpm/monica-cluster`
+- an input proxy
+- an output proxy
+- a configurable number of MONICA worker processes
 
-- Built on **Debian 9** as the base system.  
-- Runs MONICA with:  
-  i. an **input proxy**  
-  ii. an **output proxy**  
-  iii. a configurable number of **MONICA worker processes**  
-- Each container is designed to run on a **multiprocessor machine** as a service.
+The image is intended for multi-core systems and server environments where MONICA runs as a service.
+
+Docker image:
+
+```
+zalfrpm/monica-cluster
+```
+
+Available tags can be found on [Docker Hub](https://hub.docker.com/r/zalfrpm/monica-cluster)
+
+The current repository Dockerfile is based on Debian 13. The base image may differ for older image tags.
 
 ---
 
-## 1. Basic Run Command
+## Requirements
 
-```bash
-docker run -p <input port>:6666 -p <output port>:7777 \
-  --env monica_instances=<number of monica worker> \
-  --rm \
-  --name <monica cluster name> \
-  zalfrpm/monica-cluster:<tag>
-```
+Install Docker:
 
----
+- Windows: [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- Linux: Docker Engine from your distribution's package manager
 
-## 2. Parameter Explanation
-
-| Parameter | Description |
-|------------|--------------|
-| `zalfrpm/monica-cluster:<tag>` | Image name on Docker Hub. You can find available tags [here](https://hub.docker.com/r/zalfrpm/monica-cluster/tags). |
-| `-p <input port>:6666` | *(Optional)* Input port. Without this parameter, Docker chooses a random host port. |
-| `-p <output port>:7777` | *(Optional)* Output port. Without this parameter, Docker chooses a random host port. |
-| `--env monica_instances=<number>` | *(Optional)* Number of MONICA worker processes to start. Default: **3**. |
-| `--rm` | *(Optional)* Automatically removes the container after it stops. |
-| `--name <cluster name>` | *(Optional)* Assigns a human-readable container name. |
-
----
-
-
-### 3. For Example
-
-```
-docker run -p 6666:6666 -p 7777:7777 \
-  --env monica_instances=9 \
-  --rm \
-  --name my-monica-cluster \
-  zalfrpm/monica-cluster:2.0.3.150
-```
-
-This starts:
-
-- input proxy → host port 6666
-
-- output proxy → host port 7777
-
-- 9 MONICA worker processes inside the container
-
-- a container named `my-monica-cluster`
-
-- version 2.0.3.150 of the MONICA cluster image
-
-**Note on Tags**
-
-It is possible to use the tag latest, for example:
-
-```
-docker run ... zalfrpm/monica-cluster:latest
-```
-
-However, it is recommended to use a specific version tag (e.g., 3.6.32) to ensure reproducible results.
-Using latest might pull a newer image later, which could lead to slightly different results.
-
----
-
-### 4. Step-by-Step Guide (for New Users)
-
-
-#### Install Docker
-
-- **Windows/macOS:** Install [Docker Desktop](https://www.docker.com).  
-- **Linux:** Install Docker Engine via your package manager.  
-- Open a terminal:
-
-    **Windows:** PowerShell  
-    **macOS/Linux:** Terminal
-
-Check installation:
+Verify the installation:
 
 ```
 docker --version
 ```
-A version number (for example: Docker version 27.xx...) will appear.
 
-#### Pull the MONICA Image
+---
 
-Choose a tag (recommended: a specific version such as 3.6.32):
+## Ports
 
-```
-docker pull zalfrpm/monica-cluster:3.6.32
-```
-#### Start Monica
+The cluster exposes two external ports:
 
-Start a MONICA container with 9 worker processes:
+| Service      | Container port | Purpose                             |
+|--------------|----------------|-------------------------------------|
+| Input proxy  | 6666           | Receives MONICA simulation requests |
+| Output proxy | 7777           | Provides MONICA simulation results  |
 
-```
-docker run -p 6666:6666 -p 7777:7777 \
-  --env monica_instances=9 \
-  --rm \
-  --name my-monica-cluster \
-  zalfrpm/monica-cluster:3.6.32
-```
-**Explanation:**
+The image also uses internal proxy hosts `6677` and `7788`. These normally do not need to be published to the host.
 
-- Exposes input port 6666 and output port 7777
-- Runs 9 MONICA workers
-- Automatically cleans up on exit
-- Uses tag 3.6.32 for reproducibility
+---
 
-This command starts a MONICA cluster with 9 workers, exposing input port 6666 and output port 7777.
-
-#### Verify Container Status
-
-In another terminal, type:
+## Basic Usage
 
 ```
-docker ps
-docker logs -f my-monica-cluster
+docker run -p <host-input-port>:6666 -p <host-output-port>:7777 --env monica_instances=<number-of-workers> --rm --name <container-name> zalfrpm/monica-cluster:<version-tag>
+```
+
+Example:
+
+The following command starts a cluster with nine MONICA workers:
+
+```
+docker run -p 6666:7777 -p 7777:7777 --env monica_instances=9 --rm --name my-monica-cluster zalfrpm/monica-cluster:<version-tag>
+```
+
+This configuration provides:
+
+- input proxy at host port `6666`
+- output proxy at host port `7777`
+- nine MONICA worker processes
+- container name `my-monica-cluster`
+
+
+Replace `<version-tag>` with a tag available on [Docker Hub](https://hub.docker.com/r/zalfrpm/monica-cluster), for example:
+
+```
+3.6.60.sand_or_clay_0_fix
+```
+
+Use a specific version tag for reproducible runs. The `latest` tag may point to a newer image in the future and can therefore produce different results.
+
+---
+
+## Publishing Random Host Ports
+
+If you want Docker to select random host ports, omit the host-port portion of the mapping:
+
+```
+docker run -p 6666 -p 7777 --env monica_instance=9 --rm --name my-monica-cluster zalfrpm/monica-cluster:<version-tag>
+```
+
+Find the assigned ports with:
+
+```
 docker port my-monica-cluster
 ```
 
-#### Stop the Container
-Press Ctrl + C in the running terminal, or from another terminal, type:
+If the `-p` options are omitted entirely, the ports are not published to the host and cannot normally be accessed from outside the container.
+
+---
+
+## Local-Only Access
+
+Docker publishes ports to all host interfaces by default. To restrict access to the local machine, bind the ports to `127.0.0.1`:
+
+```
+docker run -p 127.0.0.1:6666:6666 -p 127.0.0.1:7777:7777 --env monica_instance=9 --rm --name my-monica-cluster zalfrpm/monica-cluster:<version-tag>
+```
+
+---
+
+## Pull the Image Before Running
+
+To download a specific image tag:
+
+```
+docker pull zalfrpm/monica-cluster:<version-tag>
+```
+
+For example:
+
+```
+docker pull zalfrpm/monica-cluster:3.6.60.sand_or_clay_0_fix
+```
+
+---
+
+## Monitor the Container
+
+List running containers:
+
+```
+docker ps
+```
+
+View the container logs:
+
+```
+docker logs -f my-monica-cluster
+```
+
+Display the published port mappings:
+
+```
+docker port my-monica-cluster
+```
+
+---
+
+## Stop the Container
+
+The standard command runs in the foreground. Press `Ctrl + C` in the terminal running Docker, or stop the container from another terminal:
 
 ```
 docker stop my-monica-cluster
 ```
 
-#### Restart MONICA
-Run the same command again:
+Because the command uses `--rm`, Docker removes the container automatically after it stops.
+
+---
+
+## Run in the Background
+
+To run the cluster in detached mode, add `--detach` or `-d`:
 
 ```
-docker run -p 6666:6666 -p 7777:7777 \
-  --env monica_instances=9 \
-  --rm \
-  --name my-monica-cluster \
-  zalfrpm/monica-cluster:3.6.32
+docker run -p 6666:6666 -p 7777:7777 --env monica_instances=9 --rm --name my-monica-cluster -d zalfrpm/monica-cluster:<version-tag>
 ```
 
+Check its status and logs:
+
+```
+docker ps
+docker logs -f my-monica-cluster
+```
+
+---
+
+## Restart the Cluster
+
+Since `-rm` removes the container when it stops, restart if by running the `docker run` command again:
+
+```
+docker run -p 6666:6666 -p 7777:7777 --env monica_instance=9 --rm --name my-monica-cluster zalfrpm/monica-cluster:<version-tag>
+```
+
+Choose `monica_instance` according to the available CPU cores and memory. More workers do not necessarily improve performance if the host is resource-constrained.
