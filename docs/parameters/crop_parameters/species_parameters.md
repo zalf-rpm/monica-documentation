@@ -1,6 +1,5 @@
 # Species-level crop parameters
 
-
 This section describes the JSON properties used to configure species-level crop parameters in MONICA.
 
 Species parameters describe characteristics shared by all cultivars of a species. Cultivar-specific properties are defined separately.
