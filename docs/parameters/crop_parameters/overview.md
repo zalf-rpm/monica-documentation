@@ -87,7 +87,7 @@ The amount of residue returned to the soil can also depend on the management wor
 
 ---
 
-## Resolving parameter-file paths:
+## Resolving parameter-file paths
 
 Paths used by `include-from-file` may be absolute or relative. Relative paths are resolved using the include-file base path configured for the simulation.
 
