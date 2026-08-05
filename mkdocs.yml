@@ -67,7 +67,7 @@ nav:
           - Singularity: user_guide/advanced/singularity.md
       - Troubleshooting:
           - Installation and setup issues: user_guide/troubleshooting/troubleshooting_installation.md
-  - Parameter Reference and Calibration:
+  - Parameter Reference:
       - Crop Parameters:
           - Overview: parameters/crop_parameters/overview.md
           - Species parameters: parameters/crop_parameters/species_parameters.md
