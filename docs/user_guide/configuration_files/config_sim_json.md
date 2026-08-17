@@ -377,7 +377,7 @@ Below you will find a simplified example of a complete `sim.json` file focused o
 
 ## Common output variables
 
-The table below documents commonly used output variables. The most up-to-date list is defined in [**`build-output.cpp`**](https://github.com/zalf-lsa/monica/blob/master/src/io/build-output.cpp).
+The tables below group commonly used output variables by topic. The most up-to-date list is defined in [**`build-output.cpp`**](https://github.com/zalf-lsa/monica/blob/master/src/io/build-output.cpp).
 
 Output names are case-sensitive. Unknown names are ignored, so check the generated header when adding a new output definition.
 
@@ -389,188 +389,248 @@ build({id++, "TraDef", "0;1", "TranspirationDeficit"},
 
 In this example, `Date` and `TraDef` are allowed output names. Additionally, the code lists the expected units of measure (if defined) and provides a description for each output variable.
 
-| Output name                         | (L)ayers/(O)rgans | Settable? | Unit                                | Description                                                                                                                                                                   |
-|-------------------------------------|-------------------|-----------|-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`Count`**                         |                   |           |                                     | Output constant value 1 (can be used for counting records or events)                                                                                                          |
-| **`CM-count`**                      |                   |           |                                     | Order number of the current cultivation method                                                                                                                                |
-| **`Date`**                          |                   |           |                                     | Current date                                                                                                                                                                  |
-| **`days-since-start`**              |                   |           |                                     | Number of days since simulation start                                                                                                                                         |
-| **`DOY`**                           |                   |           |                                     | Current day of year                                                                                                                                                           |
-| **`Month`**                         |                   |           |                                     | Current month number (1-12)                                                                                                                                                   |
-| **`Year`**                          |                   |           |                                     | Current year                                                                                                                                                                  |
-| **`Crop`**                          |                   |           |                                     | Crop name                                                                                                                                                                     |
-| **`TraDef`**                        |                   |           | 0;1                                 | Transpiration deficit index (`1`= no stress, `0` = maximum stress)                                                                                                            |
-| **`Tra`**                           |                   |           | mm                                  | Actual transpiration                                                                                                                                                          |
-| **`NDef`**                          |                   |           | 0;1                                 | Nitrogen deficit index, indicates N availability (`1` = no stress, `0` = no N available)                                                                                      | 
-| **`HeatRed`**                       |                   |           | 0;1                                 | Heat stress reductor                                                                                                                                                          |
-| **`FrostRed`**                      |                   |           | 0;1                                 | Frost stress reductor                                                                                                                                                         |
-| **`OxRed`**                         |                   |           | 0;1                                 | Oxygen deficit reductor                                                                                                                                                       |
-| **`Stage`**                         |                   | x         | 1-based stage number                | Phenological development stage                                                                                                                                                |
-| **`TempSum`**                       |                   |           | °Cd                                 | Accumulated temperature sum                                                                                                                                                   |
-| **`VernF`**                         |                   |           | 0;1                                 | Vernalisation factor                                                                                                                                                          |
-| **`DaylF`**                         |                   |           | 0;1                                 | Daylength factor                                                                                                                                                              |
-| **`IncRoot`**                       |                   |           | kg CH2O ha-1 d-1                    | Growth increment of root                                                                                                                                                      |
-| **`IncLeaf`**                       |                   |           | kg CH2O ha-1 d-1                    | Growth increment of leaf                                                                                                                                                      |
-| **`IncShoot`**                      |                   |           | kg CH2O ha-1 d-1                    | Growth increment of shoot                                                                                                                                                     |
-| **`IncFruit`**                      |                   |           | kg CH2O ha-1 d-1                    | Growth increment of fruit                                                                                                                                                     |
-| **`RelDev`**                        |                   |           | 0;1                                 | Relative total development                                                                                                                                                    |
-| **`LT50`**                          |                   |           | °C                                  | Crop's lethal temperature at which 50% of plants die                                                                                                                          |
-| **`AbBiom`**                        |                   |           | kg DM ha-1                          | Aboveground biomass                                                                                                                                                           |
-| **`OrgBiom`**                       | O                 |           | kg DM ha-1                          | Biomass of individual crop organs (e.g, Root, Leaf, Shoot, Fruit)                                                                                                             |
-| **`Yield`**                         |                   |           | kg DM ha-1                          | Current primary crop yield                                                                                                                                                    |
-| **`sumExportedCutBiomass`**         |                   |           | kg DM ha-1                          | Total exported biomass across all cuts for the current crop                                                                                                                   |
-| **`exportedCutBiomass`**            |                   |           | kg DM ha-1                          | Exported biomass from the current crop at the current cut                                                                                                                     |
-| **`sumResidueCutBiomass`**          |                   |           | kg DM ha-1                          | Total residue biomass across all cuts for the current crop                                                                                                                    |
-| **`residueCutBiomass`**             |                   |           | kg DM ha-1                          | Residue biomass from the current crop at the current cut                                                                                                                      |
-| **`GroPhot`**                       |                   |           | kg CH2O ha-1 d-1                    | Gross photosynthesis rate per hectare                                                                                                                                         |
-| **`NetPhot`**                       |                   |           | kg CH2O ha-1 d-1                    | Net photosynthesis per hectare                                                                                                                                                |
-| **`MaintR`**                        |                   |           | kg CH2O ha-1 d-1                    | Maintenance respiration rate per hectare (from AGROSIM)                                                                                                                       |
-| **`GrowthR`**                       |                   |           | kg CH2O ha-1 d-1                    | Growth respiration rate per hectare (from AGROSIM)                                                                                                                            |
-| **`StomRes`**                       |                   |           | s m-1                               | Stomata resistance                                                                                                                                                            |
-| **`Height`**                        |                   |           | m                                   | Crop height                                                                                                                                                                   |
-| **`LAI`**                           |                   |           | m2 m-2                              | Leaf Area Index                                                                                                                                                               |
-| **`RootDep`**                       |                   |           | layer#                              | Rooting depth                                                                                                                                                                 |
-| **`EffRootDep`**                    |                   |           | m                                   | Depth of the maximum active and effective root                                                                                                                                |
-| **`TotBiomN`**                      |                   |           | kg N ha-1                           | Total nitrogen content in biomass                                                                                                                                             |
-| **`AbBiomN`**                       |                   |           | kg N ha-1                           | Aboveground nitrogen content in biomass                                                                                                                                       |
-| **`SumNUp`**                        |                   |           | kg N ha-1                           | Cumulative actual nitrogen uptake by the crop                                                                                                                                 |
-| **`ActNup`**                        |                   |           | kg N ha-1                           | Daily actual crop N uptake                                                                                                                                                    |
-| **`PotNup`**                        |                   |           | kg N ha-1                           | Daily potential crop N uptake/demand                                                                                                                                          |
-| **`NFixed`**                        |                   |           | kg N ha-1                           | Nitrogen input by the crop via atmospheric fixation                                                                                                                           |
-| **`Target`**                        |                   |           | kg N kgDM-1                         | Target nitrogen concentration                                                                                                                                                 |
-| **`CritN`**                         |                   |           | kg N ha-1                           | Critical nitrogen concentration                                                                                                                                               |
-| **`AbBiomNc`**                      |                   |           | kg N ha-1 (kg ha-1)-1               | Nitrogen concentration in aboveground biomass                                                                                                                                 |
-| **`Nstress`**                       |                   |           | -                                   | Nitrogen stress index, indicates N availability (`1` = no stress, `0` = no N available)                                                                                       |
-| **`YieldNc`**                       |                   |           | kg N kgDM-1                         | Nitrogen concentration in primary yield                                                                                                                                       |
-| **`Protein`**                       |                   |           | kg kg-1                             | Raw protein concentration                                                                                                                                                     |
-| **`NPP`**                           |                   |           | kg C ha-1 d-1                       | Net Primary Production (NPP)                                                                                                                                                  |
-| **`NPP-Organs`**                    | O                 |           | kg C ha-1 d-1                       | Organ-specific Net Primary Production (NPP)                                                                                                                                   |
-| **`GPP`**                           |                   |           | kg C ha-1 d-1                       | Gross Primary Production (GPP)                                                                                                                                                |
-| **`Ra`**                            |                   |           | kg C ha-1 d-1                       | Autotrophic respiration                                                                                                                                                       |
-| **`Ra-Organs`**                     | O                 |           | kg C ha-1 d-1                       | Organ-specific autotrophic respiration                                                                                                                                        |
-| **`Mois`**                          | L                 | x         | m3 m-3                              | Soil moisture content per layer                                                                                                                                               |
-| **`Irrig`**                         |                   |           | mm                                  | Irrigation amount applied                                                                                                                                                     |
-| **`Infilt`**                        |                   |           | mm                                  | Amount of water that infiltrates into top soil layer                                                                                                                          |
-| **`Surface`**                       |                   |           | mm                                  | Surface water storage                                                                                                                                                         |
-| **`RunOff`**                        |                   |           | mm                                  | Surface water runoff for the current day                                                                                                                                      |
-| **`SnowD`**                         |                   |           | mm                                  | Snow depth                                                                                                                                                                    |
-| **`FrostD`**                        |                   |           | m                                   | Frost front depth in soil                                                                                                                                                     |
-| **`ThawD`**                         |                   |           | m                                   | Thaw front depth in soil                                                                                                                                                      |
-| **`PASW`**                          | L                 |           | m3 m-3                              | Plant available soil water per layer                                                                                                                                          |
-| **`SurfTemp`**                      |                   |           | °C                                  | Soil surface temperature                                                                                                                                                      |
-| **`STemp`**                         | L                 |           | °C                                  | Soil temperature by layer                                                                                                                                                     |
-| **`Act_Ev`**                        |                   |           | mm                                  | Actual evaporation                                                                                                                                                            |
-| **`Pot_ET`**                        |                   |           | mm                                  | Potential evapotranspiration = ET0 * Kc = the plants water use                                                                                                                |
-| **`Act_ET`**                        |                   |           | mm                                  | Actual evapotranspiration = actual transpiration + actual evaporation + evaporation from interception + evaporation from surface                                              |
-| **`ET0`**                           |                   |           | mm                                  | Reference evapotranspiration                                                                                                                                                  |
-| **`Kc`**                            |                   |           |                                     | Plant coefficient to calculate with ET0 the plants water use (ET0 * Kc)                                                                                                       |
-| **`AtmCO2`**                        |                   |           | ppm                                 | Atmospheric CO<sub>2</sub> concentration in the atmosphere                                                                                                                    |
-| **`Groundw`**                       |                   |           | m                                   | Groundwater table depth                                                                                                                                                       |
-| **`Recharge`**                      |                   |           | mm                                  | Groundwater recharge                                                                                                                                                          |
-| **`NLeach`**                        |                   |           | kg N ha-1                           | Nitrogen leaching at the configured `LeachingDepth`                                                                                                                           |
-| **`NO3`**                           | L                 | x         | kg N m-3                            | Soil nitrate (NO<sub>3</sub>) per layer                                                                                                                                       |
-| **`Carb`**                          | L                 | x         | kg N m-3                            | Soil carbamide per layer                                                                                                                                                      |
-| **`NH4`**                           | L                 | x         | kg N m-3                            | Soil ammonium (NH<sub>4</sub>) per layer                                                                                                                                      |
-| **`NO2`**                           | L                 | x         | kg N m-3                            | Soil nitrite (NO<sub>2</sub>) per layer                                                                                                                                       |
-| **`SOC`**                           | L                 |           | kg C kg-1                           | Soil organic carbon content per layer                                                                                                                                         |
-| **`SOC-X-Y`**                       | L                 |           | g C m-2                             | Produces a stock per selected layer. It represent the stock between X and Y only when the layer range is aggregated with `SUM`. (SOC * bulk density * layer thickness * 1000) |
-| **`AOMf`**                          | L                 |           | kg C m-3                            | Sum of added organic matter (AOM) fast pool carbon content                                                                                                                    |
-| **`AOMs`**                          | L                 |           | kg C m-3                            | Sum of added organic matter (AOM) slow pool carbon content                                                                                                                    |
-| **`SMBf`**                          | L                 |           | kg C m-3                            | Soil microbial biomass (SMB) fast pool carbon content                                                                                                                         |
-| **`SMBs`**                          | L                 |           | kg C m-3                            | Soil microbial biomass (SMB) slow pool carbon content                                                                                                                         |
-| **`SOMf`**                          | L                 |           | kg C m-3                            | Soil organic matter (SOM) fast pool carbon content                                                                                                                            |
-| **`SOMs`**                          | L                 |           | kg C m-3                            | Soil organic matter (SOM) slow pool carbon content                                                                                                                            |
-| **`CBal`**                          | L                 |           | kg C m-3                            | Carbon balance per layer                                                                                                                                                      |
-| **`Nmin`**                          | L                 |           | kg N ha-1 d-1                       | Net nitrogen mineralisation rate per layer                                                                                                                                    |
-| **`NetNmin`**                       |                   |           | kg N ha-1                           | Daily net mineralisation summed over the organic soil layers                                                                                                                  |
-| **`Denit`**                         |                   |           | kg N ha-1                           | Daily nitrogen loss through denitrification                                                                                                                                   |
-| **`actnitrate`**                    | L                 |           | kg N m-3 d-1                        | N production rate resulting from nitrification (N<sub>2</sub>O STICS module)                                                                                                  |
-| **`N2O`**                           |                   |           | kg N ha-1                           | Daily total N<sub>2</sub>O-N production                                                                                                                                       |
-| **`N2Onit`**                        |                   |           | kg N ha-1                           | N<sub>2</sub>O produced through nitrification (N<sub>2</sub>O STICS module)                                                                                                   |
-| **`N2Odenit`**                      |                   |           | kg N ha-1                           | N<sub>2</sub>O produced through denitrification (N<sub>2</sub>O STICS module)                                                                                                 |
-| **`SoilpH`**                        |                   |           |                                     | pH of the first soil layer only. Use `pH` for layer-selectable values.                                                                                                        |
-| **`NEP`**                           |                   |           | kg C ha-1 d-1                       | Net Ecosystem Production (NEP)                                                                                                                                                |
-| **`NEE`**                           |                   |           | kg C ha-1 d-1                       | Net Ecosystem Exchange (NEE)                                                                                                                                                  |
-| **`Rh`**                            |                   |           | kg C ha-1 d-1                       | Daily decomposer respiration                                                                                                                                                  |
-| **`Tmin`**                          |                   |           | °C                                  | Minimum daily air temperature                                                                                                                                                 |
-| **`Tavg`**                          |                   |           | °C                                  | Mean daily air temperature                                                                                                                                                    |
-| **`Tmax`**                          |                   |           | °C                                  | Maximum daily air temperature                                                                                                                                                 |
-| **`Precip`**                        |                   |           | mm                                  | Precipitation                                                                                                                                                                 |
-| **`Wind`**                          |                   |           | m s-1                               | Wind speed                                                                                                                                                                    |
-| **`Globrad`**                       |                   |           | MJ m-2                              | Global radiation                                                                                                                                                              |
-| **`Relhumid`**                      |                   |           | %                                   | Relative humidity                                                                                                                                                             |
-| **`Sunhours`**                      |                   |           | h                                   | Sunshine duration                                                                                                                                                             |
-| **`BedGrad`**                       |                   |           | 0;1                                 | Fractional soil coverage                                                                                                                                                      |
-| **`N`**                             | L                 |           | kg N m-3                            | Mineral nitrogen content in soil                                                                                                                                              |
-| **`Co`**                            | L                 |           | kg C m-3                            | Soil organic carbon concentration per soil layer                                                                                                                              |
-| **`NH3`**                           |                   |           | kg N ha-1                           | Ammonia (NH<sub>3</sub>) volatilisation                                                                                                                                       |
-| **`NFert`**                         |                   |           | kg N ha-1                           | Daily nitrogen fertiliser input                                                                                                                                               |
-| **`WaterContent`**                  | L                 |           | 0;1                                 | Fraction of usable field capacity: PASW/(FC-PWP)                                                                                                                              |
-| **`CapillaryRise`**                 | L                 |           | mm                                  | Capillary rise                                                                                                                                                                |
-| **`PercolationRate`**               | L                 |           | mm                                  | Percolation rate                                                                                                                                                              |
-| **`SMB-CO2-ER`**                    | L                 |           | kg C m-3 d-1                        | Soil microbial biomass (SMB) CO<sub>2</sub> evolution rate                                                                                                                    |
-| **`Evapotranspiration`**            |                   |           | mm                                  | Remaining evapotranspiration after evaporation of intercepted water                                                                                                           |
-| **`Evaporation`**                   |                   |           | mm                                  | Evaporation from intercepted water                                                                                                                                            |
-| **`ETa/ETc`**                       |                   |           |                                     | Ratio of actual to potential evapotranspiration `Act_ET/Pot_ET` (actual evapotranspiration/potential evapotranspiration)                                                      |
-| **`Transpiration`**                 |                   |           | mm                                  | Actual transpiration                                                                                                                                                          |
-| **`GrainN`**                        |                   |           | kg N ha-1                           | Current fruit organ biomass nitrogen content                                                                                                                                  |
-| **`Fc`**                            | L                 |           | m3 m-3                              | Field capacity                                                                                                                                                                |
-| **`Pwp`**                           | L                 |           | m3 m-3                              | Permanent wilting point                                                                                                                                                       |
-| **`Nresid`**                        |                   |           | kg N ha-1                           | Nitrogen content in crop residues                                                                                                                                             |
-| **`Sand`**                          | L                 |           | kg kg-1                             | Soil sand content                                                                                                                                                             |
-| **`Clay`**                          | L                 |           | kg kg-1                             | Soil clay content                                                                                                                                                             |
-| **`Silt`**                          | L                 |           | kg kg-1                             | Soil silt content                                                                                                                                                             |                                                                                     
-| **`Stone`**                         | L                 |           | kg kg-1                             | Soil stone content                                                                                                                                                            |                                                                                 
-| **`pH`**                            | L                 |           |                                     | Soil pH per layer                                                                                                                                                             |
-| **`rootDensity`**                   | L                 |           | m root m-3 soil (equivalent to m-2) | Root density in soil layer                                                                                                                                                    |                                                                
-| **`rootingZone`**                   |                   |           | layer number                        | Current number of layers in the rooting zone                                                                                                                                  |
-| **`PotTraDef`**                     |                   |           | mm                                  | Potential transpiration deficit before redistribution of water uptake among rooted layers                                                                                     |
-| **`ActTraDef`**                     |                   |           | mm                                  | Actual transpiration deficit remaining after redistribution of water uptake among rooted layers                                                                               |
-| **`TraRed`**                        |                   |           | mm                                  | Transpiration reduction calculated during the layer water-uptake routine                                                                                                      |
-| **`Ass`**                           |                   |           | kg CH2O ha-1 d-1                    | Daily assimilated remaining after environmental stress factors and respiration losses                                                                                         |
-| **`RootNDef`**                      |                   |           | 0;1                                 | Root nitrogen uptake reduction factor. `1` means no limitation and `0` means maximum limitation.                                                                              |
-| **`TimeUnderAnoxia`**               |                   |           | d                                   | Number of consecutive days the crop has experienced anoxic soil conditions                                                                                                    |
-| **`OrgGreenBiom`**                  | O                 |           | kg DM ha-1                          | Current green biomass of the selected crop organ                                                                                                                              |
-| **`SecondaryYield`**                |                   |           | kg DM ha-1                          | Current secondary crop yield                                                                                                                                                  |
-| **`ActNupLayer`**                   | L                 |           | kg N ha-1                           | Daily actual crop N uptake from the selected soil layer                                                                                                                       |
-| **`RootWaUptak`**                   | L                 |           | mm                                  | Actual transpiration water extracted from the selected soil layer. Despite its name, the getter returns layer transpiration.                                                  |
-| **`YieldN`**                        |                   |           | kg N ha-1                           | Nitrogen content of the current primary crop yield                                                                                                                            |
-| **`rootNConcentration`**            |                   |           | kg N kg DM-1                        | Nitrogen concentration of crop root biomass                                                                                                                                   |
-| **`LightInterception1`**            |                   |           | fraction                            | Fraction of radiation intercepted by a sole crop or by the upper canopy layer of the taller crop in an intercrop                                                              |
-| **`LightInterception2`**            |                   |           | fraction                            | Fraction of radiation intercepted by the lower canopy layer of the taller crop in an intercrop                                                                                |
-| **`Kcb`**                           |                   |           |                                     | Daily basal crop coefficient used by the FAO-56 dual-crop-coefficient calculation                                                                                             |
-| **`Ke`**                            |                   |           |                                     | Daily soil evaporation coefficient used by the FAO-56 dual-crop-coefficient calculation                                                                                       |
-| **`optCarbonExportedResidues`**     |                   |           | kg DM ha-1                          | Portion of crop residues exported according to the optimal carbon-balance calculation                                                                                         |
-| **`optCarbonReturnedResidues`**     |                   |           | kg DM ha-1                          | Portion of crop residues returned to the soil according to the optimal carbon-balance calculation                                                                             |
-| **`humusBalanceCarryOver`**         |                   |           | Heq-NRW ha-1                        | Humus equivalent balance carried over by the optimat carbon-balance calculation                                                                                               |
-| **`AWC`**                           | L                 |           | m3 m-3                              | Available water capacity of the selected layer: field capacity - permanent wilting point                                                                                      |
-| **`Sat`**                           | L                 |           | m3 m-3                              | Volumetric water content at saturation for the selected soil layer                                                                                                            |
-| **`WaterFlux`**                     | L                 |           | mm d-1                              | Vertical water flux associated with the selected soil layer. The sign indicates flow direction according to MONICA's internal convention.                                     |
-| **`OrgN`**                          | L                 |           | kg N m-3                            | Total organic N concentration in the selected layer, calculated from the SMB, SOM, and AOM carbon pools and their C:N ratios                                                  |
-| **`NO3conv`**                       | L                 |           | kg N m-3 d-1                        | Convective contribution to the daily change in nitrate concentration in the selected layer                                                                                    |
-| **`NO3disp`**                       | L                 |           | kg N m-3 d-1                        | Dispersive contribution to the daily change in nitrate concentration in the selected layer                                                                                    |
-| **`noOfAOMPools`**                  |                   |           | count                               | Number of AOM pools currently present in the first soil layer                                                                                                                 |
-| **`CN_Ratio_AOM_Fast`**             | L                 |           |                                     | C:N ratio of the fast pool of the first AOM pool in the selected layer. Returns `0` when no AOM pool exists.                                                                  |
-| **`AOM_Fast`**                      | L                 |           | kg C m-3                            | Carbon concentration in the fast pool of the first AOM pool in the selected layer. Unlike `AOMf`, this does not sum all AOM pools.                                            |
-| **`AOM_Slow`**                      | L                 |           | kg C m-3                            | Carbon concentration in the slow pool of the first AOM pool in the selected layer. Unlike `AOMs`, this does not sum all AOM pools.                                            |
-| **`actammoxrate`**                  | L                 |           | kg N m-3 d-1                        | Actual ammonia oxidation rate in the selected organic soil layer                                                                                                              |
-| **`actdenitrate`**                  | L                 |           | kg N m-3 d-1                        | Actual denitrification rate in the selected organic soil layer                                                                                                                |
-| **`NOrgFert`**                      |                   |           | kg N ha-1                           | Organic fertiliser N applied on the current day                                                                                                                               |
-| **`SumNFert`**                      |                   |           | kg N ha-1                           | Cumulative mineral fertiliser N applied during the current cropping period                                                                                                    |
-| **`SumNOrgFert`**                   |                   |           | kg N ha-1                           | Cumulative organic fertiliser N applied during the current cropping period                                                                                                    |
-| **`Act_Trans`**                     |                   |           | mm                                  | Daily actual crop transpiration. Alias of `Tra` and `Transpiration`, with different rounding precision.                                                                       |
-| **`Evaporated_from_surface`**       |                   |           | mm                                  | Water evaporated from surface water storage during the current day                                                                                                            |
-| **`Evaporated_from_intercept`**     |                   |           | mm                                  | Water evaporated from intercepted canopy water during the current day. Alias of `Evaporation`.                                                                                |
-| **`AtmO3`**                         |                   |           | ppb                                 | Atmospheric ozone concentration used during the current simulation step                                                                                                       |
-| **`Tmax>=40`**                      |                   |           | 0 or 1                              | Returns `1` when the current daily maximum air temperature is at least 40 °C, otherwise returns `0`                                                                           |
-| **`O3-short-damage`**               |                   |           |                                     | Short-term ozone damage factor representing reduction of photosynthetic carboxylation                                                                                         |
-| **`O3-long-damage`**                |                   |           |                                     | Long-term ozone damage factor associated with ozone-induced senescence                                                                                                        |
-| **`O3-WS-gs-reduction`**            |                   |           |                                     | Reduction factor describing the effect of water stress on stomatal conductance and ozone uptake                                                                               |
-| **`O3-total-uptake`**               |                   |           | µmol O<sub>3</sub> m-2 ground       | Cumulative ozone uptake per unit ground area                                                                                                                                  |
-| **`guenther-isoprene-emission`**    |                   |           | µmol m-2 ground d-1                 | Daily total canopy isoprene emission calculated with the Guenther model                                                                                                       |
-| **`guenther-monoterpene-emission`** |                   |           | µmol m-2 ground d-1                 | Daily total canopy mototerpene emission calculated with the Guenther model                                                                                                    |
-| **`jjv-isoprene-emission`**         |                   |           | µmol m-2 ground d-1                 | Daily total canopy isoprene emission calculated with the JJV model                                                                                                            |
-| **`jjv-monoterpene-emission`**      |                   |           | µmol m-2 ground d-1                 | Daily total canopy monoterpene emission calculated with the JJV model                                                                                                         |
+### General simulation information
+
+| Output name            | (L)ayers/(O)rgans | Settable? | Unit | Description                                                       |
+|------------------------|-------------------|-----------|------|-------------------------------------------------------------------|
+| **`Count`**            |                   |           |      | Constant value `1` for counting outputs or events                 |
+| **`CM-count`**         |                   |           |      | Order number of the currently sown valid crop (`0` before sowing) |
+| **`Date`**             |                   |           |      | Simulation date (`YYYY-MM-DD`)                                    |
+| **`days-since-start`** |                   |           | d    | Number of days since simulation start                             |
+| **`DOY`**              |                   |           |      | Current day of year (`1-365`, or `1-366` in leap years)           |
+| **`Month`**            |                   |           |      | Current month number (`1-12`)                                     |
+| **`Year`**             |                   |           |      | Current year                                                      |
+| **`Crop`**             |                   |           |      | Crop name (`species/cultivar`, empty when no crop is growing)     |
+
+### Weather and atmospheric conditions
+
+| Output name    | (L)ayers/(O)rgans | Settable? | Unit   | Description                              |
+|----------------|-------------------|-----------|--------|------------------------------------------|
+| **`AtmCO2`**   |                   |           | ppm    | Atmospheric CO<sub>2</sub> concentration |
+| **`Tmin`**     |                   |           | °C     | Daily minimum air temperature            |
+| **`Tavg`**     |                   |           | °C     | Daily mean air temperature               |
+| **`Tmax`**     |                   |           | °C     | Daily maximum air temperature            |
+| **`Precip`**   |                   |           | mm     | Daily precipitation                      |
+| **`Wind`**     |                   |           | m s-1  | Daily wind speed                         |
+| **`Globrad`**  |                   |           | MJ m-2 | Daily global radiation                   |
+| **`Relhumid`** |                   |           | %      | Daily relative humidity                  |
+| **`Sunhours`** |                   |           | h      | Daily sunshine duration                  |
+
+### Crop development and stress responses
+
+| Output name           | (L)ayers/(O)rgans | Settable? | Unit   | Description                                                                                                                |
+|-----------------------|-------------------|-----------|--------|----------------------------------------------------------------------------------------------------------------------------|
+| **`TraDef`**          |                   |           | 0-1    | Ratio of actual to potential transpiration (`1` = no stress, `0` = maximum stress)                                         |
+| **`NDef`**            |                   |           | 0-1    | Crop N reduction factor (`1` = no stress, `0` = maximum stress)                                                            | 
+| **`HeatRed`**         |                   |           | 0-1    | Heat stress reduction factor (`1` = no damage, `0` = maximum damage)                                                       |
+| **`FrostRed`**        |                   |           | 0-1    | Frost damage reduction factor (`1` = no damage, `0` = maximum damage)                                                      |
+| **`OxRed`**           |                   |           | 0-1    | Oxygen stress reduction factor (`1` = no damage, `0` = maximum damage)                                                     |
+| **`Stage`**           |                   | x         | 1-N    | One-based phenological stage number (`0` = no crop)                                                                        |
+| **`TempSum`**         |                   |           | °C d   | Accumulated effective temperature sum                                                                                      |
+| **`VernF`**           |                   |           | 0-1    | Vernalisation factor (`1` = unrestricted, `0` = fully restricted)                                                          |
+| **`DaylF`**           |                   |           | 0-1    | Daylength response factor (`1` = unrestricted, `0` = fully restricted)                                                     |
+| **`RelDev`**          |                   |           | 0-1    | Ratio of the current accumulated temperature sum to the crop's total temperature requirement (`0` = start, `1` = maturity) |
+| **`LT50`**            |                   |           | °C     | Crop crown temperature causing 50% lethal damage                                                                           |
+| **`RootNDef`**        |                   |           | 0-1    | Root N reduction factor (`1` = no stress, `0` = maximum stress)                                                            |
+| **`TimeUnderAnoxia`** |                   |           | d      | Internal anoxia duration counter (`0` = no current anoxia)                                                                 |
+| **`Tmax>=40`**        |                   |           | 0 or 1 | `1` when the current daily maximum air temperature is at least 40 °C, otherwise `0`                                        |
+
+### Crop biomass and productivity
+
+| Output name                 | (L)ayers/(O)rgans | Settable? | Unit               | Description                                                                                                         |
+|-----------------------------|-------------------|-----------|--------------------|---------------------------------------------------------------------------------------------------------------------|
+| **`IncRoot`**               |                   |           | kg CH2O ha-1 d-1   | Daily root biomass increment                                                                                        |
+| **`IncLeaf`**               |                   |           | kg CH2O ha-1 d-1   | Daily leaf biomass increment                                                                                        |
+| **`IncShoot`**              |                   |           | kg CH2O ha-1 d-1   | Daily shoot biomass increment                                                                                       |
+| **`IncFruit`**              |                   |           | kg CH2O ha-1 d-1   | Daily fruit or storage organ biomass increment                                                                      |
+| **`AbBiom`**                |                   |           | kg DM ha-1         | Aboveground crop biomass                                                                                            |
+| **`OrgBiom`**               | O                 |           | kg DM ha-1         | Total biomass of the selected crop organ, including green and dead biomass (e.g., `Root`, `Leaf`, `Shoot`, `Fruit`) |
+| **`OrgGreenBiom`**          | O                 |           | kg DM ha-1         | Green biomass of the selected crop organ (e.g., `Root`, `Leaf`, `Shoot`, `Fruit`)                                   |
+| **`Yield`**                 |                   |           | kg DM ha-1         | Primary crop yield                                                                                                  |
+| **`SecondaryYield`**        |                   |           | kg DM ha-1         | Secondary crop yield                                                                                                |
+| **`sumExportedCutBiomass`** |                   |           | kg DM ha-1         | Cumulative exported cut biomass                                                                                     |
+| **`exportedCutBiomass`**    |                   |           | kg DM ha-1         | Exported biomass from the latest cut                                                                                |
+| **`sumResidueCutBiomass`**  |                   |           | kg DM ha-1         | Cumulative cut residue biomass                                                                                      |
+| **`residueCutBiomass`**     |                   |           | kg DM ha-1         | Residue biomass from the latest cut                                                                                 |
+| **`GroPhot`**               |                   |           | kg CH2O ha-1 d-1   | Daily gross photosynthesis                                                                                          |
+| **`NetPhot`**               |                   |           | kg CH2O ha-1 d-1   | Net daily assimilates                                                                                               |
+| **`MaintR`**                |                   |           | kg CH2O ha-1 d-1   | Daily maintenance respiration (AGROSIM-based)                                                                       |
+| **`GrowthR`**               |                   |           | kg CH2O ha-1 d-1   | Daily growth respiration (AGROSIM-based)                                                                            |
+| **`StomRes`**               |                   |           | s m-1              | Stomatal resistance                                                                                                 |
+| **`Height`**                |                   |           | m                  | Crop height                                                                                                         |
+| **`LAI`**                   |                   |           | m2 leaf m-2 ground | Leaf area index                                                                                                     |
+| **`Ass`**                   |                   |           | kg CH2O ha-1 d-1   | Net daily assimilates                                                                                               |
+| **`LightInterception1`**    |                   |           |                    | Radiation intercepted by the sole, upper, or shorter canopy                                                         |
+| **`LightInterception2`**    |                   |           |                    | Radiation intercepted by the taller crop's lower canopy                                                             |
+| **`BedGrad`**               |                   |           | 0-1                | Crop canopy cover fraction                                                                                          |
+
+### Crop nitrogen
+
+| Output name              | (L)ayers/(O)rgans | Settable? | Unit               | Description                                                               |
+|--------------------------|-------------------|-----------|--------------------|---------------------------------------------------------------------------|
+| **`TotBiomN`**           |                   |           | kg N ha-1          | N content of total crop biomass                                           |
+| **`AbBiomN`**            |                   |           | kg N ha-1          | N content of aboveground biomass                                          |
+| **`SumNUp`**             |                   |           | kg N ha-1          | Cumulative crop N uptake                                                  |
+| **`ActNup`**             |                   |           | kg N ha-1 d-1      | Daily actual crop N uptake                                                |
+| **`PotNup`**             |                   |           | kg N ha-1 d-1      | Daily potential crop N uptake                                             |
+| **`NFixed`**             |                   |           | kg N ha-1 d-1      | Daily biological atmospheric N fixation                                   |
+| **`Target`**             |                   |           | kg N kg-1 DM       | Target aboveground biomass N concentration                                |
+| **`CritN`**              |                   |           | kg N kg-1 DM       | Critical aboveground biomass N concentration                              |
+| **`AbBiomNc`**           |                   |           | kg N kg-1 DM       | Current aboveground biomass N concentration                               |
+| **`Nstress`**            |                   |           | 0-1                | Crop N sufficiency (`1` = sufficient N)                                   |
+| **`YieldNc`**            |                   |           | kg N kg-1 DM       | Primary yield N concentration                                             |
+| **`Protein`**            |                   |           | kg protein kg-1 DM | Primary yield crude protein concentration, calculated as `YieldNc * 6.25` |
+| **`GrainN`**             |                   |           | kg N ha-1          | Fruit organ N content                                                     |
+| **`Nresid`**             |                   |           | kg N ha-1          | Crop residue N content                                                    |
+| **`ActNupLayer`**        | L                 |           | kg N ha-1 d-1      | Daily N uptake from the selected soil layer                               |
+| **`YieldN`**             |                   |           | kg N ha-1          | Primary yield N content                                                   |
+| **`rootNConcentration`** |                   |           | kg N kg-1 DM       | Root biomass N concentration                                              |
+
+### Crop roots and water use
+
+| Output name                      | (L)ayers/(O)rgans | Settable? | Unit            | Description                                                                           |
+|----------------------------------|-------------------|-----------|-----------------|---------------------------------------------------------------------------------------|
+| **`Tra`** or **`Transpiration`** |                   |           | mm              | Daily actual crop transpiration                                                       |
+| **`Act_Trans`**                  |                   |           | mm              | Daily actual crop transpiration, rounded to one decimal place                         |
+| **`RootDep`**                    |                   |           | layer count     | Rooting depth in soil layers                                                          |
+| **`EffRootDep`**                 |                   |           | m               | Maximum effective rooting depth                                                       |
+| **`rootDensity`**                | L                 |           | m root m-3 soil | Root density in the selected soil layer                                               |
+| **`rootingZone`**                |                   |           | layer count     | Number of soil layers in the rooting zone                                             |
+| **`PotTraDef`**                  |                   |           | mm              | Water supply deficit in the last processed root layer                                 |
+| **`ActTraDef`**                  |                   |           | mm              | Actual deficit in the last processed root layer                                       |
+| **`TraRed`**                     |                   |           | mm              | Transpiration reduction in the last processed root layer                              |
+| **`RootWaUptak`**                | L                 |           | mm              | Water extracted from the selected layer                                               |
+| **`Kc`**                         |                   |           |                 | Current crop coefficient used to calculate potential evapotranspiration as `ET0 * Kc` |
+| **`Kcb`**                        |                   |           |                 | FAO-56 basal crop coefficient                                                         |
+
+### Ecosystem carbon fluxes
+
+| Output name      | (L)ayers/(O)rgans | Settable? | Unit          | Description                                           |
+|------------------|-------------------|-----------|---------------|-------------------------------------------------------|
+| **`NPP`**        |                   |           | kg C ha-1 d-1 | Net primary production: `GPP - Ra`                    |
+| **`NPP-Organs`** | O                 |           | kg C ha-1 d-1 | NPP allocated to the selected organ by biomass share  |
+| **`GPP`**        |                   |           | kg C ha-1 d-1 | Gross primary production                              |
+| **`Ra`**         |                   |           | kg C ha-1 d-1 | Autotrophic crop respiration                          |
+| **`Ra-Organs`**  | O                 |           | kg C ha-1 d-1 | `Ra` allocated to the selected organ by biomass share |
+| **`NEP`**        |                   |           | kg C ha-1 d-1 | Net ecosystem production: `NPP - Rh`                  |
+| **`NEE`**        |                   |           | kg C ha-1 d-1 | Net ecosystem exchange: `Rh - NPP`                    |
+| **`Rh`**         |                   |           | kg C ha-1 d-1 | Heterotrophic decomposer respiration                  |
+
+### Soil water balance
+
+| Output name                                           | (L)ayers/(O)rgans | Settable? | Unit   | Description                                                         |
+|-------------------------------------------------------|-------------------|-----------|--------|---------------------------------------------------------------------|
+| **`Mois`**                                            | L                 | x         | m3 m-3 | Volumetric soil water content                                       |
+| **`Infilt`**                                          |                   |           | mm     | Daily infiltration into the topsoil                                 |
+| **`Surface`**                                         |                   |           | mm     | Surface water storage                                               |
+| **`RunOff`**                                          |                   |           | mm     | Daily surface water runoff                                          |
+| **`SnowD`**                                           |                   |           | mm     | Snow depth                                                          |
+| **`PASW`**                                            | L                 |           | m3 m-3 | Plant available soil water (`Mois - Pwp`)                           |
+| **`Act_Ev`**                                          |                   |           | mm     | Actual evaporation                                                  |
+| **`Pot_ET`**                                          |                   |           | mm     | Potential evapotranspiration (`ET0 * Kc`)                           |
+| **`Act_ET`**                                          |                   |           | mm     | Total daily actual evapotranspiration                               |
+| **`ET0`**                                             |                   |           | mm     | Daily reference evapotranspiration                                  |
+| **`Groundw`**                                         |                   |           | m      | Groundwater table depth                                             |
+| **`Recharge`**                                        |                   |           | mm     | Water flux at the model's lower boundary                            |
+| **`WaterContent`**                                    | L                 |           | 0-1    | Relative available water: `(Mois - Pwp)/(Fc - Pwp)`                 |
+| **`CapillaryRise`**                                   | L                 |           |        | Capillary water value                                               |
+| **`PercolationRate`**                                 | L                 |           | mm d-1 | Percolation through the selected soil layer                         |
+| **`Evapotranspiration`**                              |                   |           | mm     | Remaining evapotranspiration after evaporation of intercepted water |
+| **`Evaporation`** or **`Evaporation_from_intercept`** |                   |           | mm     | Potential ET remaining after interception evaporation               |
+| **`ETa/ETc`**                                         |                   |           |        | Ratio of actual to potential evapotranspiration `Act_ET/Pot_ET`     |
+| **`Fc`**                                              | L                 |           | m3 m-3 | Field capacity                                                      |
+| **`Pwp`**                                             | L                 |           | m3 m-3 | Permanent wilting point                                             |
+| **`Ke`**                                              |                   |           |        | FAO-56 soil evaporation coefficient                                 |
+| **`AWC`**                                             | L                 |           | m3 m-3 | Available water capacity: `Fc - Pwp`                                |
+| **`Sat`**                                             | L                 |           | m3 m-3 | Saturated water content                                             |
+| **`WaterFlux`**                                       | L                 |           | mm d-1 | Vertical water flux (positive = downward, negative = upward)        |
+| **`Evaporated_from_surface`**                         |                   |           | mm     | Daily evaporation from surface water storage                        |
+
+### Soil physical and thermal properties
+
+| Output name    | (L)ayers/(O)rgans | Settable? | Unit    | Description                            |
+|----------------|-------------------|-----------|---------|----------------------------------------|
+| **`FrostD`**   |                   |           | m       | Frost front depth in soil              |
+| **`ThawD`**    |                   |           | m       | Thaw front depth in soil               |
+| **`SurfTemp`** |                   |           | °C      | Soil surface temperature               |
+| **`STemp`**    | L                 |           | °C      | Soil temperature in the selected layer |
+| **`Sand`**     | L                 |           | kg kg-1 | Soil sand content                      |
+| **`Clay`**     | L                 |           | kg kg-1 | Soil clay content                      |
+| **`Silt`**     | L                 |           | kg kg-1 | Soil silt content                      |
+| **`Stone`**    | L                 |           | kg kg-1 | Soil stone content                     |
+| **`pH`**       | L                 |           |         | Soil pH in the selected layer          |
+| **`SoilpH`**   |                   |           |         | Soil pH in the first layer             |
+
+### Soil carbon pools and dynamics
+
+| Output name             | (L)ayers/(O)rgans | Settable? | Unit         | Description                                          |
+|-------------------------|-------------------|-----------|--------------|------------------------------------------------------|
+| **`SOC`**               | L                 |           | kg C kg-1    | Total soil organic carbon mass fraction              |
+| **`SOC-X-Y`**           | L                 |           | g C m-2      | SOC stock in each selected layer                     |
+| **`AOMf`**              | L                 |           | kg C m-3     | Total fast pool AOM carbon                           |
+| **`AOMs`**              | L                 |           | kg C m-3     | Total slow pool AOM carbon                           |
+| **`SMBf`**              | L                 |           | kg C m-3     | Fast pool soil microbial biomass carbon              |
+| **`SMBs`**              | L                 |           | kg C m-3     | Slow pool soil microbial biomass carbon              |
+| **`SOMf`**              | L                 |           | kg C m-3     | Fast pool soil organic matter carbon                 |
+| **`SOMs`**              | L                 |           | kg C m-3     | Slow pool soil organic matter carbon                 |
+| **`CBal`**              | L                 |           | kg C m-3 d-1 | Daily net carbon change                              |
+| **`Co`**                | L                 |           | kg C kg-1    | Non-inert soil organic carbon mass fraction          |
+| **`SMB-CO2-ER`**        | L                 |           | kg C m-3 d-1 | Soil microbial biomass CO<sub>2</sub> evolution rate |
+| **`noOfAOMPools`**      |                   |           | count        | Number of AOM pools in the first soil layer          |
+| **`CN_Ratio_AOM_Fast`** | L                 |           |              | Fast pool C:N ratio of the first AOM pool            |
+| **`AOM_Fast`**          | L                 |           | kg C m-3     | Fast carbon pool of the first AOM pool               |
+| **`AOM_Slow`**          | L                 |           | kg C m-3     | Slow carbon pool of the first AOM pool               |
+
+### Soil nitrogen dynamics
+
+| Output name        | (L)ayers/(O)rgans | Settable? | Unit           | Description                                                         |
+|--------------------|-------------------|-----------|----------------|---------------------------------------------------------------------|
+| **`NLeach`**       |                   |           | kg N ha-1 d-1  | Nitrogen leaching at `LeachingDepth`                                |
+| **`NO3`**          | L                 | x         | kg N m-3       | Soil nitrate-N concentration (NO<sub>3</sub>-N)                     |
+| **`Carb`**         | L                 | x         | kg N m-3       | Soil carbamide-N concentration (urea-N)                             |
+| **`NH4`**          | L                 | x         | kg N m-3       | Soil ammonium-N concentration (NH<sub>4</sub>-N)                    |
+| **`NO2`**          | L                 | x         | kg N m-3       | Soil nitrite-N concentration (NO<sub>2</sub>-N)                     |
+| **`Nmin`**         | L                 |           | kg N ha-1 d-1  | N mineralisation or immobilisation magnitude                        |
+| **`NetNmin`**      |                   |           | kg N ha-1 d-1  | Total `Nmin` across organic soil layers                             |
+| **`Denit`**        |                   |           | kg N ha-1 d-1  | N loss through denitrification                                      |
+| **`actnitrate`**   | L                 |           | kg N m-3 d-1   | Actual nitrification rate (N<sub>2</sub>O STICS module)             |
+| **`N2O`**          |                   |           | kg N ha-1 d-1  | Total N<sub>2</sub>O-N production                                   |
+| **`N2Onit`**       |                   |           | kg N ha-1 d-1  | N<sub>2</sub>O-N from nitrification (N<sub>2</sub>O STICS module)   |
+| **`N2Odenit`**     |                   |           | kg N ha-1 d-1  | N<sub>2</sub>O-N from denitrification (N<sub>2</sub>O STICS module) |
+| **`N`**            | L                 |           | kg N m-3       | Total mineral N concentration (`NO3 + NO2 + NH4`)                   |
+| **`NH3`**          |                   |           | kg N ha-1 d-1  | Daily ammonia (NH<sub>3</sub>) volatilisation                       |
+| **`OrgN`**         | L                 |           | kg N m-3       | Organic N concentration in the SMB, SOM, and AOM pools              |
+| **`NO3conv`**      | L                 |           | kg N m-3       | Convective nitrate balance term                                     |
+| **`NO3disp`**      | L                 |           | kg N m-3       | Dispersive nitrate balance term                                     |
+| **`actammoxrate`** | L                 |           | kg N m-3 d-1   | Actual ammonium oxidation rate                                      |
+| **`actdenitrate`** | L                 |           | kg N m-3 d-1   | Actual denitrification rate                                         |
+
+### Crop management inputs and residue balances
+
+| Output name                     | (L)ayers/(O)rgans | Settable? | Unit         | Description                                                                 |
+|---------------------------------|-------------------|-----------|--------------|-----------------------------------------------------------------------------|
+| **`Irrig`**                     |                   |           | mm           | Irrigation amount applied on the current day                                |
+| **`NFert`**                     |                   |           | kg N ha-1    | Mineral fertiliser N applied on the current day                             |
+| **`NOrgFert`**                  |                   |           | kg N ha-1    | Organic fertiliser N applied on the current day                             |
+| **`SumNFert`**                  |                   |           | kg N ha-1    | Cumulative mineral fertiliser N for the current cultivation method          |
+| **`SumNOrgFert`**               |                   |           | kg N ha-1    | Cumulative organic fertiliser N for the current cultivation method          |
+| **`optCarbonExportedResidues`** |                   |           | kg DM ha-1   | Residues exported by the current optimal carbon-balance calculation         |
+| **`optCarbonReturnedResidues`** |                   |           | kg DM ha-1   | Residues returned by the current optimal carbon-balance calculation         |
+| **`humusBalanceCarryOver`**     |                   |           | Heq-NRW ha-1 | Humus balance carry-over from the latest optimal carbon-balance calculation |
+
+### Ozone impacts and biogenic emissions
+
+| Output name                         | (L)ayers/(O)rgans | Settable? | Unit                          | Description                                                                                                |
+|-------------------------------------|-------------------|-----------|-------------------------------|------------------------------------------------------------------------------------------------------------|
+| **`AtmO3`**                         |                   |           | ppb                           | Atmospheric ozone concentration used by the model                                                          |
+| **`O3-short-damage`**               |                   |           |                               | Short-term carboxylation factor (`1` = no reduction, `0` = complete reduction)                             |
+| **`O3-long-damage`**                |                   |           |                               | Long-term ozone factor controlling senescence onset (`1` = no ozone effect)                                |
+| **`O3-WS-gs-reduction`**            |                   |           |                               | Water stress factor for stomatal conductance and ozone uptake (`1` = no reduction, `0` = complete closure) |
+| **`O3-total-uptake`**               |                   |           | µmol O<sub>3</sub> m-2 ground | Cumulative ozone uptake by the current crop                                                                |
+| **`guenther-isoprene-emission`**    |                   |           | µmol m-2 ground d-1           | Daily canopy isoprene emission from the Guenther model                                                     |
+| **`guenther-monoterpene-emission`** |                   |           | µmol m-2 ground d-1           | Daily canopy monoterpene emission from the Guenther model                                                  |
+| **`jjv-isoprene-emission`**         |                   |           | µmol m-2 ground d-1           | Daily canopy isoprene emission from the JJV model                                                          |
+| **`jjv-monoterpene-emission`**      |                   |           | µmol m-2 ground d-1           | Daily canopy monoterpene emission from the JJV model                                                       |
 
 ---
 
