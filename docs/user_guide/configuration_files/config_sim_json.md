@@ -377,7 +377,7 @@ Below you will find a simplified example of a complete `sim.json` file focused o
 
 ## Common output variables
 
-The tables below group commonly used output variables by topic. The most up-to-date list is defined in [**`build-output.cpp`**](https://github.com/zalf-lsa/monica/blob/master/src/io/build-output.cpp).
+The tables below group commonly used output variables by topic. The most up-to-date list is defined in [**`build-output.cpp`**](https://github.com/zalf-rpm/monica/blob/master/src/io/build-output.cpp).
 
 Output names are case-sensitive. Unknown names are ignored, so check the generated header when adding a new output definition.
 
