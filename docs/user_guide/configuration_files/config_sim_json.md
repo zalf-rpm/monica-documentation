@@ -222,65 +222,312 @@ The following table shows event expression examples, shortcuts, and their expand
 
 ## List of outputs
 
-After defining events (i.e., when to output), you must specify **what** to output. Some output expressions already appeared in the previous table, such as `"Stage"` and `["Mois", 1]`. `"Stage"` outputs the current development stage of the plant. With the default layer thickness of 0.1 m, `["Mois", 1]` outputs soil moisture in the first 10 cm of soil.
+After defining an output event (i.e., when MONICA should produce output), you must specify **what** it should output.
 
-MONICA supports three categories of outputs:
+For example:
 
-1. **Scalar values** (e.g., `"Stage"`)
-2. **Array values** for soil layers (e.g., `"Mois"`, with one value per configured layer)
-3. **Array values** for crop organs (e.g., `["OrgBiom", "Root"]`)
+- `"Stage"` returns the crop's current development stage.
+- `["Mois", 1]` returns the volumetric soil moisture content of the first soil layer.
+- `["OrgBiom", "Root"]` returns the current root biomass.
 
-By default, MONICA uses 20 soil layers of 0.1 m each (total depth 2 m). Output layer numbers are one-based. When outputs refer to layers, they can specify:
+With the default layer thickness of 0.1 m, layer 1 represents a depth of 0-0.1 m.
 
-* a single layer (e.g., `15` for the 15th layer, spanning 1.4-1.5 m with the default discretisation),
-* a range of layers (e.g., `[1, 5]` for layers 1 to 5, corresponding to 0 to 0.5 m depth),
-* or a crop organ (e.g., `"Root"`, `"Leaf"`, `"Shoot"`, `"Fruit"`, `"Struct"`, `"Sugar"`).
+### Output types
 
-Additionally, the user must tell MONICA whether ranges of values (in arrays) should be output as multiple scalars or aggregated into a single value. If aggregation is applied, the aggregation method must also be specified. 
+MONICA output variables can return:
 
-The available aggregation operations are: `AVG`, `MEDIAN`, `SUM`, `MIN`, `MAX`, `FIRST`, `LAST`, `NONE`. 
+1. Scalar numeric values, such as `"Stage"` or `"Precip"`
+2. Scalar text values, such as `"Date"` or `"Crop"`
+3. Values defined for individual soil layers, such as `"Mois"`, `"NO3"`, or `"STemp"`
+4. Values defined for crop organs, such as `"OrgBiom"`, `"NPP-Organs"`, or `"Ra-Organs"`
 
-Aggregation can occur on a daily basis to aggregate soil layers into a single scalar value (the **default** operation for layer aggregation is `NONE`) or over a time range, e.g. to aggregate monthly values, where the **default** operation in this case is `AVG`.
+Layer-based outputs must normally be accompanied by a layer number or layer range. For example:
 
-| Aggregation reason                      | Default operation  | Meaning                                                                                                                                                                                |
-|-----------------------------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Aggregate soil layers into scalar value | **`NONE`**         | If no aggregation operation is specified, the selected range of layer values will be output as individual values.                                                                      |
-| Aggregate time range                    | **`AVG`**          | If an event defines an aggregation time range and no aggregation operation is specified (value 2 or 3 in the **JSON array**), the temporarily collected daily values will be averaged. |
+```json
+["Mois", 1]
+```
 
-To understand aggregation operations, imagine that all values to be aggregated (e.g., `Runoff`) are stored temporarily in a list during the `from`/`to` period . After the `to` time range ends, the specified aggregation operation is applied to this list. For example, `AVG` will calculate the mean of all values, while `FIRST` will return the first value in the list &ndash; the value from the start (`from` day) of the aggregation period.
+or:
 
-The user specifies an output either by simply defining the output name (e.g., `"Stage"`, `"Crop"`, or `"Date"`) or by using a **JSON array**, where the first element of the array is the aforementioned output name. It is also possible to append a display name to the output name, separated by the character `|`. This display name will be used in the output instead of the result name. For example, `"DOY|MatDOY"` will output `MatDOY` instead of `DOY`, which may be more descriptive. 
+```json
+["Mois", [1, 20]]
+```
 
-The second element in the array can specify one of the following:
+### Soil layers
 
-* the selected soil layer, 
-* a range of layers, 
-* a crop organ (for array values), or 
-* an aggregation operation (for scalar values). 
+MONICA uses 20 soil layers of 0.1 m each by default, resulting in a total simulated soil depth of 2 m. These defaults can be changed using `NumberOfLayers` and `LayerThickness`.
 
-If omitted, the aggregation operation defaults to `NONE`. 
+Layer numbers in output definitions are one-based:
 
-For array outputs, a third element can define the aggregation operation. The second element can be:
+- Layer `1` is the first configured layer.
+- Layer `15` spans 1.4-1.5 m with the default discretisation.
+- `[1, 5]` selects layers 1 through 5, inclusive, corresponding to 0-0.5 m with the default discretisation.
 
-* a single number (e.g., the soil layer number), 
-* a string describing the crop organ, or 
-* an array that describes a layer range (for soil layers only). 
+The selected layers must exist in the configured soil profile.
 
-In the latter case, the first value of the array is the starting layer, the second the ending layer (inclusive), and an optional third value specifies the aggregation operation. If the range includes an aggregation operation, MONICA will apply it and store a single aggregated value each time output is requested. Otherwise, individual layer values will be listed in the output, each labeled with the result name and the corresponding layer number (e.g., `Mois_1`, `Mois_2`, etc.). 
+Examples:
 
-The following examples show the possible variations:
+```json
+["Mois", 1]
+```
 
-| Output definition                        | Meaning                                                                                                                                                                                               |
-|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `"Date"`                                 | Output the ISO date (e.g., `2017-01-17`)                                                                                                                                                              |                                                                                                                                                                         
-| `["Year", "LAST"]`                       | Output the year at the `to` time &ndash; the year at the end of the aggregation period                                                                                                                |                                                                                                                                                 
-| `["PercolationRate\|WDrain", 15, "SUM"]` | Output the sum of percolation rates in soil layer 15 (1.5 m) during the aggregation period, and rename it in the output as `WDrain` (`SUM` requires an event to specify the aggregation time range.)  | 
-| `["Mois", [1, 20]]`                      | Output the daily soil moisture of all 20 soil layers. The outputs will be labeled "Mois_1", "Mois_2", etc.                                                                                            |                                                                                                          
-| `["OrgBiom", "Leaf"]`                    | Output the daily organic biomass of leaves                                                                                                                                                            |                                                                                                                                                         
-| `["SOC", [1, 3, "AVG"]]`                 | Output the daily soil organic carbon as a single value averaged across the first three soil layers                                                                                                    |                                                                                                             
-| `["Precip", "SUM"]`                      | Output the sum of precipitation values within a given aggregation time range                                                                                                                          |                                                                                                                                       
+returns soil moisture for layer 1, whereas:
 
-In the generated output file, the order of the results follows the sequence defined in the `events` list and can be relied upon. 
+```json
+["Mois", [1, 5]]
+```
+
+returns a separate value for each of layers 1 through 5. 
+
+Without a display-name override, these values receive column names such as:
+
+```
+Mois_1, Mois_2, Mois_3, Mois_4, Mois_5
+```
+
+### Crop organs
+
+Organ-specific outputs use one of the following organ selectors:
+
+```
+Root, Leaf, Shoot, Fruit, Struct, Sugar
+```
+
+For example:
+
+```json
+["OrgBiom", "Leaf"]
+```
+
+returns the current leaf biomass.
+
+Not every crop necessarily defines every organ. If the selected organ is not present in the current crop, the output may be zero.
+
+Output names are case-sensitive. Aggregation operation and organ names are case-insensitive. Nevertheless, using the uppercase operation names and the organ spelling shown above is recommended.
+
+### Output definition syntax
+
+An output can be specified either as a string:
+
+```json
+"Stage"
+```
+
+or as a JSON array whose first element is the output name:
+
+```json
+["Mois", 1]
+```
+
+The general forms are:
+
+```json
+"OutputName"
+```
+
+```json
+["OutputName", "TIME_OPERATION"]
+```
+
+```json
+["OutputName", LAYER]
+```
+
+```json
+["OutputName", LAYER, "TIME_OPERATION"]
+```
+
+```json
+["OutputName", [FIRST_LAYER, LAST LAYER]]
+```
+
+```json
+["OutputName", [FIRST_LAYER, LAST LAYER, "LAYER_OPERATION"]]
+```
+
+```json
+["OutputName", [FIRST_LAYER, LAST LAYER, "LAYER_OPERATION"], "TIME_OPERATION"]
+```
+
+and, for organ-specific outputs:
+
+```json
+["OutputName", "ORGAN"]
+```
+
+```json
+["OutputName", "ORGAN", "TIME_OPERATION"]
+```
+
+MONICA silently omits unknown output names. Therefore, output names should be copied exactly from the list of supported outputs.
+
+### Display names
+
+A display name can be appended to an output name using `|`:
+
+```json
+["DOY|MatDOY", "LAST"]
+```
+
+The output column is then named `MatDOY` instead of `DOY`.
+
+Another example is:
+
+```json
+["PercolationRate|WDrain", 15, "SUM"]
+```
+
+This selects percolation from layer 15, sums it over the event's aggregation period, and writes the result under the name `WDrain`.
+
+When a display name is used for an unaggregated layer range, the same display may be used for every selected layer.
+
+### Aggregation
+
+MONICA supports two independent forms of aggregation:
+
+1. **Layer aggregation** combines values from several soil layers at each sampling step.
+2. **Time aggregation** combines values collected over an event period, such as a month, year, crop cycle, or complete simulation run.
+
+The supported operations are:
+
+```
+AVG, MEDIAN, SUM, MIN, MAX, FIRST, LAST, NONE
+```
+
+### Layer aggregation
+
+A layer aggregation operation is placed inside the layer range array:
+
+```json
+["SOC", [1, 3, "AVG"]]
+```
+
+At every sampling step, this calculates one value by averaging SOC across layers 1 through 3.
+
+If no layer operation is specified, the default is `NONE`:
+
+```json
+["SOC", [1, 3]]
+```
+
+This produces three separate values rather than one aggregated value.
+
+For layer aggregation:
+
+- `AVG` returns the arithmetic mean across the selected layers
+- `MEDIAN` returns the median across the selected layers
+- `SUM` returns the sum across the selected layers
+- `MIN` and `MAX` return the smallest and largest values
+- `FIRST` returns the value from the shallowest selected layer
+- `LAST` returns the value from the deepest selected layer
+- `NONE` preserves the individual layer values
+
+Layer aggregation is applied at each sampling step, before any time aggregation.
+
+### Time aggregation
+
+A time aggregation operation is specified as the second element for scalar outputs:
+
+```json
+["Precip", "SUM"]
+```
+
+or as the third outer element for layer- or organ-specific outputs:
+
+```json
+["PercolationRate", 15, "SUM"]
+```
+
+```json
+["SOC", [1, 3, "AVG"], "LAST"]
+```
+
+```json
+["OrgBiom", "Leaf", "MAX"]
+```
+
+For event periods such as `monthly`, `yearly`, `crop`, and `run`, MONICA temporarily collects values and applies the selected time operation when the event period ends.
+
+For numeric outputs, the default time operation is `AVG`.
+
+For example:
+
+```json
+"Act_ET"
+```
+
+in a monthly event returns the average of the collected daily values. To obtain monthly cumulative evapotranspiration, use:
+
+```json
+["Act_ET", "SUM"]
+```
+
+The period boundaries are inclusive. For an unfiltered `from`/`to` period:
+
+- `FIRST` returns the value collected on the `from` day.
+- `LAST` returns the value collected on the `to` day.
+
+If the event also contains a `while` condition, `FIRST` and `LAST` refer to the first and last values actually collected while the condition was true.
+
+For text outputs such as `Date` and `Crop`, use `FIRST` or `LAST` explicitly. Other operations are numeric and are not meaningful for text values.
+
+Although `NONE` is accepted as a time operation, it currently behaves like `LAST`. Use `LAST` explicitly when that behavior is required.
+
+For instantaneous events such as `daily`, a date event, or `Harvest`, no time range is accumulated. Consequently, the time operation has no practical effect.
+
+### Aggregation defaults
+
+| Aggregation type         | Default     | Meaning                                              |
+|--------------------------|-------------|------------------------------------------------------|
+| Layer aggregation        | `NONE`      | Return a separate value for every selected layer     |
+| Numeric time aggregation | `AVG`       | Average the values collected during the event period |
+| Text time aggregation    | First value | Use `FIRST` or `LAST` explicitly for clarity         |
+
+### Combining layer and time aggregation
+
+Layer and time aggregation can be combined:
+
+```json
+["Mois", [1, 15, "AVG"], "LAST"]
+```
+
+This definition:
+
+1. Averages soil moisture across layers 1–15 on every sampling day.
+2. Returns the resulting average from the last day of the event period.
+
+Similarly:
+
+```json
+["SOC", [1, 3, "AVG"], "AVG"]
+```
+
+first averages `SOC` across layers 1–3 on each day and then averages those daily values over the event period.
+
+### Examples
+
+| Output definition                        | Meaning                                                                                       |
+|------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `"Date"`                                 | Return the current date in ISO format, for example `2017-01-17`                               |                                                                                                                                                                         
+| `["Year", "LAST"]`                       | Return the year associated with the final collected value                                     |                                                                                                                                                 
+| `["PercolationRate\|WDrain", 15, "SUM"]` | Sum percolation rate from layer 15 over the event period and name the result `WDrain`         | 
+| `["Mois", [1, 20]]`                      | Return one soil moisture value for every layer                                                |
+| `["Mois", [1, 20, "AVG]]`                | Return one value containing the mean soil moisture across all 20 layers at each sampling step |
+| `["OrgBiom", "Leaf"]`                    | Return current leaf biomass                                                                   |                                                                                                                                                         
+| `["SOC", [1, 3, "AVG"]]`                 | Average soil organic carbon across layers 1-3 at each sampling step                           |
+| `["SOC", [1, 3, "AVG], "LAST]`           | Return the layer average SOC value from the final day of the event period                     |
+| `["Precip", "SUM"]`                      | Sum precipitation over the event period                                                       |
+| `["SnowD", "MAX"]`                       | Return the maximum snow depth during the event period                                         | 
+
+### Output order
+
+Within each event section, output columns follow the order in which their definitions appear in the `events` list.
+
+Event sections are also processed in their configured order. Depending on the runner configuration, the sections may be written consecutively to one file or to separate files.
+
+Unknown output names are omitted, so they do not reserve a position in the output.
+
+### Example output configuration
 
 The example below shows an output section that produces an equivalent file to the `rmout` file from MONICA version 1. It also includes a commented out (`__events`) example of outputs used in the **EU MACSUR Heat Stress** study.
 
