@@ -96,85 +96,127 @@ For a headerless file, the configuration would instead look like:
 
 ## Outputting results from MONICA
 
-All results from a MONICA run can be written to a **CSV** file. Which results are written, and how they are aggregated, is configured in `sim.json` under the key `output`.
-
-The following table describes several available options which can be set:
+Results requested from a MONICA run can be written in CSV format. The requested outputs, their aggregation, and the output destination are configured in `sim.json` under the key `output`.
 
 The following keys are direct members of `output`:
 
-| Key                  | Description                                                                                                             |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **`path-to-output`** | Directory in which output files are created                                                                             |
-| **`file-name`**      | Name of the output file                                                                                                 |
-| **`write-file?`**    | Write to a file when `true`, otherwise the commandline runner writes output to standard output. The default is `false`. |
-| **`events`**         | Alternating event definitions and lists of requested outputs                                                            |
+| Key                  | Description                                                                                                                                                          |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`path-to-output`** | Directory in which output files are created                                                                                                                          |
+| **`file-name`**      | Name of the output file                                                                                                                                              |
+| **`write-file?`**    | When `true`, write output to a file. When `false`, the command-line runner writes output to standard output, unless an output file is specified on the command line. |
+| **`events`**         | An array of alternating event definitions and lists of requested outputs                                                                                             |
 
 CSV formatting is configured in the nested `output.csv-options` object:
 
-| Key                            | Description                                                                                            |
-|--------------------------------|--------------------------------------------------------------------------------------------------------|
-| **`include-header-row`**       | Include a row containing output names                                                                  |
-| **`include-units-row`**        | Include a row containing units                                                                         |
-| **`include-aggregation-rows`** | Include two diagnostic rows: MONICA's interpreted output expressions and the original JSON expressions |
-| **`csv-separator`**            | Column separator, for example `","`                                                                    |
+| Key                            | Description                                                                                                                                       |
+|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`include-header-row`**       | Include a row containing output names                                                                                                             |
+| **`include-units-row`**        | Include a row containing units                                                                                                                    |
+| **`include-aggregation-rows`** | Include two diagnostic rows containing MONICA's normalized output specifications (`m:`) and the originally requested output specifications (`j:`) |
+| **`csv-separator`**            | Column separator, for example `","`                                                                                                               |
 
-Because omitted JSON booleans evaluate to `false` in the commandline runner, set the three `include-*` options explicitly when those rows are required.
-
----
+Missing Boolean values are read as `false` by the command-line runner. Set the three `include-*` options explicitly when the corresponding rows are required.
 
 ### Defining events
 
-The `events` key defines the list of MONICA results to be written to the output. Each event is specified as a **pair**, consisting of an **event definition** followed by the corresponding **list of outputs**. 
+The `events` key specifies which MONICA results to produce and when to produce them. Its value is a JSON array containing alternating **event definitions** and **output lists**. 
 
-Events are defined inside a JSON array and can take one of the following forms: 
+```json
+"events": [
+  "daily", [
+    "Date",
+    "Tavg"
+  ],
+  "Harvest", [
+    "Date",
+    "Yield"
+  ]
+]
+```
 
-* A simple string such as `"daily"`, 
-* A JSON array, or 
-* A full JSON object that explicitly describes the conditions under which outputs should be generated. 
+Each event definition can be: 
 
-Strings and JSON arrays serve as **shortcuts** for more complex JSON objects that describe the triggering conditions for generating output.
+- a string, such as `"daily"`
+- a JSON array containing a comparison expression
+- a JSON object defining one or more trigger conditions
 
-The event structure allows specification of:
+MONICA recognizes the string shortcuts `"daily"`, `"monthly"`, `"yearly"`, `"run"`, and `"crop"`. Other strings are interpreted as an `at` trigger, such as a date pattern or a named workstep event.
 
-1. When to **start** and **end** outputting results (`start` and `end` keys)
-2. Time ranges to aggregate results (`from` and `to` keys)
-3. Points **at** which time or condition to write results (non-aggregated)
-4. Periods **while** conditions are true (for conditional aggregation)
+A comparison-expression array is normally shorthand for an `at` condition:
 
-ISO dates can include placeholders (`x`). Every possible value for the year, month, or day of the placeholder is used. For example, `xxxx-xx-15` means every 15th day of each month.
+```json
+["Stage", "=", 2]
+```
+
+This is equivalent to:
+
+```json
+{"at": ["Stage", "=", 2]}
+```
+
+The four-element forms `["at", output, operator, value]` and `["while", output, operator, value]` are also supported.
+
+An event object can contain:
+
+1. `start` and `end`, defining the inclusive period during which the event is active
+2. `from` and `to`, defining an inclusive aggregation range
+3. `at`, producing non-aggregated output when a date, named event, or condition matches
+4. `while`, collecting values while a condition is true and producing aggregated output when the period ends
+
+Date triggers use an ISO-shaped `YYYY-MM-DD` pattern. Components may be replaced by wildcards: `xxxx` for any year and `xx` for any month or day. For example, `xxxx-xx-15` matches the 15th day of every month during the simulation. A specified day that exceeds the number of days in a month is treated as that month's last day. Thus, `xxxx-xx-31` matches the final day of every month.
 
 #### Available events
 
-In addition to date patterns, each workstep generates an event with the same name (e.g., `Sowing`, `Harvest`, `AutomaticSowing`, `SetValue`, etc.).
+Event expressions determine when MONICA records or aggregates output values. They may refer to calendar date patterns, model output values, phenological events, or successfully applied worksteps. Event and output names are case-sensitive.
 
-Common events include:
+##### Model and phenological events
 
-* **run-started**
-* **Stage-1**, **Stage-2**, ... 
-* **emergence**
-* **anthesis**
-* **cereal-stem-elongation**
-* **maturity**
-* **Sowing**, **AutomaticSowing**, **Cutting**, etc.
+Common model-generated events include:
 
-The following table shows examples of some event expressions, their shortcut forms, and their expanded equivalents:
+- `Stage-1`, `Stage-2`, ...
+- `emergence`
+- `anthesis`
+- `cereal-stem-elongation`
+- `maturity`
 
-| Shortcut                     | Expanded form                                                          | Meaning                                                                                                                                                          |
-|------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|                              | `{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}`     | Output results on the 15th of each month from May to July &ndash; daily results will be written                                                                  |
-|                              | `{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "<", 0.4]}` | Output aggregated results from the `Sowing` event until (and including) the `anthesis` event, but only while actual to potential evapotranspiration is below 0.4 |
-| `"xxxx-03-31"`               | `{"at": "xxxx-03-31"}`                                                 | Write results every March 31st                                                                                                                                   |
-| `"daily"`                    | `{"at": "xxxx-xx-xx"}`                                                 | Write daily results                                                                                                                                              |
-| `"monthly"`                  | `{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}`                           | Write monthly aggregated results                                                                                                                                 |
-| `"yearly"`                   | `{"from": "xxxx-01-01", "to": "xxxx-12-31"}`                           | Write yearly aggregated results                                                                                                                                  |
-| `"run"`                      | `{"from": <start-date>, "to": <end-date>}`                             | Write results aggregated over the entire simulation run                                                                                                          |
-| `"crop"`                     | `{"from": "Sowing", "to": "Harvest"}`                                  | Write results aggregated over the cropping period                                                                                                                |
-| `["while", "Stage", "=", 5]` | `{"while": ["Stage", "=", 5]}`                                         | Write results aggregated only while `Stage` equals 5                                                                                                             |
-| `["at", "Stage", "=", 2]`    | `{"at": ["Stage", "=", 2]}`                                            | Write results daily when `Stage` equals 2                                                                                                                        |
-| `[["Mois", 1], "<", 0.5]`    | `{"at": [["Mois", 1], "<", 0.5]}`                                      | Write results daily when the soil moisture in the first layer is below 0.5                                                                                       |
-| `"Sowing"`                   | `{"at": "Sowing"}`                                                     | Write results at sowing time                                                                                                                                     |
+##### Workstep events
 
-As shown in the table above, simple comparison expressions can be used in events. The available operators are `<`, `<=`, `=`, `>=`, `>`. Output expressions such as `"Stage"` or `["Mois", 1]`, as well as numeric values (e.g., **1**), can be used on both sides of these operators. Event and output names are case-sensitive.
+A succesfully applied workstep generally emits an event matching its type, for example:
+
+- `Sowing`
+- `AutomaticSowing`
+- `Harvest`
+- `AutomaticHarvest`
+- `Cutting`
+- `MineralFertilization`
+- `NDemandFertilization`
+- `OrganicFertilization`
+- `Tillage`
+- `Irrigation`
+- `AutomaticIrrigation`
+- `SetValue`
+
+Automatic worksteps may emit both their base event and their automatic event. For example, automatic sowing emits both `Sowing` and `AutomaticSowing`.
+
+##### Event expressions and shortcuts
+
+The following table shows event expression examples, shortcuts, and their expanded forms:
+
+| Shortcut                     | Expanded form                                                          | Meaning                                                                                                                   |
+|------------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+|                              | `{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}`     | Write results on the 15th of each month from May to July                                                                  |
+|                              | `{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "<", 0.4]}` | Write aggregated results from sowing through anthesis, but only while actual to potential evapotranspiration is below 0.4 |
+| `"xxxx-03-31"`               | `{"at": "xxxx-03-31"}`                                                 | Write results every March 31st                                                                                            |
+| `"daily"`                    | `{"at": "xxxx-xx-xx"}`                                                 | Write daily results                                                                                                       |
+| `"monthly"`                  | `{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}`                           | Write monthly aggregated results                                                                                          |
+| `"yearly"`                   | `{"from": "xxxx-01-01", "to": "xxxx-12-31"}`                           | Write yearly aggregated results                                                                                           |
+| `"run"`                      | `{"from": <start-date>, "to": <end-date>}`                             | Write results aggregated over the entire simulation run                                                                   |
+| `"crop"`                     | `{"from": "Sowing", "to": "Harvest"}`                                  | Write results aggregated over the cropping period                                                                         |
+| `["while", "Stage", "=", 5]` | `{"while": ["Stage", "=", 5]}`                                         | Write results aggregated only while `Stage` equals 5                                                                      |
+| `["at", "Stage", "=", 2]`    | `{"at": ["Stage", "=", 2]}`                                            | Write results daily when `Stage` equals 2                                                                                 |
+| `[["Mois", 1], "<", 0.5]`    | `{"at": [["Mois", 1], "<", 0.5]}`                                      | Write results daily when the soil moisture in the first layer is below 0.5                                                |
+| `"Sowing"`                   | `{"at": "Sowing"}`                                                     | Write results at sowing time                                                                                              |
 
 ---
 
