@@ -8,50 +8,87 @@ The default soil discretisation consists of 20 layers, each 0.1 m thick. Both `N
 
 ## Reading climate data (`climate.csv-options`)
 
-Climate data are stored in `.csv` files. The `climate.csv-options` object in `sim.json` configures how they are read. 
-The time range for a MONICA run is defined by the keys `start-date` and `end-date` inside the `climate.csv-options` JSON object. If these keys are not present, the time range is taken directly from `climate.csv`.
+Climate data are read from delimited text files, normally `.csv` files. Gzip-compressed files whose names end in `.gz` are also supported. The `climate.csv-options` object in `sim.json` configures how these files are read.
 
-The key `no-of-climate-file-header-lines` defines how many lines will be skipped at the beginning of the file, as there may be no header (0), only column names (1), or multiple header lines (e.g., including units). The `csv-separator` key defines which character separates columns and values. In a **Comma Separated Values (CSV)** file, this is usually a `,`, but it could also be a tab `\t`, space, or another character.
+The optional `start-date` and `end-date` keys define the inclusive time range used for the MONICA run. Dates must use the ISO format `YYYY-MM-DD`. If either boundary is omitted, that boundary is inferred from the supplied climate data.
 
-MONICA accepts **Available Climate Data (ACD)** names for the climate input. These names are **case-sensitive**.
+The `no-of-climate-file-header-lines` key specifies the total number of non-data lines at the beginning of the file. By default, the first of these lines contains the column names. Any remaining header lines, such as units line, are ignored. For example:
 
-| ACD element     | Description                              | Example        | Unit       |
-|-----------------|------------------------------------------|----------------|------------|
-| **`day`**       | Day of year                              | **5**          |            |
-| **`month`**     | Month of year                            | **11**         |            |
-| **`year`**      | Year                                     | **2017**       |            |                                      
-| **`iso-date`**  | ISO date format                          | **2017-11-05** |            |          
-| **`de-date`**   | German date format                       | **05.11.2017** |            |               
-| **`tmin`**      | Minimum daily temperature                | **-2**         | **°C**     |     
-| **`tavg`**      | Average daily temperature                | **15.3**       | **°C**     |    
-| **`tmax`**      | Maximum daily temperature                | **34.7**       | **°C**     |  
-| **`precip`**    | Daily precipitation                      | **2.3**        | **mm**     |
-| **`globrad`**   | Global radiation                         | **27.431**     | **MJ m-2** |   
-| **`sunhours`**  | Hours of sunshine (better use `globrad`) | **8.5**        | **h**      | 
-| **`wind`**      | Wind speed                               | **6.7**        | **m s-1**  |
-| **`relhumid`**  | Relative humidity                        | **90.0**       | **%**      |
-| **`skip`**      | Skip an existing element                 |                |            |
+- `1`: Line 1 contains column names. Data starts on line 2.
+- `2`: Line 1 contains column names. Line 2 might contain units. Data starts on line 3.
 
-Unknown column headers are skipped automatically. The `skip` ACD can be used explicitly to ignore known elements, for example, if there are multiple columns for the same type of climate variable. 
+For a file without a header row, provide column names explicitly with the `header` array and set `no-of-climate-file-header-lines` to `0`.
 
-To use any climate dataset without modifying the original file, column names can be **mapped** to the corresponding ACD names using the `header-to-acd-names` object. Its key/value pairs define these mappings.
+The `csv-separator` key defines the delimiter. This is commonly `,` or `;`, but a tab `\t`, space, or another character can also be used.
 
-Additionally, a mapping value can be a **JSON array** containing three elements: the ACD name, an arithmetic operation (`+`, `-`, `*`, `/`), and a number. The operation is applied to every value in that column. For example, values in `J cm-2` are converted to `MJ m-2` by multiplying by `0.01`.
+MONICA recognizes the following commonly used **Available Climate Data (ACD)** names. Names are case-sensitive.
+
+| ACD element     | Description                                               | Example      | Unit       |
+|-----------------|-----------------------------------------------------------|--------------|------------|
+| **`day`**       | Day of month                                              | `5`          |            |
+| **`month`**     | Month of year                                             | `11`         |            |
+| **`year`**      | Year                                                      | `2017`       |            |                                      
+| **`iso-date`**  | Date in `YYYY-MM-DD` format                               | `2017-11-05` |            |          
+| **`de-date`**   | Date in `DD.MM.YYYY` format                               | `05.11.2017` |            |               
+| **`tmin`**      | Minimum daily air temperature                             | `-2`         | °C         |     
+| **`tavg`**      | Average daily air temperature                             | `15.3`       | °C         |    
+| **`tmax`**      | Maximum daily air temperature                             | `34.7`       | °C         |  
+| **`precip`**    | Daily precipitation                                       | `2.3`        | mm         |
+| **`globrad`**   | Daily global radiation                                    | `27.431`     | MJ m-2 d-1 |   
+| **`sunhours`**  | Daily sunshine duration (prefer `globrad` when available) | `8.5`        | h          | 
+| **`wind`**      | Wind speed                                                | `6.7`        | m s-1      |
+| **`relhumid`**  | Relative humidity                                         | `90.0`       | %          |
+| **`skip`**      | Ignore this column                                        |              |            |
+
+A date must be supplied either through `iso-date`, `de-date`, or the combination of `day`, `month`, and `year`.
+
+If `tavg` is absent, MONICA calculates it as `(tmin + tmax) / 2`. Either `globrad` or `sunhours` must be present. If only `sunhours` is provided, MONICA estimates global radiation using the site latitude.
+
+Unknown column headers are skipped automatically. A column can also be ignored explicitly by mapping its header to `skip`. This is useful, for example, when the file contains multiple columns representing the same climate variable.
+
+Column names can be mapped to ACD names with the `header-to-acd-names` object. Each key is a column name from the input file, and its value is the corresponding ACD name.
+
+A mapping value may instead be a JSON array with three elements:
+
+1. the ACD name
+2. an arithmetic operation: `+`, `-`, `*`, `/`
+3. a numeric operand
+
+The operation is applied to values read for that climate element. For example, values in `J cm-2` are converted to `MJ m-2` by multiplying by `0.01`.
 
 ```json
 {
-"climate.csv-options": {
-  "__given the start and end date, monica will run just this time range, else the full time range given by supplied climate data": "",
-  "start-date": "1991-01-01",
-  "end-date": "1997-12-31",
-
-  "no-of-climate-file-header-lines": 1,
-  "csv-separator": ",",
-  "header-to-acd-names": {
-    "DE-date": "de-date",
-    "global_radiation": ["globrad", "*", 0.01]
+  "climate.csv-options": {
+    "start-date": "1991-01-01",
+    "end-date": "1997-12-31",
+    "no-of-climate-file-header-lines": 1,
+    "csv-separator": ",",
+    "header-to-acd-names": {
+      "DE-date": "de-date",
+      "global_radiation": ["globrad", "*", 0.01]
+    }
   }
 }
+```
+
+For a headerless file, the configuration would instead look like:
+
+```json
+{
+  "climate.csv-options": {
+    "no-of-climate-file-header-lines": 0,
+    "csv-separator": ",",
+    "header": [
+      "iso-date",
+      "tavg",
+      "tmin",
+      "tmax",
+      "wind",
+      "globrad",
+      "precip",
+      "relhumid"
+    ]
+  }
 }
 ```
 
