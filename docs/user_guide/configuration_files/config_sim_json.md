@@ -634,7 +634,111 @@ In this example, `Date` and `TraDef` are allowed output names. Additionally, the
 
 ---
 
-## Automatic irrigation trigger
+## Simulation toggles
+
+The top-level keys in `sim.json` control optional MONICA model processes. Toggle names are case-sensitive and must use JSON booleans (`true` or `false`).
+
+```json
+{
+  "UseSecondaryYields": true,
+  "NitrogenResponseOn": true,
+  "WaterDeficitResponseOn": true,
+  "EmergenceMoistureControlOn": true,
+  "EmergenceFloodingControlOn": true,
+  "FrostKillOn": true,
+
+  "UseAutomaticIrrigation": false,
+  "UseNMinMineralFertilisingMethod": false
+}
+```
+
+### Overview
+
+| Key                                   | Type    | Description                                                 |
+|---------------------------------------|---------|-------------------------------------------------------------|
+| **`UseSecondaryYields`**              | boolean | Enables exclusion of secondary yields from harvest residues |
+| **`NitrogenResponseOn`**              | boolean | Enables nitrogen stress effects                             |
+| **`WaterDeficitResponseOn`**          | boolean | Enables water stress effects                                |
+| **`EmergenceMoistureControlOn`**      | boolean | Enables topsoil moisture control of emergence               |
+| **`EmergenceFloodingControlOn`**      | boolean | Enables surface water control of emergence                  |
+| **`FrostKillOn`**                     | boolean | Enables frost damage effects                                |
+| **`UseAutomaticIrrigation`**          | boolean | Enables automatic irrigation                                |
+| **`UseNMinMineralFertilisingMethod`** | boolean | Enables automatic NMin fertilisation                        |
+
+### Crop response toggles
+
+#### `NitrogenResponseOn`
+
+`NitrogenResponseOn` controls whether nitrogen availability affects crop growth. When enabled, nitrogen shortage can reduce crop development and biomass growth. When disabled, crop growth is not reduced by nitrogen stress, but nitrogen uptake and soil nitrogen processes remain active. 
+
+```json
+{
+  "NitrogenResponseOn": true
+}
+```
+
+#### `WaterDeficitResponseOn`
+
+`WaterDeficitResponseOn` controls whether water availability affects crop growth. When enabled, water deficit can reduce crop growth. When disabled, crop growth is not reduced by water stress, but soil water calculations, transpiration, and water uptake remain active. 
+
+```json
+{
+  "WaterDeficitResponseOn": true
+}
+```
+
+#### `EmergenceMoistureControlOn`
+
+`EmergenceMoistureControlOn` controls whether topsoil moisture restricts crop emergence. When enabled, emergence progresses only if the topsoil is neither too dry nor above field capacity. When disabled, emergence progresses regardless of topsoil moisture.
+
+```json
+{
+  "EmergenceMoistureControlOn": true
+}
+```
+
+#### `EmergenceFloodingControlOn`
+
+`EmergenceFloodingControlOn` controls whether standing surface water restricts crop emergence. When enabled, emergence progresses only if surface water storage is below `0.001` mm. When disabled, emergence progresses regardless of standing surface water.
+
+```json
+{
+  "EmergenceFloodingControlOn": true
+}
+```
+
+#### `FrostKillOn`
+
+`FrostKillOn` controls whether frost damage affects crop growth. When enabled, exposure below the crop's lethal temperature threshold progressively reduces assimilation. When disabled, the frost damage response is skipped.
+
+```json
+{
+  "FrostKillOn": true
+}
+```
+
+### Secondary yield handling toggle
+
+#### `UseSecondaryYields`
+
+`UseSecondaryYields` controls whether secondary yields are removed from harvest residues. When enabled, both primary and secondary yields are excluded from residue biomass. When disabled, only the primary yield is excluded, leaving secondary yield biomass in the residues.
+
+```json
+{
+  "UseSecondaryYields": true
+}
+```
+
+### Automatic management toggles
+
+Automatic management methods require both an enabling toggle and the corresponding parameter objects.
+
+| Toggle                                | Parameter object                                    |
+|---------------------------------------|-----------------------------------------------------|
+| **`UseAutomaticIrrigation`**          | **`AutoIrrigationParams`**                          |
+| **`UseNMinMineralFertilisingMethod`** | **`NMinUserParams`**, **`NMinFertiliserPartition`** |
+
+#### Automatic irrigation
 
 Automatic irrigation is enabled with `UseAutomaticIrrigation`. Its default is `false`. The parameters themselves are defined in `AutoIrrigationParams`.
 
@@ -642,52 +746,120 @@ When `amount` is greater than zero, MONICA applies that fixed amount and ignores
 
 Irrigation is possible only while a crop is growing and its current temperature sum lies within the inclusive range `HeatSumIrrigationStart` to `HeatSumIrrigationEnd`. These two parameters are defined in the active crop's cultivar configuration. If supplied, `startDate` and `stopDate` additionally restrict irrigation to an inclusive calendar-date range.
 
-| Key                          | Default  | Unit         | Description                                                                                                    |
-|------------------------------|----------|--------------|----------------------------------------------------------------------------------------------------------------|
-| **`UseAutomaticIrrigation`** | `false`  |              | Enables or disables automatic irrigation. This key is a direct member of `sim.json`.                           |
-| **`startDate`**              | unset    | ISO date     | First date on which automatic irrigation may occur. Absolute dates only.                                       |
-| **`stopDate`**               | unset    | ISO date     | Last date on which automatic irrigation may occur. Absolute dates only.                                        |
-| **`amount`**                 | unset    | mm           | Fixed irrigation amount. When greater than zero, `set_to_%nFC` is ignored.                                     |
-| **`set_to_%nFC`**            | unset    | % nFC        | Refill target used when no positive fixed `amount` is configured.                                              |
-| **`threshold`**              | unset    | fraction nFC | Legacy fractional trigger. Prefer `trigger_if_nFC_below_%`.                                                    |
-| **`trigger_if_nFC_below_%`** | unset    | % nFC        | Trigger irrigation when plant-available water is at or below this percentage.                                  |
-| **`calc_nFC_until_depth_m`** | `0.3`    | m            | Depth over which plant-available water is evaluated.                                                           |
-| **`nitrateConcentration`**   | `0`      | mg dm-3      | Nitrate concentration in irrigation water. Must be inside `irrigationParameters`.                              |
-| **`sulfateConcentration`**   | `0`      | mg dm-3      | Sulfate concentration in irrigation water. Must be inside `irrigationParameters`; currently ignored by MONICA. |
+| Key                          | Default  | Unit         | Description                                                                                                          |
+|------------------------------|----------|--------------|----------------------------------------------------------------------------------------------------------------------|
+| **`UseAutomaticIrrigation`** | `false`  |              | Enables or disables automatic irrigation                                                                             |
+| **`startDate`**              | unset    | ISO date     | First irrigation date. Absolute dates only.                                                                          |
+| **`stopDate`**               | unset    | ISO date     | Last irrigation date. Absolute dates only.                                                                           |
+| **`amount`**                 | unset    | mm           | Fixed irrigation amount. When greater than zero, `set_to_%nFC` is ignored.                                           |
+| **`set_to_%nFC`**            | unset    | % nFC        | Refill target used when no positive fixed `amount` is configured.                                                    |
+| **`threshold`**              | unset    | fraction nFC | Legacy trigger. Prefer `trigger_if_nFC_below_%`.                                                                     |
+| **`trigger_if_nFC_below_%`** | unset    | % nFC        | Trigger irrigation when plant-available water is at or below this percentage.                                        |
+| **`calc_nFC_until_depth_m`** | `0.3`    | m            | Depth over which plant-available water is evaluated. In refill mode, the same depth determines the layers to refill. |
+| **`nitrateConcentration`**   | `0`      | mg dm-3      | Nitrate concentration in irrigation water. Place in `irrigationParameters`.                                          |
+| **`sulfateConcentration`**   | `0`      | mg dm-3      | Sulfate concentration in irrigation water. Currently ignored.                                                        |
 
-### Examples
+##### Fixed amount irrigation
 
-**Example 1: Fixed Amount**
-
-Apply 17 mm whenever plant-available water in the first 0.3 m is at or below 50%, from May 1 through August 31, inclusive.
+When `amount` is greater than zero, MONICA applies that fixed amount whenever the trigger conditions are met. In this mode, `set_to_%nFC` is ignored.
 
 ```json
 {
-"UseAutomaticIrrigation": true,
-"AutoIrrigationParams": {
-  "startDate": "2024-05-01",
-  "stopDate": "2024-08-31",
-  "amount": [17, "mm"],
-  "trigger_if_nFC_below_%": [50, "%"],
-  "calc_nFC_until_depth_m": [0.3, "m"]
-}
+  "UseAutomaticIrrigation": true,
+  "AutoIrrigationParams": {
+    "startDate": "2024-05-01",
+    "stopDate": "2024-08-31",
+    "amount": [17, "mm"],
+    "trigger_if_nFC_below_%": [50, "%"],
+    "calc_nFC_until_depth_m": [0.3, "m"]
+  }
 }
 ```
 
-**Example 2: Refill to Field Capacity**
+This example applies 17 mm whenever plant-available water in the first 0.3 m is at or below 50%, from May 1 through August 31, inclusive.
 
-Refill the first 0.5 m to field capacity (100% nFC) whenever plant-available water over that depth is at or below 50%. Irrigation water contains 10 mg dm-3 nitrate.
+##### Refill irrigation
+
+If no positive fixed `amount` is configured, `set_to_%nFC` can be used to refill the affected soil layers to a target percentage of plant-available water capacity.
 
 ```json
 {
-"UseAutomaticIrrigation": true,
-"AutoIrrigationParams": {
-  "irrigationParameters": {
-    "nitrateConcentration": [10, "mg dm-3"]
-  },
-  "trigger_if_nFC_below_%": [50, "%"],
-  "set_to_%nFC": [100, "%"],
-  "calc_nFC_until_depth_m": [0.5, "m"]
+  "UseAutomaticIrrigation": true,
+  "AutoIrrigationParams": {
+    "irrigationParameters": {
+      "nitrateConcentration": [10, "mg dm-3"]
+    },
+    "trigger_if_nFC_below_%": [50, "%"],
+    "set_to_%nFC": [100, "%"],
+    "calc_nFC_until_depth_m": [0.5, "m"]
+  }
 }
+```
+
+This example refills the first 0.5 m to field capacity whenever plant-available water over that depth is at or below 50%. Irrigation water contains 10 mg dm-3 nitrate.
+
+#### NMin mineral fertilisation
+
+The automatic NMin method is enabled with `UseNMinMineralFertilisingMethod`.
+
+```json
+{
+  "UseNMinMineralFertilisingMethod": true
+}
+```
+
+The method requires application limits (`NMinUserParams`), fertiliser composition (`NMinFertiliserPartition`), and a calculation day for winter crops (`JulianDayAutomaticFertilising`).
+
+```json
+{
+  "UseNMinMineralFertilisingMethod": true,
+  "NMinUserParams": {"min": 40, "max": 120, "delayInDays": 10},
+  "NMinFertiliserPartition": ["include-from-file", "mineral-fertilisers/AN.json"],
+  "JulianDayAutomaticFertilising": 89
+}
+```
+
+MONICA calculates a fertiliser recommendation from crop-specific nitrogen targets and the mineral nitrogen already present in the soil.
+
+##### Application timing
+
+The timing depends on the crop type:
+
+- For non-winter crops, MONICA performs the NMin calculation when the crop is sown.
+- For winter crops, MONICA performs it on `JulianDayAutomaticFertilising`, provided the crop is present on that day.
+
+##### `NMinUserParams`
+
+| Key               | Unit       | Description                                  |
+|-------------------|------------|----------------------------------------------|
+| **`min`**         | kg N ha-1  | Minimum fertiliser requirement               |
+| **`max`**         | kg N ha-1  | Maximum fertiliser requirement               |
+| **`delayInDays`** | days       | Delay before applying the amount above `max` |
+
+In the example above, calculated requirements below 40 kg N ha-1 are skipped, up to 120 kg N ha-1 is applied immediately, and any surplus is applied after 10 days. If the topsoil is wetter than field capacity, the calculation is postponed.
+
+##### `NMinFertiliserPartition`
+
+`NMinFertiliserPartition` defines how the applied mineral nitrogen is divided among carbamide, ammonium, and nitrate. It can be supplied either by including an external file or by defining the fertiliser directly in `sim.json`.
+
+###### External fertiliser definition
+
+```json
+{
+  "NMinFertiliserPartition": ["include-from-file", "mineral-fertilisers/AN.json"]
+}
+```
+
+###### Inline fertiliser definition
+
+```json
+{
+  "NMinFertiliserPartition": {
+    "id": "my AN",
+    "name": "my very own ammonium nitrate variant",
+    "Carbamid": 0,
+    "NH4": 0.5,
+    "NO3": 0.5
+  }
 }
 ```
