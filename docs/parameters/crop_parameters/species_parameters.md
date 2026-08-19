@@ -13,7 +13,7 @@ Species parameters describe characteristics shared by all cultivars of a species
 
         1. root
         2. leaf
-        3. steam or shoot
+        3. stem or shoot
         4. storage organ, such as fruit, grain, or ear
 
 - Missing properties are not necessarily reported as errors. Depending on the property, MONICA may retain a default value. Arrays required by an enabled model component must nevertheless contain the expected number of entries.
