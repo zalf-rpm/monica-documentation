@@ -1,79 +1,195 @@
 # The `site.json` configuration file
 
-**`site.json`** holds all input data and parameters that can be considered site-specific. Besides the key `SiteParameters` in the top-level JSON object, there might be a few JSON objects that set global or general soil and environment-specific parameters. These can either be included from the SQLite database (table *user_parameter*), from the filesystem, or defined directly in `site.json`. To facilitate easy overwriting of the standard parameters, they are included via the `DEFAULT` parameter pseudo-key.
+The **`site.json`** configuration file contains parameters describing the simulation site, including:
+
+- geographic and topographic properties
+- the soil profile
+- initial soil conditions
+- general environmental parameters
+- references to soil process parameter sets
+
+Site-specific parameters are defined under the top-level `SiteParameters` key. General parameter sets, such as `EnvironmentParameters` or `SoilMoistureParameters`, can be:
+
+- included from the MONICA parameter database
+- included from external JSON files
+- defined directly in `site.json`
+- included and selectively overriden
+
+The `DEFAULT` pseudo-key can be used to load a standard parameter object before applying locally defined overrides.
 
 ---
 
 ## The soil profile
 
-The key `SoilProfileParameters` contains a **JSON array** of **JSON objects** describing the layers of the soil profile. 
+The `SoilProfileParameters` key contains an array of objects describing the soil horizons supplied by the user.
 
-### Internal normalization
+```json
+{
+  "SiteParameters": {
+    "SoilProfileParameters": [
+      {
+        "Thickness": 0.3,
+        "KA5TextureClass": "Sl2"
+      }
+    ]
+  }
+}
+```
 
-MONICA internally represents the soil profile as **20** layers, each with a thickness of **10 cm**, resulting in a total profile depth of **2 m**. 
+At least one soil profile entry should be provided.
 
-* Each user-defined layer must specify a `Thickness`.
-* `Thickness` can be given as a simple number (default unit: **m**) or as an array containing a value and unit, for example `[30, "cm"]`.
-* The user-defined profile is automatically normalized to the internal 20-layer representation.
-* If the specified profile is **shallower than 2 m**, the last layer is extended until a depth of **2 m** is reached.
-* If the specified profile is **deeper than 2 m**, all layers below **2 m** are ignored.
+### Internal layer representation
 
-### Required and optional properties
+By default, MONICA represents the soil profile using:
 
-At least **one soil layer** must be defined. Every layer requires a `Thickness` value.
+- `NumberOfLayers`: 20
+- `LayerThickness`: `0.1` m
+- Total profile depth: `2.0` m
 
-To characterize the soil, either `KA5TextureClass` or both `Sand` and `Clay` should be provided.
+Both `NumberOfLayers` and `LayerThickness` can be changed in `SiteParameters`. Consequently, 20 layers of 10 cm are the default representation, not an invariant internal representation.
 
-Likewise, only one value from each of the following pairs is typically required:
+```json
+{
+  "SiteParameters": {
+    "NumberOfLayers": 30,
+    "LayerThickness": 0.05
+  }
+}
+```
 
-* `SoilRawDensity` or `SoilBulkDensity`
-* `SoilOrganicCarbon` or `SoilOrganicMatter`
+The resulting total profile depth is:
 
-If both values of a pair are supplied, they should be consistent.
+```
+NumberOfLayers * LayerThickness
+```
 
-Providing additional soil properties explicitly generally improves the accuracy of the simulated hydraulic characteristics by reducing the number of internally estimated parameters.
+### Converting user-defined horizons into internal layers
+
+MONICA converts the user-defined soil horizons into equal-sized internal layers.
+
+For every entry except the final one:
+
+1. Its `Thickness` is converted to meters.
+2. The thickness is divided by `LayerThickness`.
+3. The result is rounded to an integer number of internal layers.
+4. The soil properties are copied into that number of layers.
+
+The final soil profile entry is repeated until the configured internal profile is full. Its `Thickness` therefore does not limit its final extent.
+
+If earlier entries already fill the internal profile, subsequent entries are ignored.
+
+If `Thickness` is omitted from a non-final entry, the configured `LayerThickness` is used.
+
+Nevertheless, specifying `Thickness` explicitly is strongly recommended because it makes the intended horizon boundaries clear. `Thickness` can be supplied as:
+
+- a number in meters
+- a value-unit array using `m`, `dm`, `cm`, or `mm`
+
+For example:
+
+```json
+"Thickness": 0.3
+```
+
+```json
+"Thickness": [30, "cm"]
+```
+
+```json
+"Thickness": [300, "mm"]
+```
+
+Because horizon thicknesses are rounded to complete internal layers, horizon boundaries should preferably be multiples of `LayerThickness`.
+
+### Minimum information needed for a soil horizon
+
+To characterize a soil horizon, provide either:
+
+- `KA5TextureClass`
+- Both `Sand` and `Clay`
+
+Only one property from each of the following pairs normally needs to be supplied:
+
+- `SoilRawDensity` or `SoilBulkDensity`
+- `SoilOrganicCarbon` or `SoilOrganicMatter`
+
+If both members of a pair are supplied, they should be mutually consistent.
+
+The hydraulic properties can either be supplied explicitly or calculated by the configured pedotransfer function:
+
+- `FieldCapacity`
+- `PermanentWiltingPoint`
+- `PoreVolume`
+
+Explicitly providing measured soil properties can reduce the number of estimated parameters, but does not necessarily improve a simulation unless the measurements are representative and internally consistent.
+
+### Pedotransfer functions
+
+The `pwpFcSatFunction` property selects the method used to calculate missing hydraulic properties.
+
+The default is:
+
+```json
+"pwpFcSatFunction": "Wessolek2009"
+```
+
+Supported methods in the current implementation are: `Wessolek2009`, `VanGenuchten`, `VanGenuchtenVereecken`, `VanGenuchtenToth`, `Toth`
+
+The input data required for a successful calculation depends on the selected function. For example, `Wessolek2009` uses the KA5 texture class together with density and organic matter information.
 
 ### Automatic parameter calculation
 
-If properties are omitted, MONICA derives them whenever possible:
+MONICA derives the following values where possible:
 
-| Property                                               | Behavior if omitted                                                                          |
-|--------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `Sand`, `Clay`                                         | Derived from `KA5TextureClass` if available                                                  |
-| `Silt`                                                 | Always calculated internally as `1.0 - Sand - Clay`                                          |
-| `FieldCapacity`, `PermanentWiltingPoint`, `PoreVolume` | Estimated using the configured pedotransfer functions                                        |
-| `Lambda`                                               | Calculated from `Sand` and `Clay` content                                                    |
-| `SoilBulkDensity`/`SoilRawDensity`                     | Derived from the other density value and clay content                                        |
-| `SoilOrganicCarbon`/`SoilOrganicMatter`                | Derived from the other organic matter/carbon value using MONICA's internal conversion factor |
+| Property                | Behavior when omitted                                                   |
+|-------------------------|-------------------------------------------------------------------------|
+| `Sand`                  | Derived from `KA5TextureClass`                                          |
+| `Clay`                  | Derived from `KA5TextureClass`                                          |
+| `KA5TextureClass`       | Derived from `Sand` and `Clay` if both are available                    |
+| Silt content            | Calculated internally as `1.0 - Sand - Clay`                            |
+| `FieldCapacity`         | Calculated by the selected pedotransfer function                        |
+| `PermanentWiltingPoint` | Calculated by the selected pedotransfer function                        |
+| `PoreVolume`            | Calculated by the selected pedotransfer function                        |
+| `Lambda`                | Calculated by the sand and clay content when both are greater than zero |
+| `SoilRawDensity`        | Derived from `SoilBulkDensity` and clay content                         |
+| `SoilBulkDensity`       | Derived from `SoilRawDensity` and clay content                          |
+| `SoilOrganicCarbon`     | Derived from `SoilOrganicMatter`                                        |
+| `SoilOrganicMatter`     | Derived from `SoilOrganicCarbon`                                        |
+
+After calculation, MONICA applies lower safeguards to hydraulic properties:
+
+- `FieldCapacity`: at least `0.05`
+- `PermanentWiltingPoint`: at least `0.01`
+- `PoreVolume`: at least `0.10`
 
 ### Soil Properties
 
-The following table lists the soil properties that can be specified for each soil layer.
+The following properties can be specified for each soil profile entry.
 
-| Name of config file variable   | Unit                          | Description                                           | Default  | Example                                                                       | Note                                                                                      |
-|--------------------------------|-------------------------------|-------------------------------------------------------|----------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| **Thickness**                  | m (default), cm, mm           | Thickness of the soil layer                           |          | `"Thickness": 0.3` or `"Thickness": [30, "cm"]` or `"Thickness": [300, "mm"]` |                                                                                           |
-| **Sand**                       | kg kg-1 (fraction [0-1])      | Soil sand content                                     |          | `"Sand": 0.45` or `"Sand": [45, "%"]`                                         | If `%` is specified, `Sand` is internally converted into fraction [0-1].                  |
-| **Clay**                       | kg kg-1 (fraction [0-1])      | Soil clay content                                     |          | `"Clay": 0.12` or `"Clay": [12, "%"]`                                         | If `%` is specified, `Clay` is internally converted into fraction [0-1].                  |
-| **pH**                         |                               | Soil pH value                                         | `6.9`    | `"pH": 7.2`                                                                   |                                                                                           |
-| **Sceleton**                   | fraction [0-1]                | Stone content                                         | `0.0`    | `"Sceleton": 0.05` or `"Sceleton": [5, "%"]`                                  | Values are internally limited to **0.8**                                                  |
-| **Lambda**                     |                               | Soil water conductivity coefficient                   |          | `"Lambda": 0.5`                                                               |                                                                                           |
-| **FieldCapacity**              | m3 m-3 (fraction [0-1])       | Volumetric water content at field capacity            |          | `"FieldCapacity": 0.25` or `"FieldCapacity": [25, "%"]`                       | If `%` is specified, `FieldCapacity` is internally converted into fraction [0-1].         |
-| **PoreVolume**                 | m3 m-3 (fraction [0-1])       | Saturated volumetric water content                    |          | `"PoreVolume": 0.45` or `"PoreVolume": [45, "%"]`                             | If `%` is specified, `PoreVolume` is internally converted into fraction [0-1].            |
-| **PermanentWiltingPoint**      | m3 m-3 (fraction [0-1])       | Volumetric water content at permanent wilting point   |          | `"PermanentWiltingPoint": 0.10` or `"PermanentWiltingPoint": [10, "%"]`       | If `%` is specified, `PermanentWiltingPoint` is internally converted into fraction [0-1]. |
-| **KA5TextureClass**            |                               | German KA5 soil texture class                         |          | `"KA5TextureClass": "Sl2"`                                                    |                                                                                           |
-| **SoilAmmonium**               | kg NH4-N m-3                  | Initial soil ammonium concentration                   | `0.0005` | `"SoilAmmonium": 0.001`                                                       |                                                                                           |
-| **SoilNitrate**                | kg NO3-N m-3                  | Initial soil nitrate concentration                    | `0.005`  | `"SoilNitrate": 0.02`                                                         |                                                                                           |
-| **CN**                         |                               | Soil C/N ratio                                        | `10.0`   | `"CN": 9.5`                                                                   |                                                                                           |
-| **SoilRawDensity**             | kg m-3                        | Soil raw density                                      |          | `"SoilRawDensity": 1450`                                                      |                                                                                           |
-| **SoilBulkDensity**            | kg m-3                        | Soil bulk density                                     |          | `"SoilBulkDensity": 1300`                                                     |                                                                                           |
-| **SoilOrganicCarbon**          | % [0-100] ([kg C kg-1] * 100) | Soil organic carbon                                   |          | `"SoilOrganicCarbon": 0.8` or `"SoilOrganicCarbon": [0.8, "%"]`               | SOC is internally converted into fraction [0-1].                                          |
-| **SoilOrganicMatter**          | kg OM kg-1 (fraction [0-1])   | Soil organic matter                                   |          | `"SoilOrganicMatter": 0.015` or `"SoilOrganicMatter": [1.5, "%"]`             | If `%` is specified, `SoilOrganicMatter` is internally converted into fraction [0-1].     |
-| **SoilMoisturePercentFC**      | % [0-100]                     | Initial soil moisture as percentage of field capacity | `100.0`  | `"SoilMoisturePercentFC": 80.0`                                               |                                                                                           |
+| Configuration variable      | Unit                | Description                                         | Default                  | Example                                                                 | Note                                                                                                                       |
+|-----------------------------|---------------------|-----------------------------------------------------|--------------------------|-------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| **`Thickness`**             | m                   | User-defined horizon thickness                      | internal layer thickness | `"Thickness": 0.3`                                                      | Unit array can use `m`, `dm`, `cm`, or `mm`. The final entry fills the remaining internal profile.                         |
+| **`Sand`**                  | kg kg-1             | Soil sand fraction                                  | unset                    | `"Sand": 0.45` or `"Sand": [45, "%"]`                                   | `[45, "%"]` is converted to `0.45`                                                                                         |
+| **`Clay`**                  | kg kg-1             | Soil clay fraction                                  | unset                    | `"Clay": 0.12` or `"Clay": [12, "%"]`                                   | `[12, "%"]` is converted to `0.12`                                                                                         |
+| **`pH`**                    |                     | Soil pH                                             | `6.9`                    | `"pH": 7.2`                                                             | Valid range: 0-14                                                                                                          |
+| **`Sceleton`**              | m3 m-3              | Volumetric stone content                            | `0.0`                    | `"Sceleton": 0.05` or `"Sceleton": [5, "%"]`                            | Positive values above `0.8` are limited to `0.8`.                                                                          |
+| **`Lambda`**                |                     | Soil water conductivity coefficient                 | calculated               | `"Lambda": 0.5`                                                         | Calculated from sand and clay when possible                                                                                |
+| **`FieldCapacity`**         | m3 m-3              | Volumetric water content at field capacity          | calculated               | `"FieldCapacity": 0.25` or `"FieldCapacity": [25, "%"]`                 | A bare number is interpreted as a fraction. `[25, "%"]` is converted to `0.25`.                                            |
+| **`PoreVolume`**            | m3 m-3              | Saturated volumetric water content                  | calculated               | `"PoreVolume": 0.45` or `"PoreVolume": [45, "%"]`                       | A bare number is interpreted as a fraction. `[45, "%"]` is converted to `0.45`. Also referred to internally as saturation. |
+| **`PermanentWiltingPoint`** | m3 m-3              | Volumetric water content at permanent wilting point | calculated               | `"PermanentWiltingPoint": 0.10` or `"PermanentWiltingPoint": [10, "%"]` | A bare number is interpreted as a fraction. `[10, "%"]` is converted to `0.10`.                                            |
+| **`KA5TextureClass`**       |                     | German KA5 soil texture class                       | derived or unset         | `"KA5TextureClass": "Sl2"`                                              | Texture class matching is case-insensitive internally.                                                                     |
+| **`SoilAmmonium`**          | kg NH4-N m-3        | Initial ammonium-N concentration                    | `0.0005`                 | `"SoilAmmonium": 0.001`                                                 |                                                                                                                            |
+| **`SoilNitrate`**           | kg NO3-N m-3        | Initial nitrate-N concentration                     | `0.005`                  | `"SoilNitrate": 0.02`                                                   |                                                                                                                            |
+| **`CN`**                    |                     | Soil C/N ratio                                      | `10.0`                   | `"CN": 9.5`                                                             |                                                                                                                            |
+| **`SoilRawDensity`**        | kg m-3              | Soil raw density                                    | derived or unset         | `"SoilRawDensity": 1450`                                                | Can be derived from bulk density and clay content                                                                          |
+| **`SoilBulkDensity`**       | kg m-3              | Soil bulk density                                   | derived or unset         | `"SoilBulkDensity": 1300`                                               | Can be derived from raw density and clay content                                                                           |
+| **`SoilOrganicCarbon`**     | mass %              | Soil organic carbon concentration                   | derived or unset         | `"SoilOrganicCarbon": 0.8` or `"SoilOrganicCarbon": [0.8, "%"]`         | A bare value of `0.8` means 0.8%, not a fraction of 0.8. `[0.8, "%"]` is equivalent.                                       |
+| **`SoilOrganicMatter`**     | kg OM kg-1          | Soil organic matter fraction                        | derived or unset         | `"SoilOrganicMatter": 0.015` or `"SoilOrganicMatter": [1.5, "%"]`       | `[1.5, "%"]` is converted to `0.015`                                                                                       |
+| **`SoilMoisturePercentFC`** | % of field capacity | Initial soil moisture relative to field capacity    | `100.0`                  | `"SoilMoisturePercentFC": 80.0`                                         | Valid range: 0-100                                                                                                         |
 
-### Recommended minimal soil layer
+### Recommended minimal soil horizon
 
-A typical soil layer only needs a few parameters. MONICA derives the remaining hydraulic properties automatically.
+The following entry contains enough information for the default `Wessolek2009` calculation:
 
 ```json
 {
@@ -85,97 +201,138 @@ A typical soil layer only needs a few parameters. MONICA derives the remaining h
 }
 ```
 
----
-
-## Further site-specific variables
-
-| Name of config file variable   | Unit              | Description                          |
-|--------------------------------|-------------------|--------------------------------------|
-| **Latitude**                   | [decimal degrees] | Site's latitude                      |
-| **Slope**                      | [m m-1] [0-1]     | Site's slope (height m * length m-1) |
-| **HeightNN**                   | [m]               | Site's height above sea level        |
-| **NDeposition**                | [kg N ha-1 y-1]   | Annual N deposition via atmosphere   |
+The selected pedotransfer function and its supporting parameter files must be available for missing hydraulic properties to be calculated.
 
 ---
 
-## Environment parameters for the whole simulation
+## Site-specific parameters
 
-The following environment parameters for the entire simulation can be adjusted by referencing either the appropriate JSON file or selectively overwriting parameters read from the default file. 
+The following parameters are accepted inside `SiteParameters`.
 
-### Atmospheric CO<sub>2</sub> (O<sub>3</sub>) handling logic
+| Parameter              | Unit            | Default        | Description                                                                                 |
+|------------------------|-----------------|----------------|---------------------------------------------------------------------------------------------|
+| **`Latitude`**         | decimal degrees | `52.5`         | Geographic latitude of the site                                                             |
+| **`Slope`**            | m m-1           | `0.01`         | Surface slope (height m * length m-1)                                                       |
+| **`HeightNN`**         | m               | `50.0`         | Elevation above sea level                                                                   |
+| **`NDeposition`**      | kg N ha-1 y-1   | `30.0`         | Annual atmospheric nitrogen deposition                                                      |
+| **`NumberOfLayers`**   |                 | `20`           | Number of equal-sized internal soil layers                                                  |
+| **`LayerThickness`**   | m               | `0.1`          | Thickness of each internal soil layer                                                       |
+| **`pwpFcSatFunction`** | m               | `Wessolek2009` | Function used to calculate missing field capacity, pore volume, and permanent wilting point |
 
-The atmospheric CO<sub>2</sub> and O<sub>3</sub> concentrations in MONICA are determined using the following priority order:
+---
+
+## Environment parameters
+
+Parameters that apply to the entire simulation are specified under `EnvironmentParameters`.
+
+They can be loaded from an external parameter file and selectively overridden:
+
+```json
+{
+  "EnvironmentParameters": {
+    "DEFAULT": ["include-from-file", "../monica-parameters/user-parameters/hermes-environment.json"],
+    "LeachingDepth": 2.0,
+    "WindSpeedHeight": 2.5
+  }
+}
+```
+
+### Atmospheric CO<sub>2</sub> handling
+
+For every simulation day, MONICA determines the atmospheric CO<sub>2</sub> concentration in the following order:
 
 1. **Daily climate data**
 
-    If the field `co2` or `o3` is present in the daily climate input, this value is used directly.
+    If the daily climate data contain `co2`, that value is used.
 
-2. **Yearly concentration mapping**
+2. **Year-specific concentration**
     
-    If no daily value is available and `AtmosphericCO2s` or `AtmosphericO3s` is provided as a JSON object mapping years to concentration values, the value corresponding to the simulation year is used.
+    Otherwise, if `AtmosphericCO2s` contains a value for the current year, that value is used.
 
-3. **Dynamic calculation by MONICA**
+3. **Dynamic calculation**
 
-    If no daily or yearly value is available, and if the parameter `AtmosphericCO2` is set to **0 or a negative value**, MONICA internally calculates the CO<sub>2</sub> concentration based on the simulation date and the selected `rcp` scenario. *Note: There is currently no internal dynamic calculation for O<sub>3</sub>. If no values are provided and `AtmosphericO3 <= 0`, the concentration defaults to 0.*
+    Otherwise, if `AtmosphericCO2` is zero or negative, MONICA calculates the concentration from the simulation date and the selected `rcp` pathway.
 
 4. **Constant concentration**
 
-    If none of the above conditions apply, the constant value defined in `AtmosphericCO2` or `AtmosphericO3` is used for the entire simulation period.
+    Otherwise, `AtmosphericCO2` is used as a constant value.
+
+For practical configurations, use `AtmosphericCO2 <= 0` to request dynamic calculation.
+
+### Atmospheric O<sub>3</sub> handling
+
+For every simulation day, MONICA determines the atmospheric O<sub>3</sub> concentration in the following order:
+
+1. If the daily climate data contain `o3`, that value is used.
+2. Otherwise, if `AtmosphericO3s` contains a value for the current year, that value is used.
+3. Otherwise, the constant `AtmosphericO3` is used.
+
+MONICA does not calculate O<sub>3</sub> dynamically. If `AtmosphericO3` is omitted, its default value is zero.
 
 ### Environment parameter table
 
-| Name of parameter            | Unit | Default value | Description                                                                              | Example                                                      | Note                              |
-|------------------------------|------|---------------|------------------------------------------------------------------------------------------|--------------------------------------------------------------|-----------------------------------|
-| **Albedo**                   |      | 0.23          | Surface reflectivity coefficient                                                         | `"Albedo": 0.23`                                             |                                   |
-| **AtmosphericCO2**           | ppm  | 0.0           | Atmospheric CO<sub>2</sub> concentration                                                 | `"AtmosphericCO2": 420`                                      | Internal calculation used if <= 0 |
-| **AtmosphericCO2s**          | ppm  | unset         | Yearly CO<sub>2</sub> values                                                             | `"AtmosphericCO2s": {"1991": 360, "1992": 370, "1993": 380}` |                                   |
-| **AtmosphericO3**            | ppm  | 0.0           | Atmospheric O<sub>3</sub> concentration                                                  | `"AtmosphericO3": 0.04`                                      |                                   |
-| **AtmosphericO3s**           | ppm  | unset         | Yearly O<sub>3</sub> values                                                              | `"AtmosphericO3s": {"1991": 0.035, "1992": 0.036}`           |                                   |
-| **WindSpeedHeight**          | m    | 2.0           | Height above ground surface at which wind speed is measured                              | `"WindSpeedHeight": 2.5`                                     |                                   |
-| **LeachingDepth**            | m    | 0.0           | Depth below ground surface at which water and nitrate outflow is determined              | `"LeachingDepth": 2.0`                                       |                                   |
-| **MaxGroundwaterDepth**      | m    | 18.0          | Maximum annual groundwater depth below the ground surface                                | `"MaxGroundwaterDepth": 1.0`                                 |                                   |
-| **MinGroundwaterDepth**      | m    | 20.0          | Minimum annual groundwater depth below the ground surface                                | `"MinGroundwaterDepth": 0.5`                                 |                                   |
-| **MinGroundwaterDepthMonth** |      | 3             | Month (1-12) in which the minimum average groundwater depth is observed                  | `"MinGroundwaterDepthMonth": 3`                              |                                   |
-| **rcp**                      |      | rcp85         | Climate scenario used for internal CO<sub>2</sub> calculation when `AtmosphericCO2` <= 0 | `"rcp": "rcp45"`                                             |                                   |
+| Name of parameter              | Unit  | Default value | Description                                                                                        | Example                                                      |
+|--------------------------------|-------|---------------|----------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| **`Albedo`**                   |       | `0.23`        | Surface reflectivity coefficient                                                                   | `"Albedo": 0.23`                                             |
+| **`AtmosphericCO2`**           | ppm   | `0.0`         | Constant atmospheric CO<sub>2</sub> concentration, or dynamic calculation switch when non-positive | `"AtmosphericCO2": 420`                                      |
+| **`AtmosphericCO2s`**          | ppm   | unset         | Object mapping years to CO<sub>2</sub> concentrations                                              | `"AtmosphericCO2s": {"1991": 360, "1992": 370, "1993": 380}` |
+| **`AtmosphericO3`**            | ppm   | `0.0`         | Constant atmospheric O<sub>3</sub> concentration                                                   | `"AtmosphericO3": 0.04`                                      |
+| **`AtmosphericO3s`**           | ppm   | unset         | Object mapping years to O<sub>3</sub> values                                                       | `"AtmosphericO3s": {"1991": 0.035, "1992": 0.036}`           |
+| **`WindSpeedHeight`**          | m     | `2.0`         | Height above the ground at which wind speed was measured                                           | `"WindSpeedHeight": 2.5`                                     |
+| **`LeachingDepth`**            | m     | `0.0`         | Depth at which water and nitrate outflow are evaluated                                             | `"LeachingDepth": 2.0`                                       |
+| **`MaxGroundwaterDepth`**      | m     | `18.0`        | Maximum annual groundwater depth below the ground surface                                          | `"MaxGroundwaterDepth": 1.0`                                 |
+| **`MinGroundwaterDept`**       | m     | `20.0`        | Minimum annual groundwater depth below the ground surface                                          | `"MinGroundwaterDepth": 0.5`                                 |
+| **`MinGroundwaterDepthMonth`** | month | `3`           | Month (1-12) in which the minimum average groundwater depth is reached                             | `"MinGroundwaterDepthMonth": 3`                              |
+| **`rcp`**                      |       | `rcp85`       | Pathway used for dynamic CO<sub>2</sub> calculation                                                | `"rcp": "rcp45"`                                             |
 
-!!! note
-    The `rcp` parameter is only used when CO<sub>2</sub> is calculated internally (i.e., `AtmosphericCO2` <= 0 and no climate or yearly values are provided).
-    
-    Supported scenarios depend on the MONICA version:
+The groundwater parameters are interpolated using an annual sinusoidal function. `MinGroundwaterDepth` is reached during `MinGroundwaterDepthMonth`, while `MaxGroundwaterDepth` is reached approximately six months later.
 
-    | MONICA version | Supported scenarios |
-    |----------------|---------------------|
-    | `< 3.6.54` | `rcp26`, `rcp45`, `rcp60`, `rcp85` |
-    | `>= 3.6.54` | `rcp19`, `rcp26`, `rcp34`, `rcp45`, `rcp60`, `rcp70`, `rcp85` |
+#### Supported RCP pathways
 
-    **SSP Mapping**
+The `rcp parameter` is only used when:
 
-    If your climate data is based on SSP scenarios, use the corresponding `rcp` value.
+- daily climate data do not provide CO<sub>2</sub>
+- `AtmosphericCO2s` does not contain the current year
+- `AtmosphericCO2` requests dynamic calculation
 
-    The following mapping can be used to select the appropriate `rcp` value:
+Supported dynamically calculated pathways depend on the MONICA version:
 
-    | SSP scenario | MONICA `rcp` value |
-    |--------------|--------------------|
-    | `ssp119`     | `rcp19`            |
-    | `ssp126`     | `rcp26`            |
-    | `ssp245`     | `rcp45`            |
-    | `ssp370`     | `rcp70`            |
-    | `ssp460`     | `rcp60`            |
-    | `ssp585`     | `rcp85`            |
+| MONICA version | Supported pathways                                            |
+|----------------|---------------------------------------------------------------|
+| `< 3.6.52`     | `rcp26`, `rcp45`, `rcp60`, `rcp85`                            |
+| `>= 3.6.52`    | `rcp19`, `rcp26`, `rcp34`, `rcp45`, `rcp60`, `rcp70`, `rcp85` |
+
+#### Mapping SSP labels to MONICA pathways
+
+SSP and RCP names describe different scenario frameworks. For MONICA's internal CO<sub>2</sub> calculation, the following mapping selects the pathway with the corresponding approximate radiative forcing level:
+
+| SSP scenario | MONICA `rcp` value |
+|--------------|--------------------|
+| `ssp119`     | `rcp19`            |
+| `ssp126`     | `rcp26`            |
+| `ssp245`     | `rcp45`            |
+| `ssp370`     | `rcp70`            |
+| `ssp460`     | `rcp60`            |
+| `ssp585`     | `rcp85`            |
+
+This mapping selects comparable forcing levels. It does not make an SSP scenario identical to an RCP scenario.
 
 ---
 
 ## Example **site.json** file
 
-The following example shows a typical `site.json` configuration defining key site parameters such as latitude, slope, and soil profile properties. It also demonstrates how to include external parameter files for soil, environment, and transport processes using the `include-from-file` directive.
+The following example defines the site location and soil profile and loads standard parameter sets from external files.
 
 ```json
 {
   "SiteParameters": {
     "Latitude": 52.80939865112305,
     "Slope": 0.1,
-    "HeightNN": [0 , "m"],
+    "HeightNN": [0, "m"],
     "NDeposition": 30,
+    "NumberOfLayers": 20,
+    "LayerThickness": 0.1,
+    "pwpFcSatFunction": "Wessolek2009",
     "SoilProfileParameters": [
       {
         "Thickness": 0.3,
