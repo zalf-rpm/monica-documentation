@@ -65,6 +65,7 @@ nav:
           - MONICA server: user_guide/advanced/monica_server.md
           - HPC clusters: user_guide/advanced/hpc.md
           - Singularity: user_guide/advanced/singularity.md
+      - MONICA Versions: user_guide/versions.md
       - Troubleshooting:
           - Installation and setup issues: user_guide/troubleshooting/troubleshooting_installation.md
   - Parameter Reference:
