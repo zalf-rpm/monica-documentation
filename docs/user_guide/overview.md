@@ -13,6 +13,10 @@ If MONICA is not yet available on your computer, begin with the installation ins
 - [Compile MONICA on Linux](installation/linux_installation.md) if you use a Linux system.
 - See [Python support and dependencies](installation/dependencies_and_python.md) when using the optional Python tools and examples.
 
+### Choose a MONICA version
+
+See [MONICA versions](versions.md) for the public release history, Git tags, release dates, main changes, and compatibility guidance. For reproducible simulations, record the complete Git tag together with the configuration, parameter data, and climate inputs used.
+
 ### Run MONICA
 
 Choose the method that matches your environment:
@@ -49,4 +53,3 @@ The advanced guides cover server-based and distributed execution:
 ## Troubleshooting
 
 If installation or execution fails, consult [Installation and setup issues](troubleshooting/troubleshooting_installation.md) for common causes and solutions.
-
