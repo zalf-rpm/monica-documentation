@@ -23,7 +23,7 @@ across Germany. Evaluation covered a broad range of output variables, including:
 - Leaf dry matter and leaf area index
 - Crop nitrogen concentration and uptake
 - Soil moisture and soil mineral nitrogen content
-- Crop height and ground coverag
+- Crop height and ground coverage
 
 Assessment of model performance was evaluated by using Willmott’s Index of Agreement (d) Meter, 
 and with calibrated runs generally producing values in the acceptable range for most variables and sites. Calibration was also extended to more crops, such as:
