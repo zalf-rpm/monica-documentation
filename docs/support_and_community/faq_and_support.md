@@ -227,7 +227,7 @@ Include appropriate tests and documentation when changing model behavior, config
 
 ### Contact
 
-MONICA is developed and maintained by the Research Platform [**Simulation and Data Science**](https://www.zalf.de/en/struktur/pb4/Pages/default.aspx) and [**Computation and Data Service Platform**](https://www.zalf.de/en/struktur/cdp/Pages/default.aspx) at the [**Leibniz Centre for Agricultural Landscape Research (ZALF)**](https://www.zalf.de/en/Pages/ZALF.aspx) in Müncheberg, Germany.
+MONICA is developed and maintained by the Research Platform [**Simulation and Data Science**](https://www.zalf.de/en/struktur/pb4/Pages/default.aspx) and [**Model and Simulation Infrastructure**](https://www.zalf.de/en/struktur/cdp/mas/Pages/default.aspx) Service at the [**Leibniz Centre for Agricultural Landscape Research (ZALF)**](https://www.zalf.de/en/Pages/ZALF.aspx) in Müncheberg, Germany.
 
 Use the following project channels:
 
