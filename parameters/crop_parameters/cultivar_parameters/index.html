@@ -1,0 +1,4018 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Model for Nitrogen and Carbon in Agro-ecosystems">
+      
+      
+      
+        <link rel="canonical" href="https://zalf-rpm.github.io/monica-documentation/parameters/crop_parameters/cultivar_parameters/">
+      
+      
+        <link rel="prev" href="../species_parameters/">
+      
+      
+        <link rel="next" href="../crop_residue_parameters/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Cultivar parameters - MONICA Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cultivar-level-crop-parameters" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MONICA Documentation" class="md-header__button md-logo" aria-label="MONICA Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MONICA Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cultivar parameters
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zalf-rpm/monica-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monica-documentation
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../user_guide/overview/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../overview/" class="md-tabs__link">
+          
+  
+  
+  Parameter Reference
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../model_testing_and_applications/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Validation and Testing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../model_science/soil_processes/overview/" class="md-tabs__link">
+          
+  
+  
+  Model Science and Algorithm
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../references/publications/" class="md-tabs__link">
+          
+  
+  
+  References and Further Reading
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../support_and_community/faq_and_support/" class="md-tabs__link">
+          
+  
+  
+  Support and Community
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MONICA Documentation" class="md-nav__button md-logo" aria-label="MONICA Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MONICA Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zalf-rpm/monica-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monica-documentation
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/installation/windows_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/installation/windows_compilation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows compilation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/installation/linux_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux compilation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/installation/dependencies_and_python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Support and Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run MONICA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Run MONICA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/how_to_run/command_line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA from the Command Line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/how_to_run/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA in Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/how_to_run/python_producer_consumer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running with Python producer-consumer pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/how_to_run/rundeck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA via Rundeck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/configuration_files/config_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/configuration_files/config_sim_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sim.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/configuration_files/config_crop_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    crop.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/configuration_files/config_site_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    site.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced and Distributed Execution
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Advanced and Distributed Execution
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/advanced/monica_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONICA server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/advanced/hpc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HPC clusters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/advanced/singularity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Singularity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONICA Versions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/troubleshooting/troubleshooting_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation and setup issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameter Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parameter Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop Parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crop Parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../species_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Species parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cultivar parameters
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cultivar parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#json-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-and-crop-cycle-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General and crop-cycle parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#photosynthesis-and-crop-size-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Photosynthesis and crop-size parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-stage-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Development-stage parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#biomass-allocation-and-senescence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Biomass allocation and senescence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heat-stress-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heat-stress parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frost-and-winter-survival-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frost and winter-survival parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#irrigation-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Irrigation parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yield-and-cutting-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Yield and cutting components
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-temperature-response-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional temperature-response parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optional temperature-response parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leaf-expansion-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leaf-expansion response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wang-engel-phenology-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wang-Engel phenology response
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#legacy-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Legacy parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-winter-wheatjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: winter-wheat.json
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../crop_residue_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop residue parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soil parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soil_parameters/soil_organic_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil organic parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soil_parameters/soil_moisture_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil moisture parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soil_parameters/soil_temperature_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil temperature parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soil_parameters/soil_transport_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil transport parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Management parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Management parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../management_parameters/mineral_fertiliser_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mineral fertiliser parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../management_parameters/organic_fertiliser_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organic fertiliser parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    General parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    General parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general_parameters/environment_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environmental parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general_parameters/crop_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_testing_and_applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation and Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Science and Algorithm
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model Science and Algorithm
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil Processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soil Processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_temperature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil temperature
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/evaporation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaporation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_moisture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil moisture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_frost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil frost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/snow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Snow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/organic_matter_turn-over/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organic matter turn-over
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/nitrification_and_denitrification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nitrification and denitrification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/matter_transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matter transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop Processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crop Processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/photosynthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Photosynthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/respiration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Respiration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/assimilate_partitioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assimilate partitioning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/phenology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phenology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/root_growth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Root growth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/leaf_area_and_ground_coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Leaf area and ground coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/transpiration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transpiration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/n_uptake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N uptake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/n_concentration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N concentration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/drought_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Drought stress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/nitrogen_deficiency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nitrogen deficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/oxygen_deficiency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oxygen deficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/heat_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat stress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/yield/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yield
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References and Further Reading
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    References and Further Reading
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../references/publications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Support and Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Support and Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../support_and_community/faq_and_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ & Support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="cultivar-level-crop-parameters">Cultivar-level crop parameters</h1>
+<p>This section describes the JSON properties used to configure cultivar-level crop parameters in MONICA. </p>
+<p>Cultivar parameters describe characteristics that may differ between cultivars of the same species. They complement, but do not replace, the corresponding species parameters.</p>
+<hr />
+<h2 id="json-conventions">JSON conventions</h2>
+<ul>
+<li><code>Number</code> means a JSON number and may contain an integer or decimal value.</li>
+<li><code>Integer</code> means a whole-number JSON value.</li>
+<li>Stage-dependent arrays must contain one entry for each developmental stage defined by the species parameters.</li>
+<li>Organ-dependent matrix rows must contain one entry for every species organ.</li>
+<li>
+<p>Organ IDs in yield components are one-base:</p>
+<pre><code>1. root
+2. leaf
+3. steam or shoot
+4. storage organ, such as fruit, grain, or ear
+</code></pre>
+</li>
+<li>
+<p>Numeric values may be written directly:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">"MaxCropHeight"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.83</span>
+</code></pre></div>
+<p>They may also contain unit metadata:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">"MaxCropHeight"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.83</span><span class="p">,</span><span class="w"> </span><span class="s2">"m"</span><span class="p">]</span>
+</code></pre></div>
+</li>
+<li>
+<p>Stage-dependent arrays may similarly contain unit metadata:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">"StageTemperatureSum"</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span><span class="mi">148</span><span class="p">,</span><span class="w"> </span><span class="mi">284</span><span class="p">,</span><span class="w"> </span><span class="mi">380</span><span class="p">,</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w"> </span><span class="mi">420</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">],</span><span class="w"> </span><span class="s2">"°C d"</span><span class="p">]</span>
+</code></pre></div>
+</li>
+</ul>
+<p>MONICA reads the numeric value or array but does not validate the unit string or perform unit conversion. Values must already use the units documented below.</p>
+<hr />
+<h2 id="general-and-crop-cycle-parameters">General and crop-cycle parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>String</td>
+<td></td>
+<td>Serialization metadata identifying the object as cultivar parameters</td>
+<td><code>"type": "CultivarParameters"</code></td>
+</tr>
+<tr>
+<td><code>CultivarName</code></td>
+<td>String</td>
+<td></td>
+<td>Identifier or name of the cultivar</td>
+<td><code>"CultivarName": "winter wheat"</code></td>
+</tr>
+<tr>
+<td><code>Description</code></td>
+<td>String</td>
+<td></td>
+<td>Optional textual description of the cultivar</td>
+<td><code>"Description": ""</code></td>
+</tr>
+<tr>
+<td><code>Perennial</code></td>
+<td>Boolean</td>
+<td></td>
+<td>Indicates whether the cultivar is perennial</td>
+<td><code>"Perennial": false</code></td>
+</tr>
+<tr>
+<td><code>WinterCrop</code></td>
+<td>Boolean</td>
+<td></td>
+<td>Indicates whether the cultivar is treated as a winter crop. This flag is used by operations that distinguish winter and non-winter crops.</td>
+<td><code>"WinterCrop": true</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="photosynthesis-and-crop-size-parameters">Photosynthesis and crop-size parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MaxAssimilationRate</code></td>
+<td>Number</td>
+<td>kg CO2 ha-1 leaf h-1</td>
+<td>Maximum leaf-area-based CO<sub>2</sub> assimilation rate</td>
+<td><code>"MaxAssimilationRate": 30</code></td>
+</tr>
+<tr>
+<td><code>LightExtinctionCoefficient</code></td>
+<td>Number</td>
+<td></td>
+<td>Beer–Lambert light-extinction coefficient used to calculate the fraction of radiation intercepted by the crop canopy</td>
+<td><code>"LightExtinctionCoefficient": 0.8</code></td>
+</tr>
+<tr>
+<td><code>MaxCropHeight</code></td>
+<td>Number</td>
+<td>m</td>
+<td>Maximum potential crop height</td>
+<td><code>"MaxCropHeight": [0.83,"m"]</code></td>
+</tr>
+<tr>
+<td><code>CropHeightP1</code></td>
+<td>Number</td>
+<td></td>
+<td>Slope parameter of the sigmoid crop-height development function</td>
+<td><code>"CropHeightP1": 6</code></td>
+</tr>
+<tr>
+<td><code>CropHeightP2</code></td>
+<td>Number</td>
+<td></td>
+<td>Relative-development position parameter of the sigmoid crop-height function</td>
+<td><code>"CropHeightP2": 0.5</code></td>
+</tr>
+<tr>
+<td><code>CropSpecificMaxRootingDepth</code></td>
+<td>Number</td>
+<td>m</td>
+<td>Cultivar-specific maximum potential rooting depth. The effective rooting depth may also be constrained by soil properties.</td>
+<td><code>"CropSpecificMaxRootingDepth": 1.3</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="development-stage-parameters">Development-stage parameters</h2>
+<p>The outer index of every stage-dependent array corresponds to a developmental stage.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>StageTemperatureSum</code></td>
+<td>Number (Array)</td>
+<td>°C d</td>
+<td>Thermal-time requirement thath must be accumulated in each developmental stage before the crop advances to the next stage</td>
+<td><code>"StageTemperatureSum": [[148,284,380,180,420,25],"°C d"]</code></td>
+</tr>
+<tr>
+<td><code>OptimumTemperature</code></td>
+<td>Number (Array)</td>
+<td>°C</td>
+<td>Stage-specific upper temperature used when calculating effective thermal-time accumulation</td>
+<td><code>"OptimumTemperature": [[30,30,30,30,30,30],"°C"]</code></td>
+</tr>
+<tr>
+<td><code>BaseDaylength</code></td>
+<td>Number (Array)</td>
+<td>h</td>
+<td>Stage-specific base or reference day length used with <code>DaylengthRequirement</code> to calculate the photoperiod development factor</td>
+<td><code>"BaseDaylength": [[0,0,7,7,0,0],"h"]</code></td>
+</tr>
+<tr>
+<td><code>DaylengthRequirement</code></td>
+<td>Number (Array)</td>
+<td>h</td>
+<td>Stage-specific critical day length. Positive values select the long-day response, negative values select the short-day response, and zero disables photoperiod limitation for that stage.</td>
+<td><code>"DaylengthRequirement": [[0,20,20,20,0,0],"h"]</code></td>
+</tr>
+<tr>
+<td><code>VernalisationRequirement</code></td>
+<td>Number (Array)</td>
+<td>effective d</td>
+<td>Stage-specific effective vernalization-day requirement. A value of zero disables vernalization limitation for that stage.</td>
+<td><code>"VernalisationRequirement": [0,50,0,0,0,0]</code></td>
+</tr>
+<tr>
+<td><code>DroughtStressThreshold</code></td>
+<td>Number (Array)</td>
+<td></td>
+<td>Stage-specific threshold for the ratio of actual to potential transpiration. Below this threshold this threshold, drought responses can affect development, photosynthesis, fertility, and biomass calculation.</td>
+<td><code>"DroughtStressThreshold": [1,0.9,1,1,0.9,0.8]</code></td>
+</tr>
+<tr>
+<td><code>SpecificLeafArea</code></td>
+<td>Number (Array)</td>
+<td>ha leaf kg-1 leaf DM</td>
+<td>Stage-specific leaf area per unit leaf dry-matter biomass</td>
+<td><code>"SpecificLeafArea": [[0.002,0.0018,0.0017,0.0016,0.0015,0.0015],"ha kg-1"]</code></td>
+</tr>
+<tr>
+<td><code>StageKcFactor</code></td>
+<td>Number (Array)</td>
+<td></td>
+<td>Stage-specific crop coefficient used in crop evapotranspiration and interception calculations</td>
+<td><code>"StageKcFactor": [[0.4,0.7,1.1,1.1,0.8,0.25],"1;0"]</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="biomass-allocation-and-senescence">Biomass allocation and senescence</h2>
+<p>The outer array index represents the developmental stage. Each inner array uses the species organ order: root, leaf, stem/shoot, and storage organ.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AssimilatePartitioningCoeff</code></td>
+<td>Number (Array of Arrays)</td>
+<td>fraction</td>
+<td>Fraction of available assimilates allocated to each organ during each developmental stage. Fractions should normally sum to <code>1</code> in active growth stages.</td>
+<td><code>"AssimilatePartitioningCoeff": [[0.5,0.5,0,0],[0.2,0.2,0.6,0],[0.13,0.2,0.67,0],[0,0,0.03,0.97],[0,0,0,1],[0,0,0,0]]</code></td>
+</tr>
+<tr>
+<td><code>OrganSenescenceRate</code></td>
+<td>Number (Array of Arrays)</td>
+<td>d-1</td>
+<td>Daily senescence rate of each organ during each developmental stage</td>
+<td><code>"OrganSenescenceRate": [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0.05,0,0],[0,0.05,0,0]]</code></td>
+</tr>
+<tr>
+<td><code>ResidueNRatio</code></td>
+<td>Number</td>
+<td></td>
+<td>Ratio of residue nitrogen concentration to primary-yield nitrogen concentration</td>
+<td><code>"ResidueNRatio": 0.5</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="heat-stress-parameters">Heat-stress parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CriticalTemperatureHeatStress</code></td>
+<td>Number</td>
+<td>°C</td>
+<td>Temperature threshold above which reproductive heat damage begins</td>
+<td><code>"CriticalTemperatureHeatStress": [31,"°C"]</code></td>
+</tr>
+<tr>
+<td><code>BeginSensitivePhaseHeatStress</code></td>
+<td>Number</td>
+<td>°C d</td>
+<td>Cumulative thermal time at which the heat-sensitive reproductive phase begins</td>
+<td><code>"BeginSensitivePhaseHeatStress": [620,"°C d"]</code></td>
+</tr>
+<tr>
+<td><code>EndSensitivePhaseHeatStress</code></td>
+<td>Number</td>
+<td>°C d</td>
+<td>Cumulative thermal time at which the heat-sensitive reproductive phase ends</td>
+<td><code>"EndSensitivePhaseHeatStress": [740,"°C d"]</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="frost-and-winter-survival-parameters">Frost and winter-survival parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LT50cultivar</code></td>
+<td>Number</td>
+<td>°C</td>
+<td>Cultivar-specific temperature at which 50% frost mortality is expected</td>
+<td><code>"LT50cultivar": -24</code></td>
+</tr>
+<tr>
+<td><code>FrostHardening</code></td>
+<td>Number</td>
+<td>°C-1 d-1</td>
+<td>Coefficient controlling the daily decrease in LT50 caused by cold acclimation</td>
+<td><code>"FrostHardening": 0.014</code></td>
+</tr>
+<tr>
+<td><code>FrostDehardening</code></td>
+<td>Number</td>
+<td>°C-1 d-1</td>
+<td>Coefficient controlling the daily increase in LT50 caused by deacclimation</td>
+<td><code>"FrostDehardening": 5.05</code></td>
+</tr>
+<tr>
+<td><code>RespiratoryStress</code></td>
+<td>Number</td>
+<td>°C-1 d-1</td>
+<td>Coefficient controlling the increase in L50 caused by respiratory stress under snow cover.</td>
+<td><code>"RespiratoryStress": 0.54</code></td>
+</tr>
+<tr>
+<td><code>LowTemperatureExposure</code></td>
+<td>Number</td>
+<td>°C-1</td>
+<td>Coefficient intended to control additional LT50 changes caused by extreme low-temperature exposure. The corresponding model calculation is currently disabled, so this parameter currently has no effect.</td>
+<td><code>"LowTemperatureExposure": 0.654</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="irrigation-parameters">Irrigation parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HeatSumIrrigationStart</code></td>
+<td>Number</td>
+<td>°C d</td>
+<td>Accumulated crop thermal time at which automatic irrigation may begin</td>
+<td><code>"HeatSumIrrigationStart": 461</code></td>
+</tr>
+<tr>
+<td><code>HeatSumIrrigationEnd</code></td>
+<td>Number</td>
+<td>°C d</td>
+<td>Accumulated crop thermal time at which automatic irrigation ends</td>
+<td><code>"HeatSumIrrigationEnd": 1676</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="yield-and-cutting-components">Yield and cutting components</h2>
+<p><code>OrganIdsForPrimaryYield</code>, <code>OrganIdsForSecondaryYield</code>, and <code>OrganIdsForCutting</code> contain yield-component objects.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OrganIdsForPrimaryYield</code></td>
+<td>YieldComponent (Array)</td>
+<td></td>
+<td>Organ fractions included in the primary harvested product</td>
+<td><code>"OrganIdsForPrimaryYield": [{"organId":4,"type":"YieldComponent","yieldDryMatter":0.86,"yieldPercentage":0.85}]</code></td>
+</tr>
+<tr>
+<td><code>OrganIdsForSecondaryYield</code></td>
+<td>YieldComponent (Array)</td>
+<td></td>
+<td>Organ fractions included in the secondary harvested product</td>
+<td><code>"OrganIdsForSecondaryYield": [{"organId":2,"type":"YieldComponent","yieldDryMatter":0.86,"yieldPercentage":0.85},{"organId":3,"type":"YieldComponent","yieldDryMatter":0.86,"yieldPercentage":0.9}]</code></td>
+</tr>
+<tr>
+<td><code>OrganIdsForCutting</code></td>
+<td>YieldComponent (Array)</td>
+<td></td>
+<td>Organ fractions included in the default cutting or mowing yield. An empty array means that no default cutting yield components are configured.</td>
+<td><code>"OrganIdsForCutting": []</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>YieldComponent</code> contains:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>String</td>
+<td></td>
+<td>Serialization metadata identifying the object as a yield component</td>
+<td><code>"type": "YieldComponent"</code></td>
+</tr>
+<tr>
+<td><code>organId</code></td>
+<td>Integer</td>
+<td></td>
+<td>Species organ referenced by the component</td>
+<td><code>"organId": 4</code></td>
+</tr>
+<tr>
+<td><code>yieldPercentage</code></td>
+<td>Number</td>
+<td>fraction</td>
+<td>Fraction of the organ biomass included in the harvested or cut yield</td>
+<td><code>"yieldPercentage": 0.85</code></td>
+</tr>
+<tr>
+<td><code>yieldDryMatter</code></td>
+<td>Number</td>
+<td>kg DM kg-1 FM</td>
+<td>Dry-matter fraction used to convert dry-matter yield into fresh-matter yield</td>
+<td><code>"yieldDryMatter": 0.86</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>organId</code> must be between <code>1</code> and the number of species organs. <code>yieldPercentage</code> and <code>yieldDryMatter</code> should normally lie in the internal <code>[0,1]</code>.</p>
+<hr />
+<h2 id="optional-temperature-response-parameters">Optional temperature-response parameters</h2>
+<h3 id="leaf-expansion-response">Leaf-expansion response</h3>
+<p>These parameters apply only when temperature-dependent leaf expansion (<code>__enable_T_response_leaf_expansion__</code>) is enabled in <code>sim.json</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EarlyRefLeafExp</code></td>
+<td>Number</td>
+<td>°C</td>
+<td>Reference temperature for the early-stage leaf-expansion temperature response</td>
+<td><code>"EarlyRefLeafExp": 12</code></td>
+</tr>
+<tr>
+<td><code>RefLeafExp</code></td>
+<td>Number</td>
+<td>°C</td>
+<td>Reference temperature for the later-stage leaf-expansion temperature response</td>
+<td><code>"RefLeafExp": 20</code></td>
+</tr>
+</tbody>
+</table>
+<p>The species parameter <code>TransitionStageLeafExp</code> determines when MONICA changes from the early-stage response to the later-stage response.</p>
+<h3 id="wang-engel-phenology-response">Wang-Engel phenology response</h3>
+<p>These parameters apply only when the optional Wang-Engel phenological temperature response (<code>__enable_Phenology_WangEngelTemperatureResponse__</code>) is enabled in <code>sim.json</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MinTempDev_WE</code></td>
+<td>Number</td>
+<td>°C</td>
+<td>Minimum temperature for phenological development</td>
+<td><code>"MinTempDev_WE": 0</code></td>
+</tr>
+<tr>
+<td><code>OptTempDev_WE</code></td>
+<td>Number</td>
+<td>°C</td>
+<td>Optimum temperature for phenological development</td>
+<td><code>"OptTempDev_WE": 0</code></td>
+</tr>
+<tr>
+<td><code>MaxTempDev_WE</code></td>
+<td>Number</td>
+<td>°C</td>
+<td>Maximum temperature for phenological development</td>
+<td><code>"MaxTempDev_WE": 0</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="legacy-parameters">Legacy parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LatestHarvestDoy</code></td>
+<td>Integer</td>
+<td>day of year</td>
+<td>Legacy cultivar-level latest-harvest value. It is currently not consumed by the automatic harvest calculation.</td>
+<td><code>"LatestHarvestDoy": -1</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="example-winter-wheatjson">Example: <code>winter-wheat.json</code></h2>
+<p>The following example shows a complete cultivar parameter file for winter wheat.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"CultivarName"</span><span class="p">:</span><span class="s2">"winter wheat"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"WinterCrop"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"AssimilatePartitioningCoeff"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mf">0.2</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.2</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.6</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mf">0.13</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.2</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.67</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.03</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.97</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">1</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"BaseDaylength"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">"h"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"BeginSensitivePhaseHeatStress"</span><span class="p">:[</span>
+<span class="w">    </span><span class="mi">620</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"°C d"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"CriticalTemperatureHeatStress"</span><span class="p">:[</span>
+<span class="w">    </span><span class="mi">31</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"°C"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"CropHeightP1"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"CropHeightP2"</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"CropSpecificMaxRootingDepth"</span><span class="p">:</span><span class="mf">1.3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"DaylengthRequirement"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">"h"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"Description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"DroughtStressThreshold"</span><span class="p">:[</span>
+<span class="w">    </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.9</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.9</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.8</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"EndSensitivePhaseHeatStress"</span><span class="p">:[</span>
+<span class="w">    </span><span class="mi">740</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"°C d"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"FrostDehardening"</span><span class="p">:</span><span class="mf">5.05</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"FrostHardening"</span><span class="p">:</span><span class="mf">0.014</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"HeatSumIrrigationEnd"</span><span class="p">:</span><span class="mi">1676</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"HeatSumIrrigationStart"</span><span class="p">:</span><span class="mi">461</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"LT50cultivar"</span><span class="p">:</span><span class="mi">-24</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"LatestHarvestDoy"</span><span class="p">:</span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"LowTemperatureExposure"</span><span class="p">:</span><span class="mf">0.654</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"MaxAssimilationRate"</span><span class="p">:</span><span class="mi">30</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"MaxCropHeight"</span><span class="p">:[</span>
+<span class="w">    </span><span class="mf">0.83</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"m"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"OptimumTemperature"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">30</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">"°C"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"OrganIdsForCutting"</span><span class="p">:[],</span>
+<span class="w">  </span><span class="nt">"OrganIdsForPrimaryYield"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"organId"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"YieldComponent"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"yieldDryMatter"</span><span class="p">:</span><span class="mf">0.86</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"yieldPercentage"</span><span class="p">:</span><span class="mf">0.85</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"OrganIdsForSecondaryYield"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"organId"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"YieldComponent"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"yieldDryMatter"</span><span class="p">:</span><span class="mf">0.86</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"yieldPercentage"</span><span class="p">:</span><span class="mf">0.85</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"organId"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"YieldComponent"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"yieldDryMatter"</span><span class="p">:</span><span class="mf">0.86</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"yieldPercentage"</span><span class="p">:</span><span class="mf">0.9</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"OrganSenescenceRate"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.05</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.05</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"Perennial"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"ResidueNRatio"</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"RespiratoryStress"</span><span class="p">:</span><span class="mf">0.54</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"SpecificLeafArea"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mf">0.002</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.0018</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.0017</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.0016</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.0015</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.0015</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">"ha kg-1"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"StageKcFactor"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mf">0.4</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.7</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">1.1</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">1.1</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.8</span><span class="p">,</span>
+<span class="w">      </span><span class="mf">0.25</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">"1;0"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"StageTemperatureSum"</span><span class="p">:[</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">      </span><span class="mi">148</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">284</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">380</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">180</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">420</span><span class="p">,</span>
+<span class="w">      </span><span class="mi">25</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">"°C d"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"VernalisationRequirement"</span><span class="p">:[</span>
+<span class="w">    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">0</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"CultivarParameters"</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../../javascripts/tablesort.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,6010 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Model for Nitrogen and Carbon in Agro-ecosystems">
+      
+      
+      
+        <link rel="canonical" href="https://zalf-rpm.github.io/monica-documentation/user_guide/configuration_files/config_sim_json/">
+      
+      
+        <link rel="prev" href="../config_overview/">
+      
+      
+        <link rel="next" href="../config_crop_json/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>sim.json - MONICA Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-simjson-configuration-file" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MONICA Documentation" class="md-header__button md-logo" aria-label="MONICA Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MONICA Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              sim.json
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zalf-rpm/monica-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monica-documentation
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../overview/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../parameters/crop_parameters/overview/" class="md-tabs__link">
+          
+  
+  
+  Parameter Reference
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../model_testing_and_applications/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Validation and Testing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../model_science/soil_processes/overview/" class="md-tabs__link">
+          
+  
+  
+  Model Science and Algorithm
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../references/publications/" class="md-tabs__link">
+          
+  
+  
+  References and Further Reading
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../support_and_community/faq_and_support/" class="md-tabs__link">
+          
+  
+  
+  Support and Community
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MONICA Documentation" class="md-nav__button md-logo" aria-label="MONICA Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MONICA Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zalf-rpm/monica-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monica-documentation
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/windows_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/windows_compilation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows compilation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/linux_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux compilation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/dependencies_and_python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Support and Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run MONICA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Run MONICA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/command_line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA from the Command Line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA in Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/python_producer_consumer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running with Python producer-consumer pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/rundeck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA via Rundeck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sim.json
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sim.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reading-climate-data-climatecsv-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading climate data (climate.csv-options)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputting-results-from-monica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputting results from MONICA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outputting results from MONICA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining events
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-of-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List of outputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="List of outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#output-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soil-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soil layers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crop-organs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crop organs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-definition-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output definition syntax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Display names
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aggregation-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aggregation defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-layer-and-time-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combining layer and time aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-output-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example output configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-output-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common output variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common output variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-simulation-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General simulation information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-and-atmospheric-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weather and atmospheric conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crop-development-and-stress-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crop development and stress responses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crop-biomass-and-productivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crop biomass and productivity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crop-nitrogen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crop nitrogen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crop-roots-and-water-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crop roots and water use
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecosystem-carbon-fluxes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ecosystem carbon fluxes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soil-water-balance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soil water balance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soil-physical-and-thermal-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soil physical and thermal properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soil-carbon-pools-and-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soil carbon pools and dynamics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soil-nitrogen-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soil nitrogen dynamics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crop-management-inputs-and-residue-balances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crop management inputs and residue balances
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ozone-impacts-and-biogenic-emissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ozone impacts and biogenic emissions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simulation-toggles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation toggles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Simulation toggles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crop-response-toggles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crop response toggles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secondary-yield-handling-toggle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secondary yield handling toggle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-management-toggles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic management toggles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_crop_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    crop.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_site_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    site.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced and Distributed Execution
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Advanced and Distributed Execution
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/monica_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONICA server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/hpc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HPC clusters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/singularity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Singularity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONICA Versions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/troubleshooting_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation and setup issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameter Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parameter Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop Parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crop Parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/species_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Species parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/cultivar_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cultivar parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/crop_residue_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop residue parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soil parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/soil_parameters/soil_organic_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil organic parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/soil_parameters/soil_moisture_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil moisture parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/soil_parameters/soil_temperature_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil temperature parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/soil_parameters/soil_transport_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil transport parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Management parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Management parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/management_parameters/mineral_fertiliser_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mineral fertiliser parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/management_parameters/organic_fertiliser_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organic fertiliser parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    General parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    General parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/general_parameters/environment_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environmental parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/general_parameters/crop_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_testing_and_applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation and Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Science and Algorithm
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model Science and Algorithm
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil Processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soil Processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_temperature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil temperature
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/evaporation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaporation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_moisture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil moisture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_frost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil frost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/snow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Snow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/organic_matter_turn-over/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organic matter turn-over
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/nitrification_and_denitrification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nitrification and denitrification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/matter_transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matter transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop Processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crop Processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/photosynthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Photosynthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/respiration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Respiration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/assimilate_partitioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assimilate partitioning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/phenology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phenology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/root_growth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Root growth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/leaf_area_and_ground_coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Leaf area and ground coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/transpiration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transpiration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/n_uptake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N uptake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/n_concentration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N concentration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/drought_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Drought stress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/nitrogen_deficiency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nitrogen deficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/oxygen_deficiency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oxygen deficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/heat_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat stress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/yield/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yield
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References and Further Reading
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    References and Further Reading
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../references/publications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Support and Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Support and Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../support_and_community/faq_and_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ & Support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="the-simjson-configuration-file">The <code>sim.json</code> configuration file</h1>
+<p>The <code>sim.json</code> file contains simulation-specific information such as the start and end date (MONICA will select the appropriate climate data from <code>climate.csv</code>) and whether certain global toggles, such as nitrogen response or the use of secondary yields, are turned on or off.</p>
+<p>The default soil discretisation consists of 20 layers, each 0.1 m thick. Both <code>NumberOfLayers</code> and <code>LayerThickness</code> are configurable, but changing them can affect parameterisation and output definitions that assume the defaults.</p>
+<hr />
+<h2 id="reading-climate-data-climatecsv-options">Reading climate data (<code>climate.csv-options</code>)</h2>
+<p>Climate data are read from delimited text files, normally <code>.csv</code> files. Gzip-compressed files whose names end in <code>.gz</code> are also supported. The <code>climate.csv-options</code> object in <code>sim.json</code> configures how these files are read.</p>
+<p>The optional <code>start-date</code> and <code>end-date</code> keys define the inclusive time range used for the MONICA run. Dates must use the ISO format <code>YYYY-MM-DD</code>. If either boundary is omitted, that boundary is inferred from the supplied climate data.</p>
+<p>The <code>no-of-climate-file-header-lines</code> key specifies the total number of non-data lines at the beginning of the file. By default, the first of these lines contains the column names. Any remaining header lines, such as units line, are ignored. For example:</p>
+<ul>
+<li><code>1</code>: Line 1 contains column names. Data starts on line 2.</li>
+<li><code>2</code>: Line 1 contains column names. Line 2 might contain units. Data starts on line 3.</li>
+</ul>
+<p>For a file without a header row, provide column names explicitly with the <code>header</code> array and set <code>no-of-climate-file-header-lines</code> to <code>0</code>.</p>
+<p>The <code>csv-separator</code> key defines the delimiter. This is commonly <code>,</code> or <code>;</code>, but a tab <code>\t</code>, space, or another character can also be used.</p>
+<p>MONICA recognizes the following commonly used <strong>Available Climate Data (ACD)</strong> names. Names are case-sensitive.</p>
+<table>
+<thead>
+<tr>
+<th>ACD element</th>
+<th>Description</th>
+<th>Example</th>
+<th>Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>day</code></strong></td>
+<td>Day of month</td>
+<td><code>5</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><code>month</code></strong></td>
+<td>Month of year</td>
+<td><code>11</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><code>year</code></strong></td>
+<td>Year</td>
+<td><code>2017</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><code>iso-date</code></strong></td>
+<td>Date in <code>YYYY-MM-DD</code> format</td>
+<td><code>2017-11-05</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><code>de-date</code></strong></td>
+<td>Date in <code>DD.MM.YYYY</code> format</td>
+<td><code>05.11.2017</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><code>tmin</code></strong></td>
+<td>Minimum daily air temperature</td>
+<td><code>-2</code></td>
+<td>°C</td>
+</tr>
+<tr>
+<td><strong><code>tavg</code></strong></td>
+<td>Average daily air temperature</td>
+<td><code>15.3</code></td>
+<td>°C</td>
+</tr>
+<tr>
+<td><strong><code>tmax</code></strong></td>
+<td>Maximum daily air temperature</td>
+<td><code>34.7</code></td>
+<td>°C</td>
+</tr>
+<tr>
+<td><strong><code>precip</code></strong></td>
+<td>Daily precipitation</td>
+<td><code>2.3</code></td>
+<td>mm</td>
+</tr>
+<tr>
+<td><strong><code>globrad</code></strong></td>
+<td>Daily global radiation</td>
+<td><code>27.431</code></td>
+<td>MJ m-2 d-1</td>
+</tr>
+<tr>
+<td><strong><code>sunhours</code></strong></td>
+<td>Daily sunshine duration (prefer <code>globrad</code> when available)</td>
+<td><code>8.5</code></td>
+<td>h</td>
+</tr>
+<tr>
+<td><strong><code>wind</code></strong></td>
+<td>Wind speed</td>
+<td><code>6.7</code></td>
+<td>m s-1</td>
+</tr>
+<tr>
+<td><strong><code>relhumid</code></strong></td>
+<td>Relative humidity</td>
+<td><code>90.0</code></td>
+<td>%</td>
+</tr>
+<tr>
+<td><strong><code>skip</code></strong></td>
+<td>Ignore this column</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>A date must be supplied either through <code>iso-date</code>, <code>de-date</code>, or the combination of <code>day</code>, <code>month</code>, and <code>year</code>.</p>
+<p>If <code>tavg</code> is absent, MONICA calculates it as <code>(tmin + tmax) / 2</code>. Either <code>globrad</code> or <code>sunhours</code> must be present. If only <code>sunhours</code> is provided, MONICA estimates global radiation using the site latitude.</p>
+<p>Unknown column headers are skipped automatically. A column can also be ignored explicitly by mapping its header to <code>skip</code>. This is useful, for example, when the file contains multiple columns representing the same climate variable.</p>
+<p>Column names can be mapped to ACD names with the <code>header-to-acd-names</code> object. Each key is a column name from the input file, and its value is the corresponding ACD name.</p>
+<p>A mapping value may instead be a JSON array with three elements:</p>
+<ol>
+<li>the ACD name</li>
+<li>an arithmetic operation: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
+<li>a numeric operand</li>
+</ol>
+<p>The operation is applied to values read for that climate element. For example, values in <code>J cm-2</code> are converted to <code>MJ m-2</code> by multiplying by <code>0.01</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"climate.csv-options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"start-date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1991-01-01"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"end-date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1997-12-31"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"no-of-climate-file-header-lines"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"csv-separator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"header-to-acd-names"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"DE-date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de-date"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"global_radiation"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"globrad"</span><span class="p">,</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>For a headerless file, the configuration would instead look like:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"climate.csv-options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"no-of-climate-file-header-lines"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"csv-separator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">"iso-date"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"tavg"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"tmin"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"tmax"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"wind"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"globrad"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"precip"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"relhumid"</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="outputting-results-from-monica">Outputting results from MONICA</h2>
+<p>Results requested from a MONICA run can be written in CSV format. The requested outputs, their aggregation, and the output destination are configured in <code>sim.json</code> under the key <code>output</code>.</p>
+<p>The following keys are direct members of <code>output</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>path-to-output</code></strong></td>
+<td>Directory in which output files are created</td>
+</tr>
+<tr>
+<td><strong><code>file-name</code></strong></td>
+<td>Name of the output file</td>
+</tr>
+<tr>
+<td><strong><code>write-file?</code></strong></td>
+<td>When <code>true</code>, write output to a file. When <code>false</code>, the command-line runner writes output to standard output, unless an output file is specified on the command line.</td>
+</tr>
+<tr>
+<td><strong><code>events</code></strong></td>
+<td>An array of alternating event definitions and lists of requested outputs</td>
+</tr>
+</tbody>
+</table>
+<p>CSV formatting is configured in the nested <code>output.csv-options</code> object:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>include-header-row</code></strong></td>
+<td>Include a row containing output names</td>
+</tr>
+<tr>
+<td><strong><code>include-units-row</code></strong></td>
+<td>Include a row containing units</td>
+</tr>
+<tr>
+<td><strong><code>include-aggregation-rows</code></strong></td>
+<td>Include two diagnostic rows containing MONICA's normalized output specifications (<code>m:</code>) and the originally requested output specifications (<code>j:</code>)</td>
+</tr>
+<tr>
+<td><strong><code>csv-separator</code></strong></td>
+<td>Column separator, for example <code>","</code></td>
+</tr>
+</tbody>
+</table>
+<p>Missing Boolean values are read as <code>false</code> by the command-line runner. Set the three <code>include-*</code> options explicitly when the corresponding rows are required.</p>
+<h3 id="defining-events">Defining events</h3>
+<p>The <code>events</code> key specifies which MONICA results to produce and when to produce them. Its value is a JSON array containing alternating <strong>event definitions</strong> and <strong>output lists</strong>. </p>
+<div class="highlight"><pre><span></span><code><span class="nt">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s2">"daily"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">"Date"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Tavg"</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="s2">"Harvest"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">"Date"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Yield"</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Each event definition can be: </p>
+<ul>
+<li>a string, such as <code>"daily"</code></li>
+<li>a JSON array containing a comparison expression</li>
+<li>a JSON object defining one or more trigger conditions</li>
+</ul>
+<p>MONICA recognizes the string shortcuts <code>"daily"</code>, <code>"monthly"</code>, <code>"yearly"</code>, <code>"run"</code>, and <code>"crop"</code>. Other strings are interpreted as an <code>at</code> trigger, such as a date pattern or a named workstep event.</p>
+<p>A comparison-expression array is normally shorthand for an <code>at</code> condition:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"Stage"</span><span class="p">,</span><span class="w"> </span><span class="s2">"="</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+<p>This is equivalent to:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">"at"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Stage"</span><span class="p">,</span><span class="w"> </span><span class="s2">"="</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]}</span>
+</code></pre></div>
+<p>The four-element forms <code>["at", output, operator, value]</code> and <code>["while", output, operator, value]</code> are also supported.</p>
+<p>An event object can contain:</p>
+<ol>
+<li><code>start</code> and <code>end</code>, defining the inclusive period during which the event is active</li>
+<li><code>from</code> and <code>to</code>, defining an inclusive aggregation range</li>
+<li><code>at</code>, producing non-aggregated output when a date, named event, or condition matches</li>
+<li><code>while</code>, collecting values while a condition is true and producing aggregated output when the period ends</li>
+</ol>
+<p>Date triggers use an ISO-shaped <code>YYYY-MM-DD</code> pattern. Components may be replaced by wildcards: <code>xxxx</code> for any year and <code>xx</code> for any month or day. For example, <code>xxxx-xx-15</code> matches the 15th day of every month during the simulation. A specified day that exceeds the number of days in a month is treated as that month's last day. Thus, <code>xxxx-xx-31</code> matches the final day of every month.</p>
+<h4 id="available-events">Available events</h4>
+<p>Event expressions determine when MONICA records or aggregates output values. They may refer to calendar date patterns, model output values, phenological events, or successfully applied worksteps. Event and output names are case-sensitive.</p>
+<h5 id="model-and-phenological-events">Model and phenological events</h5>
+<p>Common model-generated events include:</p>
+<ul>
+<li><code>Stage-1</code>, <code>Stage-2</code>, ...</li>
+<li><code>emergence</code></li>
+<li><code>anthesis</code></li>
+<li><code>cereal-stem-elongation</code></li>
+<li><code>maturity</code></li>
+</ul>
+<h5 id="workstep-events">Workstep events</h5>
+<p>A succesfully applied workstep generally emits an event matching its type, for example:</p>
+<ul>
+<li><code>Sowing</code></li>
+<li><code>AutomaticSowing</code></li>
+<li><code>Harvest</code></li>
+<li><code>AutomaticHarvest</code></li>
+<li><code>Cutting</code></li>
+<li><code>MineralFertilization</code></li>
+<li><code>NDemandFertilization</code></li>
+<li><code>OrganicFertilization</code></li>
+<li><code>Tillage</code></li>
+<li><code>Irrigation</code></li>
+<li><code>AutomaticIrrigation</code></li>
+<li><code>SetValue</code></li>
+</ul>
+<p>Automatic worksteps may emit both their base event and their automatic event. For example, automatic sowing emits both <code>Sowing</code> and <code>AutomaticSowing</code>.</p>
+<h5 id="event-expressions-and-shortcuts">Event expressions and shortcuts</h5>
+<p>The following table shows event expression examples, shortcuts, and their expanded forms:</p>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Expanded form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><code>{"start": "xxxx-05-01", "end": "xxxx-07-31", "at": "xxxx-xx-15"}</code></td>
+<td>Write results on the 15th of each month from May to July</td>
+</tr>
+<tr>
+<td></td>
+<td><code>{"from": "Sowing", "to": "anthesis", "while": ["ETa/ETc", "&lt;", 0.4]}</code></td>
+<td>Write aggregated results from sowing through anthesis, but only while actual to potential evapotranspiration is below 0.4</td>
+</tr>
+<tr>
+<td><code>"xxxx-03-31"</code></td>
+<td><code>{"at": "xxxx-03-31"}</code></td>
+<td>Write results every March 31st</td>
+</tr>
+<tr>
+<td><code>"daily"</code></td>
+<td><code>{"at": "xxxx-xx-xx"}</code></td>
+<td>Write daily results</td>
+</tr>
+<tr>
+<td><code>"monthly"</code></td>
+<td><code>{"from": "xxxx-xx-01", "to": "xxxx-xx-31"}</code></td>
+<td>Write monthly aggregated results</td>
+</tr>
+<tr>
+<td><code>"yearly"</code></td>
+<td><code>{"from": "xxxx-01-01", "to": "xxxx-12-31"}</code></td>
+<td>Write yearly aggregated results</td>
+</tr>
+<tr>
+<td><code>"run"</code></td>
+<td><code>{"from": &lt;start-date&gt;, "to": &lt;end-date&gt;}</code></td>
+<td>Write results aggregated over the entire simulation run</td>
+</tr>
+<tr>
+<td><code>"crop"</code></td>
+<td><code>{"from": "Sowing", "to": "Harvest"}</code></td>
+<td>Write results aggregated over the cropping period</td>
+</tr>
+<tr>
+<td><code>["while", "Stage", "=", 5]</code></td>
+<td><code>{"while": ["Stage", "=", 5]}</code></td>
+<td>Write results aggregated only while <code>Stage</code> equals 5</td>
+</tr>
+<tr>
+<td><code>["at", "Stage", "=", 2]</code></td>
+<td><code>{"at": ["Stage", "=", 2]}</code></td>
+<td>Write results daily when <code>Stage</code> equals 2</td>
+</tr>
+<tr>
+<td><code>[["Mois", 1], "&lt;", 0.5]</code></td>
+<td><code>{"at": [["Mois", 1], "&lt;", 0.5]}</code></td>
+<td>Write results daily when the soil moisture in the first layer is below 0.5</td>
+</tr>
+<tr>
+<td><code>"Sowing"</code></td>
+<td><code>{"at": "Sowing"}</code></td>
+<td>Write results at sowing time</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="list-of-outputs">List of outputs</h2>
+<p>After defining an output event (i.e., when MONICA should produce output), you must specify <strong>what</strong> it should output.</p>
+<p>For example:</p>
+<ul>
+<li><code>"Stage"</code> returns the crop's current development stage.</li>
+<li><code>["Mois", 1]</code> returns the volumetric soil moisture content of the first soil layer.</li>
+<li><code>["OrgBiom", "Root"]</code> returns the current root biomass.</li>
+</ul>
+<p>With the default layer thickness of 0.1 m, layer 1 represents a depth of 0-0.1 m.</p>
+<h3 id="output-types">Output types</h3>
+<p>MONICA output variables can return:</p>
+<ol>
+<li>Scalar numeric values, such as <code>"Stage"</code> or <code>"Precip"</code></li>
+<li>Scalar text values, such as <code>"Date"</code> or <code>"Crop"</code></li>
+<li>Values defined for individual soil layers, such as <code>"Mois"</code>, <code>"NO3"</code>, or <code>"STemp"</code></li>
+<li>Values defined for crop organs, such as <code>"OrgBiom"</code>, <code>"NPP-Organs"</code>, or <code>"Ra-Organs"</code></li>
+</ol>
+<p>Layer-based outputs must normally be accompanied by a layer number or layer range. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"Mois"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>or:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"Mois"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]]</span>
+</code></pre></div>
+<h3 id="soil-layers">Soil layers</h3>
+<p>MONICA uses 20 soil layers of 0.1 m each by default, resulting in a total simulated soil depth of 2 m. These defaults can be changed using <code>NumberOfLayers</code> and <code>LayerThickness</code>.</p>
+<p>Layer numbers in output definitions are one-based:</p>
+<ul>
+<li>Layer <code>1</code> is the first configured layer.</li>
+<li>Layer <code>15</code> spans 1.4-1.5 m with the default discretisation.</li>
+<li><code>[1, 5]</code> selects layers 1 through 5, inclusive, corresponding to 0-0.5 m with the default discretisation.</li>
+</ul>
+<p>The selected layers must exist in the configured soil profile.</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"Mois"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>returns soil moisture for layer 1, whereas:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"Mois"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]]</span>
+</code></pre></div>
+<p>returns a separate value for each of layers 1 through 5. </p>
+<p>Without a display-name override, these values receive column names such as:</p>
+<div class="highlight"><pre><span></span><code>Mois_1, Mois_2, Mois_3, Mois_4, Mois_5
+</code></pre></div>
+<h3 id="crop-organs">Crop organs</h3>
+<p>Organ-specific outputs use one of the following organ selectors:</p>
+<div class="highlight"><pre><span></span><code>Root, Leaf, Shoot, Fruit, Struct, Sugar
+</code></pre></div>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OrgBiom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Leaf"</span><span class="p">]</span>
+</code></pre></div>
+<p>returns the current leaf biomass.</p>
+<p>Not every crop necessarily defines every organ. If the selected organ is not present in the current crop, the output may be zero.</p>
+<p>Output names are case-sensitive. Aggregation operation and organ names are case-insensitive. Nevertheless, using the uppercase operation names and the organ spelling shown above is recommended.</p>
+<h3 id="output-definition-syntax">Output definition syntax</h3>
+<p>An output can be specified either as a string:</p>
+<div class="highlight"><pre><span></span><code><span class="s2">"Stage"</span>
+</code></pre></div>
+<p>or as a JSON array whose first element is the output name:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"Mois"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>The general forms are:</p>
+<div class="highlight"><pre><span></span><code><span class="s2">"OutputName"</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OutputName"</span><span class="p">,</span><span class="w"> </span><span class="s2">"TIME_OPERATION"</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OutputName"</span><span class="p">,</span><span class="w"> </span><span class="err">LAYER</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OutputName"</span><span class="p">,</span><span class="w"> </span><span class="err">LAYER</span><span class="p">,</span><span class="w"> </span><span class="s2">"TIME_OPERATION"</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OutputName"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="err">FIRST_LAYER</span><span class="p">,</span><span class="w"> </span><span class="err">LAST</span><span class="w"> </span><span class="err">LAYER</span><span class="p">]]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OutputName"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="err">FIRST_LAYER</span><span class="p">,</span><span class="w"> </span><span class="err">LAST</span><span class="w"> </span><span class="err">LAYER</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAYER_OPERATION"</span><span class="p">]]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OutputName"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="err">FIRST_LAYER</span><span class="p">,</span><span class="w"> </span><span class="err">LAST</span><span class="w"> </span><span class="err">LAYER</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAYER_OPERATION"</span><span class="p">],</span><span class="w"> </span><span class="s2">"TIME_OPERATION"</span><span class="p">]</span>
+</code></pre></div>
+<p>and, for organ-specific outputs:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OutputName"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ORGAN"</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OutputName"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ORGAN"</span><span class="p">,</span><span class="w"> </span><span class="s2">"TIME_OPERATION"</span><span class="p">]</span>
+</code></pre></div>
+<p>MONICA silently omits unknown output names. Therefore, output names should be copied exactly from the list of supported outputs.</p>
+<h3 id="display-names">Display names</h3>
+<p>A display name can be appended to an output name using <code>|</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"DOY|MatDOY"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAST"</span><span class="p">]</span>
+</code></pre></div>
+<p>The output column is then named <code>MatDOY</code> instead of <code>DOY</code>.</p>
+<p>Another example is:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"PercolationRate|WDrain"</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">]</span>
+</code></pre></div>
+<p>This selects percolation from layer 15, sums it over the event's aggregation period, and writes the result under the name <code>WDrain</code>.</p>
+<p>When a display name is used for an unaggregated layer range, the same display may be used for every selected layer.</p>
+<h3 id="aggregation">Aggregation</h3>
+<p>MONICA supports two independent forms of aggregation:</p>
+<ol>
+<li><strong>Layer aggregation</strong> combines values from several soil layers at each sampling step.</li>
+<li><strong>Time aggregation</strong> combines values collected over an event period, such as a month, year, crop cycle, or complete simulation run.</li>
+</ol>
+<p>The supported operations are:</p>
+<div class="highlight"><pre><span></span><code>AVG, MEDIAN, SUM, MIN, MAX, FIRST, LAST, NONE
+</code></pre></div>
+<h3 id="layer-aggregation">Layer aggregation</h3>
+<p>A layer aggregation operation is placed inside the layer range array:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"SOC"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s2">"AVG"</span><span class="p">]]</span>
+</code></pre></div>
+<p>At every sampling step, this calculates one value by averaging SOC across layers 1 through 3.</p>
+<p>If no layer operation is specified, the default is <code>NONE</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"SOC"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]]</span>
+</code></pre></div>
+<p>This produces three separate values rather than one aggregated value.</p>
+<p>For layer aggregation:</p>
+<ul>
+<li><code>AVG</code> returns the arithmetic mean across the selected layers</li>
+<li><code>MEDIAN</code> returns the median across the selected layers</li>
+<li><code>SUM</code> returns the sum across the selected layers</li>
+<li><code>MIN</code> and <code>MAX</code> return the smallest and largest values</li>
+<li><code>FIRST</code> returns the value from the shallowest selected layer</li>
+<li><code>LAST</code> returns the value from the deepest selected layer</li>
+<li><code>NONE</code> preserves the individual layer values</li>
+</ul>
+<p>Layer aggregation is applied at each sampling step, before any time aggregation.</p>
+<h3 id="time-aggregation">Time aggregation</h3>
+<p>A time aggregation operation is specified as the second element for scalar outputs:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"Precip"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">]</span>
+</code></pre></div>
+<p>or as the third outer element for layer- or organ-specific outputs:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"PercolationRate"</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"SOC"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s2">"AVG"</span><span class="p">],</span><span class="w"> </span><span class="s2">"LAST"</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"OrgBiom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Leaf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MAX"</span><span class="p">]</span>
+</code></pre></div>
+<p>For event periods such as <code>monthly</code>, <code>yearly</code>, <code>crop</code>, and <code>run</code>, MONICA temporarily collects values and applies the selected time operation when the event period ends.</p>
+<p>For numeric outputs, the default time operation is <code>AVG</code>.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="s2">"Act_ET"</span>
+</code></pre></div>
+<p>in a monthly event returns the average of the collected daily values. To obtain monthly cumulative evapotranspiration, use:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"Act_ET"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">]</span>
+</code></pre></div>
+<p>The period boundaries are inclusive. For an unfiltered <code>from</code>/<code>to</code> period:</p>
+<ul>
+<li><code>FIRST</code> returns the value collected on the <code>from</code> day.</li>
+<li><code>LAST</code> returns the value collected on the <code>to</code> day.</li>
+</ul>
+<p>If the event also contains a <code>while</code> condition, <code>FIRST</code> and <code>LAST</code> refer to the first and last values actually collected while the condition was true.</p>
+<p>For text outputs such as <code>Date</code> and <code>Crop</code>, use <code>FIRST</code> or <code>LAST</code> explicitly. Other operations are numeric and are not meaningful for text values.</p>
+<p>Although <code>NONE</code> is accepted as a time operation, it currently behaves like <code>LAST</code>. Use <code>LAST</code> explicitly when that behavior is required.</p>
+<p>For instantaneous events such as <code>daily</code>, a date event, or <code>Harvest</code>, no time range is accumulated. Consequently, the time operation has no practical effect.</p>
+<h3 id="aggregation-defaults">Aggregation defaults</h3>
+<table>
+<thead>
+<tr>
+<th>Aggregation type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Layer aggregation</td>
+<td><code>NONE</code></td>
+<td>Return a separate value for every selected layer</td>
+</tr>
+<tr>
+<td>Numeric time aggregation</td>
+<td><code>AVG</code></td>
+<td>Average the values collected during the event period</td>
+</tr>
+<tr>
+<td>Text time aggregation</td>
+<td>First value</td>
+<td>Use <code>FIRST</code> or <code>LAST</code> explicitly for clarity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="combining-layer-and-time-aggregation">Combining layer and time aggregation</h3>
+<p>Layer and time aggregation can be combined:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"Mois"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="s2">"AVG"</span><span class="p">],</span><span class="w"> </span><span class="s2">"LAST"</span><span class="p">]</span>
+</code></pre></div>
+<p>This definition:</p>
+<ol>
+<li>Averages soil moisture across layers 1–15 on every sampling day.</li>
+<li>Returns the resulting average from the last day of the event period.</li>
+</ol>
+<p>Similarly:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">"SOC"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s2">"AVG"</span><span class="p">],</span><span class="w"> </span><span class="s2">"AVG"</span><span class="p">]</span>
+</code></pre></div>
+<p>first averages <code>SOC</code> across layers 1–3 on each day and then averages those daily values over the event period.</p>
+<h3 id="examples">Examples</h3>
+<table>
+<thead>
+<tr>
+<th>Output definition</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"Date"</code></td>
+<td>Return the current date in ISO format, for example <code>2017-01-17</code></td>
+</tr>
+<tr>
+<td><code>["Year", "LAST"]</code></td>
+<td>Return the year associated with the final collected value</td>
+</tr>
+<tr>
+<td><code>["PercolationRate\|WDrain", 15, "SUM"]</code></td>
+<td>Sum percolation rate from layer 15 over the event period and name the result <code>WDrain</code></td>
+</tr>
+<tr>
+<td><code>["Mois", [1, 20]]</code></td>
+<td>Return one soil moisture value for every layer</td>
+</tr>
+<tr>
+<td><code>["Mois", [1, 20, "AVG]]</code></td>
+<td>Return one value containing the mean soil moisture across all 20 layers at each sampling step</td>
+</tr>
+<tr>
+<td><code>["OrgBiom", "Leaf"]</code></td>
+<td>Return current leaf biomass</td>
+</tr>
+<tr>
+<td><code>["SOC", [1, 3, "AVG"]]</code></td>
+<td>Average soil organic carbon across layers 1-3 at each sampling step</td>
+</tr>
+<tr>
+<td><code>["SOC", [1, 3, "AVG], "LAST]</code></td>
+<td>Return the layer average SOC value from the final day of the event period</td>
+</tr>
+<tr>
+<td><code>["Precip", "SUM"]</code></td>
+<td>Sum precipitation over the event period</td>
+</tr>
+<tr>
+<td><code>["SnowD", "MAX"]</code></td>
+<td>Return the maximum snow depth during the event period</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output-order">Output order</h3>
+<p>Within each event section, output columns follow the order in which their definitions appear in the <code>events</code> list.</p>
+<p>Event sections are also processed in their configured order. Depending on the runner configuration, the sections may be written consecutively to one file or to separate files.</p>
+<p>Unknown output names are omitted, so they do not reserve a position in the output.</p>
+<h3 id="example-output-configuration">Example output configuration</h3>
+<p>The example below shows an output section that produces an equivalent file to the <code>rmout</code> file from MONICA version 1. It also includes a commented out (<code>__events</code>) example of outputs used in the <strong>EU MACSUR Heat Stress</strong> study.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"write-file?"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"file-name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"out.csv"</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">"csv-options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"include-header-row"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"include-units-row"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"include-aggregation-rows"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"csv-separator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">"__events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">"crop"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"Year"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"DOY|SowDOY"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FIRST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"LAI|MaxLAI"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MAX"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"PercolationRate|WDrain"</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"Act_ET|CumET"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"Act_Ev|Evap"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"Mois|SoilAvW"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span><span class="w"> </span><span class="s2">"LAST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"RunOff"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"ET0|Eto"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"Tmax|TMAXAve"</span><span class="p">,</span><span class="w"> </span><span class="s2">"AVG"</span><span class="p">],</span>
+
+<span class="w">      </span><span class="p">[</span><span class="s2">"Yield"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"AbBiom|Biom-ma"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"AbBiomN|CroN-ma"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"GrainN"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAST"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">],</span>
+
+<span class="w">    </span><span class="p">[</span><span class="s2">"while"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Stage"</span><span class="p">,</span><span class="w"> </span><span class="s2">"="</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">],</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"DOY|AntDOY"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FIRST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"AbBiom|Biom-an"</span><span class="p">,</span><span class="w"> </span><span class="s2">"First"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"AbBiomN|CroN-an"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FIRST"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">],</span>
+
+<span class="w">    </span><span class="p">[</span><span class="s2">"while"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Stage"</span><span class="p">,</span><span class="w"> </span><span class="s2">"="</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">],</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"Yield"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FIRST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"DOY|MatDOY"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FIRST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"AbBiom|Biom-ma"</span><span class="p">,</span><span class="w"> </span><span class="s2">"First"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"AbBiomN|CroN-ma"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FIRST"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"GrainN"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FIRST"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">],</span>
+
+<span class="w">    </span><span class="p">[</span><span class="s2">"while"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Stage"</span><span class="p">,</span><span class="w"> </span><span class="s2">"="</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"DOY|EmergDOY"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FIRST"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">"events"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">"daily"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">"Date"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Crop"</span><span class="p">,</span><span class="w"> </span><span class="s2">"TraDef"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Tra"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NDef"</span><span class="p">,</span><span class="w"> </span><span class="s2">"HeatRed"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FrostRed"</span><span class="p">,</span><span class="w"> </span><span class="s2">"OxRed"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"Stage"</span><span class="p">,</span><span class="w"> </span><span class="s2">"TempSum"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VernF"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DaylF"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"IncRoot"</span><span class="p">,</span><span class="w"> </span><span class="s2">"IncLeaf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"IncShoot"</span><span class="p">,</span><span class="w"> </span><span class="s2">"IncFruit"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"RelDev"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LT50"</span><span class="p">,</span><span class="w"> </span><span class="s2">"AbBiom"</span><span class="p">,</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"OrgBiom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Root"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"OrgBiom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Leaf"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"OrgBiom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Shoot"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"OrgBiom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fruit"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"OrgBiom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Struct"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"OrgBiom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sugar"</span><span class="p">],</span>
+<span class="w">      </span><span class="s2">"Yield"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SecondaryYield"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GroPhot"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NetPhot"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MaintR"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GrowthR"</span><span class="p">,</span><span class="w"> </span><span class="s2">"StomRes"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"Height"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAI"</span><span class="p">,</span><span class="w"> </span><span class="s2">"RootDep"</span><span class="p">,</span><span class="w"> </span><span class="s2">"EffRootDep"</span><span class="p">,</span><span class="w"> </span><span class="s2">"TotBiomN"</span><span class="p">,</span><span class="w"> </span><span class="s2">"AbBiomN"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SumNUp"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"ActNup"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PotNup"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NFixed"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Target"</span><span class="p">,</span><span class="w"> </span><span class="s2">"CritN"</span><span class="p">,</span><span class="w"> </span><span class="s2">"AbBiomNc"</span><span class="p">,</span><span class="w"> </span><span class="s2">"YieldNc"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"Protein"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"NPP"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"NPP-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Root"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"NPP-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Leaf"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"NPP-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Shoot"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"NPP-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fruit"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"NPP-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Struct"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"NPP-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sugar"</span><span class="p">],</span>
+<span class="w">      </span><span class="s2">"GPP"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"Ra"</span><span class="p">,</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"Ra-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Root"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"Ra-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Leaf"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"Ra-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Shoot"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"Ra-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fruit"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"Ra-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Struct"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"Ra-Organs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sugar"</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"Mois"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]],</span><span class="w"> </span><span class="s2">"Precip"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Irrig"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Infilt"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Surface"</span><span class="p">,</span><span class="w"> </span><span class="s2">"RunOff"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SnowD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FrostD"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"ThawD"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"PASW"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]],</span><span class="w"> </span><span class="s2">"SurfTemp"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"STemp"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]],</span>
+<span class="w">      </span><span class="s2">"Act_Ev"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Act_ET"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ET0"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Kc"</span><span class="p">,</span><span class="w"> </span><span class="s2">"AtmCO2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Groundw"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Recharge"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NLeach"</span><span class="p">,</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"NO3"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]],</span><span class="w"> </span><span class="p">[</span><span class="s2">"Carb"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"NH4"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]],</span><span class="w"> </span><span class="p">[</span><span class="s2">"NO2"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"SOC"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]],</span><span class="w"> </span><span class="p">[</span><span class="s2">"SOC-X-Y"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">]],</span><span class="w"> </span><span class="p">[</span><span class="s2">"SOC-X-Y"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">]],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"AOMf"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"AOMs"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"SMBf"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"SMBs"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"SOMf"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span><span class="s2">"SOMs"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"CBal"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"Nmin"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]],</span><span class="w"> </span><span class="s2">"NetNmin"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Denit"</span><span class="p">,</span><span class="w"> </span><span class="s2">"N2O"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SoilpH"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"NEP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NEE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Rh"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Tmin"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Tavg"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Tmax"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Wind"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Globrad"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Relhumid"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sunhours"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"NFert"</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Below you will find a simplified example of a complete <code>sim.json</code> file focused on output configuration.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"climate.csv-options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"__given the start and end date, monica will run just this time range, else the full time range given by supplied climate data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"start-date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1991-01-01"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"end-date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1997-12-31"</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nt">"no-of-climate-file-header-lines"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"csv-separator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"header-to-acd-names"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"DE-date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de-date"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"write-file?"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"file-name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"out.csv"</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nt">"__how to write and what to include in monica CSV output"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"csv-options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"include-header-row"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"include-units-row"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"include-aggregation-rows"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"csv-separator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span>
+<span class="w">        </span><span class="p">},</span>
+
+<span class="w">        </span><span class="nt">"__what data to include in the monica output according to the events defined by the keys"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"events"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">"Year"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Month"</span><span class="p">,</span>
+<span class="w">                </span><span class="p">[</span><span class="s2">"SOC"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s2">"AVG"</span><span class="p">]],</span><span class="w"> </span><span class="p">[</span><span class="s2">"SOC"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s2">"AVG"</span><span class="p">]],</span>
+<span class="w">                </span><span class="p">[</span><span class="s2">"WaterContent"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="s2">"AVG"</span><span class="p">]],</span><span class="w"> </span><span class="s2">"Recharge"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NLeach"</span><span class="p">,</span>
+<span class="w">                </span><span class="p">[</span><span class="s2">"SnowD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MAX"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"SnowD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"FrostD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span>
+<span class="w">                </span><span class="p">[</span><span class="s2">"RunOff"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"NH3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"Precip"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span><span class="w"> </span><span class="s2">"Act_ET"</span>
+<span class="w">            </span><span class="p">],</span>
+
+<span class="w">            </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">"Year"</span><span class="p">,</span>
+<span class="w">                </span><span class="p">[</span><span class="s2">"N"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]],</span>
+<span class="w">                </span><span class="p">[</span><span class="s2">"RunOff"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span>
+<span class="w">                </span><span class="p">[</span><span class="s2">"NLeach"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">],</span>
+<span class="w">                </span><span class="p">[</span><span class="s2">"Recharge"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">]</span>
+<span class="w">            </span><span class="p">],</span>
+
+<span class="w">            </span><span class="s2">"run"</span><span class="p">,</span><span class="w"> </span><span class="p">[[</span><span class="s2">"Precip"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUM"</span><span class="p">]],</span>
+
+<span class="w">            </span><span class="s2">"Harvest"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"Crop"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"OrgBiom"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fruit"</span><span class="p">],</span><span class="w"> </span><span class="s2">"Yield"</span><span class="p">]</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">"NumberOfLayers"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"LayerThickness"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="s2">"m"</span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">"UseSecondaryYields"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"NitrogenResponseOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"WaterDeficitResponseOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"EmergenceMoistureControlOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"EmergenceFloodingControlOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"FrostKillOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">"UseAutomaticIrrigation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"AutoIrrigationParams"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"irrigationParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"nitrateConcentration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"mg dm-3"</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">"sulfateConcentration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"mg dm-3"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="s2">"mm"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"threshold"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.35</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">"UseNMinMineralFertilisingMethod"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"NMinUserParams"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">"delayInDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"NMinFertiliserPartition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my AN"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my very own ammonium nitrate variant"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"Carbamid"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"NH4"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"NO3"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="common-output-variables">Common output variables</h2>
+<p>The tables below group commonly used output variables by topic. The most up-to-date list is defined in <a href="https://github.com/zalf-rpm/monica/blob/master/src/io/build-output.cpp"><strong><code>build-output.cpp</code></strong></a>.</p>
+<p>Output names are case-sensitive. Unknown names are ignored, so check the generated header when adding a new output definition.</p>
+<div class="highlight"><pre><span></span><code><span class="n">build</span><span class="p">({</span><span class="n">id</span><span class="o">++</span><span class="p">,</span><span class="w"> </span><span class="s">"Date"</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">,</span><span class="w"> </span><span class="s">"output current date"</span><span class="p">},</span>
+<span class="p">...</span>
+<span class="n">build</span><span class="p">({</span><span class="n">id</span><span class="o">++</span><span class="p">,</span><span class="w"> </span><span class="s">"TraDef"</span><span class="p">,</span><span class="w"> </span><span class="s">"0;1"</span><span class="p">,</span><span class="w"> </span><span class="s">"TranspirationDeficit"</span><span class="p">},</span>
+</code></pre></div>
+<p>In this example, <code>Date</code> and <code>TraDef</code> are allowed output names. Additionally, the code lists the expected units of measure (if defined) and provides a description for each output variable.</p>
+<h3 id="general-simulation-information">General simulation information</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>Count</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Constant value <code>1</code> for counting outputs or events</td>
+</tr>
+<tr>
+<td><strong><code>CM-count</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Order number of the currently sown valid crop (<code>0</code> before sowing)</td>
+</tr>
+<tr>
+<td><strong><code>Date</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Simulation date (<code>YYYY-MM-DD</code>)</td>
+</tr>
+<tr>
+<td><strong><code>days-since-start</code></strong></td>
+<td></td>
+<td></td>
+<td>d</td>
+<td>Number of days since simulation start</td>
+</tr>
+<tr>
+<td><strong><code>DOY</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Current day of year (<code>1-365</code>, or <code>1-366</code> in leap years)</td>
+</tr>
+<tr>
+<td><strong><code>Month</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Current month number (<code>1-12</code>)</td>
+</tr>
+<tr>
+<td><strong><code>Year</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Current year</td>
+</tr>
+<tr>
+<td><strong><code>Crop</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Crop name (<code>species/cultivar</code>, empty when no crop is growing)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="weather-and-atmospheric-conditions">Weather and atmospheric conditions</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>AtmCO2</code></strong></td>
+<td></td>
+<td></td>
+<td>ppm</td>
+<td>Atmospheric CO<sub>2</sub> concentration</td>
+</tr>
+<tr>
+<td><strong><code>Tmin</code></strong></td>
+<td></td>
+<td></td>
+<td>°C</td>
+<td>Daily minimum air temperature</td>
+</tr>
+<tr>
+<td><strong><code>Tavg</code></strong></td>
+<td></td>
+<td></td>
+<td>°C</td>
+<td>Daily mean air temperature</td>
+</tr>
+<tr>
+<td><strong><code>Tmax</code></strong></td>
+<td></td>
+<td></td>
+<td>°C</td>
+<td>Daily maximum air temperature</td>
+</tr>
+<tr>
+<td><strong><code>Precip</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Daily precipitation</td>
+</tr>
+<tr>
+<td><strong><code>Wind</code></strong></td>
+<td></td>
+<td></td>
+<td>m s-1</td>
+<td>Daily wind speed</td>
+</tr>
+<tr>
+<td><strong><code>Globrad</code></strong></td>
+<td></td>
+<td></td>
+<td>MJ m-2</td>
+<td>Daily global radiation</td>
+</tr>
+<tr>
+<td><strong><code>Relhumid</code></strong></td>
+<td></td>
+<td></td>
+<td>%</td>
+<td>Daily relative humidity</td>
+</tr>
+<tr>
+<td><strong><code>Sunhours</code></strong></td>
+<td></td>
+<td></td>
+<td>h</td>
+<td>Daily sunshine duration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crop-development-and-stress-responses">Crop development and stress responses</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>TraDef</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Ratio of actual to potential transpiration (<code>1</code> = no stress, <code>0</code> = maximum stress)</td>
+</tr>
+<tr>
+<td><strong><code>NDef</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Crop N reduction factor (<code>1</code> = no stress, <code>0</code> = maximum stress)</td>
+</tr>
+<tr>
+<td><strong><code>HeatRed</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Heat stress reduction factor (<code>1</code> = no damage, <code>0</code> = maximum damage)</td>
+</tr>
+<tr>
+<td><strong><code>FrostRed</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Frost damage reduction factor (<code>1</code> = no damage, <code>0</code> = maximum damage)</td>
+</tr>
+<tr>
+<td><strong><code>OxRed</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Oxygen stress reduction factor (<code>1</code> = no damage, <code>0</code> = maximum damage)</td>
+</tr>
+<tr>
+<td><strong><code>Stage</code></strong></td>
+<td></td>
+<td>x</td>
+<td>1-N</td>
+<td>One-based phenological stage number (<code>0</code> = no crop)</td>
+</tr>
+<tr>
+<td><strong><code>TempSum</code></strong></td>
+<td></td>
+<td></td>
+<td>°C d</td>
+<td>Accumulated effective temperature sum</td>
+</tr>
+<tr>
+<td><strong><code>VernF</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Vernalisation factor (<code>1</code> = unrestricted, <code>0</code> = fully restricted)</td>
+</tr>
+<tr>
+<td><strong><code>DaylF</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Daylength response factor (<code>1</code> = unrestricted, <code>0</code> = fully restricted)</td>
+</tr>
+<tr>
+<td><strong><code>RelDev</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Ratio of the current accumulated temperature sum to the crop's total temperature requirement (<code>0</code> = start, <code>1</code> = maturity)</td>
+</tr>
+<tr>
+<td><strong><code>LT50</code></strong></td>
+<td></td>
+<td></td>
+<td>°C</td>
+<td>Crop crown temperature causing 50% lethal damage</td>
+</tr>
+<tr>
+<td><strong><code>RootNDef</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Root N reduction factor (<code>1</code> = no stress, <code>0</code> = maximum stress)</td>
+</tr>
+<tr>
+<td><strong><code>TimeUnderAnoxia</code></strong></td>
+<td></td>
+<td></td>
+<td>d</td>
+<td>Internal anoxia duration counter (<code>0</code> = no current anoxia)</td>
+</tr>
+<tr>
+<td><strong><code>Tmax&gt;=40</code></strong></td>
+<td></td>
+<td></td>
+<td>0 or 1</td>
+<td><code>1</code> when the current daily maximum air temperature is at least 40 °C, otherwise <code>0</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="crop-biomass-and-productivity">Crop biomass and productivity</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>IncRoot</code></strong></td>
+<td></td>
+<td></td>
+<td>kg CH2O ha-1 d-1</td>
+<td>Daily root biomass increment</td>
+</tr>
+<tr>
+<td><strong><code>IncLeaf</code></strong></td>
+<td></td>
+<td></td>
+<td>kg CH2O ha-1 d-1</td>
+<td>Daily leaf biomass increment</td>
+</tr>
+<tr>
+<td><strong><code>IncShoot</code></strong></td>
+<td></td>
+<td></td>
+<td>kg CH2O ha-1 d-1</td>
+<td>Daily shoot biomass increment</td>
+</tr>
+<tr>
+<td><strong><code>IncFruit</code></strong></td>
+<td></td>
+<td></td>
+<td>kg CH2O ha-1 d-1</td>
+<td>Daily fruit or storage organ biomass increment</td>
+</tr>
+<tr>
+<td><strong><code>AbBiom</code></strong></td>
+<td></td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Aboveground crop biomass</td>
+</tr>
+<tr>
+<td><strong><code>OrgBiom</code></strong></td>
+<td>O</td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Total biomass of the selected crop organ, including green and dead biomass (e.g., <code>Root</code>, <code>Leaf</code>, <code>Shoot</code>, <code>Fruit</code>)</td>
+</tr>
+<tr>
+<td><strong><code>OrgGreenBiom</code></strong></td>
+<td>O</td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Green biomass of the selected crop organ (e.g., <code>Root</code>, <code>Leaf</code>, <code>Shoot</code>, <code>Fruit</code>)</td>
+</tr>
+<tr>
+<td><strong><code>Yield</code></strong></td>
+<td></td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Primary crop yield</td>
+</tr>
+<tr>
+<td><strong><code>SecondaryYield</code></strong></td>
+<td></td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Secondary crop yield</td>
+</tr>
+<tr>
+<td><strong><code>sumExportedCutBiomass</code></strong></td>
+<td></td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Cumulative exported cut biomass</td>
+</tr>
+<tr>
+<td><strong><code>exportedCutBiomass</code></strong></td>
+<td></td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Exported biomass from the latest cut</td>
+</tr>
+<tr>
+<td><strong><code>sumResidueCutBiomass</code></strong></td>
+<td></td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Cumulative cut residue biomass</td>
+</tr>
+<tr>
+<td><strong><code>residueCutBiomass</code></strong></td>
+<td></td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Residue biomass from the latest cut</td>
+</tr>
+<tr>
+<td><strong><code>GroPhot</code></strong></td>
+<td></td>
+<td></td>
+<td>kg CH2O ha-1 d-1</td>
+<td>Daily gross photosynthesis</td>
+</tr>
+<tr>
+<td><strong><code>NetPhot</code></strong></td>
+<td></td>
+<td></td>
+<td>kg CH2O ha-1 d-1</td>
+<td>Net daily assimilates</td>
+</tr>
+<tr>
+<td><strong><code>MaintR</code></strong></td>
+<td></td>
+<td></td>
+<td>kg CH2O ha-1 d-1</td>
+<td>Daily maintenance respiration (AGROSIM-based)</td>
+</tr>
+<tr>
+<td><strong><code>GrowthR</code></strong></td>
+<td></td>
+<td></td>
+<td>kg CH2O ha-1 d-1</td>
+<td>Daily growth respiration (AGROSIM-based)</td>
+</tr>
+<tr>
+<td><strong><code>StomRes</code></strong></td>
+<td></td>
+<td></td>
+<td>s m-1</td>
+<td>Stomatal resistance</td>
+</tr>
+<tr>
+<td><strong><code>Height</code></strong></td>
+<td></td>
+<td></td>
+<td>m</td>
+<td>Crop height</td>
+</tr>
+<tr>
+<td><strong><code>LAI</code></strong></td>
+<td></td>
+<td></td>
+<td>m2 leaf m-2 ground</td>
+<td>Leaf area index</td>
+</tr>
+<tr>
+<td><strong><code>Ass</code></strong></td>
+<td></td>
+<td></td>
+<td>kg CH2O ha-1 d-1</td>
+<td>Net daily assimilates</td>
+</tr>
+<tr>
+<td><strong><code>LightInterception1</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Radiation intercepted by the sole, upper, or shorter canopy</td>
+</tr>
+<tr>
+<td><strong><code>LightInterception2</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Radiation intercepted by the taller crop's lower canopy</td>
+</tr>
+<tr>
+<td><strong><code>BedGrad</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Crop canopy cover fraction</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crop-nitrogen">Crop nitrogen</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>TotBiomN</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>N content of total crop biomass</td>
+</tr>
+<tr>
+<td><strong><code>AbBiomN</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>N content of aboveground biomass</td>
+</tr>
+<tr>
+<td><strong><code>SumNUp</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>Cumulative crop N uptake</td>
+</tr>
+<tr>
+<td><strong><code>ActNup</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>Daily actual crop N uptake</td>
+</tr>
+<tr>
+<td><strong><code>PotNup</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>Daily potential crop N uptake</td>
+</tr>
+<tr>
+<td><strong><code>NFixed</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>Daily biological atmospheric N fixation</td>
+</tr>
+<tr>
+<td><strong><code>Target</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N kg-1 DM</td>
+<td>Target aboveground biomass N concentration</td>
+</tr>
+<tr>
+<td><strong><code>CritN</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N kg-1 DM</td>
+<td>Critical aboveground biomass N concentration</td>
+</tr>
+<tr>
+<td><strong><code>AbBiomNc</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N kg-1 DM</td>
+<td>Current aboveground biomass N concentration</td>
+</tr>
+<tr>
+<td><strong><code>Nstress</code></strong></td>
+<td></td>
+<td></td>
+<td>0-1</td>
+<td>Crop N sufficiency (<code>1</code> = sufficient N)</td>
+</tr>
+<tr>
+<td><strong><code>YieldNc</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N kg-1 DM</td>
+<td>Primary yield N concentration</td>
+</tr>
+<tr>
+<td><strong><code>Protein</code></strong></td>
+<td></td>
+<td></td>
+<td>kg protein kg-1 DM</td>
+<td>Primary yield crude protein concentration, calculated as <code>YieldNc * 6.25</code></td>
+</tr>
+<tr>
+<td><strong><code>GrainN</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>Fruit organ N content</td>
+</tr>
+<tr>
+<td><strong><code>Nresid</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>Crop residue N content</td>
+</tr>
+<tr>
+<td><strong><code>ActNupLayer</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>Daily N uptake from the selected soil layer</td>
+</tr>
+<tr>
+<td><strong><code>YieldN</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>Primary yield N content</td>
+</tr>
+<tr>
+<td><strong><code>rootNConcentration</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N kg-1 DM</td>
+<td>Root biomass N concentration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crop-roots-and-water-use">Crop roots and water use</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>Tra</code></strong> or <strong><code>Transpiration</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Daily actual crop transpiration</td>
+</tr>
+<tr>
+<td><strong><code>Act_Trans</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Daily actual crop transpiration, rounded to one decimal place</td>
+</tr>
+<tr>
+<td><strong><code>RootDep</code></strong></td>
+<td></td>
+<td></td>
+<td>layer count</td>
+<td>Rooting depth in soil layers</td>
+</tr>
+<tr>
+<td><strong><code>EffRootDep</code></strong></td>
+<td></td>
+<td></td>
+<td>m</td>
+<td>Maximum effective rooting depth</td>
+</tr>
+<tr>
+<td><strong><code>rootDensity</code></strong></td>
+<td>L</td>
+<td></td>
+<td>m root m-3 soil</td>
+<td>Root density in the selected soil layer</td>
+</tr>
+<tr>
+<td><strong><code>rootingZone</code></strong></td>
+<td></td>
+<td></td>
+<td>layer count</td>
+<td>Number of soil layers in the rooting zone</td>
+</tr>
+<tr>
+<td><strong><code>PotTraDef</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Water supply deficit in the last processed root layer</td>
+</tr>
+<tr>
+<td><strong><code>ActTraDef</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Actual deficit in the last processed root layer</td>
+</tr>
+<tr>
+<td><strong><code>TraRed</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Transpiration reduction in the last processed root layer</td>
+</tr>
+<tr>
+<td><strong><code>RootWaUptak</code></strong></td>
+<td>L</td>
+<td></td>
+<td>mm</td>
+<td>Water extracted from the selected layer</td>
+</tr>
+<tr>
+<td><strong><code>Kc</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Current crop coefficient used to calculate potential evapotranspiration as <code>ET0 * Kc</code></td>
+</tr>
+<tr>
+<td><strong><code>Kcb</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>FAO-56 basal crop coefficient</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ecosystem-carbon-fluxes">Ecosystem carbon fluxes</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>NPP</code></strong></td>
+<td></td>
+<td></td>
+<td>kg C ha-1 d-1</td>
+<td>Net primary production: <code>GPP - Ra</code></td>
+</tr>
+<tr>
+<td><strong><code>NPP-Organs</code></strong></td>
+<td>O</td>
+<td></td>
+<td>kg C ha-1 d-1</td>
+<td>NPP allocated to the selected organ by biomass share</td>
+</tr>
+<tr>
+<td><strong><code>GPP</code></strong></td>
+<td></td>
+<td></td>
+<td>kg C ha-1 d-1</td>
+<td>Gross primary production</td>
+</tr>
+<tr>
+<td><strong><code>Ra</code></strong></td>
+<td></td>
+<td></td>
+<td>kg C ha-1 d-1</td>
+<td>Autotrophic crop respiration</td>
+</tr>
+<tr>
+<td><strong><code>Ra-Organs</code></strong></td>
+<td>O</td>
+<td></td>
+<td>kg C ha-1 d-1</td>
+<td><code>Ra</code> allocated to the selected organ by biomass share</td>
+</tr>
+<tr>
+<td><strong><code>NEP</code></strong></td>
+<td></td>
+<td></td>
+<td>kg C ha-1 d-1</td>
+<td>Net ecosystem production: <code>NPP - Rh</code></td>
+</tr>
+<tr>
+<td><strong><code>NEE</code></strong></td>
+<td></td>
+<td></td>
+<td>kg C ha-1 d-1</td>
+<td>Net ecosystem exchange: <code>Rh - NPP</code></td>
+</tr>
+<tr>
+<td><strong><code>Rh</code></strong></td>
+<td></td>
+<td></td>
+<td>kg C ha-1 d-1</td>
+<td>Heterotrophic decomposer respiration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="soil-water-balance">Soil water balance</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>Mois</code></strong></td>
+<td>L</td>
+<td>x</td>
+<td>m3 m-3</td>
+<td>Volumetric soil water content</td>
+</tr>
+<tr>
+<td><strong><code>Infilt</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Daily infiltration into the topsoil</td>
+</tr>
+<tr>
+<td><strong><code>Surface</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Surface water storage</td>
+</tr>
+<tr>
+<td><strong><code>RunOff</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Daily surface water runoff</td>
+</tr>
+<tr>
+<td><strong><code>SnowD</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Snow depth</td>
+</tr>
+<tr>
+<td><strong><code>PASW</code></strong></td>
+<td>L</td>
+<td></td>
+<td>m3 m-3</td>
+<td>Plant available soil water (<code>Mois - Pwp</code>)</td>
+</tr>
+<tr>
+<td><strong><code>Act_Ev</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Actual evaporation</td>
+</tr>
+<tr>
+<td><strong><code>Pot_ET</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Potential evapotranspiration (<code>ET0 * Kc</code>)</td>
+</tr>
+<tr>
+<td><strong><code>Act_ET</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Total daily actual evapotranspiration</td>
+</tr>
+<tr>
+<td><strong><code>ET0</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Daily reference evapotranspiration</td>
+</tr>
+<tr>
+<td><strong><code>Groundw</code></strong></td>
+<td></td>
+<td></td>
+<td>m</td>
+<td>Groundwater table depth</td>
+</tr>
+<tr>
+<td><strong><code>Recharge</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Water flux at the model's lower boundary</td>
+</tr>
+<tr>
+<td><strong><code>WaterContent</code></strong></td>
+<td>L</td>
+<td></td>
+<td>0-1</td>
+<td>Relative available water: <code>(Mois - Pwp)/(Fc - Pwp)</code></td>
+</tr>
+<tr>
+<td><strong><code>CapillaryRise</code></strong></td>
+<td>L</td>
+<td></td>
+<td></td>
+<td>Capillary water value</td>
+</tr>
+<tr>
+<td><strong><code>PercolationRate</code></strong></td>
+<td>L</td>
+<td></td>
+<td>mm d-1</td>
+<td>Percolation through the selected soil layer</td>
+</tr>
+<tr>
+<td><strong><code>Evapotranspiration</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Remaining evapotranspiration after evaporation of intercepted water</td>
+</tr>
+<tr>
+<td><strong><code>Evaporation</code></strong> or <strong><code>Evaporation_from_intercept</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Potential ET remaining after interception evaporation</td>
+</tr>
+<tr>
+<td><strong><code>ETa/ETc</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Ratio of actual to potential evapotranspiration <code>Act_ET/Pot_ET</code></td>
+</tr>
+<tr>
+<td><strong><code>Fc</code></strong></td>
+<td>L</td>
+<td></td>
+<td>m3 m-3</td>
+<td>Field capacity</td>
+</tr>
+<tr>
+<td><strong><code>Pwp</code></strong></td>
+<td>L</td>
+<td></td>
+<td>m3 m-3</td>
+<td>Permanent wilting point</td>
+</tr>
+<tr>
+<td><strong><code>Ke</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>FAO-56 soil evaporation coefficient</td>
+</tr>
+<tr>
+<td><strong><code>AWC</code></strong></td>
+<td>L</td>
+<td></td>
+<td>m3 m-3</td>
+<td>Available water capacity: <code>Fc - Pwp</code></td>
+</tr>
+<tr>
+<td><strong><code>Sat</code></strong></td>
+<td>L</td>
+<td></td>
+<td>m3 m-3</td>
+<td>Saturated water content</td>
+</tr>
+<tr>
+<td><strong><code>WaterFlux</code></strong></td>
+<td>L</td>
+<td></td>
+<td>mm d-1</td>
+<td>Vertical water flux (positive = downward, negative = upward)</td>
+</tr>
+<tr>
+<td><strong><code>Evaporated_from_surface</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Daily evaporation from surface water storage</td>
+</tr>
+</tbody>
+</table>
+<h3 id="soil-physical-and-thermal-properties">Soil physical and thermal properties</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>FrostD</code></strong></td>
+<td></td>
+<td></td>
+<td>m</td>
+<td>Frost front depth in soil</td>
+</tr>
+<tr>
+<td><strong><code>ThawD</code></strong></td>
+<td></td>
+<td></td>
+<td>m</td>
+<td>Thaw front depth in soil</td>
+</tr>
+<tr>
+<td><strong><code>SurfTemp</code></strong></td>
+<td></td>
+<td></td>
+<td>°C</td>
+<td>Soil surface temperature</td>
+</tr>
+<tr>
+<td><strong><code>STemp</code></strong></td>
+<td>L</td>
+<td></td>
+<td>°C</td>
+<td>Soil temperature in the selected layer</td>
+</tr>
+<tr>
+<td><strong><code>Sand</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg kg-1</td>
+<td>Soil sand content</td>
+</tr>
+<tr>
+<td><strong><code>Clay</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg kg-1</td>
+<td>Soil clay content</td>
+</tr>
+<tr>
+<td><strong><code>Silt</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg kg-1</td>
+<td>Soil silt content</td>
+</tr>
+<tr>
+<td><strong><code>Stone</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg kg-1</td>
+<td>Soil stone content</td>
+</tr>
+<tr>
+<td><strong><code>pH</code></strong></td>
+<td>L</td>
+<td></td>
+<td></td>
+<td>Soil pH in the selected layer</td>
+</tr>
+<tr>
+<td><strong><code>SoilpH</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Soil pH in the first layer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="soil-carbon-pools-and-dynamics">Soil carbon pools and dynamics</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>SOC</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C kg-1</td>
+<td>Total soil organic carbon mass fraction</td>
+</tr>
+<tr>
+<td><strong><code>SOC-X-Y</code></strong></td>
+<td>L</td>
+<td></td>
+<td>g C m-2</td>
+<td>SOC stock in each selected layer</td>
+</tr>
+<tr>
+<td><strong><code>AOMf</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3</td>
+<td>Total fast pool AOM carbon</td>
+</tr>
+<tr>
+<td><strong><code>AOMs</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3</td>
+<td>Total slow pool AOM carbon</td>
+</tr>
+<tr>
+<td><strong><code>SMBf</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3</td>
+<td>Fast pool soil microbial biomass carbon</td>
+</tr>
+<tr>
+<td><strong><code>SMBs</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3</td>
+<td>Slow pool soil microbial biomass carbon</td>
+</tr>
+<tr>
+<td><strong><code>SOMf</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3</td>
+<td>Fast pool soil organic matter carbon</td>
+</tr>
+<tr>
+<td><strong><code>SOMs</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3</td>
+<td>Slow pool soil organic matter carbon</td>
+</tr>
+<tr>
+<td><strong><code>CBal</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3 d-1</td>
+<td>Daily net carbon change</td>
+</tr>
+<tr>
+<td><strong><code>Co</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C kg-1</td>
+<td>Non-inert soil organic carbon mass fraction</td>
+</tr>
+<tr>
+<td><strong><code>SMB-CO2-ER</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3 d-1</td>
+<td>Soil microbial biomass CO<sub>2</sub> evolution rate</td>
+</tr>
+<tr>
+<td><strong><code>noOfAOMPools</code></strong></td>
+<td></td>
+<td></td>
+<td>count</td>
+<td>Number of AOM pools in the first soil layer</td>
+</tr>
+<tr>
+<td><strong><code>CN_Ratio_AOM_Fast</code></strong></td>
+<td>L</td>
+<td></td>
+<td></td>
+<td>Fast pool C:N ratio of the first AOM pool</td>
+</tr>
+<tr>
+<td><strong><code>AOM_Fast</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3</td>
+<td>Fast carbon pool of the first AOM pool</td>
+</tr>
+<tr>
+<td><strong><code>AOM_Slow</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg C m-3</td>
+<td>Slow carbon pool of the first AOM pool</td>
+</tr>
+</tbody>
+</table>
+<h3 id="soil-nitrogen-dynamics">Soil nitrogen dynamics</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>NLeach</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>Nitrogen leaching at <code>LeachingDepth</code></td>
+</tr>
+<tr>
+<td><strong><code>NO3</code></strong></td>
+<td>L</td>
+<td>x</td>
+<td>kg N m-3</td>
+<td>Soil nitrate-N concentration (NO<sub>3</sub>-N)</td>
+</tr>
+<tr>
+<td><strong><code>Carb</code></strong></td>
+<td>L</td>
+<td>x</td>
+<td>kg N m-3</td>
+<td>Soil carbamide-N concentration (urea-N)</td>
+</tr>
+<tr>
+<td><strong><code>NH4</code></strong></td>
+<td>L</td>
+<td>x</td>
+<td>kg N m-3</td>
+<td>Soil ammonium-N concentration (NH<sub>4</sub>-N)</td>
+</tr>
+<tr>
+<td><strong><code>NO2</code></strong></td>
+<td>L</td>
+<td>x</td>
+<td>kg N m-3</td>
+<td>Soil nitrite-N concentration (NO<sub>2</sub>-N)</td>
+</tr>
+<tr>
+<td><strong><code>Nmin</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>N mineralisation or immobilisation magnitude</td>
+</tr>
+<tr>
+<td><strong><code>NetNmin</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>Total <code>Nmin</code> across organic soil layers</td>
+</tr>
+<tr>
+<td><strong><code>Denit</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>N loss through denitrification</td>
+</tr>
+<tr>
+<td><strong><code>actnitrate</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg N m-3 d-1</td>
+<td>Actual nitrification rate (N<sub>2</sub>O STICS module)</td>
+</tr>
+<tr>
+<td><strong><code>N2O</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>Total N<sub>2</sub>O-N production</td>
+</tr>
+<tr>
+<td><strong><code>N2Onit</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>N<sub>2</sub>O-N from nitrification (N<sub>2</sub>O STICS module)</td>
+</tr>
+<tr>
+<td><strong><code>N2Odenit</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>N<sub>2</sub>O-N from denitrification (N<sub>2</sub>O STICS module)</td>
+</tr>
+<tr>
+<td><strong><code>N</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg N m-3</td>
+<td>Total mineral N concentration (<code>NO3 + NO2 + NH4</code>)</td>
+</tr>
+<tr>
+<td><strong><code>NH3</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1 d-1</td>
+<td>Daily ammonia (NH<sub>3</sub>) volatilisation</td>
+</tr>
+<tr>
+<td><strong><code>OrgN</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg N m-3</td>
+<td>Organic N concentration in the SMB, SOM, and AOM pools</td>
+</tr>
+<tr>
+<td><strong><code>NO3conv</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg N m-3</td>
+<td>Convective nitrate balance term</td>
+</tr>
+<tr>
+<td><strong><code>NO3disp</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg N m-3</td>
+<td>Dispersive nitrate balance term</td>
+</tr>
+<tr>
+<td><strong><code>actammoxrate</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg N m-3 d-1</td>
+<td>Actual ammonium oxidation rate</td>
+</tr>
+<tr>
+<td><strong><code>actdenitrate</code></strong></td>
+<td>L</td>
+<td></td>
+<td>kg N m-3 d-1</td>
+<td>Actual denitrification rate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crop-management-inputs-and-residue-balances">Crop management inputs and residue balances</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>Irrig</code></strong></td>
+<td></td>
+<td></td>
+<td>mm</td>
+<td>Irrigation amount applied on the current day</td>
+</tr>
+<tr>
+<td><strong><code>NFert</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>Mineral fertiliser N applied on the current day</td>
+</tr>
+<tr>
+<td><strong><code>NOrgFert</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>Organic fertiliser N applied on the current day</td>
+</tr>
+<tr>
+<td><strong><code>SumNFert</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>Cumulative mineral fertiliser N for the current cultivation method</td>
+</tr>
+<tr>
+<td><strong><code>SumNOrgFert</code></strong></td>
+<td></td>
+<td></td>
+<td>kg N ha-1</td>
+<td>Cumulative organic fertiliser N for the current cultivation method</td>
+</tr>
+<tr>
+<td><strong><code>optCarbonExportedResidues</code></strong></td>
+<td></td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Residues exported by the current optimal carbon-balance calculation</td>
+</tr>
+<tr>
+<td><strong><code>optCarbonReturnedResidues</code></strong></td>
+<td></td>
+<td></td>
+<td>kg DM ha-1</td>
+<td>Residues returned by the current optimal carbon-balance calculation</td>
+</tr>
+<tr>
+<td><strong><code>humusBalanceCarryOver</code></strong></td>
+<td></td>
+<td></td>
+<td>Heq-NRW ha-1</td>
+<td>Humus balance carry-over from the latest optimal carbon-balance calculation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ozone-impacts-and-biogenic-emissions">Ozone impacts and biogenic emissions</h3>
+<table>
+<thead>
+<tr>
+<th>Output name</th>
+<th>(L)ayers/(O)rgans</th>
+<th>Settable?</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>AtmO3</code></strong></td>
+<td></td>
+<td></td>
+<td>ppb</td>
+<td>Atmospheric ozone concentration used by the model</td>
+</tr>
+<tr>
+<td><strong><code>O3-short-damage</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Short-term carboxylation factor (<code>1</code> = no reduction, <code>0</code> = complete reduction)</td>
+</tr>
+<tr>
+<td><strong><code>O3-long-damage</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Long-term ozone factor controlling senescence onset (<code>1</code> = no ozone effect)</td>
+</tr>
+<tr>
+<td><strong><code>O3-WS-gs-reduction</code></strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Water stress factor for stomatal conductance and ozone uptake (<code>1</code> = no reduction, <code>0</code> = complete closure)</td>
+</tr>
+<tr>
+<td><strong><code>O3-total-uptake</code></strong></td>
+<td></td>
+<td></td>
+<td>µmol O<sub>3</sub> m-2 ground</td>
+<td>Cumulative ozone uptake by the current crop</td>
+</tr>
+<tr>
+<td><strong><code>guenther-isoprene-emission</code></strong></td>
+<td></td>
+<td></td>
+<td>µmol m-2 ground d-1</td>
+<td>Daily canopy isoprene emission from the Guenther model</td>
+</tr>
+<tr>
+<td><strong><code>guenther-monoterpene-emission</code></strong></td>
+<td></td>
+<td></td>
+<td>µmol m-2 ground d-1</td>
+<td>Daily canopy monoterpene emission from the Guenther model</td>
+</tr>
+<tr>
+<td><strong><code>jjv-isoprene-emission</code></strong></td>
+<td></td>
+<td></td>
+<td>µmol m-2 ground d-1</td>
+<td>Daily canopy isoprene emission from the JJV model</td>
+</tr>
+<tr>
+<td><strong><code>jjv-monoterpene-emission</code></strong></td>
+<td></td>
+<td></td>
+<td>µmol m-2 ground d-1</td>
+<td>Daily canopy monoterpene emission from the JJV model</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="simulation-toggles">Simulation toggles</h2>
+<p>The top-level keys in <code>sim.json</code> control optional MONICA model processes. Toggle names are case-sensitive and must use JSON booleans (<code>true</code> or <code>false</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"UseSecondaryYields"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"NitrogenResponseOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"WaterDeficitResponseOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"EmergenceMoistureControlOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"EmergenceFloodingControlOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"FrostKillOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">"UseAutomaticIrrigation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"UseNMinMineralFertilisingMethod"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="overview">Overview</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>UseSecondaryYields</code></strong></td>
+<td>boolean</td>
+<td>Enables exclusion of secondary yields from harvest residues</td>
+</tr>
+<tr>
+<td><strong><code>NitrogenResponseOn</code></strong></td>
+<td>boolean</td>
+<td>Enables nitrogen stress effects</td>
+</tr>
+<tr>
+<td><strong><code>WaterDeficitResponseOn</code></strong></td>
+<td>boolean</td>
+<td>Enables water stress effects</td>
+</tr>
+<tr>
+<td><strong><code>EmergenceMoistureControlOn</code></strong></td>
+<td>boolean</td>
+<td>Enables topsoil moisture control of emergence</td>
+</tr>
+<tr>
+<td><strong><code>EmergenceFloodingControlOn</code></strong></td>
+<td>boolean</td>
+<td>Enables surface water control of emergence</td>
+</tr>
+<tr>
+<td><strong><code>FrostKillOn</code></strong></td>
+<td>boolean</td>
+<td>Enables frost damage effects</td>
+</tr>
+<tr>
+<td><strong><code>UseAutomaticIrrigation</code></strong></td>
+<td>boolean</td>
+<td>Enables automatic irrigation</td>
+</tr>
+<tr>
+<td><strong><code>UseNMinMineralFertilisingMethod</code></strong></td>
+<td>boolean</td>
+<td>Enables automatic NMin fertilisation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crop-response-toggles">Crop response toggles</h3>
+<h4 id="nitrogenresponseon"><code>NitrogenResponseOn</code></h4>
+<p><code>NitrogenResponseOn</code> controls whether nitrogen availability affects crop growth. When enabled, nitrogen shortage can reduce crop development and biomass growth. When disabled, crop growth is not reduced by nitrogen stress, but nitrogen uptake and soil nitrogen processes remain active. </p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"NitrogenResponseOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="waterdeficitresponseon"><code>WaterDeficitResponseOn</code></h4>
+<p><code>WaterDeficitResponseOn</code> controls whether water availability affects crop growth. When enabled, water deficit can reduce crop growth. When disabled, crop growth is not reduced by water stress, but soil water calculations, transpiration, and water uptake remain active. </p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"WaterDeficitResponseOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="emergencemoisturecontrolon"><code>EmergenceMoistureControlOn</code></h4>
+<p><code>EmergenceMoistureControlOn</code> controls whether topsoil moisture restricts crop emergence. When enabled, emergence progresses only if the topsoil is neither too dry nor above field capacity. When disabled, emergence progresses regardless of topsoil moisture.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"EmergenceMoistureControlOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="emergencefloodingcontrolon"><code>EmergenceFloodingControlOn</code></h4>
+<p><code>EmergenceFloodingControlOn</code> controls whether standing surface water restricts crop emergence. When enabled, emergence progresses only if surface water storage is below <code>0.001</code> mm. When disabled, emergence progresses regardless of standing surface water.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"EmergenceFloodingControlOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="frostkillon"><code>FrostKillOn</code></h4>
+<p><code>FrostKillOn</code> controls whether frost damage affects crop growth. When enabled, exposure below the crop's lethal temperature threshold progressively reduces assimilation. When disabled, the frost damage response is skipped.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"FrostKillOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="secondary-yield-handling-toggle">Secondary yield handling toggle</h3>
+<h4 id="usesecondaryyields"><code>UseSecondaryYields</code></h4>
+<p><code>UseSecondaryYields</code> controls whether secondary yields are removed from harvest residues. When enabled, both primary and secondary yields are excluded from residue biomass. When disabled, only the primary yield is excluded, leaving secondary yield biomass in the residues.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"UseSecondaryYields"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="automatic-management-toggles">Automatic management toggles</h3>
+<p>Automatic management methods require both an enabling toggle and the corresponding parameter objects.</p>
+<table>
+<thead>
+<tr>
+<th>Toggle</th>
+<th>Parameter object</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>UseAutomaticIrrigation</code></strong></td>
+<td><strong><code>AutoIrrigationParams</code></strong></td>
+</tr>
+<tr>
+<td><strong><code>UseNMinMineralFertilisingMethod</code></strong></td>
+<td><strong><code>NMinUserParams</code></strong>, <strong><code>NMinFertiliserPartition</code></strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="automatic-irrigation">Automatic irrigation</h4>
+<p>Automatic irrigation is enabled with <code>UseAutomaticIrrigation</code>. Its default is <code>false</code>. The parameters themselves are defined in <code>AutoIrrigationParams</code>.</p>
+<p>When <code>amount</code> is greater than zero, MONICA applies that fixed amount and ignores <code>set_to_%nFC</code>. Otherwise, <code>set_to_%nFC</code> can refill the affected layers to the requested percentage of plant-available water capacity. The same depth, <code>calc_nFC_until_depth_m</code>, is used both to calculate the trigger and, in refill mode, to select the layers to refill.</p>
+<p>Irrigation is possible only while a crop is growing and its current temperature sum lies within the inclusive range <code>HeatSumIrrigationStart</code> to <code>HeatSumIrrigationEnd</code>. These two parameters are defined in the active crop's cultivar configuration. If supplied, <code>startDate</code> and <code>stopDate</code> additionally restrict irrigation to an inclusive calendar-date range.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>UseAutomaticIrrigation</code></strong></td>
+<td><code>false</code></td>
+<td></td>
+<td>Enables or disables automatic irrigation</td>
+</tr>
+<tr>
+<td><strong><code>startDate</code></strong></td>
+<td>unset</td>
+<td>ISO date</td>
+<td>First irrigation date. Absolute dates only.</td>
+</tr>
+<tr>
+<td><strong><code>stopDate</code></strong></td>
+<td>unset</td>
+<td>ISO date</td>
+<td>Last irrigation date. Absolute dates only.</td>
+</tr>
+<tr>
+<td><strong><code>amount</code></strong></td>
+<td>unset</td>
+<td>mm</td>
+<td>Fixed irrigation amount. When greater than zero, <code>set_to_%nFC</code> is ignored.</td>
+</tr>
+<tr>
+<td><strong><code>set_to_%nFC</code></strong></td>
+<td>unset</td>
+<td>% nFC</td>
+<td>Refill target used when no positive fixed <code>amount</code> is configured.</td>
+</tr>
+<tr>
+<td><strong><code>threshold</code></strong></td>
+<td>unset</td>
+<td>fraction nFC</td>
+<td>Legacy trigger. Prefer <code>trigger_if_nFC_below_%</code>.</td>
+</tr>
+<tr>
+<td><strong><code>trigger_if_nFC_below_%</code></strong></td>
+<td>unset</td>
+<td>% nFC</td>
+<td>Trigger irrigation when plant-available water is at or below this percentage.</td>
+</tr>
+<tr>
+<td><strong><code>calc_nFC_until_depth_m</code></strong></td>
+<td><code>0.3</code></td>
+<td>m</td>
+<td>Depth over which plant-available water is evaluated. In refill mode, the same depth determines the layers to refill.</td>
+</tr>
+<tr>
+<td><strong><code>nitrateConcentration</code></strong></td>
+<td><code>0</code></td>
+<td>mg dm-3</td>
+<td>Nitrate concentration in irrigation water. Place in <code>irrigationParameters</code>.</td>
+</tr>
+<tr>
+<td><strong><code>sulfateConcentration</code></strong></td>
+<td><code>0</code></td>
+<td>mg dm-3</td>
+<td>Sulfate concentration in irrigation water. Currently ignored.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="fixed-amount-irrigation">Fixed amount irrigation</h5>
+<p>When <code>amount</code> is greater than zero, MONICA applies that fixed amount whenever the trigger conditions are met. In this mode, <code>set_to_%nFC</code> is ignored.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"UseAutomaticIrrigation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"AutoIrrigationParams"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-05-01"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"stopDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-08-31"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="s2">"mm"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"trigger_if_nFC_below_%"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="s2">"%"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"calc_nFC_until_depth_m"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="s2">"m"</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This example applies 17 mm whenever plant-available water in the first 0.3 m is at or below 50%, from May 1 through August 31, inclusive.</p>
+<h5 id="refill-irrigation">Refill irrigation</h5>
+<p>If no positive fixed <code>amount</code> is configured, <code>set_to_%nFC</code> can be used to refill the affected soil layers to a target percentage of plant-available water capacity.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"UseAutomaticIrrigation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"AutoIrrigationParams"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"irrigationParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"nitrateConcentration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s2">"mg dm-3"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"trigger_if_nFC_below_%"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="s2">"%"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"set_to_%nFC"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="s2">"%"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"calc_nFC_until_depth_m"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="s2">"m"</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This example refills the first 0.5 m to field capacity whenever plant-available water over that depth is at or below 50%. Irrigation water contains 10 mg dm-3 nitrate.</p>
+<h4 id="nmin-mineral-fertilisation">NMin mineral fertilisation</h4>
+<p>The automatic NMin method is enabled with <code>UseNMinMineralFertilisingMethod</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"UseNMinMineralFertilisingMethod"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The method requires application limits (<code>NMinUserParams</code>), fertiliser composition (<code>NMinFertiliserPartition</code>), and a calculation day for winter crops (<code>JulianDayAutomaticFertilising</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"UseNMinMineralFertilisingMethod"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"NMinUserParams"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"min"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="nt">"max"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="nt">"delayInDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"NMinFertiliserPartition"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"include-from-file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mineral-fertilisers/AN.json"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"JulianDayAutomaticFertilising"</span><span class="p">:</span><span class="w"> </span><span class="mi">89</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>MONICA calculates a fertiliser recommendation from crop-specific nitrogen targets and the mineral nitrogen already present in the soil.</p>
+<h5 id="application-timing">Application timing</h5>
+<p>The timing depends on the crop type:</p>
+<ul>
+<li>For non-winter crops, MONICA performs the NMin calculation when the crop is sown.</li>
+<li>For winter crops, MONICA performs it on <code>JulianDayAutomaticFertilising</code>, provided the crop is present on that day.</li>
+</ul>
+<h5 id="nminuserparams"><code>NMinUserParams</code></h5>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>min</code></strong></td>
+<td>kg N ha-1</td>
+<td>Minimum fertiliser requirement</td>
+</tr>
+<tr>
+<td><strong><code>max</code></strong></td>
+<td>kg N ha-1</td>
+<td>Maximum fertiliser requirement</td>
+</tr>
+<tr>
+<td><strong><code>delayInDays</code></strong></td>
+<td>days</td>
+<td>Delay before applying the amount above <code>max</code></td>
+</tr>
+</tbody>
+</table>
+<p>In the example above, calculated requirements below 40 kg N ha-1 are skipped, up to 120 kg N ha-1 is applied immediately, and any surplus is applied after 10 days. If the topsoil is wetter than field capacity, the calculation is postponed.</p>
+<h5 id="nminfertiliserpartition"><code>NMinFertiliserPartition</code></h5>
+<p><code>NMinFertiliserPartition</code> defines how the applied mineral nitrogen is divided among carbamide, ammonium, and nitrate. It can be supplied either by including an external file or by defining the fertiliser directly in <code>sim.json</code>.</p>
+<h6 id="external-fertiliser-definition">External fertiliser definition</h6>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"NMinFertiliserPartition"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"include-from-file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mineral-fertilisers/AN.json"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h6 id="inline-fertiliser-definition">Inline fertiliser definition</h6>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"NMinFertiliserPartition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my AN"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my very own ammonium nitrate variant"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"Carbamid"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"NH4"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"NO3"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../../javascripts/tablesort.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
