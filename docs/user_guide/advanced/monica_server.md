@@ -248,7 +248,7 @@ C:\> monica-zmq-proxy -pps -f 6666 -b 6677
 Start the output proxy:
 
 ```
-C:\> monica-zmq-proxy -pps -f 7777 -b 7788
+C:\> monica-zmq-proxy -pps -f 7788 -b 7777
 ```
 
 The options are:
@@ -266,16 +266,16 @@ flowchart TB
     Workers([Workers])
     Consumer([Consumer])
 
+    subgraph Output["Output Proxy"]
+        direction TB
+        OF["Frontend<br/><code>tcp://localhost:7788</code>"]
+        OB["Backend<br/><code>tcp://localhost:7777</code>"]
+    end
+    
     subgraph Input["Input Proxy"]
         direction TB
         IF["Frontend<br/><code>tcp://localhost:6666</code>"]
         IB["Backend<br/><code>tcp://localhost:6677</code>"]
-    end
-
-    subgraph Output["Output Proxy"]
-        direction TB
-        OF["Frontend<br/><code>tcp://localhost:7777</code>"]
-        OB["Backend<br/><code>tcp://localhost:7788</code>"]
     end
 
     Producer -->|connect| IF
@@ -295,7 +295,7 @@ The producer connects to port `6666` and sends jobs. The workers connect to port
 
 The proxies bind their frontend and backend ports, while producers, consumers, and MONICA workers connect to them. This allows the proxy processes and worker pool to remain running while producers and consumers are started or restarted independently.
 
-The proxy executablbe defaults to ROUTER/DEALER sockets. When using the PULL/PUSH topology shown above, start it with `-pps`. The older `-p` option is retained for compatibility but is deprecated.
+The proxy executable defaults to ROUTER/DEALER sockets. When using the PULL/PUSH topology shown above, start it with `-pps`. The older `-p` option is retained for compatibility but is deprecated.
 
 ---
 
