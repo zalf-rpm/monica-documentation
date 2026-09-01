@@ -209,15 +209,16 @@ The selected pedotransfer function and its supporting parameter files must be av
 
 The following parameters are accepted inside `SiteParameters`.
 
-| Parameter              | Unit            | Default        | Description                                                                                 |
-|------------------------|-----------------|----------------|---------------------------------------------------------------------------------------------|
-| **`Latitude`**         | decimal degrees | `52.5`         | Geographic latitude of the site                                                             |
-| **`Slope`**            | m m-1           | `0.01`         | Surface slope (height m * length m-1)                                                       |
-| **`HeightNN`**         | m               | `50.0`         | Elevation above sea level                                                                   |
-| **`NDeposition`**      | kg N ha-1 y-1   | `30.0`         | Annual atmospheric nitrogen deposition                                                      |
-| **`NumberOfLayers`**   |                 | `20`           | Number of equal-sized internal soil layers                                                  |
-| **`LayerThickness`**   | m               | `0.1`          | Thickness of each internal soil layer                                                       |
-| **`pwpFcSatFunction`** | m               | `Wessolek2009` | Function used to calculate missing field capacity, pore volume, and permanent wilting point |
+| Parameter                      | Unit             | Default        | Description                                                                                                                                                   |
+|--------------------------------|------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`Latitude`**                 | decimal degrees  | `52.5`         | Geographic latitude of the site                                                                                                                               |
+| **`Slope`**                    | m m-1            | `0.01`         | Surface slope (height m * length m-1)                                                                                                                         |
+| **`HeightNN`**                 | m                | `50.0`         | Elevation above sea level                                                                                                                                     |
+| **`NDeposition`**              | kg N ha-1 y-1    | `30.0`         | Annual atmospheric nitrogen deposition                                                                                                                        |
+| **`NumberOfLayers`**           |                  | `20`           | Number of equal-sized internal soil layers                                                                                                                    |
+| **`LayerThickness`**           | m                | `0.1`          | Thickness of each internal soil layer                                                                                                                         |
+| **`pwpFcSatFunction`**         |                  | `Wessolek2009` | Function used to calculate missing field capacity, pore volume, and permanent wilting point                                                                   |
+| **`ImpenetrableLayerDepth`**   | m                | `-1`           | Depth below the soil surface beyond which roots cannot grow. Values greater than zero limit the crop's maximum rooting depth. `-1` disables this restriction. |
 
 ---
 
