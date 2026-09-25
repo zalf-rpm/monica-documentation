@@ -38,6 +38,7 @@ MONICA recognizes the following commonly used **Available Climate Data (ACD)** n
 | **`sunhours`**  | Daily sunshine duration (prefer `globrad` when available) | `8.5`        | h          | 
 | **`wind`**      | Wind speed                                                | `6.7`        | m s-1      |
 | **`relhumid`**  | Relative humidity                                         | `90.0`       | %          |
+| **`co2`**       | Atmospheric CO<sub>2</sub> concentration                  | `425.6`      | ppm        |
 | **`skip`**      | Ignore this column                                        |              |            |
 
 A date must be supplied either through `iso-date`, `de-date`, or the combination of `day`, `month`, and `year`.
