@@ -1,0 +1,3909 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Model for Nitrogen and Carbon in Agro-ecosystems">
+      
+      
+      
+        <link rel="canonical" href="https://zalf-rpm.github.io/monica-documentation/user_guide/configuration_files/config_site_json/">
+      
+      
+        <link rel="prev" href="../config_crop_json/">
+      
+      
+        <link rel="next" href="../../advanced/monica_server/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>site.json - MONICA Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-sitejson-configuration-file" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MONICA Documentation" class="md-header__button md-logo" aria-label="MONICA Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MONICA Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              site.json
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zalf-rpm/monica-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monica-documentation
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../overview/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../parameters/crop_parameters/overview/" class="md-tabs__link">
+          
+  
+  
+  Parameter Reference
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../model_testing_and_applications/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Validation and Testing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../model_science/soil_processes/overview/" class="md-tabs__link">
+          
+  
+  
+  Model Science and Algorithm
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../references/publications/" class="md-tabs__link">
+          
+  
+  
+  References and Further Reading
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../support_and_community/faq_and_support/" class="md-tabs__link">
+          
+  
+  
+  Support and Community
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MONICA Documentation" class="md-nav__button md-logo" aria-label="MONICA Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MONICA Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zalf-rpm/monica-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monica-documentation
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/windows_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/windows_compilation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows compilation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/linux_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux compilation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/dependencies_and_python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python Support and Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Run MONICA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Run MONICA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/command_line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA from the Command Line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA in Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/python_producer_consumer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running with Python producer-consumer pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how_to_run/rundeck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running MONICA via Rundeck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configuration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_sim_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sim.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_crop_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    crop.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    site.json
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    site.json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-soil-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The soil profile
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The soil profile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internal-layer-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal layer representation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#converting-user-defined-horizons-into-internal-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Converting user-defined horizons into internal layers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimum-information-needed-for-a-soil-horizon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimum information needed for a soil horizon
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pedotransfer-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pedotransfer functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-parameter-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic parameter calculation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soil-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soil Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-minimal-soil-horizon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended minimal soil horizon
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#site-specific-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Site-specific parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atmospheric-co2-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atmospheric CO2 handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atmospheric-o3-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atmospheric O3 handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-parameter-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment parameter table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-sitejson-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example site.json file
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced and Distributed Execution
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Advanced and Distributed Execution
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/monica_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONICA server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/hpc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HPC clusters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/singularity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Singularity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONICA Versions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/troubleshooting_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation and setup issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameter Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parameter Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop Parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crop Parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/species_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Species parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/cultivar_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cultivar parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/crop_parameters/crop_residue_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop residue parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soil parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/soil_parameters/soil_organic_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil organic parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/soil_parameters/soil_moisture_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil moisture parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/soil_parameters/soil_temperature_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil temperature parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/soil_parameters/soil_transport_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil transport parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Management parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Management parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/management_parameters/mineral_fertiliser_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mineral fertiliser parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/management_parameters/organic_fertiliser_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organic fertiliser parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    General parameters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    General parameters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/general_parameters/environment_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environmental parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../parameters/general_parameters/crop_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_testing_and_applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation and Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Science and Algorithm
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model Science and Algorithm
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil Processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soil Processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_temperature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil temperature
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/evaporation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaporation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_moisture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil moisture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/soil_frost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soil frost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/snow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Snow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/organic_matter_turn-over/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organic matter turn-over
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/nitrification_and_denitrification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nitrification and denitrification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/soil_processes/matter_transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matter transport
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crop Processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crop Processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/photosynthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Photosynthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/respiration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Respiration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/assimilate_partitioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assimilate partitioning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/phenology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phenology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/root_growth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Root growth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/leaf_area_and_ground_coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Leaf area and ground coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/transpiration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transpiration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/n_uptake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N uptake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/n_concentration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N concentration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/drought_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Drought stress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/nitrogen_deficiency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nitrogen deficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/oxygen_deficiency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oxygen deficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/heat_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat stress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model_science/crop_processes/yield/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yield
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References and Further Reading
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    References and Further Reading
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../references/publications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Support and Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Support and Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../support_and_community/faq_and_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ & Support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="the-sitejson-configuration-file">The <code>site.json</code> configuration file</h1>
+<p>The <strong><code>site.json</code></strong> configuration file contains parameters describing the simulation site, including:</p>
+<ul>
+<li>geographic and topographic properties</li>
+<li>the soil profile</li>
+<li>initial soil conditions</li>
+<li>general environmental parameters</li>
+<li>references to soil process parameter sets</li>
+</ul>
+<p>Site-specific parameters are defined under the top-level <code>SiteParameters</code> key. General parameter sets, such as <code>EnvironmentParameters</code> or <code>SoilMoistureParameters</code>, can be:</p>
+<ul>
+<li>included from the MONICA parameter database</li>
+<li>included from external JSON files</li>
+<li>defined directly in <code>site.json</code></li>
+<li>included and selectively overriden</li>
+</ul>
+<p>The <code>DEFAULT</code> pseudo-key can be used to load a standard parameter object before applying locally defined overrides.</p>
+<hr />
+<h2 id="the-soil-profile">The soil profile</h2>
+<p>The <code>SoilProfileParameters</code> key contains an array of objects describing the soil horizons supplied by the user.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"SiteParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"SoilProfileParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"Thickness"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"KA5TextureClass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sl2"</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>At least one soil profile entry should be provided.</p>
+<h3 id="internal-layer-representation">Internal layer representation</h3>
+<p>By default, MONICA represents the soil profile using:</p>
+<ul>
+<li><code>NumberOfLayers</code>: 20</li>
+<li><code>LayerThickness</code>: <code>0.1</code> m</li>
+<li>Total profile depth: <code>2.0</code> m</li>
+</ul>
+<p>Both <code>NumberOfLayers</code> and <code>LayerThickness</code> can be changed in <code>SiteParameters</code>. Consequently, 20 layers of 10 cm are the default representation, not an invariant internal representation.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"SiteParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"NumberOfLayers"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"LayerThickness"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The resulting total profile depth is:</p>
+<div class="highlight"><pre><span></span><code>NumberOfLayers * LayerThickness
+</code></pre></div>
+<h3 id="converting-user-defined-horizons-into-internal-layers">Converting user-defined horizons into internal layers</h3>
+<p>MONICA converts the user-defined soil horizons into equal-sized internal layers.</p>
+<p>For every entry except the final one:</p>
+<ol>
+<li>Its <code>Thickness</code> is converted to meters.</li>
+<li>The thickness is divided by <code>LayerThickness</code>.</li>
+<li>The result is rounded to an integer number of internal layers.</li>
+<li>The soil properties are copied into that number of layers.</li>
+</ol>
+<p>The final soil profile entry is repeated until the configured internal profile is full. Its <code>Thickness</code> therefore does not limit its final extent.</p>
+<p>If earlier entries already fill the internal profile, subsequent entries are ignored.</p>
+<p>If <code>Thickness</code> is omitted from a non-final entry, the configured <code>LayerThickness</code> is used.</p>
+<p>Nevertheless, specifying <code>Thickness</code> explicitly is strongly recommended because it makes the intended horizon boundaries clear. <code>Thickness</code> can be supplied as:</p>
+<ul>
+<li>a number in meters</li>
+<li>a value-unit array using <code>m</code>, <code>dm</code>, <code>cm</code>, or <code>mm</code></li>
+</ul>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">"Thickness"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">"Thickness"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="s2">"cm"</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">"Thickness"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="s2">"mm"</span><span class="p">]</span>
+</code></pre></div>
+<p>Because horizon thicknesses are rounded to complete internal layers, horizon boundaries should preferably be multiples of <code>LayerThickness</code>.</p>
+<h3 id="minimum-information-needed-for-a-soil-horizon">Minimum information needed for a soil horizon</h3>
+<p>To characterize a soil horizon, provide either:</p>
+<ul>
+<li><code>KA5TextureClass</code></li>
+<li>Both <code>Sand</code> and <code>Clay</code></li>
+</ul>
+<p>Only one property from each of the following pairs normally needs to be supplied:</p>
+<ul>
+<li><code>SoilRawDensity</code> or <code>SoilBulkDensity</code></li>
+<li><code>SoilOrganicCarbon</code> or <code>SoilOrganicMatter</code></li>
+</ul>
+<p>If both members of a pair are supplied, they should be mutually consistent.</p>
+<p>The hydraulic properties can either be supplied explicitly or calculated by the configured pedotransfer function:</p>
+<ul>
+<li><code>FieldCapacity</code></li>
+<li><code>PermanentWiltingPoint</code></li>
+<li><code>PoreVolume</code></li>
+</ul>
+<p>Explicitly providing measured soil properties can reduce the number of estimated parameters, but does not necessarily improve a simulation unless the measurements are representative and internally consistent.</p>
+<h3 id="pedotransfer-functions">Pedotransfer functions</h3>
+<p>The <code>pwpFcSatFunction</code> property selects the method used to calculate missing hydraulic properties.</p>
+<p>The default is:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">"pwpFcSatFunction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wessolek2009"</span>
+</code></pre></div>
+<p>Supported methods in the current implementation are: <code>Wessolek2009</code>, <code>VanGenuchten</code>, <code>VanGenuchtenVereecken</code>, <code>VanGenuchtenToth</code>, <code>Toth</code></p>
+<p>The input data required for a successful calculation depends on the selected function. For example, <code>Wessolek2009</code> uses the KA5 texture class together with density and organic matter information.</p>
+<h3 id="automatic-parameter-calculation">Automatic parameter calculation</h3>
+<p>MONICA derives the following values where possible:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Behavior when omitted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Sand</code></td>
+<td>Derived from <code>KA5TextureClass</code></td>
+</tr>
+<tr>
+<td><code>Clay</code></td>
+<td>Derived from <code>KA5TextureClass</code></td>
+</tr>
+<tr>
+<td><code>KA5TextureClass</code></td>
+<td>Derived from <code>Sand</code> and <code>Clay</code> if both are available</td>
+</tr>
+<tr>
+<td>Silt content</td>
+<td>Calculated internally as <code>1.0 - Sand - Clay</code></td>
+</tr>
+<tr>
+<td><code>FieldCapacity</code></td>
+<td>Calculated by the selected pedotransfer function</td>
+</tr>
+<tr>
+<td><code>PermanentWiltingPoint</code></td>
+<td>Calculated by the selected pedotransfer function</td>
+</tr>
+<tr>
+<td><code>PoreVolume</code></td>
+<td>Calculated by the selected pedotransfer function</td>
+</tr>
+<tr>
+<td><code>Lambda</code></td>
+<td>Calculated by the sand and clay content when both are greater than zero</td>
+</tr>
+<tr>
+<td><code>SoilRawDensity</code></td>
+<td>Derived from <code>SoilBulkDensity</code> and clay content</td>
+</tr>
+<tr>
+<td><code>SoilBulkDensity</code></td>
+<td>Derived from <code>SoilRawDensity</code> and clay content</td>
+</tr>
+<tr>
+<td><code>SoilOrganicCarbon</code></td>
+<td>Derived from <code>SoilOrganicMatter</code></td>
+</tr>
+<tr>
+<td><code>SoilOrganicMatter</code></td>
+<td>Derived from <code>SoilOrganicCarbon</code></td>
+</tr>
+</tbody>
+</table>
+<p>After calculation, MONICA applies lower safeguards to hydraulic properties:</p>
+<ul>
+<li><code>FieldCapacity</code>: at least <code>0.05</code></li>
+<li><code>PermanentWiltingPoint</code>: at least <code>0.01</code></li>
+<li><code>PoreVolume</code>: at least <code>0.10</code></li>
+</ul>
+<h3 id="soil-properties">Soil Properties</h3>
+<p>The following properties can be specified for each soil profile entry.</p>
+<table>
+<thead>
+<tr>
+<th>Configuration variable</th>
+<th>Unit</th>
+<th>Description</th>
+<th>Default</th>
+<th>Example</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>Thickness</code></strong></td>
+<td>m</td>
+<td>User-defined horizon thickness</td>
+<td>internal layer thickness</td>
+<td><code>"Thickness": 0.3</code></td>
+<td>Unit array can use <code>m</code>, <code>dm</code>, <code>cm</code>, or <code>mm</code>. The final entry fills the remaining internal profile.</td>
+</tr>
+<tr>
+<td><strong><code>Sand</code></strong></td>
+<td>kg kg-1</td>
+<td>Soil sand fraction</td>
+<td>unset</td>
+<td><code>"Sand": 0.45</code> or <code>"Sand": [45, "%"]</code></td>
+<td><code>[45, "%"]</code> is converted to <code>0.45</code></td>
+</tr>
+<tr>
+<td><strong><code>Clay</code></strong></td>
+<td>kg kg-1</td>
+<td>Soil clay fraction</td>
+<td>unset</td>
+<td><code>"Clay": 0.12</code> or <code>"Clay": [12, "%"]</code></td>
+<td><code>[12, "%"]</code> is converted to <code>0.12</code></td>
+</tr>
+<tr>
+<td><strong><code>pH</code></strong></td>
+<td></td>
+<td>Soil pH</td>
+<td><code>6.9</code></td>
+<td><code>"pH": 7.2</code></td>
+<td>Valid range: 0-14</td>
+</tr>
+<tr>
+<td><strong><code>Sceleton</code></strong></td>
+<td>m3 m-3</td>
+<td>Volumetric stone content</td>
+<td><code>0.0</code></td>
+<td><code>"Sceleton": 0.05</code> or <code>"Sceleton": [5, "%"]</code></td>
+<td>Positive values above <code>0.8</code> are limited to <code>0.8</code>.</td>
+</tr>
+<tr>
+<td><strong><code>Lambda</code></strong></td>
+<td></td>
+<td>Soil water conductivity coefficient</td>
+<td>calculated</td>
+<td><code>"Lambda": 0.5</code></td>
+<td>Calculated from sand and clay when possible</td>
+</tr>
+<tr>
+<td><strong><code>FieldCapacity</code></strong></td>
+<td>m3 m-3</td>
+<td>Volumetric water content at field capacity</td>
+<td>calculated</td>
+<td><code>"FieldCapacity": 0.25</code> or <code>"FieldCapacity": [25, "%"]</code></td>
+<td>A bare number is interpreted as a fraction. <code>[25, "%"]</code> is converted to <code>0.25</code>.</td>
+</tr>
+<tr>
+<td><strong><code>PoreVolume</code></strong></td>
+<td>m3 m-3</td>
+<td>Saturated volumetric water content</td>
+<td>calculated</td>
+<td><code>"PoreVolume": 0.45</code> or <code>"PoreVolume": [45, "%"]</code></td>
+<td>A bare number is interpreted as a fraction. <code>[45, "%"]</code> is converted to <code>0.45</code>. Also referred to internally as saturation.</td>
+</tr>
+<tr>
+<td><strong><code>PermanentWiltingPoint</code></strong></td>
+<td>m3 m-3</td>
+<td>Volumetric water content at permanent wilting point</td>
+<td>calculated</td>
+<td><code>"PermanentWiltingPoint": 0.10</code> or <code>"PermanentWiltingPoint": [10, "%"]</code></td>
+<td>A bare number is interpreted as a fraction. <code>[10, "%"]</code> is converted to <code>0.10</code>.</td>
+</tr>
+<tr>
+<td><strong><code>KA5TextureClass</code></strong></td>
+<td></td>
+<td>German KA5 soil texture class</td>
+<td>derived or unset</td>
+<td><code>"KA5TextureClass": "Sl2"</code></td>
+<td>Texture class matching is case-insensitive internally.</td>
+</tr>
+<tr>
+<td><strong><code>SoilAmmonium</code></strong></td>
+<td>kg NH4-N m-3</td>
+<td>Initial ammonium-N concentration</td>
+<td><code>0.0005</code></td>
+<td><code>"SoilAmmonium": 0.001</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><code>SoilNitrate</code></strong></td>
+<td>kg NO3-N m-3</td>
+<td>Initial nitrate-N concentration</td>
+<td><code>0.005</code></td>
+<td><code>"SoilNitrate": 0.02</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><code>CN</code></strong></td>
+<td></td>
+<td>Soil C/N ratio</td>
+<td><code>10.0</code></td>
+<td><code>"CN": 9.5</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong><code>SoilRawDensity</code></strong></td>
+<td>kg m-3</td>
+<td>Soil raw density</td>
+<td>derived or unset</td>
+<td><code>"SoilRawDensity": 1450</code></td>
+<td>Can be derived from bulk density and clay content</td>
+</tr>
+<tr>
+<td><strong><code>SoilBulkDensity</code></strong></td>
+<td>kg m-3</td>
+<td>Soil bulk density</td>
+<td>derived or unset</td>
+<td><code>"SoilBulkDensity": 1300</code></td>
+<td>Can be derived from raw density and clay content</td>
+</tr>
+<tr>
+<td><strong><code>SoilOrganicCarbon</code></strong></td>
+<td>mass %</td>
+<td>Soil organic carbon concentration</td>
+<td>derived or unset</td>
+<td><code>"SoilOrganicCarbon": 0.8</code> or <code>"SoilOrganicCarbon": [0.8, "%"]</code></td>
+<td>A bare value of <code>0.8</code> means 0.8%, not a fraction of 0.8. <code>[0.8, "%"]</code> is equivalent.</td>
+</tr>
+<tr>
+<td><strong><code>SoilOrganicMatter</code></strong></td>
+<td>kg OM kg-1</td>
+<td>Soil organic matter fraction</td>
+<td>derived or unset</td>
+<td><code>"SoilOrganicMatter": 0.015</code> or <code>"SoilOrganicMatter": [1.5, "%"]</code></td>
+<td><code>[1.5, "%"]</code> is converted to <code>0.015</code></td>
+</tr>
+<tr>
+<td><strong><code>SoilMoisturePercentFC</code></strong></td>
+<td>% of field capacity</td>
+<td>Initial soil moisture relative to field capacity</td>
+<td><code>100.0</code></td>
+<td><code>"SoilMoisturePercentFC": 80.0</code></td>
+<td>Valid range: 0-100</td>
+</tr>
+</tbody>
+</table>
+<h3 id="recommended-minimal-soil-horizon">Recommended minimal soil horizon</h3>
+<p>The following entry contains enough information for the default <code>Wessolek2009</code> calculation:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"Thickness"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="s2">"m"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"KA5TextureClass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sl2"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"SoilOrganicCarbon"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="s2">"%"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"SoilBulkDensity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1350</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"SoilMoisturePercentFC"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The selected pedotransfer function and its supporting parameter files must be available for missing hydraulic properties to be calculated.</p>
+<hr />
+<h2 id="site-specific-parameters">Site-specific parameters</h2>
+<p>The following parameters are accepted inside <code>SiteParameters</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Unit</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>Latitude</code></strong></td>
+<td>decimal degrees</td>
+<td><code>52.5</code></td>
+<td>Geographic latitude of the site</td>
+</tr>
+<tr>
+<td><strong><code>Slope</code></strong></td>
+<td>m m-1</td>
+<td><code>0.01</code></td>
+<td>Surface slope (height m * length m-1)</td>
+</tr>
+<tr>
+<td><strong><code>HeightNN</code></strong></td>
+<td>m</td>
+<td><code>50.0</code></td>
+<td>Elevation above sea level</td>
+</tr>
+<tr>
+<td><strong><code>NDeposition</code></strong></td>
+<td>kg N ha-1 y-1</td>
+<td><code>30.0</code></td>
+<td>Annual atmospheric nitrogen deposition</td>
+</tr>
+<tr>
+<td><strong><code>NumberOfLayers</code></strong></td>
+<td></td>
+<td><code>20</code></td>
+<td>Number of equal-sized internal soil layers</td>
+</tr>
+<tr>
+<td><strong><code>LayerThickness</code></strong></td>
+<td>m</td>
+<td><code>0.1</code></td>
+<td>Thickness of each internal soil layer</td>
+</tr>
+<tr>
+<td><strong><code>pwpFcSatFunction</code></strong></td>
+<td></td>
+<td><code>Wessolek2009</code></td>
+<td>Function used to calculate missing field capacity, pore volume, and permanent wilting point</td>
+</tr>
+<tr>
+<td><strong><code>ImpenetrableLayerDepth</code></strong></td>
+<td>m</td>
+<td><code>-1</code></td>
+<td>Depth below the soil surface beyond which roots cannot grow. Values greater than zero limit the crop's maximum rooting depth. <code>-1</code> disables this restriction.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="environment-parameters">Environment parameters</h2>
+<p>Parameters that apply to the entire simulation are specified under <code>EnvironmentParameters</code>.</p>
+<p>They can be loaded from an external parameter file and selectively overridden:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"EnvironmentParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"DEFAULT"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"include-from-file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"../monica-parameters/user-parameters/hermes-environment.json"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"LeachingDepth"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"WindSpeedHeight"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.5</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="atmospheric-co2-handling">Atmospheric CO<sub>2</sub> handling</h3>
+<p>For every simulation day, MONICA determines the atmospheric CO<sub>2</sub> concentration in the following order:</p>
+<ol>
+<li>
+<p><strong>Daily climate data</strong></p>
+<p>If the daily climate data contain <code>co2</code>, that value is used.</p>
+</li>
+<li>
+<p><strong>Year-specific concentration</strong></p>
+<p>Otherwise, if <code>AtmosphericCO2s</code> contains a value for the current year, that value is used.</p>
+</li>
+<li>
+<p><strong>Dynamic calculation</strong></p>
+<p>Otherwise, if <code>AtmosphericCO2</code> is zero or negative, MONICA calculates the concentration from the simulation date and the selected <code>rcp</code> pathway.</p>
+</li>
+<li>
+<p><strong>Constant concentration</strong></p>
+<p>Otherwise, <code>AtmosphericCO2</code> is used as a constant value.</p>
+</li>
+</ol>
+<p>For practical configurations, use <code>AtmosphericCO2 &lt;= 0</code> to request dynamic calculation.</p>
+<h3 id="atmospheric-o3-handling">Atmospheric O<sub>3</sub> handling</h3>
+<p>For every simulation day, MONICA determines the atmospheric O<sub>3</sub> concentration in the following order:</p>
+<ol>
+<li>If the daily climate data contain <code>o3</code>, that value is used.</li>
+<li>Otherwise, if <code>AtmosphericO3s</code> contains a value for the current year, that value is used.</li>
+<li>Otherwise, the constant <code>AtmosphericO3</code> is used.</li>
+</ol>
+<p>MONICA does not calculate O<sub>3</sub> dynamically. If <code>AtmosphericO3</code> is omitted, its default value is zero.</p>
+<h3 id="environment-parameter-table">Environment parameter table</h3>
+<table>
+<thead>
+<tr>
+<th>Name of parameter</th>
+<th>Unit</th>
+<th>Default value</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>Albedo</code></strong></td>
+<td></td>
+<td><code>0.23</code></td>
+<td>Surface reflectivity coefficient</td>
+<td><code>"Albedo": 0.23</code></td>
+</tr>
+<tr>
+<td><strong><code>AtmosphericCO2</code></strong></td>
+<td>ppm</td>
+<td><code>0.0</code></td>
+<td>Constant atmospheric CO<sub>2</sub> concentration, or dynamic calculation switch when non-positive</td>
+<td><code>"AtmosphericCO2": 420</code></td>
+</tr>
+<tr>
+<td><strong><code>AtmosphericCO2s</code></strong></td>
+<td>ppm</td>
+<td>unset</td>
+<td>Object mapping years to CO<sub>2</sub> concentrations</td>
+<td><code>"AtmosphericCO2s": {"1991": 360, "1992": 370, "1993": 380}</code></td>
+</tr>
+<tr>
+<td><strong><code>AtmosphericO3</code></strong></td>
+<td>ppm</td>
+<td><code>0.0</code></td>
+<td>Constant atmospheric O<sub>3</sub> concentration</td>
+<td><code>"AtmosphericO3": 0.04</code></td>
+</tr>
+<tr>
+<td><strong><code>AtmosphericO3s</code></strong></td>
+<td>ppm</td>
+<td>unset</td>
+<td>Object mapping years to O<sub>3</sub> values</td>
+<td><code>"AtmosphericO3s": {"1991": 0.035, "1992": 0.036}</code></td>
+</tr>
+<tr>
+<td><strong><code>WindSpeedHeight</code></strong></td>
+<td>m</td>
+<td><code>2.0</code></td>
+<td>Height above the ground at which wind speed was measured</td>
+<td><code>"WindSpeedHeight": 2.5</code></td>
+</tr>
+<tr>
+<td><strong><code>LeachingDepth</code></strong></td>
+<td>m</td>
+<td><code>0.0</code></td>
+<td>Depth at which water and nitrate outflow are evaluated</td>
+<td><code>"LeachingDepth": 2.0</code></td>
+</tr>
+<tr>
+<td><strong><code>MaxGroundwaterDepth</code></strong></td>
+<td>m</td>
+<td><code>18.0</code></td>
+<td>Maximum annual groundwater depth below the ground surface</td>
+<td><code>"MaxGroundwaterDepth": 1.0</code></td>
+</tr>
+<tr>
+<td><strong><code>MinGroundwaterDept</code></strong></td>
+<td>m</td>
+<td><code>20.0</code></td>
+<td>Minimum annual groundwater depth below the ground surface</td>
+<td><code>"MinGroundwaterDepth": 0.5</code></td>
+</tr>
+<tr>
+<td><strong><code>MinGroundwaterDepthMonth</code></strong></td>
+<td>month</td>
+<td><code>3</code></td>
+<td>Month (1-12) in which the minimum average groundwater depth is reached</td>
+<td><code>"MinGroundwaterDepthMonth": 3</code></td>
+</tr>
+<tr>
+<td><strong><code>rcp</code></strong></td>
+<td></td>
+<td><code>rcp85</code></td>
+<td>Pathway used for dynamic CO<sub>2</sub> calculation</td>
+<td><code>"rcp": "rcp45"</code></td>
+</tr>
+</tbody>
+</table>
+<p>The groundwater parameters are interpolated using an annual sinusoidal function. <code>MinGroundwaterDepth</code> is reached during <code>MinGroundwaterDepthMonth</code>, while <code>MaxGroundwaterDepth</code> is reached approximately six months later.</p>
+<h4 id="supported-rcp-pathways">Supported RCP pathways</h4>
+<p>The <code>rcp parameter</code> is only used when:</p>
+<ul>
+<li>daily climate data do not provide CO<sub>2</sub></li>
+<li><code>AtmosphericCO2s</code> does not contain the current year</li>
+<li><code>AtmosphericCO2</code> requests dynamic calculation</li>
+</ul>
+<p>Supported dynamically calculated pathways depend on the MONICA version:</p>
+<table>
+<thead>
+<tr>
+<th>MONICA version</th>
+<th>Supported pathways</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt; 3.6.52</code></td>
+<td><code>rcp26</code>, <code>rcp45</code>, <code>rcp60</code>, <code>rcp85</code></td>
+</tr>
+<tr>
+<td><code>&gt;= 3.6.52</code></td>
+<td><code>rcp19</code>, <code>rcp26</code>, <code>rcp34</code>, <code>rcp45</code>, <code>rcp60</code>, <code>rcp70</code>, <code>rcp85</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="mapping-ssp-labels-to-monica-pathways">Mapping SSP labels to MONICA pathways</h4>
+<p>SSP and RCP names describe different scenario frameworks. For MONICA's internal CO<sub>2</sub> calculation, the following mapping selects the pathway with the corresponding approximate radiative forcing level:</p>
+<table>
+<thead>
+<tr>
+<th>SSP scenario</th>
+<th>MONICA <code>rcp</code> value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ssp119</code></td>
+<td><code>rcp19</code></td>
+</tr>
+<tr>
+<td><code>ssp126</code></td>
+<td><code>rcp26</code></td>
+</tr>
+<tr>
+<td><code>ssp245</code></td>
+<td><code>rcp45</code></td>
+</tr>
+<tr>
+<td><code>ssp370</code></td>
+<td><code>rcp70</code></td>
+</tr>
+<tr>
+<td><code>ssp460</code></td>
+<td><code>rcp60</code></td>
+</tr>
+<tr>
+<td><code>ssp585</code></td>
+<td><code>rcp85</code></td>
+</tr>
+</tbody>
+</table>
+<p>This mapping selects comparable forcing levels. It does not make an SSP scenario identical to an RCP scenario.</p>
+<hr />
+<h2 id="example-sitejson-file">Example <strong>site.json</strong> file</h2>
+<p>The following example defines the site location and soil profile and loads standard parameter sets from external files.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"SiteParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"Latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">52.80939865112305</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"Slope"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"HeightNN"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"m"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"NDeposition"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"NumberOfLayers"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"LayerThickness"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"pwpFcSatFunction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wessolek2009"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"SoilProfileParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"Thickness"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"SoilOrganicCarbon"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="s2">"%"</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">"KA5TextureClass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sl2"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"SoilRawDensity"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ld_eff2trd"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"KA5TextureClass2clay"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sl2"</span><span class="p">]],</span>
+<span class="w">        </span><span class="nt">"Lambda"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"sandAndClay2lambda"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"KA5TextureClass2sand"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sl2"</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s2">"KA5TextureClass2clay"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sl2"</span><span class="p">]]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"Thickness"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"SoilOrganicCarbon"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.15</span><span class="p">,</span><span class="w"> </span><span class="s2">"%"</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">"KA5TextureClass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sl2"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"SoilRawDensity"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ld_eff2trd"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"KA5TextureClass2clay"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sl2"</span><span class="p">]]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"Thickness"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.6</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"SoilOrganicCarbon"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="s2">"%"</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">"KA5TextureClass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sl2"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"SoilRawDensity"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ld_eff2trd"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">"KA5TextureClass2clay"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sl2"</span><span class="p">]]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"SoilTemperatureParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"include-from-file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"../monica-parameters/user-parameters/hermes-soil-temperature.json"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"EnvironmentParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"DEFAULT"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"include-from-file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"../monica-parameters/user-parameters/hermes-environment.json"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"LeachingDepth"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"WindSpeedHeight"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.5</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"SoilOrganicParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"include-from-file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"../monica-parameters/user-parameters/hermes-soil-organic.json"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"SoilTransportParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"include-from-file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"../monica-parameters/user-parameters/hermes-soil-transport.json"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"SoilMoistureParameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"include-from-file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"../monica-parameters/user-parameters/hermes-soil-moisture.json"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="../../../javascripts/tablesort.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
