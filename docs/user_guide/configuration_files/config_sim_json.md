@@ -10,6 +10,26 @@ The default soil discretisation consists of 20 layers, each 0.1 m thick. Both `N
 
 Climate data are read from delimited text files, normally `.csv` files. Gzip-compressed files whose names end in `.gz` are also supported. The `climate.csv-options` object in `sim.json` configures how these files are read.
 
+Set `climate.csv` to a single file path or a list of paths. For example, to combine two files:
+
+```json
+{
+  "climate.csv": [
+    "climate-1991-2000.csv",
+    "climate-2001-2010.csv"
+  ]
+}
+```
+
+The command-line runner interprets relative climate file paths starting from the folder containing `sim.json`. All files use the same `climate.csv-options`, so their climate columns and CSV formatting must match.
+
+MONICA reads the files in the listed order and combines them into one daily series:
+
+- Each file must overlap or continue directly after or before the dates already loaded. Files separated by a gap are not merged. List consecutive periods in chronological order.
+- If files contain the same date, the last file listed supplies that day's data. Values are replaced, not averaged or added. Dates outside the overlap are kept.
+
+For example, `"climate.csv": ["climate-original.csv", "climate-corrected.csv"]` uses the corrected file wherever the dates overlap and keeps the original data for other dates.
+
 The optional `start-date` and `end-date` keys define the inclusive time range used for the MONICA run. Dates must use the ISO format `YYYY-MM-DD`. If either boundary is omitted, that boundary is inferred from the supplied climate data.
 
 The `no-of-climate-file-header-lines` key specifies the total number of non-data lines at the beginning of the file. By default, the first of these lines contains the column names. Any remaining header lines, such as units line, are ignored. For example:
